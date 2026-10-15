@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATLAS HAUL &amp; FREIGHT | Heavy Vehicle Transport &amp; Global Logistics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        condensed: ['Barlow Condensed', 'sans-serif'],
+                    },
+                    colors: {
+                        freight: {
+                            50: '#f4f6f8',
+                            100: '#e2e7ec',
+                            200: '#c5d0dc',
+                            300: '#9cb0c2',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#060913',
+                        },
+                        hazard: {
+                            500: '#f97316',
+                            600: '#ea580c',
+                            yellow: '#eab308',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-freight-950 text-freight-100 font-sans antialiased selection:bg-hazard-500 selection:text-freight-950">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-freight-900/95 backdrop-blur-md border-b border-freight-800">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 bg-gradient-to-br from-hazard-500 to-hazard-600 flex items-center justify-center font-condensed font-extrabold text-freight-950 text-2xl tracking-tight shadow-lg shadow-hazard-500/20">
+                    AH
+                </div>
+                <div>
+                    <span class="font-condensed text-2xl font-bold tracking-wider text-white block leading-none">ATLAS HAUL</span>
+                    <span class="text-[10px] uppercase font-mono tracking-[0.25em] text-hazard-500 block mt-1">Global Freight &amp; Heavy Logistics</span>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-condensed uppercase tracking-[0.2em] font-semibold text-freight-300">
+                <a href="#services" class="hover:text-hazard-500 transition-colors">Logistics Hub</a>
+                <a href="#fleet" class="hover:text-hazard-500 transition-colors">Heavy Fleet</a>
+                <a href="#calculator" class="hover:text-hazard-500 transition-colors">Instant Freight Quote</a>
+                <a href="#compliance" class="hover:text-hazard-500 transition-colors">Permits &amp; Safety</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#calculator" class="bg-hazard-500 text-freight-950 px-6 py-3.5 text-xs font-condensed uppercase tracking-widest font-extrabold hover:bg-hazard-600 transition-all shadow-lg shadow-hazard-500/20">
+                    Book Transport
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-24">
+        <section class="relative min-h-[90vh] flex items-center justify-center py-20 px-6 lg:px-12 bg-freight-900 border-b border-freight-800">
+            <div class="absolute inset-0 z-0 opacity-20">
+                <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1920&q=80" alt="Heavy freight cargo ship and container port" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-freight-950 via-freight-900/90 to-freight-950/80 z-0"></div>
+
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="lg:col-span-7 space-y-8">
+                    <div class="inline-flex items-center space-x-2 bg-hazard-500/10 border border-hazard-500/30 px-3.5 py-1.5 rounded-sm">
+                        <span class="w-2 h-2 rounded-full bg-hazard-500 animate-pulse"></span>
+                        <span class="text-xs font-condensed uppercase tracking-[0.2em] text-hazard-500 font-bold">Over-Dimensional &amp; Intermodal Specialists</span>
+                    </div>
+
+                    <h1 class="font-condensed text-5xl sm:text-7xl font-extrabold tracking-tight text-white leading-[1.05]">
+                        MOVING THE <span class="text-hazard-500">HEAVIEST</span> ASSETS ON EARTH.
+                    </h1>
+
+                    <p class="text-freight-300 font-light text-base sm:text-lg max-w-xl leading-relaxed">
+                        End-to-end heavy equipment hauling, multi-axle lowboy transport, oversized cargo permits, and international ocean freight shipping managed with precision and military-grade reliability.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-2">
+                        <a href="#calculator" class="bg-hazard-500 text-freight-950 px-8 py-4 text-center text-xs font-condensed uppercase tracking-[0.2em] font-extrabold hover:bg-hazard-600 transition-colors shadow-lg">
+                            Calculate Freight Rate
+                        </a>
+                        <a href="#fleet" class="border border-freight-700 bg-freight-900/50 text-freight-100 px-8 py-4 text-center text-xs font-condensed uppercase tracking-[0.2em] font-bold hover:border-hazard-500 hover:text-hazard-500 transition-colors">
+                            Explore Heavy Fleet
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Live Metrics Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-freight-900/95 border border-freight-800 p-8 shadow-2xl relative">
+                        <div class="absolute -top-3 -right-3 bg-hazard-500 text-freight-950 text-[10px] font-condensed px-3 py-1 uppercase tracking-widest font-extrabold">
+                            Live Status: Active
+                        </div>
+                        <div class="grid grid-cols-2 gap-6 divide-y sm:divide-y-0 sm:divide-x divide-freight-800">
+                            <div class="space-y-2 pr-4">
+                                <span class="font-condensed text-4xl sm:text-5xl font-extrabold text-hazard-500 block">45,000+</span>
+                                <span class="text-xs font-condensed uppercase text-freight-400 tracking-wider block">Heavy Hauls Delivered</span>
+                            </div>
+                            <div class="space-y-2 pl-0 sm:pl-6 pt-4 sm:pt-0">
+                                <span class="font-condensed text-4xl sm:text-5xl font-extrabold text-white block">99.8%</span>
+                                <span class="text-xs font-condensed uppercase text-freight-400 tracking-wider block">On-Time Port Arrival</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-freight-800 flex items-center justify-between text-xs font-condensed text-freight-400 tracking-wider">
+                            <span>GLOBAL CORRIDORS: 48 STATES &amp; OCEANS</span>
+                            <span class="text-hazard-500 font-bold">24/7 SATELLITE TTM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-32 px-6 lg:px-12 max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <span class="text-xs font-condensed uppercase tracking-[0.3em] text-hazard-500 font-bold block mb-3">Freight Divisions</span>
+                    <h2 class="font-condensed text-4xl sm:text-5xl font-extrabold text-white">Specialized Transport Verticals</h2>
+                </div>
+                <p class="text-freight-400 text-xs font-condensed uppercase tracking-widest mt-4 md:mt-0 font-medium">Fully Bonded, Insured &amp; Permitted</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-freight-900 border border-freight-800 p-8 hover:border-hazard-500/50 transition-colors group">
+                    <div class="w-14 h-14 bg-hazard-500/10 border border-hazard-500/30 flex items-center justify-center text-hazard-500 mb-6 group-hover:bg-hazard-500 group-hover:text-freight-950 transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+                    </div>
+                    <h3 class="font-condensed text-2xl font-bold text-white mb-3 tracking-wide">Heavy Vehicle &amp; Machinery Hauling</h3>
+                    <p class="text-xs text-freight-400 font-light leading-relaxed mb-6">
+                        Multi-axle lowboy trailers, RGNs, and step decks engineered to haul excavators, bulldozers, cranes, and agricultural combines up to 150 tons.
+                    </p>
+                    <ul class="space-y-2 text-xs font-condensed tracking-wider text-freight-300 border-t border-freight-800 pt-4 uppercase">
+                        <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 bg-hazard-500 rounded-full"></span><span>RGN &amp; Lowboy Trailers</span></li>
+                        <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 bg-hazard-500 rounded-full"></span><span>Oversized Permit Escorts</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-freight-900 border border-freight-800 p-8 hover:border-hazard-500/50 transition-colors group">
+                    <div class="w-14 h-14 bg-hazard-500/10 border border-hazard-500/30 flex items-center justify-center text-hazard-500 mb-6 group-hover:bg-hazard-500 group-hover:text-freight-950 transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    </div>
+                    <h3 class="font-condensed text-2xl font-bold text-white mb-3 tracking-wide">Global Ocean &amp; Port Container Freight</h3>
+                    <p class="text-xs text-freight-400 font-light leading-relaxed mb-6">
+                        Full container load (FCL) and less than container load (LCL) forwarding across major international shipping lanes with drayage and rail transloading.
+                    </p>
+                    <ul class="space-y-2 text-xs font-condensed tracking-wider text-freight-300 border-t border-freight-800 pt-4 uppercase">
+                        <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 bg-hazard-500 rounded-full"></span><span>Intermodal Port Drayage</span></li>
+                        <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 bg-hazard-500 rounded-full"></span><span>Customs Clearance Support</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-freight-900 border border-freight-800 p-8 hover:border-hazard-500/50 transition-colors group">
+                    <div class="w-14 h-14 bg-hazard-500/10 border border-hazard-500/30 flex items-center justify-center text-hazard-500 mb-6 group-hover:bg-hazard-500 group-hover:text-freight-950 transition-colors">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <h3 class="font-condensed text-2xl font-bold text-white mb-3 tracking-wide">Industrial Project Logistics</h3>
+                    <p class="text-xs text-freight-400 font-light leading-relaxed mb-6">
+                        Turnkey site-to-site relocation for power plants, wind turbines, oil rig components, and factory assembly lines requiring route surveying and crane hoisting.
+                    </p>
+                    <ul class="space-y-2 text-xs font-condensed tracking-wider text-freight-300 border-t border-freight-800 pt-4 uppercase">
+                        <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 bg-hazard-500 rounded-full"></span><span>Route Engineering &amp; Survey</span></li>
+                        <li class="flex items-center space-x-2"><span class="w-1.5 h-1.5 bg-hazard-500 rounded-full"></span><span>Rigging &amp; Crane Coordination</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="fleet" class="py-32 bg-freight-900 border-y border-freight-800 px-6 lg:px-12">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                    <div>
+                        <span class="text-xs font-condensed uppercase tracking-[0.3em] text-hazard-500 font-bold block mb-3">Heavy Machinery Fleet</span>
+                        <h2 class="font-condensed text-4xl sm:text-5xl font-extrabold text-white">Engineered For Extreme Loads</h2>
+                    </div>
+                    <p class="text-freight-400 text-xs font-condensed uppercase tracking-widest mt-4 md:mt-0 font-medium">State-of-the-Art Specialized Rigs</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Fleet 1 -->
+                    <div class="group relative overflow-hidden bg-freight-950 border border-freight-800">
+                        <div class="aspect-[16/10] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80" alt="Heavy lowboy transport truck hauling industrial cargo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-freight-950 via-freight-950/30 to-transparent"></div>
+                            <div class="absolute top-4 left-4 bg-freight-950/90 border border-freight-700 px-3.5 py-1.5">
+                                <span class="text-[10px] font-condensed uppercase tracking-widest text-hazard-500 font-bold">Max Capacity: 120 Tons</span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-condensed text-3xl font-extrabold text-white mb-2">Multi-Axle Hydraulic RGN Lowboy</h3>
+                            <p class="text-xs text-freight-300 font-light leading-relaxed mb-6">
+                                Removable Gooseneck (RGN) trailers equipped with hydraulic suspension, adjustable deck heights, and multi-axle spreads designed for low-clearance and ultra-heavy construction equipment.
+                            </p>
+                            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-freight-800 text-xs font-condensed">
+                                <div>
+                                    <span class="text-freight-400 block uppercase">Deck Length</span>
+                                    <span class="text-white font-bold text-sm">29 ft - 50 ft Ext.</span>
+                                </div>
+                                <div>
+                                    <span class="text-freight-400 block uppercase">Axle Config</span>
+                                    <span class="text-white font-bold text-sm">9 to 13 Axle</span>
+                                </div>
+                                <div>
+                                    <span class="text-freight-400 block uppercase">Permit Grade</span>
+                                    <span class="text-hazard-500 font-bold text-sm">Superload Certified</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fleet 2 -->
+                    <div class="group relative overflow-hidden bg-freight-950 border border-freight-800">
+                        <div class="aspect-[16/10] overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Container port shipping logistics crane" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-freight-950 via-freight-950/30 to-transparent"></div>
+                            <div class="absolute top-4 left-4 bg-freight-950/90 border border-freight-700 px-3.5 py-1.5">
+                                <span class="text-[10px] font-condensed uppercase tracking-widest text-hazard-500 font-bold">Intermodal &amp; Ocean Hub</span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-condensed text-3xl font-extrabold text-white mb-2">Intermodal Container Chassis</h3>
+                            <p class="text-xs text-freight-300 font-light leading-relaxed mb-6">
+                                Specialized 20ft, 40ft, and tri-axle chassis units built for heavy dry vans and refrigerated reefers, guaranteeing secure transit from marine terminals directly to distribution hubs.
+                            </p>
+                            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-freight-800 text-xs font-condensed">
+                                <div>
+                                    <span class="text-freight-400 block uppercase">Container Types</span>
+                                    <span class="text-white font-bold text-sm">20' / 40' / 45' HQ</span>
+                                    </div>
+                                <div>
+                                    <span class="text-freight-400 block uppercase">Tracking</span>
+                                    <span class="text-white font-bold text-sm">Real-Time GPS / IoT</span>
+                                </div>
+                                <div>
+                                    <span class="text-freight-400 block uppercase">Compliance</span>
+                                    <span class="text-hazard-500 font-bold text-sm">ISO / C-TPAT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator" class="py-32 px-6 lg:px-12 max-w-5xl mx-auto">
+            <div class="bg-freight-900 border border-freight-800 p-8 sm:p-16 shadow-2xl relative">
+                <div class="absolute top-0 right-0 bg-hazard-500 text-freight-950 px-4 py-1 text-[10px] font-condensed uppercase tracking-widest font-extrabold">
+                    Instant Freight Estimate
+                </div>
+
+                <div class="text-center max-w-lg mx-auto mb-12">
+                    <span class="text-xs font-condensed uppercase tracking-[0.3em] text-hazard-500 font-bold block mb-3">Freight Estimator</span>
+                    <h2 class="font-condensed text-3xl sm:text-4xl font-extrabold text-white">Calculate Haul Specifications</h2>
+                    <p class="text-xs font-condensed text-freight-400 uppercase tracking-widest mt-2">Submit your cargo weight, route, and dimensions for an immediate logistics proposal.</p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Freight proposal inquiry transmitted successfully. Our Dispatch & Permit Operations Center will contact you with a guaranteed rate within 30 minutes.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] font-condensed uppercase tracking-[0.2em] font-bold text-freight-300 mb-2">Origin (City, State or Port)</label>
+                            <input type="text" placeholder="e.g., Houston Port, TX" class="w-full bg-freight-950 border border-freight-700 px-4 py-3.5 text-xs font-condensed text-white focus:outline-none focus:border-hazard-500 uppercase" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-condensed uppercase tracking-[0.2em] font-bold text-freight-300 mb-2">Destination (City, State or Site)</label>
+                            <input type="text" placeholder="e.g., Denver Jobsite, CO" class="w-full bg-freight-950 border border-freight-700 px-4 py-3.5 text-xs font-condensed text-white focus:outline-none focus:border-hazard-500 uppercase" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-[10px] font-condensed uppercase tracking-[0.2em] font-bold text-freight-300 mb-2">Transport Classification</label>
+                            <select class="w-full bg-freight-950 border border-freight-700 px-4 py-3.5 text-xs font-condensed text-white focus:outline-none focus:border-hazard-500 uppercase">
+                                <option>Heavy Equipment / Lowboy</option>
+                                <option>Ocean Container / Drayage</option>
+                                <option>Oversized Superload</option>
+                                <option>Flatbed / Step Deck</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-condensed uppercase tracking-[0.2em] font-bold text-freight-300 mb-2">Estimated Weight (Tons)</label>
+                            <input type="number" placeholder="e.g., 45" class="w-full bg-freight-950 border border-freight-700 px-4 py-3.5 text-xs font-condensed text-white focus:outline-none focus:border-hazard-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-condensed uppercase tracking-[0.2em] font-bold text-freight-300 mb-2">Corporate Contact Email</label>
+                            <input type="email" placeholder="dispatch@company.com" class="w-full bg-freight-950 border border-freight-700 px-4 py-3.5 text-xs font-condensed text-white focus:outline-none focus:border-hazard-500" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-condensed uppercase tracking-[0.2em] font-bold text-freight-300 mb-2">Cargo Dimensions &amp; Special Handling Notes</label>
+                        <textarea rows="4" placeholder="Include length, width, height, and whether police escorts or crane lifts are required..." class="w-full bg-freight-950 border border-freight-700 px-4 py-3.5 text-xs font-condensed text-white focus:outline-none focus:border-hazard-500" required></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-hazard-500 text-freight-950 py-4 text-xs font-condensed uppercase tracking-[0.3em] font-extrabold hover:bg-hazard-600 transition-colors shadow-lg">
+                        Request Guaranteed Logistics Rate
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer id="compliance" class="bg-freight-950 text-freight-300 border-t border-freight-800 py-20 px-6 lg:px-12 font-condensed">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-1 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-hazard-500 flex items-center justify-center font-extrabold text-freight-950 text-lg">AH</div>
+                    <span class="font-bold text-lg text-white">ATLAS HAUL</span>
+                </div>
+                <p class="text-xs font-light text-freight-400 leading-relaxed font-sans">
+                    Global heavy haulage, specialized machinery transport, and intermodal ocean freight logistics.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-bold mb-4">Dispatch Terminals</h3>
+                <ul class="space-y-2.5 text-xs font-light text-freight-400">
+                    <li><a href="#" class="hover:text-hazard-500 transition-colors">North American Hub (Houston, TX)</a></li>
+                    <li><a href="#" class="hover:text-hazard-500 transition-colors">European Port Gateway (Rotterdam)</a></li>
+                    <li><a href="#" class="hover:text-hazard-500 transition-colors">Asia-Pacific Operations (Singapore)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-bold mb-4">Compliance &amp; Safety</h3>
+                <ul class="space-y-2.5 text-xs font-light text-freight-400">
+                    <li><a href="#" class="hover:text-hazard-500 transition-colors">USDOT &amp; MC Bonded</a></li>
+                    <li><a href="#" class="hover:text-hazard-500 transition-colors">Superload Permit Bureau</a></li>
+                    <li><a href="#" class="hover:text-hazard-500 transition-colors">C-TPAT Certified Supply Chain</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-bold mb-4">Logistics Wire</h3>
+                <p class="text-xs font-light text-freight-400 mb-4 font-sans">Receive weekly heavy transport fuel indexes and permit alerts.</p>
+                <form class="flex" onsubmit="event.preventDefault(); alert('Subscribed to Atlas Freight Wire.');">
+                    <input type="email" placeholder="dispatch@domain.com" class="bg-freight-900 text-xs text-white px-4 py-3 border border-freight-700 focus:outline-none w-full font-sans" required>
+                    <button type="submit" class="bg-hazard-500 text-freight-950 px-5 text-xs uppercase tracking-widest font-extrabold hover:bg-hazard-600 transition-colors">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-freight-900 flex flex-col md:flex-row justify-between items-center text-xs font-light text-freight-500 font-sans">
+            <p>&copy; 2026 Atlas Haul &amp; Freight Logistics Corp. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-freight-300 transition-colors">Safety Charter</a>
+                <a href="#" class="hover:text-freight-300 transition-colors">Brokerage Terms</a>
+                <a href="#" class="hover:text-freight-300 transition-colors">Permit Portal</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOPEBRIDGE GLOBAL | International NGO & Humanitarian Foundation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Newsreader -->
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Newsreader', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        hopeBg: '#F8F6F0',          /* Soft parchment ivory */
+                        hopeCard: '#FFFFFF',        /* Pure white card */
+                        hopeDark: '#1E2421',        /* Deep charcoal evergreen */
+                        hopeGreen: '#2B4C3F',       /* Forest moss green */
+                        hopeAmber: '#D97736',       /* Sunset terracotta amber */
+                        hopeGold: '#E5A93B',        /* Warm humanitarian gold */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-hopeBg text-hopeDark font-sans antialiased selection:bg-hopeAmber selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-hopeBg/90 backdrop-blur-md border-b border-hopeDark/10">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3">
+                <div class="w-11 h-11 rounded-2xl bg-hopeGreen text-hopeBg flex items-center justify-center font-serif font-bold text-xl shadow-md">
+                    H
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold tracking-wider text-xl">HOPEBRIDGE</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-hopeAmber font-semibold">Global Foundation</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.2em] text-hopeDark/75">
+                <a href="#mission" class="hover:text-hopeAmber transition-colors">Our Mission</a>
+                <a href="#initiatives" class="hover:text-hopeAmber transition-colors">Initiatives</a>
+                <a href="#impact" class="hover:text-hopeAmber transition-colors">Impact & Transparency</a>
+                <a href="#stories" class="hover:text-hopeAmber transition-colors">Stories</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openVolunteerModal()" class="hidden sm:flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-hopeDark border border-hopeDark/20 px-5 py-3 rounded-full hover:bg-hopeDark hover:text-hopeBg transition-all">
+                    <span>Volunteer</span>
+                </button>
+                <button onclick="openDonateModal('General Emergency Fund')" class="bg-hopeAmber hover:bg-hopeAmber/90 text-white font-bold px-7 py-3.5 text-xs uppercase tracking-[0.2em] rounded-full transition-all shadow-lg">
+                    Donate Now
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-24">
+        <section class="relative min-h-[85vh] flex items-center justify-center px-6 py-20 bg-hopeBg">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-8">
+                    <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-[0.3em] text-hopeGreen bg-hopeGreen/10 px-4 py-2 rounded-full border border-hopeGreen/20">
+                        <span>Global Humanitarian Action • 42 Countries Active</span>
+                    </span>
+                    <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
+                        Bridging Compassion <br><span class="italic font-normal text-hopeAmber">To Lasting Global Change</span>.
+                    </h1>
+                    <p class="text-hopeDark/80 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+                        We deliver emergency disaster relief, clean drinking water infrastructure, childhood education, and sustainable healthcare to vulnerable communities across the globe.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-2">
+                        <button onclick="openDonateModal('Urgent Relief Fund')" class="bg-hopeGreen hover:bg-hopeGreen/90 text-hopeBg text-center font-bold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full shadow-lg">
+                            Support Relief Fund
+                        </button>
+                        <a href="#initiatives" class="border border-hopeDark/30 hover:border-hopeDark text-hopeDark text-center font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full">
+                            Explore Programs
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-5 relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div class="h-64 rounded-3xl overflow-hidden shadow-xl border border-hopeDark/10">
+                                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80" alt="Child education program" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x800/FFFFFF/1E2421?text=Education'">
+                            </div>
+                            <div class="h-40 rounded-3xl overflow-hidden shadow-xl border border-hopeDark/10">
+                                <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80" alt="Community support" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x400/FFFFFF/1E2421?text=Community'">
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-8">
+                            <div class="h-40 rounded-3xl overflow-hidden shadow-xl border border-hopeDark/10">
+                                <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?auto=format&fit=crop&w=800&q=80" alt="Volunteer charity work" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x400/FFFFFF/1E2421?text=Relief'">
+                            </div>
+                            <div class="h-64 rounded-3xl overflow-hidden shadow-xl border border-hopeDark/10 bg-hopeCard p-6 flex flex-col justify-center text-center shadow-lg">
+                                <span class="font-serif text-3xl font-bold text-hopeAmber">92%</span>
+                                <span class="text-xs uppercase tracking-widest font-bold mt-2">Direct Aid Efficiency</span>
+                                <p class="text-[11px] text-hopeDark/70 mt-2 font-light">Every dollar goes straight toward life-saving field operations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-hopeGreen text-hopeBg">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="space-y-2 border-r border-hopeBg/10 last:border-none">
+                        <span class="font-serif text-4xl sm:text-5xl font-bold text-hopeGold">1.4M+</span>
+                        <p class="text-xs uppercase tracking-widest text-hopeBg/80 font-medium">Lives Impacted</p>
+                    </div>
+                    <div class="space-y-2 border-r border-hopeBg/10 last:border-none">
+                        <span class="font-serif text-4xl sm:text-5xl font-bold text-hopeGold">42</span>
+                        <p class="text-xs uppercase tracking-widest text-hopeBg/80 font-medium">Countries Served</p>
+                    </div>
+                    <div class="space-y-2 border-r border-hopeBg/10 last:border-none">
+                        <span class="font-serif text-4xl sm:text-5xl font-bold text-hopeGold">320+</span>
+                        <p class="text-xs uppercase tracking-widest text-hopeBg/80 font-medium">Wells Constructed</p>
+                    </div>
+                    <div class="space-y-2">
+                        <span class="font-serif text-4xl sm:text-5xl font-bold text-hopeGold">$45M</span>
+                        <p class="text-xs uppercase tracking-widest text-hopeBg/80 font-medium">Direct Aid Delivered</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="initiatives" class="py-24 px-6 bg-hopeCard border-y border-hopeDark/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-hopeAmber">Our Core Pillars</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold">Where Your Support Goes</h2>
+                    <p class="text-xs text-hopeDark/75 tracking-wider uppercase">Targeted humanitarian programs engineered for sustainable community independence.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Initiative 1 -->
+                    <div class="bg-hopeBg p-8 rounded-3xl border border-hopeDark/10 space-y-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="h-48 rounded-2xl overflow-hidden mb-6">
+                                <img src="https://images.unsplash.com/photo-1541976590-713941681591?auto=format&fit=crop&w=800&q=80" alt="Clean Water Project" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-hopeAmber bg-hopeAmber/10 px-3 py-1 rounded-full">Pillar One</span>
+                            <h3 class="font-serif text-2xl font-bold">Clean Water & Sanitation</h3>
+                            <p class="text-xs text-hopeDark/80 font-light leading-relaxed">
+                                Building deep solar-powered borehole wells, water purification units, and community hygiene facilities in remote rural settlements.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-hopeDark/10 flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-widest">$35 provides clean water for 10 people</span>
+                            <button onclick="openDonateModal('Clean Water Initiative')" class="bg-hopeGreen text-hopeBg text-[10px] uppercase font-bold tracking-widest px-4 py-2.5 rounded-full hover:bg-hopeAmber transition-colors">
+                                Support Well
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Initiative 2 -->
+                    <div class="bg-hopeBg p-8 rounded-3xl border border-hopeDark/10 space-y-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="h-48 rounded-2xl overflow-hidden mb-6">
+                                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80" alt="Education & Schools" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-hopeGreen bg-hopeGreen/10 px-3 py-1 rounded-full">Pillar Two</span>
+                            <h3 class="font-serif text-2xl font-bold">Child Education & Schools</h3>
+                            <p class="text-xs text-hopeDark/80 font-light leading-relaxed">
+                                Constructing classrooms, supplying textbooks, providing digital learning kits, and supporting teacher training initiatives in developing regions.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-hopeDark/10 flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-widest">$50 equips 1 student for a year</span>
+                            <button onclick="openDonateModal('Child Education Fund')" class="bg-hopeGreen text-hopeBg text-[10px] uppercase font-bold tracking-widest px-4 py-2.5 rounded-full hover:bg-hopeAmber transition-colors">
+                                Support School
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Initiative 3 -->
+                    <div class="bg-hopeBg p-8 rounded-3xl border border-hopeDark/10 space-y-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="h-48 rounded-2xl overflow-hidden mb-6">
+                                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80" alt="Emergency Medical Relief" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-hopeGold bg-hopeGold/10 px-3 py-1 rounded-full">Pillar Three</span>
+                            <h3 class="font-serif text-2xl font-bold">Emergency Medical Relief</h3>
+                            <p class="text-xs text-hopeDark/80 font-light leading-relaxed">
+                                Deploying mobile medical clinics, trauma supply kits, emergency food rations, and pediatric nutrition care to disaster-affected zones.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-hopeDark/10 flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-widest">$75 provides emergency medical kit</span>
+                            <button onclick="openDonateModal('Medical Relief Fund')" class="bg-hopeGreen text-hopeBg text-[10px] uppercase font-bold tracking-widest px-4 py-2.5 rounded-full hover:bg-hopeAmber transition-colors">
+                                Support Health
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="donate-section" class="py-24 px-6 bg-hopeBg">
+            <div class="max-w-4xl mx-auto bg-hopeCard p-8 sm:p-12 rounded-3xl border border-hopeDark/10 shadow-xl">
+                <div class="text-center max-w-xl mx-auto space-y-4 mb-12">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-hopeAmber">Secure Contribution</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold">Choose Your Impact Level</h2>
+                    <p class="text-xs text-hopeDark/75">Select a monthly or one-time contribution amount to empower our field operations worldwide.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                    <button onclick="selectAmount(25)" id="btn-25" class="donation-btn p-6 rounded-2xl border-2 border-hopeDark/20 hover:border-hopeAmber bg-hopeBg text-center transition-all">
+                        <span class="block font-serif text-3xl font-bold text-hopeGreen">$25</span>
+                        <span class="text-[10px] uppercase tracking-widest text-hopeDark/70 mt-1 block">Feeds a family for 2 weeks</span>
+                    </button>
+                    <button onclick="selectAmount(75)" id="btn-75" class="donation-btn p-6 rounded-2xl border-2 border-hopeAmber bg-hopeAmber/10 text-center transition-all">
+                        <span class="block font-serif text-3xl font-bold text-hopeGreen">$75</span>
+                        <span class="text-[10px] uppercase tracking-widest text-hopeDark/70 mt-1 block">Provides medical supplies</span>
+                    </button>
+                    <button onclick="selectAmount(150)" id="btn-150" class="donation-btn p-6 rounded-2xl border-2 border-hopeDark/20 hover:border-hopeAmber bg-hopeBg text-center transition-all">
+                        <span class="block font-serif text-3xl font-bold text-hopeGreen">$150</span>
+                        <span class="text-[10px] uppercase tracking-widest text-hopeDark/70 mt-1 block">Contributes to water well</span>
+                    </button>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); showNotification('Thank you for your generous donation! Confirmation receipt sent.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Full Name</label>
+                            <input type="text" placeholder="e.g., David Miller" class="w-full bg-hopeBg text-hopeDark font-sans text-xs px-4 py-3.5 rounded-xl border border-hopeDark/20 focus:outline-none focus:border-hopeAmber" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Email Address</label>
+                            <input type="email" placeholder="e.g., david@example.com" class="w-full bg-hopeBg text-hopeDark font-sans text-xs px-4 py-3.5 rounded-xl border border-hopeDark/20 focus:outline-none focus:border-hopeAmber" required>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3 py-2">
+                        <input type="checkbox" id="monthly" class="w-4 h-4 text-hopeAmber rounded border-hopeDark/20 focus:ring-hopeAmber">
+                        <label for="monthly" class="text-xs text-hopeDark/80">Make this a monthly recurring gift to sustain ongoing field work</label>
+                    </div>
+                    <button type="submit" class="w-full bg-hopeAmber hover:bg-hopeAmber/90 text-white font-bold py-4 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-lg">
+                        Complete Secure Donation (<span id="selected-amount-label">$75</span>)
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="stories" class="py-24 px-6 bg-hopeCard border-t border-hopeDark/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-hopeGreen">Field Dispatches</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold">Voices From The Communities</h2>
+                    <p class="text-xs text-hopeDark/75 tracking-wider uppercase">Read firsthand accounts from local coordinators and aid recipients.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-hopeBg p-8 rounded-3xl border border-hopeDark/10 space-y-4 shadow-sm">
+                        <div class="flex text-hopeGold space-x-1 text-sm">★★★★★</div>
+                        <p class="text-xs text-hopeDark/80 font-light leading-relaxed italic">
+                            "Before HopeBridge built our village well, women and children walked 6 miles daily for water. Now, our children attend school and our health has transformed completely."
+                        </p>
+                        <div class="pt-4 border-t border-hopeDark/10">
+                            <span class="font-serif font-bold block text-sm">Amina Diallo</span>
+                            <span class="text-[10px] text-hopeDark/60 uppercase tracking-widest">Community Leader, Sub-Saharan Region</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-hopeBg p-8 rounded-3xl border border-hopeDark/10 space-y-4 shadow-sm">
+                        <div class="flex text-hopeGold space-x-1 text-sm">★★★★★</div>
+                        <p class="text-xs text-hopeDark/80 font-light leading-relaxed italic">
+                            "The disaster relief supplies arrived within 48 hours of the hurricane. The professionalism, dedication, and genuine empathy of the HopeBridge volunteers were extraordinary."
+                        </p>
+                        <div class="pt-4 border-t border-hopeDark/10">
+                            <span class="font-serif font-bold block text-sm">Mateo Alvarez</span>
+                            <span class="text-[10px] text-hopeDark/60 uppercase tracking-widest">Regional Coordinator, Latin America</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-hopeBg p-8 rounded-3xl border border-hopeDark/10 space-y-4 shadow-sm">
+                        <div class="flex text-hopeGold space-x-1 text-sm">★★★★★</div>
+                        <p class="text-xs text-hopeDark/80 font-light leading-relaxed italic">
+                            "As a recurring donor for 5 years, I deeply appreciate HopeBridge's financial transparency and detailed impact reports showing exactly where funds are deployed."
+                        </p>
+                        <div class="pt-4 border-t border-hopeDark/10">
+                            <span class="font-serif font-bold block text-sm">Sarah Jenkins</span>
+                            <span class="text-[10px] text-hopeDark/60 uppercase tracking-widest">Global Partner Donor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-hopeDark text-hopeBg py-16 px-6 text-xs">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <span class="font-serif tracking-widest text-lg font-bold block text-hopeBg">HOPEBRIDGE GLOBAL</span>
+                <p class="text-xs leading-relaxed text-hopeBg/70 font-light">
+                    International humanitarian non-profit organization dedicated to poverty alleviation, disaster relief, education, and clean water access since 1994.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-hopeGold mb-4">Core Pillars</h3>
+                <ul class="space-y-2 text-xs text-hopeBg/70 font-light">
+                    <li><a href="#initiatives" class="hover:text-hopeBg transition-colors">Clean Water Infrastructure</a></li>
+                    <li><a href="#initiatives" class="hover:text-hopeBg transition-colors">Child Education Programs</a></li>
+                    <li><a href="#initiatives" class="hover:text-hopeBg transition-colors">Emergency Medical Relief</a></li>
+                    <li><a href="#initiatives" class="hover:text-hopeBg transition-colors">Sustainable Agriculture</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-hopeGold mb-4">Transparency</h3>
+                <ul class="space-y-2 text-xs text-hopeBg/70 font-light">
+                    <li><a href="#" class="hover:text-hopeBg transition-colors">Annual Financial Reports</a></li>
+                    <li><a href="#" class="hover:text-hopeBg transition-colors">Charity Navigator 4-Star</a></li>
+                    <li><a href="#impact" class="hover:text-hopeBg transition-colors">Global Impact Metrics</a></li>
+                    <li><a href="#" class="hover:text-hopeBg transition-colors">Audit Statements</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-hopeGold mb-4">Headquarters</h3>
+                <ul class="space-y-2 text-xs text-hopeBg/70 font-light">
+                    <li>750 International Way, Suite 400</li>
+                    <li>Geneva & Washington D.C.</li>
+                    <li>Phone: +1 (800) 555-HOPE</li>
+                    <li>Email: contact@hopebridgeglobal.org</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-hopeBg/10 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest text-hopeBg/60">
+            <p>&copy; 2026 HOPEBRIDGE GLOBAL FOUNDATION. 501(c)(3) Non-Profit Organization.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-hopeBg transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-hopeBg transition-colors">Donor Terms</a>
+                <a href="#" class="hover:text-hopeBg transition-colors">Legal Disclosures</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Donation Modal -->
+    <div id="donateModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-hopeBg text-hopeDark p-8 rounded-3xl max-w-md w-full mx-4 relative border border-hopeDark/20 shadow-2xl space-y-6">
+            <button onclick="closeDonateModal()" class="absolute top-6 right-6 text-hopeDark/60 hover:text-hopeDark text-xs uppercase tracking-widest font-bold">Close</button>
+            <div class="space-y-4 pt-2">
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-hopeAmber">Secure Humanitarian Fund</span>
+                <h3 class="font-serif text-2xl font-bold" id="modalTitle">Donate to Relief Fund</h3>
+                <p class="text-xs text-hopeDark/75 font-light leading-relaxed">Your contribution goes directly to field operations and emergency response teams.</p>
+                <div class="space-y-4 pt-2">
+                    <input type="number" placeholder="Enter Amount ($USD)" value="50" class="w-full bg-hopeCard text-hopeDark text-xs px-4 py-3.5 rounded-xl border border-hopeDark/20 focus:outline-none focus:border-hopeAmber">
+                    <input type="text" placeholder="Full Name" class="w-full bg-hopeCard text-hopeDark text-xs px-4 py-3.5 rounded-xl border border-hopeDark/20 focus:outline-none focus:border-hopeAmber">
+                    <input type="email" placeholder="Email Address" class="w-full bg-hopeCard text-hopeDark text-xs px-4 py-3.5 rounded-xl border border-hopeDark/20 focus:outline-none focus:border-hopeAmber">
+                    <button onclick="closeDonateModal(); showNotification('Donation successfully processed! Thank you for your support.');" class="w-full bg-hopeAmber hover:bg-hopeAmber/90 text-white font-bold py-3.5 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-md">
+                        Process Donation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Volunteer Modal -->
+    <div id="volunteerModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-hopeBg text-hopeDark p-8 rounded-3xl max-w-md w-full mx-4 relative border border-hopeDark/20 shadow-2xl space-y-6">
+            <button onclick="closeVolunteerModal()" class="absolute top-6 right-6 text-hopeDark/60 hover:text-hopeDark text-xs uppercase tracking-widest font-bold">Close</button>
+            <div class="space-y-4 pt-2">
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-hopeGreen">Global Volunteer Network</span>
+                <h3 class="font-serif text-2xl font-bold">Join Our Mission</h3>
+                <p class="text-xs text-hopeDark/75 font-light leading-relaxed">Register your interest to volunteer locally or join international field missions.</p>
+                <div class="space-y-4 pt-2">
+                    <input type="text" placeholder="Full Name" class="w-full bg-hopeCard text-hopeDark text-xs px-4 py-3.5 rounded-xl border border-hopeDark/20 focus:outline-none focus:border-hopeAmber">
+                    <input type="email" placeholder="Email Address" class="w-full bg-hopeCard text-hopeDark text-xs px-4 py-3.5 rounded-xl border border-hopeDark/20 focus:outline-none focus:border-hopeAmber">
+                    <select class="w-full bg-hopeCard text-hopeDark text-xs px-4 py-3.5 rounded-xl border border-hopeDark/20 focus:outline-none focus:border-hopeAmber">
+                        <option>Community Outreach & Fundraising</option>
+                        <option>Medical & Healthcare Support</option>
+                        <option>Education & Youth Mentorship</option>
+                        <option>Disaster Response Logistics</option>
+                    </select>
+                    <button onclick="closeVolunteerModal(); showNotification('Volunteer application received! Our team will contact you.');" class="w-full bg-hopeGreen hover:bg-hopeGreen/90 text-hopeBg font-bold py-3.5 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-md">
+                        Submit Application
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="fixed bottom-6 right-6 z-50 bg-hopeDark text-hopeBg px-6 py-4 rounded-2xl shadow-2xl border border-hopeBg/20 text-xs tracking-wider transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <span id="notificationText">Notification message</span>
+    </div>
+
+    <script>
+        function showNotification(msg) {
+            const notif = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            text.innerText = msg;
+            notif.classList.remove('translate-y-20', 'opacity-0');
+            notif.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                notif.classList.remove('translate-y-0', 'opacity-100');
+                notif.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        function selectAmount(amount) {
+            document.querySelectorAll('.donation-btn').forEach(btn => {
+                btn.classList.remove('border-hopeAmber', 'bg-hopeAmber/10');
+                btn.classList.add('border-hopeDark/20', 'bg-hopeBg');
+            });
+            const selectedBtn = document.getElementById('btn-' + amount);
+            if (selectedBtn) {
+                selectedBtn.classList.remove('border-hopeDark/20', 'bg-hopeBg');
+                selectedBtn.classList.add('border-hopeAmber', 'bg-hopeAmber/10');
+            }
+            document.getElementById('selected-amount-label').innerText = '$' + amount;
+        }
+
+        function openDonateModal(fundName) {
+            document.getElementById('modalTitle').innerText = 'Donate to ' + fundName;
+            document.getElementById('donateModal').classList.remove('hidden');
+        }
+
+        function closeDonateModal() {
+            document.getElementById('donateModal').classList.add('hidden');
+        }
+
+        function openVolunteerModal() {
+            document.getElementById('volunteerModal').classList.remove('hidden');
+        }
+
+        function closeVolunteerModal() {
+            document.getElementById('volunteerModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

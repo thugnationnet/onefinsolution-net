@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDIO VORTEX | Avant-Garde Digital Design & Creative Agency</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Syne & Space Grotesk -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        syne: ['Syne', 'sans-serif'],
+                        grotesk: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        vortexDark: '#0A0A0C',
+                        vortexCard: '#131318',
+                        vortexAccent: '#C8FF00', /* Acid Lime */
+                        vortexPurple: '#8B5CF6',
+                        vortexGray: '#8E8E93',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-vortexDark text-white font-grotesk antialiased selection:bg-vortexAccent selection:text-black">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-vortexDark/80 backdrop-blur-xl border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-vortexAccent text-black flex items-center justify-center font-syne font-extrabold text-xl group-hover:rotate-45 transition-transform duration-500">
+                    V
+                </div>
+                <span class="font-syne font-bold tracking-wider text-lg uppercase">Studio Vortex</span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                <a href="#work" class="hover:text-vortexAccent transition-colors">Selected Work</a>
+                <a href="#services" class="hover:text-vortexAccent transition-colors">Capabilities</a>
+                <a href="#studio" class="hover:text-vortexAccent transition-colors">The Studio</a>
+                <a href="#awards" class="hover:text-vortexAccent transition-colors">Accolades</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openInquiryModal()" class="bg-vortexAccent hover:bg-vortexAccent/90 text-black font-bold px-6 py-3 text-xs uppercase tracking-[0.2em] rounded-full transition-all shadow-[0_0_20px_rgba(200,255,0,0.3)]">
+                    Start Project
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-20">
+        <section class="relative min-h-[90vh] flex items-center justify-center px-6 py-20">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#C8FF00_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none"></div>
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="lg:col-span-8 space-y-8">
+                    <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-[0.3em] text-vortexAccent bg-vortexAccent/10 px-4 py-2 rounded-full border border-vortexAccent/20">
+                        <span>Digital Art Direction • Brand Systems • Immersive Web</span>
+                    </span>
+                    <h1 class="font-syne text-5xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[0.95]">
+                        We Shape <br><span class="text-vortexAccent italic font-normal">Digital Futures</span>.
+                    </h1>
+                    <p class="text-white/70 text-base sm:text-xl max-w-xl font-light leading-relaxed">
+                        An independent multidisciplinary creative studio crafting hypnotic web experiences, brand identities, and high-performance digital products for visionary brands.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        <a href="#work" class="bg-white hover:bg-white/90 text-black text-center font-bold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full">
+                            Explore Case Studies
+                        </a>
+                        <button onclick="openInquiryModal()" class="border border-white/20 hover:border-vortexAccent text-white text-center font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full">
+                            Let's Talk (~2 Slots Open)
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-4">
+                    <div class="bg-vortexCard p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl relative overflow-hidden group">
+                        <div class="absolute -right-12 -top-12 w-36 h-36 bg-vortexAccent/10 rounded-full blur-2xl group-hover:bg-vortexAccent/20 transition-all"></div>
+                        <span class="text-[10px] uppercase font-bold tracking-[0.3em] text-vortexGray block">Live Studio Status</span>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-3 h-3 rounded-full bg-vortexAccent animate-ping"></div>
+                            <span class="font-syne font-bold text-lg">Accepting Q3/Q4 Briefs</span>
+                        </div>
+                        <p class="text-xs text-white/60 leading-relaxed">Partnering with ambitious founders, Web3 innovators, and luxury houses worldwide.</p>
+                        <div class="pt-4 border-t border-white/10 flex justify-between items-center text-xs">
+                            <span class="text-white/50">Based in NY & Berlin</span>
+                            <span class="font-bold text-vortexAccent">2026 Awwwards Nominee</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-y border-white/10 bg-vortexCard/50 py-8 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-8 text-white/40 font-syne font-bold uppercase tracking-[0.3em] text-xs sm:text-sm">
+                <span class="hover:text-white transition-colors cursor-default">✦ KINETIC LABS</span>
+                <span class="hover:text-white transition-colors cursor-default">✦ AURA METAVERSE</span>
+                <span class="hover:text-white transition-colors cursor-default">✦ NEBULA OS</span>
+                <span class="hover:text-white transition-colors cursor-default">✦ VANGUARD LUXURY</span>
+                <span class="hover:text-white transition-colors cursor-default">✦ HELIX AI</span>
+            </div>
+        </div>
+
+        <section id="work" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto space-y-16">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-4">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-vortexAccent">Selected Work (2024-2026)</span>
+                        <h2 class="font-syne text-4xl sm:text-6xl font-extrabold tracking-tight">Featured Case Studies</h2>
+                    </div>
+                    <p class="text-xs text-white/60 max-w-sm">Every project is engineered with obsessive attention to typographic hierarchy, fluid interaction design, and blazing speed.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="group cursor-pointer space-y-6" onclick="showNotification('Opening Nebula OS Case Study...')">
+                        <div class="h-[420px] rounded-3xl overflow-hidden bg-vortexCard border border-white/10 relative">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="Nebula OS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80" onerror="this.src='https://placehold.co/1000x800/131318/C8FF00?text=Nebula+OS'">
+                            <div class="absolute top-6 left-6 flex space-x-2">
+                                <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-white/10">UI/UX Design</span>
+                                <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-white/10">WebGL</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div class="space-y-2">
+                                <h3 class="font-syne text-2xl font-bold group-hover:text-vortexAccent transition-colors">Nebula Quantum OS Interface</h3>
+                                <p class="text-xs text-white/60">Next-gen spatial operating system for quantum hardware developers.</p>
+                            </div>
+                            <span class="text-vortexAccent font-bold text-sm tracking-wider">2026 ↗</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="group cursor-pointer space-y-6" onclick="showNotification('Opening Maison Vélo Case Study...')">
+                        <div class="h-[420px] rounded-3xl overflow-hidden bg-vortexCard border border-white/10 relative">
+                            <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80" alt="Maison Vélo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80" onerror="this.src='https://placehold.co/1000x800/131318/C8FF00?text=Maison+Velo'">
+                            <div class="absolute top-6 left-6 flex space-x-2">
+                                <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-white/10">E-Commerce</span>
+                                <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-white/10">Art Direction</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div class="space-y-2">
+                                <h3 class="font-syne text-2xl font-bold group-hover:text-vortexAccent transition-colors">Maison Vélo Haute Couture</h3>
+                                <p class="text-xs text-white/60">Immersive e-commerce flagship for sustainable Parisian luxury fashion.</p>
+                            </div>
+                            <span class="text-vortexAccent font-bold text-sm tracking-wider">2025 ↗</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="group cursor-pointer space-y-6" onclick="showNotification('Opening Kinetic AI Case Study...')">
+                        <div class="h-[420px] rounded-3xl overflow-hidden bg-vortexCard border border-white/10 relative">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" alt="Kinetic AI" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80" onerror="this.src='https://placehold.co/1000x800/131318/C8FF00?text=Kinetic+AI'">
+                            <div class="absolute top-6 left-6 flex space-x-2">
+                                <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-white/10">Brand Identity</span>
+                                <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-white/10">Motion Design</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div class="space-y-2">
+                                <h3 class="font-syne text-2xl font-bold group-hover:text-vortexAccent transition-colors">Kinetic Neural Labs</h3>
+                                <p class="text-xs text-white/60">Complete brand overhaul and generative identity system for AI research.</p>
+                            </div>
+                            <span class="text-vortexAccent font-bold text-sm tracking-wider">2025 ↗</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="group cursor-pointer space-y-6" onclick="showNotification('Opening Aura Metaverse Case Study...')">
+                        <div class="h-[420px] rounded-3xl overflow-hidden bg-vortexCard border border-white/10 relative">
+                            <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1200&q=80" alt="Aura Metaverse" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80" onerror="this.src='https://placehold.co/1000x800/131318/C8FF00?text=Aura+Metaverse'">
+                            <div class="absolute top-6 left-6 flex space-x-2">
+                                <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-white/10">Spatial Design</span>
+                                <span class="bg-black/60 backdrop-blur-md text-white text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-white/10">3D Audio</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div class="space-y-2">
+                                <h3 class="font-syne text-2xl font-bold group-hover:text-vortexAccent transition-colors">Aura Immersive Audio Gallery</h3>
+                                <p class="text-xs text-white/60">WebXR exhibition experience for generative spatial sound sculptures.</p>
+                            </div>
+                            <span class="text-vortexAccent font-bold text-sm tracking-wider">2026 ↗</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-24 px-6 bg-vortexCard border-y border-white/10">
+            <div class="max-w-7xl mx-auto space-y-16">
+                <div class="text-center max-w-2xl mx-auto space-y-4">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-vortexAccent">Core Capabilities</span>
+                    <h2 class="font-syne text-4xl sm:text-5xl font-extrabold">How We Elevate Brands</h2>
+                    <p class="text-xs text-white/60">We bridge the gap between rigorous engineering and visionary design aesthetics.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-vortexDark p-8 rounded-3xl border border-white/10 space-y-6 hover:border-vortexAccent/50 transition-colors">
+                        <span class="text-vortexAccent font-syne text-3xl font-bold">01</span>
+                        <h3 class="font-syne text-2xl font-bold">Brand Systems & Art Direction</h3>
+                        <p class="text-xs text-white/70 font-light leading-relaxed">
+                            Crafting distinct visual languages, typographic systems, motion guidelines, and comprehensive design systems that command attention.
+                        </p>
+                        <ul class="space-y-2 text-xs text-white/50 pt-4 border-t border-white/10">
+                            <li>• Visual Identity & Logo Systems</li>
+                            <li>• Design Tokens & UI Kits</li>
+                            <li>• Editorial Direction & Guidelines</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-vortexDark p-8 rounded-3xl border border-white/10 space-y-6 hover:border-vortexAccent/50 transition-colors">
+                        <span class="text-vortexAccent font-syne text-3xl font-bold">02</span>
+                        <h3 class="font-syne text-2xl font-bold">Immersive Digital Experiences</h3>
+                        <p class="text-xs text-white/70 font-light leading-relaxed">
+                            Developing award-winning WebGL web applications, custom interactive animations, and blazing-fast frontend architectures.
+                        </p>
+                        <ul class="space-y-2 text-xs text-white/50 pt-4 border-t border-white/10">
+                            <li>• Three.js & WebGL Shaders</li>
+                            <li>• Headless React & Next.js Apps</li>
+                            <li>• Micro-interactions & Motion</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-vortexDark p-8 rounded-3xl border border-white/10 space-y-6 hover:border-vortexAccent/50 transition-colors">
+                        <span class="text-vortexAccent font-syne text-3xl font-bold">03</span>
+                        <h3 class="font-syne text-2xl font-bold">E-Commerce & Digital Products</h3>
+                        <p class="text-xs text-white/70 font-light leading-relaxed">
+                            Designing high-converting direct-to-consumer flagships, SaaS platforms, and bespoke mobile app user interfaces.
+                        </p>
+                        <ul class="space-y-2 text-xs text-white/50 pt-4 border-t border-white/10">
+                            <li>• Shopify Plus & Custom Stores</li>
+                            <li>• SaaS Product UX Architecture</li>
+                            <li>• Design-to-Code Systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="awards" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto space-y-16">
+                <div class="text-center max-w-2xl mx-auto space-y-4">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-vortexAccent">Recognition & Trust</span>
+                    <h2 class="font-syne text-4xl sm:text-5xl font-extrabold">Industry Accolades</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+                    <div class="bg-vortexCard p-8 rounded-3xl border border-white/10 space-y-2">
+                        <span class="font-syne text-4xl font-bold text-vortexAccent">14x</span>
+                        <p class="text-xs uppercase tracking-widest text-white/60">Awwwards SOTD</p>
+                    </div>
+                    <div class="bg-vortexCard p-8 rounded-3xl border border-white/10 space-y-2">
+                        <span class="font-syne text-4xl font-bold text-vortexAccent">06x</span>
+                        <p class="text-xs uppercase tracking-widest text-white/60">FWA of the Day</p>
+                    </div>
+                    <div class="bg-vortexCard p-8 rounded-3xl border border-white/10 space-y-2">
+                        <span class="font-syne text-4xl font-bold text-vortexAccent">32+</span>
+                        <p class="text-xs uppercase tracking-widest text-white/60">Global Clients</p>
+                    </div>
+                    <div class="bg-vortexCard p-8 rounded-3xl border border-white/10 space-y-2">
+                        <span class="font-syne text-4xl font-bold text-vortexAccent">99%</span>
+                        <p class="text-xs uppercase tracking-widest text-white/60">Client Retention</p>
+                    </div>
+                </div>
+
+                <!-- Testimonial Quote -->
+                <div class="bg-vortexCard p-10 sm:p-16 rounded-3xl border border-white/10 relative max-w-4xl mx-auto text-center space-y-8">
+                    <p class="font-syne text-xl sm:text-3xl font-bold leading-relaxed">
+                        "Studio Vortex completely redefined our digital presence. Their obsessive craftsmanship and unique aesthetic sensibility elevated our brand into a category of one."
+                    </p>
+                    <div class="flex items-center justify-center space-x-4">
+                        <div class="w-12 h-12 rounded-full bg-vortexAccent/20 flex items-center justify-center font-bold text-vortexAccent font-syne">MK</div>
+                        <div class="text-left">
+                            <span class="font-bold block text-sm">Marcus Kael</span>
+                            <span class="text-xs text-white/50 uppercase tracking-widest">Founder & CEO, Nebula OS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-vortexCard border-t border-white/10 py-16 px-6 text-xs">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-xl bg-vortexAccent text-black flex items-center justify-center font-syne font-extrabold text-sm">
+                        V
+                    </div>
+                    <span class="font-syne font-bold tracking-wider text-base uppercase">STUDIO VORTEX</span>
+                </div>
+                <p class="text-xs leading-relaxed text-white/60 font-light">
+                    Independent creative studio building next-generation digital experiences, immersive web applications, and iconic brand systems.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-vortexAccent mb-4">Sitemap</h3>
+                <ul class="space-y-2 text-xs text-white/60">
+                    <li><a href="#work" class="hover:text-white transition-colors">Selected Work</a></li>
+                    <li><a href="#services" class="hover:text-white transition-colors">Capabilities</a></li>
+                    <li><a href="#awards" class="hover:text-white transition-colors">Accolades</a></li>
+                    <li><a href="#studio" class="hover:text-white transition-colors">The Studio</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-vortexAccent mb-4">Socials</h3>
+                <ul class="space-y-2 text-xs text-white/60">
+                    <li><a href="#" class="hover:text-white transition-colors">Twitter / X ↗</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Instagram ↗</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Awwwards ↗</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">LinkedIn ↗</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-vortexAccent mb-4">Studio Bases</h3>
+                <ul class="space-y-2 text-xs text-white/60">
+                    <li>New York: 450 Broadway, NY 10013</li>
+                    <li>Berlin: Torstraße 89, 10119 Berlin</li>
+                    <li>Email: contact@studiovortex.io</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest text-white/40">
+            <p>&copy; 2026 STUDIO VORTEX LLC. ALL RIGHTS RESERVED.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="inquiryModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden">
+        <div class="bg-vortexCard text-white p-8 sm:p-12 rounded-3xl max-w-lg w-full mx-4 relative border border-white/20 shadow-2xl space-y-6">
+            <button onclick="closeInquiryModal()" class="absolute top-6 right-6 text-white/60 hover:text-white text-xs uppercase tracking-widest font-bold">Close ✕</button>
+            <div class="space-y-4 pt-2">
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-vortexAccent">New Project Inquiry</span>
+                <h3 class="font-syne text-3xl font-bold">Let's Build Something Exceptional</h3>
+                <p class="text-xs text-white/70 font-light leading-relaxed">Tell us about your project timeline, goals, and budget range.</p>
+                <form class="space-y-4 pt-2" onsubmit="event.preventDefault(); closeInquiryModal(); showNotification('Project brief received! Our partners will review within 24 hours.');">
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-white/50">Your Name</label>
+                        <input type="text" placeholder="e.g., Sarah Jenkins" class="w-full bg-vortexDark text-white text-xs px-4 py-3.5 rounded-xl border border-white/20 focus:outline-none focus:border-vortexAccent" required>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-white/50">Email Address</label>
+                        <input type="email" placeholder="e.g., sarah@company.com" class="w-full bg-vortexDark text-white text-xs px-4 py-3.5 rounded-xl border border-white/20 focus:outline-none focus:border-vortexAccent" required>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-white/50">Estimated Budget</label>
+                        <select class="w-full bg-vortexDark text-white text-xs px-4 py-3.5 rounded-xl border border-white/20 focus:outline-none focus:border-vortexAccent">
+                            <option>$50k - $100k</option>
+                            <option>$100k - $250k</option>
+                            <option>$250k+</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-vortexAccent hover:bg-vortexAccent/90 text-black font-bold py-4 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-lg">
+                        Submit Project Brief
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="fixed bottom-6 right-6 z-50 bg-vortexCard text-white px-6 py-4 rounded-2xl shadow-2xl border border-white/20 text-xs tracking-wider transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <span id="notificationText">Notification message</span>
+    </div>
+
+    <script>
+        function showNotification(msg) {
+            const notif = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            text.innerText = msg;
+            notif.classList.remove('translate-y-20', 'opacity-0');
+            notif.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                notif.classList.remove('translate-y-0', 'opacity-100');
+                notif.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        function openInquiryModal() {
+            document.getElementById('inquiryModal').classList.remove('hidden');
+        }
+
+        function closeInquiryModal() {
+            document.getElementById('inquiryModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

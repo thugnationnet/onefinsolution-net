@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Motors - Luxury Car Showroom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .brand-font {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-300 flex flex-col min-h-screen">
+
+    <header class="bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold text-white brand-font tracking-widest">APEX<span class="text-red-600">MOTORS</span></a>
+                </div>
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inventory" class="text-zinc-400 hover:text-red-600 px-3 py-2 text-sm font-semibold tracking-wider uppercase transition-colors">Inventory</a>
+                    <a href="#services" class="text-zinc-400 hover:text-red-600 px-3 py-2 text-sm font-semibold tracking-wider uppercase transition-colors">Services</a>
+                    <a href="#experience" class="text-zinc-400 hover:text-red-600 px-3 py-2 text-sm font-semibold tracking-wider uppercase transition-colors">Experience</a>
+                    <a href="#about" class="text-zinc-400 hover:text-red-600 px-3 py-2 text-sm font-semibold tracking-wider uppercase transition-colors">About</a>
+                </nav>
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#contact" class="bg-red-600 text-white px-6 py-2.5 rounded-sm text-sm font-bold tracking-wider uppercase hover:bg-white hover:text-zinc-950 transition-colors duration-300">Book Test Drive</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-zinc-400 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section class="relative bg-zinc-950 overflow-hidden h-[90vh] min-h-[600px] flex items-center">
+            <div class="absolute inset-0">
+                <img class="w-full h-full object-cover opacity-50" src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2850&q=80" alt="Sleek sports car in dark setting">
+                <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-transparent"></div>
+            </div>
+            
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-left max-w-3xl">
+                    <span class="block text-red-600 font-bold tracking-widest uppercase text-sm mb-4">Unleash Performance</span>
+                    <h1 class="text-4xl font-bold text-white sm:text-5xl md:text-6xl lg:text-7xl mb-6 brand-font leading-tight">
+                        Drive Your <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Ambition</span>
+                    </h1>
+                    <p class="mt-3 text-base text-zinc-400 sm:text-lg md:text-xl lg:max-w-2xl mb-10 font-light">
+                        Discover an exclusive collection of high-performance and luxury vehicles engineered for perfection. Your next masterpiece awaits at Apex Motors.
+                    </p>
+                    
+                    <!-- Search Bar Mockup -->
+                    <div class="bg-zinc-900/80 backdrop-blur-sm p-3 rounded-md border border-zinc-800 flex flex-col sm:flex-row gap-3 max-w-2xl">
+                        <select class="px-4 py-3 text-zinc-300 bg-zinc-800 border border-zinc-700 rounded-sm focus:outline-none focus:border-red-600 flex-grow">
+                            <option>Make</option>
+                            <option>Porsche</option>
+                            <option>Ferrari</option>
+                            <option>Aston Martin</option>
+                        </select>
+                        <select class="px-4 py-3 text-zinc-300 bg-zinc-800 border border-zinc-700 rounded-sm focus:outline-none focus:border-red-600 flex-grow">
+                            <option>Body Style</option>
+                            <option>Coupe</option>
+                            <option>SUV</option>
+                            <option>Convertible</option>
+                        </select>
+                        <button class="bg-red-600 hover:bg-white hover:text-zinc-950 text-white px-8 py-3 rounded-sm font-bold uppercase tracking-wider transition-colors w-full sm:w-auto">
+                            Search Inventory
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Inventory -->
+        <section id="inventory" class="py-24 bg-zinc-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-zinc-800 pb-6">
+                    <div>
+                        <span class="text-red-600 font-bold tracking-widest uppercase text-sm">Curated Collection</span>
+                        <h2 class="mt-2 text-3xl font-bold text-white sm:text-4xl brand-font">Featured Vehicles</h2>
+                    </div>
+                    <a href="#" class="mt-4 md:mt-0 flex text-zinc-400 font-semibold uppercase tracking-wider hover:text-white items-center text-sm transition-colors">
+                        View Full Showroom 
+                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Car 1 -->
+                    <div class="bg-zinc-950 rounded-sm overflow-hidden group border border-zinc-800 hover:border-red-600 transition-colors duration-300">
+                        <div class="relative h-64 overflow-hidden bg-zinc-800">
+                            <img src="https://images.unsplash.com/photo-1503376712344-706f9bd3e6fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Porsche 911" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                            <div class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 uppercase tracking-wider rounded-sm">Just Arrived</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">2024</p>
+                                <h3 class="text-xl font-bold text-white brand-font">Porsche 911 GT3</h3>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-sm text-zinc-400 mb-6">
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">Engine</span>
+                                    <span class="font-semibold text-zinc-300">4.0L Flat-6</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">Power</span>
+                                    <span class="font-semibold text-zinc-300">502 HP</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">0-60 MPH</span>
+                                    <span class="font-semibold text-zinc-300">3.2 sec</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">Mileage</span>
+                                    <span class="font-semibold text-zinc-300">1,200 mi</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-zinc-800 pt-4">
+                                <span class="text-2xl font-bold text-white">$195,500</span>
+                                <button class="text-red-600 hover:text-white uppercase text-sm font-bold tracking-wider transition-colors">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Car 2 -->
+                    <div class="bg-zinc-950 rounded-sm overflow-hidden group border border-zinc-800 hover:border-red-600 transition-colors duration-300">
+                        <div class="relative h-64 overflow-hidden bg-zinc-800">
+                            <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Ferrari F8" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">2023</p>
+                                <h3 class="text-xl font-bold text-white brand-font">Ferrari F8 Tributo</h3>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 text-sm text-zinc-400 mb-6">
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">Engine</span>
+                                    <span class="font-semibold text-zinc-300">3.9L Twin-Turbo V8</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">Power</span>
+                                    <span class="font-semibold text-zinc-300">710 HP</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">0-60 MPH</span>
+                                    <span class="font-semibold text-zinc-300">2.9 sec</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">Mileage</span>
+                                    <span class="font-semibold text-zinc-300">3,450 mi</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-zinc-800 pt-4">
+                                <span class="text-2xl font-bold text-white">$325,000</span>
+                                <button class="text-red-600 hover:text-white uppercase text-sm font-bold tracking-wider transition-colors">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Car 3 -->
+                    <div class="bg-zinc-950 rounded-sm overflow-hidden group border border-zinc-800 hover:border-red-600 transition-colors duration-300">
+                        <div class="relative h-64 overflow-hidden bg-zinc-800">
+                            <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Mercedes AMG" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                        </div>
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <p class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-1">2025</p>
+                                <h3 class="text-xl font-bold text-white brand-font">Mercedes-AMG GT</h3>
+                            </div>
+                             <div class="grid grid-cols-2 gap-4 text-sm text-zinc-400 mb-6">
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">Engine</span>
+                                    <span class="font-semibold text-zinc-300">4.0L BiTurbo V8</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">Power</span>
+                                    <span class="font-semibold text-zinc-300">577 HP</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">0-60 MPH</span>
+                                    <span class="font-semibold text-zinc-300">3.1 sec</span>
+                                </div>
+                                <div>
+                                    <span class="block text-xs uppercase text-zinc-600">Mileage</span>
+                                    <span class="font-semibold text-zinc-300">New</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center border-t border-zinc-800 pt-4">
+                                <span class="text-2xl font-bold text-white">$185,900</span>
+                                <button class="text-red-600 hover:text-white uppercase text-sm font-bold tracking-wider transition-colors">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 bg-zinc-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-red-600 font-bold tracking-widest uppercase text-sm">Beyond The Drive</span>
+                    <h2 class="mt-2 text-3xl font-bold text-white sm:text-4xl brand-font">Elite Automotive Services</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="p-8 border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-colors group">
+                        <div class="w-16 h-16 bg-zinc-800 rounded-sm flex items-center justify-center mb-6 text-red-600 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 uppercase tracking-wider">Bespoke Financing</h3>
+                        <p class="text-zinc-400 font-light text-sm leading-relaxed">Tailored financial solutions designed to match the exclusivity of your purchase, offering flexible terms and competitive rates for premium vehicles.</p>
+                    </div>
+                    <div class="p-8 border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-colors group">
+                        <div class="w-16 h-16 bg-zinc-800 rounded-sm flex items-center justify-center mb-6 text-red-600 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 uppercase tracking-wider">Performance Service</h3>
+                        <p class="text-zinc-400 font-light text-sm leading-relaxed">Factory-certified technicians utilizing state-of-the-art diagnostic equipment to maintain the precise engineering of your high-performance vehicle.</p>
+                    </div>
+                    <div class="p-8 border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-900 transition-colors group">
+                        <div class="w-16 h-16 bg-zinc-800 rounded-sm flex items-center justify-center mb-6 text-red-600 group-hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 uppercase tracking-wider">Consignment</h3>
+                        <p class="text-zinc-400 font-light text-sm leading-relaxed">Leverage our global network and premium showroom placement to achieve maximum value when selling your exotic or luxury automobile.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 bg-zinc-900 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
+                    <div class="mb-10 lg:mb-0 relative">
+                        <!-- Decorative frame -->
+                        <div class="absolute -inset-4 border-2 border-red-600/30 translate-x-4 translate-y-4"></div>
+                        <img class="relative w-full object-cover h-[500px] grayscale hover:grayscale-0 transition-all duration-700" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Showroom interior">
+                    </div>
+                    <div>
+                        <span class="text-red-600 font-bold tracking-widest uppercase text-sm mb-2 block">Our Legacy</span>
+                        <h2 class="text-3xl font-bold text-white sm:text-4xl brand-font mb-6 leading-tight">
+                            Defining the Pinnacle of Automotive Excellence
+                        </h2>
+                        <p class="text-lg text-zinc-400 font-light mb-6">
+                            Since 1998, Apex Motors has curated the most exclusive collection of supercars and luxury vehicles. We don't just sell cars; we deliver adrenaline.
+                        </p>
+                        <p class="text-lg text-zinc-400 font-light mb-8">
+                            Our passion for automotive perfection is matched only by our commitment to an uncompromising client experience. Every vehicle in our showroom is hand-selected and rigorously inspected to ensure it meets our exacting standards.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 border-t border-zinc-800 pt-8">
+                            <div>
+                                <p class="text-4xl font-bold text-white brand-font mb-1 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">25+</p>
+                                <p class="text-xs text-zinc-500 uppercase tracking-widest font-bold">Years of Excellence</p>
+                            </div>
+                            <div>
+                                <p class="text-4xl font-bold text-white brand-font mb-1 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">5K+</p>
+                                <p class="text-xs text-zinc-500 uppercase tracking-widest font-bold">Vehicles Delivered</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Contact Section -->
+        <section id="contact" class="bg-zinc-950 relative border-y border-zinc-800">
+            <div class="absolute inset-0 opacity-20">
+                <img src="https://images.unsplash.com/photo-1611015112101-38295a024c65?ixlib=rb-4.0.3&auto=format&fit=crop&w=2850&q=80" class="w-full h-full object-cover" alt="Abstract dark garage">
+            </div>
+            <div class="relative max-w-4xl mx-auto text-center py-24 px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-white sm:text-4xl brand-font mb-4">
+                    Schedule Your Experience
+                </h2>
+                <p class="text-xl text-zinc-400 font-light mb-10 max-w-2xl mx-auto">
+                    Contact our concierges to arrange a private viewing or test drive of your desired vehicle.
+                </p>
+                
+                <form class="bg-zinc-900/90 backdrop-blur-md p-8 rounded-sm border border-zinc-800 max-w-2xl mx-auto text-left shadow-2xl">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">First Name</label>
+                            <input type="text" class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-sm focus:ring-1 focus:ring-red-600 focus:border-red-600 text-white placeholder-zinc-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">Last Name</label>
+                            <input type="text" class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-sm focus:ring-1 focus:ring-red-600 focus:border-red-600 text-white placeholder-zinc-700">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">Email Address</label>
+                        <input type="email" class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-sm focus:ring-1 focus:ring-red-600 focus:border-red-600 text-white placeholder-zinc-700">
+                    </div>
+                    <div class="mb-8">
+                        <label class="block text-xs font-bold tracking-widest uppercase text-zinc-400 mb-2">Vehicle of Interest</label>
+                        <select class="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-sm focus:ring-1 focus:ring-red-600 focus:border-red-600 text-white">
+                            <option>General Inquiry</option>
+                            <option>Porsche 911 GT3</option>
+                            <option>Ferrari F8 Tributo</option>
+                            <option>Mercedes-AMG GT</option>
+                        </select>
+                    </div>
+                    <button type="button" class="w-full bg-red-600 text-white font-bold tracking-widest uppercase py-4 px-4 rounded-sm hover:bg-white hover:text-zinc-950 transition-colors duration-300">
+                        Request Appointment
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-950 text-zinc-500">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="text-2xl font-bold text-white brand-font tracking-widest mb-4 block">APEX<span class="text-red-600">MOTORS</span></span>
+                    <p class="text-sm font-light leading-relaxed">
+                        The ultimate destination for exotic, luxury, and high-performance automobiles.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Showroom</h3>
+                    <ul class="space-y-3 font-light text-sm">
+                        <li><a href="#" class="hover:text-red-600 transition-colors">Current Inventory</a></li>
+                        <li><a href="#" class="hover:text-red-600 transition-colors">New Arrivals</a></li>
+                        <li><a href="#" class="hover:text-red-600 transition-colors">Coming Soon</a></li>
+                        <li><a href="#" class="hover:text-red-600 transition-colors">Sell Your Car</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Dealership</h3>
+                    <ul class="space-y-3 font-light text-sm">
+                        <li><a href="#" class="hover:text-red-600 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-red-600 transition-colors">Service Center</a></li>
+                        <li><a href="#" class="hover:text-red-600 transition-colors">Financing</a></li>
+                        <li><a href="#" class="hover:text-red-600 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Location</h3>
+                    <ul class="space-y-3 font-light text-sm">
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 mr-2 text-red-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            100 Motorsports Drive, Newport Beach, CA 92660
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 mr-2 text-red-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            (800) EXOTIC-1
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-zinc-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light uppercase tracking-wider">
+                <p>&copy; 2026 Apex Motors. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

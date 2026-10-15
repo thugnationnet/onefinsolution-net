@@ -1,0 +1,21 @@
+{
+  "servers": {
+    "resend": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "resend-mcp",
+        "--sender",
+        "One Fin Solution <noreply@onefinsolution.net>",
+        "--reply-to",
+        "support@onefinsolution.net"
+      ],
+      "env": {
+        "RESEND_API_KEY": "${env:RESEND_API_KEY}",
+        "SENDER_EMAIL_ADDRESS": "One Fin Solution <noreply@onefinsolution.net>",
+        "REPLY_TO_EMAIL_ADDRESSES": "support@onefinsolution.net"
+      }
+    }
+  }
+}

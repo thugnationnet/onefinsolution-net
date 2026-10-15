@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA & ALCHEMY | Contemporary Haute Couture & Streetwear</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                    },
+                    colors: {
+                        fashionDark: '#0D0D0D',
+                        fashionStone: '#1A1A1A',
+                        fashionMuted: '#8C8C8C',
+                        fashionAccent: '#D4AF37',
+                        fashionLight: '#F5F5F3',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-fashionLight text-fashionDark font-sans antialiased selection:bg-fashionAccent/30">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-fashionLight/90 backdrop-blur-md border-b border-fashionDark/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2">
+                <span class="font-serif tracking-[0.25em] text-lg sm:text-xl font-bold text-fashionDark">AURA <span class="text-fashionAccent">&</span> ALCHEMY</span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.2em] text-fashionDark/80">
+                <a href="#collection" class="hover:text-fashionAccent transition-colors">Spring/Summer '26</a>
+                <a href="#lookbook" class="hover:text-fashionAccent transition-colors">Editorial Lookbook</a>
+                <a href="#atelier" class="hover:text-fashionAccent transition-colors">The Atelier</a>
+                <a href="#sustainability" class="hover:text-fashionAccent transition-colors">Ethics & Craft</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#collection" class="bg-fashionDark hover:bg-fashionAccent text-fashionLight px-6 py-3 text-[10px] uppercase tracking-[0.2em] font-bold transition-all">
+                    Shop Collection
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden">
+        <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-6 bg-fashionDark text-fashionLight">
+            <div class="absolute inset-0 z-0 opacity-40">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80" alt="High Fashion Editorial" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-fashionDark via-fashionDark/60 to-transparent"></div>
+            
+            <div class="max-w-7xl w-full mx-auto relative z-10 text-center space-y-6">
+                <span class="inline-block text-[10px] font-semibold uppercase tracking-[0.4em] text-fashionAccent border border-fashionAccent/40 px-4 py-1.5 rounded-full">
+                    Paris Fashion Week Feature
+                </span>
+                <h1 class="font-serif text-4xl sm:text-7xl lg:text-8xl tracking-wider font-bold leading-tight">
+                    SILHOUETTES OF <br><span class="italic font-light text-fashionAccent">Transcendence</span>
+                </h1>
+                <p class="text-fashionMuted text-sm sm:text-base max-w-xl mx-auto font-light tracking-wide leading-relaxed">
+                    Uncompromising craftsmanship meets avant-garde minimalism. Designed in Paris, tailored for the modern iconoclast.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 pt-6">
+                    <a href="#collection" class="w-full sm:w-auto bg-fashionLight text-fashionDark hover:bg-fashionAccent hover:text-white px-8 py-4 text-xs uppercase tracking-[0.2em] font-bold transition-all">
+                        Explore SS26 Line
+                    </a>
+                    <a href="#lookbook" class="w-full sm:w-auto border border-fashionLight/40 hover:border-fashionLight text-fashionLight px-8 py-4 text-xs uppercase tracking-[0.2em] font-bold transition-all">
+                        View Editorial
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="collection" class="py-24 px-6 bg-fashionLight">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-fashionDark/10 pb-6">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-fashionAccent">Curated Arrivals</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl text-fashionDark tracking-wide mt-2">The SS26 Drop</h2>
+                    </div>
+                    <p class="text-xs text-fashionMuted tracking-widest mt-4 md:mt-0 uppercase">Limited production runs of 150 pieces worldwide.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="group cursor-pointer">
+                        <div class="h-[450px] bg-gray-200 overflow-hidden relative mb-4">
+                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Silk Trench Coat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-fashionDark text-fashionLight text-[9px] uppercase tracking-[0.2em] px-3 py-1 font-bold">New Arrival</div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-lg font-bold text-fashionDark tracking-wide">Aetherius Silk Trench</h3>
+                                <p class="text-xs text-fashionMuted uppercase tracking-widest mt-1">Obsidian Black / Raw Silk</p>
+                            </div>
+                            <span class="font-serif text-lg font-bold text-fashionDark">$890</span>
+                        </div>
+                        <button onclick="alert('Added Aetherius Silk Trench to your private cart.')" class="w-full mt-4 bg-fashionStone text-fashionLight hover:bg-fashionAccent py-3 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors">
+                            Add to Bag
+                        </button>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="group cursor-pointer">
+                        <div class="h-[450px] bg-gray-200 overflow-hidden relative mb-4">
+                            <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80" alt="Structured Wool Blazer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-fashionAccent text-white text-[9px] uppercase tracking-[0.2em] px-3 py-1 font-bold">Best Seller</div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-lg font-bold text-fashionDark tracking-wide">Vanguard Wool Blazer</h3>
+                                <p class="text-xs text-fashionMuted uppercase tracking-widest mt-1">Alabaster / Structured Cut</p>
+                            </div>
+                            <span class="font-serif text-lg font-bold text-fashionDark">$640</span>
+                        </div>
+                        <button onclick="alert('Added Vanguard Wool Blazer to your private cart.')" class="w-full mt-4 bg-fashionStone text-fashionLight hover:bg-fashionAccent py-3 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors">
+                            Add to Bag
+                        </button>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="group cursor-pointer">
+                        <div class="h-[450px] bg-gray-200 overflow-hidden relative mb-4">
+                            <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="Asymmetric Cashmere Dress" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-fashionDark text-fashionLight text-[9px] uppercase tracking-[0.2em] px-3 py-1 font-bold">Exlusive</div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-lg font-bold text-fashionDark tracking-wide">Monolith Cashmere Gown</h3>
+                                <p class="text-xs text-fashionMuted uppercase tracking-widest mt-1">Charcoal Melange</p>
+                            </div>
+                            <span class="font-serif text-lg font-bold text-fashionDark">$1,150</span>
+                        </div>
+                        <button onclick="alert('Added Monolith Cashmere Gown to your private cart.')" class="w-full mt-4 bg-fashionStone text-fashionLight hover:bg-fashionAccent py-3 text-[10px] uppercase tracking-[0.2em] font-bold transition-colors">
+                            Add to Bag
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lookbook" class="py-24 px-6 bg-fashionStone text-fashionLight">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.4em] text-fashionAccent">Visual Archive</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl tracking-wide">Editorial Lookbook</h2>
+                    <p class="text-fashionMuted text-xs uppercase tracking-widest">Captured on location in Reykjavik & Milan</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="relative h-[550px] overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1000&q=80" alt="Lookbook 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-fashionDark/80 via-transparent to-transparent flex flex-col justify-end p-8">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-fashionAccent font-bold">Series 04</span>
+                            <h3 class="font-serif text-2xl tracking-wide mt-1">The Brutalist Monologue</h3>
+                        </div>
+                    </div>
+                    <div class="relative h-[550px] overflow-hidden group">
+                        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1000&q=80" alt="Lookbook 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-fashionDark/80 via-transparent to-transparent flex flex-col justify-end p-8">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-fashionAccent font-bold">Series 05</span>
+                            <h3 class="font-serif text-2xl tracking-wide mt-1">Nocturnal Elegance</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sustainability" class="py-24 px-6 bg-fashionLight">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.4em] text-fashionAccent">Conscious Luxury</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl text-fashionDark tracking-wide">Ethical Craftsmanship & Rare Fibers</h2>
+                    <p class="text-fashionMuted text-sm font-light leading-relaxed">
+                        We reject fast fashion cycles in favor of zero-waste pattern making, regenerative organic wools, and hand-finished seams executed by master tailors in our Milanese workshop.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 pt-4 border-t border-fashionDark/10">
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-fashionDark block">100%</span>
+                            <span class="text-[10px] uppercase tracking-widest text-fashionMuted">Traceable Organic Fibers</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-fashionDark block">Zero</span>
+                            <span class="text-[10px] uppercase tracking-widest text-fashionMuted">Synthetic Plastic Waste</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative h-[450px]">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80" alt="Atelier Craftsmanship" class="w-full h-full object-cover shadow-2xl">
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 px-6 bg-fashionDark text-fashionLight text-center">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <span class="text-[10px] font-semibold uppercase tracking-[0.4em] text-fashionAccent">Private Access</span>
+                <h2 class="font-serif text-3xl sm:text-4xl tracking-wide">Join The Inner Circle</h2>
+                <p class="text-fashionMuted text-xs uppercase tracking-widest">Receive private invites to seasonal salon shows and capsule drops.</p>
+                <form class="flex flex-col sm:flex-row gap-4 pt-4" onsubmit="event.preventDefault(); alert('You have been added to the AURA & ALCHEMY private registry.');">
+                    <input type="email" placeholder="Enter your email address..." class="bg-fashionStone text-fashionLight text-xs px-6 py-4 border border-fashionLight/20 focus:outline-none focus:border-fashionAccent flex-grow placeholder-fashionMuted" required>
+                    <button type="submit" class="bg-fashionAccent hover:bg-fashionAccent/90 text-fashionDark font-bold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-colors">
+                        Request Invite
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-fashionStone text-fashionMuted py-16 px-6 border-t border-fashionLight/10 text-xs">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <span class="font-serif tracking-[0.25em] text-lg font-bold text-fashionLight uppercase block">AURA <span class="text-fashionAccent">&</span> ALCHEMY</span>
+                <p class="text-xs leading-relaxed text-fashionMuted/70">
+                    Redefining contemporary haute couture through sustainable innovation and timeless silhouette architecture.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-fashionLight font-bold mb-4">Atelier Houses</h3>
+                <ul class="space-y-2 text-xs">
+                    <li>Paris: Rue Saint-Honoré</li>
+                    <li>Milan: Via Monte Napoleone</li>
+                    <li>New York: SoHo Flagship</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-fashionLight font-bold mb-4">Client Services</h3>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" class="hover:text-fashionLight transition-colors">Private Appointments</a></li>
+                    <li><a href="#" class="hover:text-fashionLight transition-colors">Bespoke Tailoring</a></li>
+                    <li><a href="#" class="hover:text-fashionLight transition-colors">Global Logistics & Returns</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-fashionLight font-bold mb-4">Legal & Privacy</h3>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" class="hover:text-fashionLight transition-colors">Terms of Condé-Nast</a></li>
+                    <li><a href="#" class="hover:text-fashionLight transition-colors">Sustainability Charter</a></li>
+                    <li><a href="#" class="hover:text-fashionLight transition-colors">Cookie Preferences</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-fashionLight/10 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest text-fashionMuted/50">
+            <p>&copy; 2026 AURA & ALCHEMY. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-fashionLight transition-colors">Instagram</a>
+                <a href="#" class="hover:text-fashionLight transition-colors">Vogue Archive</a>
+                <a href="#" class="hover:text-fashionLight transition-colors">Press Inquiries</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

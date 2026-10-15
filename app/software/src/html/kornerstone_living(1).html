@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KORNERSTONE LIVING | Handcrafted Solid Wood &amp; Bespoke Furniture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        timber: {
+                            50: '#fdfbf7',
+                            100: '#f7f2ea',
+                            200: '#ece2d3',
+                            300: '#d9c7b0',
+                            600: '#a37e5b',
+                            700: '#846243',
+                            800: '#5c432d',
+                            900: '#38281b',
+                            950: '#221810',
+                        },
+                        terracotta: {
+                            DEFAULT: '#c85a32',
+                            light: '#e07a55',
+                            dark: '#9e4321',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-timber-50 text-timber-900 font-sans antialiased selection:bg-terracotta selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-timber-50/90 backdrop-blur-md border-b border-timber-200">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-timber-900 text-timber-100 flex items-center justify-center font-serif text-xl font-bold tracking-widest rounded-sm">
+                    K
+                </div>
+                <span class="font-serif text-2xl font-bold tracking-wider text-timber-900">KORNERSTONE</span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.2em] text-timber-700">
+                <a href="#collections" class="hover:text-terracotta transition-colors">Collections</a>
+                <a href="#craftsmanship" class="hover:text-terracotta transition-colors">Artisan Craft</a>
+                <a href="#bespoke" class="hover:text-terracotta transition-colors">Bespoke Design</a>
+                <a href="#showroom" class="hover:text-terracotta transition-colors">Showroom</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#bespoke" class="bg-timber-900 text-timber-50 px-5 py-2.5 text-xs uppercase tracking-widest font-semibold rounded-sm hover:bg-terracotta transition-colors">
+                    Book Consultation
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-20">
+        <section class="relative min-h-[85vh] flex items-center justify-center py-20 px-6 lg:px-12">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-8">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-terracotta block">Timeless Organic Living</span>
+                    <h1 class="font-serif text-5xl sm:text-7xl font-bold text-timber-900 leading-[1.1]">
+                        Crafted for life. <span class="italic font-normal text-timber-600 block mt-2">Built for generations.</span>
+                    </h1>
+                    <p class="text-timber-700 text-base sm:text-lg font-light leading-relaxed max-w-lg">
+                        We design and build heirloom-quality solid wood furniture using sustainably harvested American walnut, white oak, and natural linen textiles. Every piece tells an organic story.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-2">
+                        <a href="#collections" class="bg-timber-900 text-timber-50 px-8 py-4 text-center text-xs uppercase tracking-[0.2em] font-semibold rounded-sm hover:bg-terracotta transition-colors shadow-sm">
+                            Explore Collections
+                        </a>
+                        <a href="#bespoke" class="border border-timber-300 text-timber-900 px-8 py-4 text-center text-xs uppercase tracking-[0.2em] font-semibold rounded-sm hover:border-timber-900 transition-colors">
+                            Custom Inquiry
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 relative">
+                    <div class="relative aspect-[4/5] overflow-hidden rounded-sm shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80" alt="Minimalist designer sofa and walnut coffee table" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-timber-100 border border-timber-200 p-6 shadow-lg max-w-xs hidden sm:block rounded-sm">
+                        <p class="font-serif italic text-timber-900 text-sm">"Simplicity is not the absence of clutter, it's the presence of purpose."</p>
+                        <span class="text-[10px] font-semibold uppercase tracking-widest text-terracotta mt-2 block">— Studio Manifesto</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="collections" class="py-32 bg-timber-100/60 border-y border-timber-200 px-6 lg:px-12">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.3em] text-terracotta block mb-3">Curated Spaces</span>
+                        <h2 class="font-serif text-4xl sm:text-5xl font-bold text-timber-900">Featured Living Categories</h2>
+                    </div>
+                    <p class="text-timber-600 text-xs uppercase tracking-widest mt-4 md:mt-0 font-medium">Solid Timber &amp; Natural Finishes</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="group cursor-pointer">
+                        <div class="aspect-[4/5] overflow-hidden rounded-sm mb-6 relative bg-timber-200">
+                            <img src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80" alt="Living Room Furniture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-timber-900/10 group-hover:bg-transparent transition-colors"></div>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-timber-900 mb-1">Living &amp; Lounge</h3>
+                        <p class="text-xs text-timber-600 font-light tracking-wide uppercase">Sofas, Coffee Tables, Media Credenzas</p>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="group cursor-pointer">
+                        <div class="aspect-[4/5] overflow-hidden rounded-sm mb-6 relative bg-timber-200">
+                            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" alt="Dining Room Furniture" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-timber-900/10 group-hover:bg-transparent transition-colors"></div>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-timber-900 mb-1">Dining &amp; Kitchen</h3>
+                        <p class="text-xs text-timber-600 font-light tracking-wide uppercase">Trestle Tables, Dining Chairs, Sideboards</p>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="group cursor-pointer">
+                        <div class="aspect-[4/5] overflow-hidden rounded-sm mb-6 relative bg-timber-200">
+                            <img src="https://images.unsplash.com/photo-1540518614846-7ede433c4ef0?auto=format&fit=crop&w=800&q=80" alt="Bedroom Sanctuary" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-timber-900/10 group-hover:bg-transparent transition-colors"></div>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-timber-900 mb-1">Bedroom Sanctuaries</h3>
+                        <p class="text-xs text-timber-600 font-light tracking-wide uppercase">Platform Beds, Nightstands, Wardrobes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="craftsmanship" class="py-32 px-6 lg:px-12 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-terracotta block">Artisan Standards</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold text-timber-900 leading-tight">Honest Materials &amp; Traditional Joinery</h2>
+                    <p class="text-timber-700 font-light leading-relaxed">
+                        We reject flat-pack furniture and veneers in favor of solid domestic hardwoods, hand-rubbed plant oils, and time-tested mortise-and-tenon joinery. Every knot and grain pattern is celebrated as a unique signature of nature.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 pt-4 border-t border-timber-200">
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-timber-900 block">100%</span>
+                            <span class="text-xs uppercase tracking-widest text-timber-600 mt-1 block">Solid Hardwood</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-timber-900 block">0%</span>
+                            <span class="text-xs uppercase tracking-widest text-timber-600 mt-1 block">Toxic Varnishes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+                    <div class="aspect-[4/5] overflow-hidden rounded-sm">
+                        <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=800&q=80" alt="Woodworking craftsman planing timber" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-[4/5] overflow-hidden rounded-sm mt-8">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80" alt="Minimalist interior chair styling" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bespoke" class="py-32 bg-timber-900 text-timber-50 px-6 lg:px-12">
+            <div class="max-w-4xl mx-auto bg-timber-950 border border-timber-800 p-8 sm:p-16 rounded-sm shadow-2xl relative">
+                <div class="text-center max-w-lg mx-auto mb-12">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-terracotta block mb-3">Custom Studio</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Bespoke Room Consultation</h2>
+                    <p class="text-xs text-timber-300 uppercase tracking-widest mt-2">Collaborate with our interior designers to build custom dimensions and wood species.</p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Consultation request received. Our studio lead will reach out to review your floor plans within 24 hours.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-timber-300 mb-2">Full Name</label>
+                            <input type="text" placeholder="Jane Doe" class="w-full bg-timber-900 border border-timber-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-terracotta rounded-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-timber-300 mb-2">Email Address</label>
+                            <input type="email" placeholder="jane@example.com" class="w-full bg-timber-900 border border-timber-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-terracotta rounded-sm" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-timber-300 mb-2">Primary Interest</label>
+                            <select class="w-full bg-timber-900 border border-timber-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-terracotta rounded-sm">
+                                <option>Custom Dining Table</option>
+                                <option>Living Room Seating</option>
+                                <option>Full Home Styling Package</option>
+                                <option>Bedroom Suite</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-timber-300 mb-2">Preferred Wood Finish</label>
+                            <select class="w-full bg-timber-900 border border-timber-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-terracotta rounded-sm">
+                                <option>American Black Walnut</option>
+                                <option>European White Oak</option>
+                                <option>Ebonized Ash</option>
+                                <option>Natural Teak</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-timber-300 mb-2">Project Notes &amp; Dimensions</label>
+                        <textarea rows="4" placeholder="Describe your room layout, preferred aesthetic, and target delivery timeline..." class="w-full bg-timber-900 border border-timber-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-terracotta rounded-sm" required></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-terracotta text-white py-4 text-xs uppercase tracking-[0.3em] font-bold rounded-sm hover:bg-terracotta-dark transition-colors shadow-sm">
+                        Schedule Design Consultation
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer id="showroom" class="bg-timber-950 text-timber-300 border-t border-timber-800 py-20 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-1 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-terracotta text-white flex items-center justify-center font-serif font-bold text-lg rounded-sm">K</div>
+                    <span class="font-serif font-bold text-lg text-white">KORNERSTONE</span>
+                </div>
+                <p class="text-xs font-light text-timber-400 leading-relaxed">
+                    Artisanal solid wood furniture and bespoke interior curation for mindful modern homes.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-semibold mb-4">Showrooms</h3>
+                <ul class="space-y-2.5 text-xs font-light text-timber-400">
+                    <li><a href="#" class="hover:text-terracotta transition-colors">SoHo Flagship (New York)</a></li>
+                    <li><a href="#" class="hover:text-timber-100 transition-colors">Design District (Los Angeles)</a></li>
+                    <li><a href="#" class="hover:text-timber-100 transition-colors">Nordic Studio (Copenhagen)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-semibold mb-4">Services</h3>
+                <ul class="space-y-2.5 text-xs font-light text-timber-400">
+                    <li><a href="#" class="hover:text-timber-100 transition-colors">White-Glove Delivery</a></li>
+                    <li><a href="#" class="hover:text-timber-100 transition-colors">Wood Care &amp; Maintenance</a></li>
+                    <li><a href="#" class="hover:text-timber-100 transition-colors">Trade &amp; Commercial Contracts</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-semibold mb-4">Journal</h3>
+                <p class="text-xs font-light text-timber-400 mb-4">Receive stories on timber sourcing and minimalist interior design.</p>
+                <form class="flex" onsubmit="event.preventDefault(); alert('Thank you for subscribing to our journal.');">
+                    <input type="email" placeholder="your@email.com" class="bg-timber-900 text-xs text-white px-4 py-3 border border-timber-700 focus:outline-none w-full rounded-l-sm" required>
+                    <button type="submit" class="bg-terracotta text-white px-5 text-xs uppercase tracking-widest font-semibold rounded-r-sm hover:bg-terracotta-dark transition-colors">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-timber-900 flex flex-col md:flex-row justify-between items-center text-xs font-light text-timber-500">
+            <p>&copy; 2026 Kornerstone Living Inc. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-timber-300 transition-colors">Sustainability Charter</a>
+                <a href="#" class="hover:text-timber-300 transition-colors">Warranty &amp; Care</a>
+                <a href="#" class="hover:text-timber-300 transition-colors">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

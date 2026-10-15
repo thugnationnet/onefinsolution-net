@@ -1,0 +1,379 @@
+.page {
+  display: grid;
+  gap: 22px;
+  width: min(100%, 1120px);
+  margin: 0 auto;
+  padding: 34px 20px 70px;
+}
+
+.hero,
+.section {
+  padding: clamp(20px, 4vw, 32px);
+  border: 1px solid #e6e1ed;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 35px rgb(38 29 62 / 5%);
+}
+
+.eyebrow {
+  color: #7354b9;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.hero h1 {
+  margin: 8px 0;
+  color: #2e2540;
+  font-size: clamp(28px, 5vw, 40px);
+  letter-spacing: -.04em;
+}
+
+.hero p,
+.section > p {
+  color: #70697c;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.nav a {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  padding: 0 13px;
+  border: 1px solid #e2dcea;
+  border-radius: 9px;
+  color: #594877;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  background: #f7f4fc;
+}
+
+.manager {
+  display: grid;
+  gap: 22px;
+}
+
+.profileForm,
+.cards {
+  display: grid;
+  gap: 14px;
+  padding: clamp(20px, 4vw, 28px);
+  border: 1px solid #e6e1ed;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.profileForm h2,
+.cards h2,
+.section h2 {
+  margin: 0;
+  color: #302641;
+  font-size: 19px;
+  letter-spacing: -.02em;
+}
+
+.profileForm > p,
+.cardsHeading p {
+  margin: -5px 0 2px;
+  color: #756e80;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  color: #4b415e;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.field input {
+  width: 100%;
+  min-height: 41px;
+  padding: 8px 10px;
+  border: 1px solid #ddd7e7;
+  border-radius: 8px;
+  background: #fff;
+  color: #302641;
+  font: inherit;
+  font-weight: 450;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #584d69;
+  font-size: 13px;
+}
+
+.profileForm > button,
+.cardsHeading > button,
+.cardForm > button {
+  min-height: 41px;
+  justify-self: start;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 8px;
+  background: #392b52;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.profileForm > button:disabled,
+.cardsHeading > button:disabled,
+.cardForm > button:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+.cardsHeading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cardsHeading > div {
+  display: grid;
+  gap: 8px;
+}
+
+.cards ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid #ece8f1;
+  border-radius: 10px;
+  background: #fcfbfd;
+}
+
+.cards li > span:first-child {
+  display: grid;
+  gap: 5px;
+  color: #382e4a;
+  font-size: 13px;
+}
+
+.cards li small {
+  color: #766f80;
+  font-size: 11px;
+}
+
+.cardActions {
+  display: flex;
+  gap: 8px;
+}
+
+.cardActions button {
+  min-height: 32px;
+  padding: 0 9px;
+  border: 1px solid #e1dce8;
+  border-radius: 7px;
+  background: #fff;
+  color: #594877;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.cardForm {
+  display: grid;
+  gap: 13px;
+  padding: 16px;
+  border: 1px solid #ebe6f0;
+  border-radius: 12px;
+  background: #fbfaff;
+}
+
+.error,
+.message {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.error {
+  background: #fff1f0;
+  color: #a4312d;
+}
+
+.message {
+  background: #eef8f2;
+  color: #24623f;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.table th,
+.table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eeeaf2;
+  white-space: nowrap;
+}
+
+.table th {
+  color: #766e81;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.table td {
+  color: #3d334f;
+}
+
+@media (max-width: 620px) {
+  .fields {
+    grid-template-columns: 1fr;
+  }
+
+  .cardsHeading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cardsHeading > button {
+    align-self: flex-start;
+  }
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid #0f766e;
+  background: #0f766e;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+}
+.secondaryButton {
+  background: transparent;
+  color: #0f766e;
+}
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.muted {
+  color: #64748b;
+  font-size: 0.92rem;
+}
+
+
+.remainingPanel {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(15, 118, 110, 0.18);
+  border-radius: 18px;
+  background: #f8fffd;
+  display: grid;
+  gap: 0.85rem;
+}
+.payModeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.payMethodLabel {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+.payMethodLabel select {
+  width: 100%;
+  max-width: 28rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font: inherit;
+}
+.payAmountLabel {
+  display: grid;
+  gap: 0.45rem;
+  font-weight: 600;
+}
+.payAmountRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+.payAmountRow input {
+  width: min(100%, 12rem);
+  padding: 0.55rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font: inherit;
+}
+.payActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+.payFormShell {
+  margin-top: 0.75rem;
+  padding: 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #fff;
+}
+
+
+#pay-remaining {
+  scroll-margin-top: 6rem;
+}
+.page {
+  padding-top: 0.5rem;
+}

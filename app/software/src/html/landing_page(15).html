@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOBUS VISA | Global Immigration & Visa Consultation Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            950: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 flex flex-col min-h-screen selection:bg-indigo-500 selection:text-slate-950">
+
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-blue-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <a href="#" class="text-xl font-extrabold tracking-tight text-white">GLOBUS<span class="text-indigo-400">VISA</span></a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#destinations" class="text-slate-300 hover:text-indigo-400 text-sm font-medium transition-colors">Destinations</a>
+                    <a href="#services" class="text-slate-300 hover:text-indigo-400 text-sm font-medium transition-colors">Visa Services</a>
+                    <a href="#eligibility" class="text-slate-300 hover:text-indigo-400 text-sm font-medium transition-colors">Eligibility Check</a>
+                    <a href="#testimonials" class="text-slate-300 hover:text-indigo-400 text-sm font-medium transition-colors">Success Stories</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#consultation" class="text-slate-300 hover:text-white text-sm font-medium px-4 py-2">Client Portal</a>
+                    <a href="#consultation" class="bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/20">Book Consultation</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-slate-400 hover:text-white focus:outline-none" aria-label="Open mobile menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="relative bg-slate-950 overflow-hidden py-20 lg:py-32">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:24px_24px]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7">
+                        <div class="inline-flex items-center space-x-2 bg-indigo-500/10 text-indigo-400 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-indigo-500/20 mb-6">
+                            <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+                            <span>99.4% Visa Approval Success Rate</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6 leading-[1.1]">
+                            Your Gateway to <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-blue-300 to-cyan-400">Global Mobility.</span>
+                        </h1>
+                        <p class="text-slate-400 text-lg mb-8 font-light leading-relaxed max-w-xl">
+                            Expert immigration consultancy for work visas, permanent residency, student visas, and corporate relocation across 40+ countries.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#consultation" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-8 py-4 rounded-xl transition-all text-sm text-center shadow-lg shadow-indigo-600/30 flex items-center justify-center space-x-2">
+                                <span>Free Visa Assessment</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </a>
+                            <a href="#destinations" class="bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-semibold px-8 py-4 rounded-xl transition-all text-sm text-center flex items-center justify-center">
+                                Explore Destinations
+                            </a>
+                        </div>
+
+                        <div class="mt-8 flex items-center space-x-8 text-sm text-slate-400">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span>Licensed Immigration Lawyers</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span>End-to-End Documentation</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-5 relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-blue-600 rounded-3xl blur-xl opacity-30"></div>
+                        <div class="relative bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl overflow-hidden">
+                            <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                </div>
+                                <span class="text-xs font-mono text-slate-400">visa-application-tracker.sys</span>
+                                <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono">Approved</span>
+                            </div>
+                            
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-xs font-bold text-white">Express Entry Permanent Residency</span>
+                                        <span class="text-xs text-indigo-400 font-mono">Canada (IRCC)</span>
+                                    </div>
+                                    <div class="w-full bg-slate-900 rounded-full h-2 mb-2">
+                                        <div class="bg-indigo-500 h-2 rounded-full w-full"></div>
+                                    </div>
+                                    <div class="flex justify-between text-[11px] text-slate-400">
+                                        <span>Status: COPR Issued</span>
+                                        <span>CRS Score: 512</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-xl overflow-hidden border border-slate-800 relative h-36">
+                                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=80" alt="Global Travel & Immigration" class="w-full h-full object-cover opacity-60">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex items-end p-4">
+                                    <div>
+                                        <span class="text-xs font-mono text-indigo-400 block">Global Reach</span>
+                                        <span class="text-sm font-bold text-white">Over 15,000+ Visas Successfully Processed</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="py-12 bg-slate-950 border-t border-b border-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">15k+</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Visas Granted</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">40+</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Countries Covered</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">99.4%</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Success Rate</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">15+</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Destinations Section -->
+        <section id="destinations" class="py-24 bg-slate-900/50 border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-indigo-400 font-bold tracking-widest uppercase text-xs">Top Destinations</span>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-white">Where Do You Want to Live & Work?</h2>
+                    <p class="mt-4 text-slate-400 text-base">Explore our most popular immigration pathways with guaranteed legal compliance.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden hover:border-indigo-500/50 transition-all group">
+                        <div class="h-48 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=600&q=80" alt="Canada Immigration" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent"></div>
+                            <span class="absolute bottom-3 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">Canada</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Express Entry & Provincial Nominee</h3>
+                            <p class="text-slate-400 text-sm mb-6">Fast-track permanent residency for skilled professionals seeking career growth in Toronto, Vancouver, and beyond.</p>
+                            <a href="#consultation" class="text-indigo-400 hover:text-indigo-300 font-semibold text-sm flex items-center space-x-1">
+                                <span>Check Eligibility</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden hover:border-indigo-500/50 transition-all group">
+                        <div class="h-48 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=600&q=80" alt="United States Visas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent"></div>
+                            <span class="absolute bottom-3 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">United States</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">H-1B, L-1 & EB-2 NIW Visas</h3>
+                            <p class="text-slate-400 text-sm mb-6">Specialized employment-based petitions and green card sponsorships for top-tier engineers, founders, and researchers.</p>
+                            <a href="#consultation" class="text-indigo-400 hover:text-indigo-300 font-semibold text-sm flex items-center space-x-1">
+                                <span>Check Eligibility</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden hover:border-indigo-500/50 transition-all group">
+                        <div class="h-48 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1524813686514-a57563d77840?auto=format&fit=crop&w=600&q=80" alt="Europe & Schengen" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent"></div>
+                            <span class="absolute bottom-3 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">European Union</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">EU Blue Card & Digital Nomad Visas</h3>
+                            <p class="text-slate-400 text-sm mb-6">Relocate seamlessly to Germany, Portugal, Spain, and Netherlands with streamlined residency programs.</p>
+                            <a href="#consultation" class="text-indigo-400 hover:text-indigo-300 font-semibold text-sm flex items-center space-x-1">
+                                <span>Check Eligibility</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-24 bg-slate-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-indigo-400 font-bold tracking-widest uppercase text-xs">Comprehensive Services</span>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-white">How We Guide Your Journey</h2>
+                    <p class="mt-4 text-slate-400 text-base">From initial credential evaluation to final consular interview preparation.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-6 border border-indigo-500/20">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Eligibility Assessment</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Comprehensive review of your education, work history, and language proficiency to recommend the highest success visa program.</p>
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-6 border border-indigo-500/20">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Documentation & Filing</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Meticulous preparation of petition letters, financial affidavits, employer verification letters, and government forms.</p>
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-6 border border-indigo-500/20">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Interview & Settlement</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Mock consular interview sessions, language test prep coaching, and post-landing housing & employment guidance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consultation Booking Section -->
+        <section id="consultation" class="py-24 bg-slate-900/50 border-t border-slate-800/80">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-slate-900 border border-slate-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+                    <div class="text-center max-w-xl mx-auto mb-10">
+                        <span class="text-indigo-400 font-bold tracking-widest uppercase text-xs">Start Today</span>
+                        <h2 class="mt-2 text-3xl font-extrabold text-white">Book Your Free Visa Consultation</h2>
+                        <p class="mt-2 text-slate-400 text-sm">Speak directly with a licensed immigration expert to evaluate your options.</p>
+                    </div>
+
+                    <form class="space-y-6" onsubmit="event.preventDefault();">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Full Name</label>
+                                <input type="text" placeholder="John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Email Address</label>
+                                <input type="email" placeholder="john@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Target Destination</label>
+                                <select class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500">
+                                    <option>Canada (Express Entry / PNP)</option>
+                                    <option>United States (H1B / EB-2 / L1)</option>
+                                    <option>European Union (Blue Card / Nomad)</option>
+                                    <option>Australia & New Zealand</option>
+                                    <option>United Kingdom (Skilled Worker)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Visa Type</label>
+                                <select class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500">
+                                    <option>Skilled Work / Employment Visa</option>
+                                    <option>Permanent Residency (PR)</option>
+                                    <option>Student & Study Permit</option>
+                                    <option>Digital Nomad / Freelancer</option>
+                                    <option>Investor & Entrepreneur</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Brief Summary of Background</label>
+                            <textarea rows="4" placeholder="Mention your degree, years of experience, or current profession..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-indigo-500"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-indigo-600/20 text-sm">
+                            Schedule Free Assessment
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <span class="text-lg font-extrabold text-white">GLOBUS<span class="text-indigo-400">VISA</span></span>
+                    </div>
+                    <p class="text-xs font-light leading-relaxed text-slate-500">
+                        Licensed global immigration consultancy providing reliable visa and residency pathways worldwide.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Destinations</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#destinations" class="hover:text-indigo-400 transition-colors">Canada PR & Work</a></li>
+                        <li><a href="#destinations" class="hover:text-indigo-400 transition-colors">United States Visas</a></li>
+                        <li><a href="#destinations" class="hover:text-indigo-400 transition-colors">European Union</a></li>
+                        <li><a href="#destinations" class="hover:text-indigo-400 transition-colors">Australia & NZ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Resources</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">CRS Calculator</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Immigration News</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">Success Stories</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Global Headquarters</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li class="flex items-start">
+                            <svg class="h-4 w-4 mr-2 text-indigo-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0 z"/></svg>
+                            500 Grand Army Plaza, Suite 800, New York, NY
+                        </li>
+                        <li class="flex items-center mt-2">
+                            <svg class="h-4 w-4 mr-2 text-indigo-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1.1 1.1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            1-800-GLOBUS-VISA
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-slate-600">
+                <p>&copy; 2026 Globus Visa & Immigration Services Inc. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

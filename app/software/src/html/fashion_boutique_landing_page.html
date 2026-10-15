@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAISON VÉLO | Conscious Avant-Garde Fashion &amp; Atelier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        atelier: {
+                            50: '#fbf9f6',
+                            100: '#f3efe6',
+                            200: '#e5dccb',
+                            300: '#d1c3a8',
+                            800: '#4a4336',
+                            900: '#2c271e',
+                        },
+                        terracotta: {
+                            600: '#b85d34',
+                            700: '#9b4a25',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-atelier-50 text-atelier-900 font-sans antialiased selection:bg-atelier-200">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-atelier-50/80 backdrop-blur-md border-b border-atelier-200/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-12">
+                <a href="#" class="font-serif text-2xl lg:text-3xl tracking-[0.2em] font-semibold text-atelier-900">
+                    MAISON VÉLO
+                </a>
+                <nav class="hidden md:flex space-x-8 text-xs tracking-[0.2em] uppercase font-medium text-atelier-800">
+                    <a href="#collections" class="hover:text-terracotta-600 transition-colors">Collections</a>
+                    <a href="#atelier" class="hover:text-terracotta-600 transition-colors">The Atelier</a>
+                    <a href="#sustainability" class="hover:text-terracotta-600 transition-colors">Sustainability</a>
+                    <a href="#journal" class="hover:text-terracotta-600 transition-colors">Journal</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-6 text-xs uppercase tracking-widest font-medium">
+                <a href="#lookbook" class="hidden sm:inline-block text-atelier-800 hover:text-terracotta-600 transition-colors">Lookbook '26</a>
+                <a href="#consultation" class="bg-atelier-900 text-atelier-50 px-6 py-3 hover:bg-terracotta-600 transition-colors duration-300">Book Fitting</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-20">
+        <section class="relative min-h-[90vh] flex items-center justify-center py-20 px-6 lg:px-12 bg-atelier-100">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-8 z-10">
+                    <div class="inline-block border-b border-terracotta-600 pb-1">
+                        <span class="text-xs uppercase tracking-[0.3em] font-medium text-terracotta-600">Autumn / Winter '26 Collection</span>
+                    </div>
+                    <h1 class="font-serif text-5xl sm:text-7xl font-light tracking-tight leading-[1.1] text-atelier-900">
+                        Silhouettes of <br/><span class="italic font-normal">quiet luxury</span> &amp; form.
+                    </h1>
+                    <p class="text-atelier-800 font-light text-sm sm:text-base max-w-lg leading-relaxed">
+                        Crafted from hand-spun organic linen, raw silk, and recycled cashmere. Designed for timeless elegance and conscious expression.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-2">
+                        <a href="#collections" class="bg-atelier-900 text-atelier-50 px-8 py-4 text-center text-xs uppercase tracking-[0.2em] font-medium hover:bg-terracotta-600 transition-colors">
+                            Explore Collection
+                        </a>
+                        <a href="#sustainability" class="border border-atelier-300 text-atelier-900 px-8 py-4 text-center text-xs uppercase tracking-[0.2em] font-medium hover:border-atelier-900 transition-colors">
+                            Our Craft Ethics
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 relative">
+                    <div class="relative aspect-[3/4] w-full max-w-lg mx-auto overflow-hidden shadow-2xl bg-atelier-200">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80" alt="High fashion editorial model wearing Maison Vélo coat" class="w-full h-full object-cover">
+                        <div class="absolute bottom-6 left-6 right-6 bg-atelier-50/90 backdrop-blur-md p-6 border border-atelier-200">
+                            <p class="text-[10px] uppercase tracking-[0.3em] text-terracotta-600 font-semibold mb-1">Look 04 / Runway</p>
+                            <p class="font-serif text-lg font-medium text-atelier-900">The Oversized Cashmere Trench in Sand</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="collections" class="py-32 px-6 lg:px-12 max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] text-terracotta-600 font-semibold block mb-3">Curated Capsule</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-light text-atelier-900">Featured Masterpieces</h2>
+                </div>
+                <p class="text-atelier-800 text-xs uppercase tracking-widest mt-4 md:mt-0 font-medium">Limited batch fabrication • Hand-finished</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="group cursor-pointer">
+                    <div class="aspect-[4/5] bg-atelier-200 overflow-hidden relative mb-6">
+                        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=800&q=80" alt="Minimalist Silk Slip Dress" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="bg-atelier-50 text-atelier-900 w-full py-3 text-center text-xs uppercase tracking-widest font-medium">View Details</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-baseline">
+                        <h3 class="font-serif text-xl font-medium text-atelier-900">The Raw Silk Slip Dress</h3>
+                        <span class="text-sm font-medium text-atelier-800">$480</span>
+                    </div>
+                    <p class="text-xs text-atelier-800 uppercase tracking-widest mt-1">Ebon Black &amp; Olive</p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="group cursor-pointer">
+                    <div class="aspect-[4/5] bg-atelier-200 overflow-hidden relative mb-6">
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" alt="Structured Linen Blazer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="bg-atelier-50 text-atelier-900 w-full py-3 text-center text-xs uppercase tracking-widest font-medium">View Details</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-baseline">
+                        <h3 class="font-serif text-xl font-medium text-atelier-900">Structured Organic Linen Blazer</h3>
+                        <span class="text-sm font-medium text-atelier-800">$620</span>
+                    </div>
+                    <p class="text-xs text-atelier-800 uppercase tracking-widest mt-1">Ecru / Natural Weave</p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="group cursor-pointer">
+                    <div class="aspect-[4/5] bg-atelier-200 overflow-hidden relative mb-6">
+                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" alt="Architectural Wool Trouser" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="bg-atelier-50 text-atelier-900 w-full py-3 text-center text-xs uppercase tracking-widest font-medium">View Details</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-baseline">
+                        <h3 class="font-serif text-xl font-medium text-atelier-900">Architectural Pleated Trouser</h3>
+                        <span class="text-sm font-medium text-atelier-800">$390</span>
+                    </div>
+                    <p class="text-xs text-atelier-800 uppercase tracking-widest mt-1">Graphite Wool</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sustainability" class="py-32 bg-atelier-100 border-y border-atelier-200 px-6 lg:px-12">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs uppercase tracking-[0.3em] text-terracotta-600 font-semibold block">Conscious Craftsmanship</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-light text-atelier-900 leading-tight">
+                        Zero waste design, rooted in ethical heritage.
+                    </h2>
+                    <p class="text-atelier-800 text-sm sm:text-base font-light leading-relaxed">
+                        Every garment produced at Maison Vélo is crafted in our zero-carbon solar-powered Parisian workshop. We partner directly with regenerative family farms for our botanical dyes and cruelty-free fibers.
+                    </p>
+                    <div class="grid grid-cols-2 gap-8 pt-6 border-t border-atelier-300">
+                        <div>
+                            <p class="font-serif text-4xl font-light text-atelier-900 mb-1">100%</p>
+                            <p class="text-xs uppercase tracking-wider text-atelier-800">Traceable Organic Fibers</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-4xl font-light text-atelier-900 mb-1">0</p>
+                            <p class="text-xs uppercase tracking-wider text-atelier-800">Synthetic Microplastics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="aspect-[4/3] overflow-hidden rounded-none shadow-2xl bg-atelier-200">
+                        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1000&q=80" alt="Fabric swatches and design atelier" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="consultation" class="py-32 px-6 lg:px-12 max-w-4xl mx-auto">
+            <div class="bg-atelier-50 border border-atelier-300 p-8 sm:p-16 shadow-xl relative">
+                <div class="text-center max-w-lg mx-auto mb-12">
+                    <span class="text-xs uppercase tracking-[0.3em] text-terracotta-600 font-semibold block mb-3">Bespoke Experience</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-light text-atelier-900">Request a Private Fitting</h2>
+                    <p class="text-xs text-atelier-800 uppercase tracking-widest mt-3">Available at our flagship salons or via secure virtual consultation.</p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Fitting request successfully received. Our style concierge will contact you within 24 hours.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-atelier-800 mb-2">Full Name</label>
+                            <input type="text" placeholder="Camille Laurent" class="w-full bg-atelier-100 border border-atelier-300 px-4 py-3.5 text-xs text-atelier-900 focus:outline-none focus:border-terracotta-600" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-atelier-800 mb-2">Email Address</label>
+                            <input type="email" placeholder="camille@example.com" class="w-full bg-atelier-100 border border-atelier-300 px-4 py-3.5 text-xs text-atelier-900 focus:outline-none focus:border-terracotta-600" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-atelier-800 mb-2">Consultation Format</label>
+                            <select class="w-full bg-atelier-100 border border-atelier-300 px-4 py-3.5 text-xs text-atelier-900 focus:outline-none focus:border-terracotta-600">
+                                <option>Flagship Salon (Paris)</option>
+                                <option>Virtual Styling Session</option>
+                                <option>Private Hotel Suite Fitting</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-atelier-800 mb-2">Preferred Date</label>
+                            <input type="date" class="w-full bg-atelier-100 border border-atelier-300 px-4 py-3.5 text-xs text-atelier-900 focus:outline-none focus:border-terracotta-600" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-atelier-800 mb-2">Style Preferences &amp; Measurements Notes</label>
+                        <textarea rows="3" placeholder="Share your sizing preferences or particular pieces of interest..." class="w-full bg-atelier-100 border border-atelier-300 px-4 py-3.5 text-xs text-atelier-900 focus:outline-none focus:border-terracotta-600" required></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-atelier-900 text-atelier-50 py-4 text-xs uppercase tracking-[0.3em] font-medium hover:bg-terracotta-600 transition-colors duration-300">
+                        Confirm Appointment Request
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-atelier-900 text-atelier-200 border-t border-atelier-800 py-20 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-1 space-y-4">
+                <span class="font-serif text-2xl tracking-[0.2em] font-semibold text-atelier-50">MAISON VÉLO</span>
+                <p class="text-xs font-light text-atelier-300 leading-relaxed">
+                    Avant-garde design meets uncompromising sustainability. Parisian roots, global consciousness.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-[10px] font-semibold uppercase tracking-[0.3em] text-atelier-50 mb-4">Atelier Houses</h3>
+                <ul class="space-y-2.5 text-xs font-light text-atelier-300">
+                    <li><a href="#" class="hover:text-atelier-50 transition-colors">Paris Flagship</a></li>
+                    <li><a href="#" class="hover:text-atelier-50 transition-colors">Milan Studio</a></li>
+                    <li><a href="#" class="hover:text-atelier-50 transition-colors">Tokyo Salon</a></li>
+                    <li><a href="#" class="hover:text-atelier-50 transition-colors">New York Showroom</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-[10px] font-semibold uppercase tracking-[0.3em] text-atelier-50 mb-4">Client Care</h3>
+                <ul class="space-y-2.5 text-xs font-light text-atelier-300">
+                    <li><a href="#" class="hover:text-atelier-50 transition-colors">Complimentary Alterations</a></li>
+                    <li><a href="#" class="hover:text-atelier-50 transition-colors">Global Eco Shipping</a></li>
+                    <li><a href="#" class="hover:text-atelier-50 transition-colors">Garment Care &amp; Repair</a></li>
+                    <li><a href="#" class="hover:text-atelier-50 transition-colors">Authenticity Guarantee</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-[10px] font-semibold uppercase tracking-[0.3em] text-atelier-50 mb-4">The Gazette</h3>
+                <p class="text-xs font-light text-atelier-300 mb-4">Receive invitations to private runway showings and seasonal lookbooks.</p>
+                <form class="flex" onsubmit="event.preventDefault(); alert('Subscribed successfully to The Gazette.');">
+                    <input type="email" placeholder="Enter your email" class="bg-atelier-800 text-xs text-atelier-50 px-4 py-3 border border-atelier-700 focus:outline-none w-full" required>
+                    <button type="submit" class="bg-terracotta-600 text-atelier-50 px-5 text-xs uppercase tracking-widest font-medium hover:bg-terracotta-700 transition-colors">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-atelier-800 flex flex-col md:flex-row justify-between items-center text-xs font-light text-atelier-400">
+            <p>&copy; 2026 Maison Vélo Atelier. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-atelier-200 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-atelier-200 transition-colors">Terms of Atelier</a>
+                <a href="#" class="hover:text-atelier-200 transition-colors">Ethics Charter</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

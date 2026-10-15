@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUMB & CROWN | Artisan Bakery & Patisserie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        bakeryCream: '#FAF7F2',
+                        bakeryGold: '#D4AF37',
+                        bakeryBrown: '#3A2E2B',
+                        bakeryTerracotta: '#C86D51',
+                        bakerySand: '#EFECE6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-bakeryCream text-bakeryBrown font-sans antialiased selection:bg-bakeryGold/30">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-bakeryCream/90 backdrop-blur-md border-b border-bakeryBrown/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2">
+                <span class="font-serif italic text-2xl sm:text-3xl font-bold tracking-tight text-bakeryBrown">Crumb <span class="text-bakeryTerracotta">&</span> Crown</span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest text-bakeryBrown/80">
+                <a href="#menu" class="hover:text-bakeryTerracotta transition-colors">Patisserie & Bread</a>
+                <a href="#heritage" class="hover:text-bakeryTerracotta transition-colors">Our Craft</a>
+                <a href="#schedule" class="hover:text-bakeryTerracotta transition-colors">Fresh Bake Times</a>
+                <a href="#custom" class="hover:text-bakeryTerracotta transition-colors">Custom Cakes</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#custom" class="bg-bakeryBrown hover:bg-bakeryTerracotta text-bakeryCream px-6 py-3 text-xs uppercase tracking-widest font-bold rounded-full transition-all shadow-md">
+                    Order Custom Cake
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden">
+        <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-6 bg-gradient-to-b from-bakerySand via-bakeryCream to-bakeryCream">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-bakeryGold/20 border border-bakeryGold/40 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-bakeryBrown">
+                        <span>✨ Organic Sourdough & French Butter Pastries</span>
+                    </div>
+                    <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl leading-tight font-normal text-bakeryBrown">
+                        Baked with <span class="italic font-light text-bakeryTerracotta">passion</span>, served with <span class="italic font-light text-bakeryGold">joy</span>.
+                    </h1>
+                    <p class="text-bakeryBrown/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        Every loaf, croissant, and tart is crafted daily using wild yeasts, single-origin French butter, and heritage stone-ground grains.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        <a href="#menu" class="w-full sm:w-auto bg-bakeryTerracotta hover:bg-bakeryTerracotta/90 text-white px-8 py-4 text-center text-xs uppercase tracking-widest font-bold rounded-full shadow-lg transition-transform hover:scale-105">
+                            Explore Menu
+                        </a>
+                        <a href="#schedule" class="w-full sm:w-auto bg-bakeryBrown/10 hover:bg-bakeryBrown/20 text-bakeryBrown border border-bakeryBrown/20 px-8 py-4 text-center text-xs uppercase tracking-widest font-semibold rounded-full transition-colors">
+                            Daily Bake Schedule
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80" alt="Fresh baked artisan bread and croissants" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-bakeryGold text-bakeryBrown p-5 rounded-2xl shadow-xl font-serif text-center transform -rotate-6">
+                        <span class="block text-2xl font-bold">100%</span>
+                        <span class="text-[10px] tracking-widest uppercase font-sans font-bold">Organic Flour</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule" class="py-20 bg-bakerySand px-6 border-y border-bakeryBrown/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-bakeryTerracotta">Warm From The Oven</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl text-bakeryBrown">Daily Bake Timetable</h2>
+                    <p class="text-bakeryBrown/70 text-sm">Nothing beats the aroma of fresh crust. Here is when our signature items emerge from the brick ovens.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-bakeryCream p-8 rounded-3xl border border-bakeryBrown/10 shadow-sm text-center space-y-3">
+                        <span class="inline-block bg-bakeryGold/20 text-bakeryBrown text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">7:00 AM</span>
+                        <h3 class="font-serif text-xl font-bold text-bakeryBrown">Butter Croissants & Danishes</h3>
+                        <p class="text-xs text-bakeryBrown/70">Flaky, golden layers baked fresh with French gourmet butter.</p>
+                    </div>
+                    <div class="bg-bakeryCream p-8 rounded-3xl border border-bakeryBrown/10 shadow-sm text-center space-y-3">
+                        <span class="inline-block bg-bakeryGold/20 text-bakeryBrown text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">8:30 AM</span>
+                        <h3 class="font-serif text-xl font-bold text-bakeryBrown">Artisan Sourdough Loaves</h3>
+                        <p class="text-xs text-bakeryBrown/70">Country blonde, seeded whole grain, and dark rye boules.</p>
+                    </div>
+                    <div class="bg-bakeryCream p-8 rounded-3xl border border-bakeryBrown/10 shadow-sm text-center space-y-3">
+                        <span class="inline-block bg-bakeryGold/20 text-bakeryBrown text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">11:00 AM</span>
+                        <h3 class="font-serif text-xl font-bold text-bakeryBrown">Quiches & Savory Tarts</h3>
+                        <p class="text-xs text-bakeryBrown/70">Leek & Gruyère, mushroom herb, and roasted tomato galettes.</p>
+                    </div>
+                    <div class="bg-bakeryCream p-8 rounded-3xl border border-bakeryBrown/10 shadow-sm text-center space-y-3">
+                        <span class="inline-block bg-bakeryGold/20 text-bakeryBrown text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">1:00 PM</span>
+                        <h3 class="font-serif text-xl font-bold text-bakeryBrown">Layer Cakes & Fruit Tarts</h3>
+                        <p class="text-xs text-bakeryBrown/70">Delicate patisserie creations, éclairs, and seasonal fruit tarts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="py-24 px-6 bg-bakeryCream">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-bakeryTerracotta">Crafted Daily</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl text-bakeryBrown">Our Signature Creations</h2>
+                    <p class="text-bakeryBrown/70 text-sm">Handmade with exceptional ingredients and absolute devotion.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="bg-white border border-bakeryBrown/10 rounded-3xl p-6 relative overflow-hidden group shadow-md">
+                        <div class="absolute top-4 right-4 bg-bakeryTerracotta text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Best Seller</div>
+                        <div class="h-60 rounded-2xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80" alt="Almond Croissant" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-bakeryBrown">Double Baked Almond Croissant</h3>
+                            <span class="font-serif text-xl text-bakeryTerracotta">$5.25</span>
+                        </div>
+                        <p class="text-xs text-bakeryBrown/70 mb-6">Filled with rich frangipane cream, topped with toasted sliced almonds and powdered sugar.</p>
+                        <button onclick="alert('Added Almond Croissant to your tasting box!')" class="w-full bg-bakerySand hover:bg-bakeryBrown hover:text-bakeryCream py-3 rounded-xl text-xs uppercase tracking-widest font-bold transition-colors">
+                            Add To Tasting Box
+                        </button>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-white border border-bakeryBrown/10 rounded-3xl p-6 relative overflow-hidden group shadow-md">
+                        <div class="absolute top-4 right-4 bg-bakeryGold text-bakeryBrown text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Organic Wild Yeast</div>
+                        <div class="h-60 rounded-2xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80" alt="Artisan Country Sourdough" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-bakeryBrown">Rustic Country Sourdough</h3>
+                            <span class="font-serif text-xl text-bakeryTerracotta">$8.50</span>
+                        </div>
+                        <p class="text-xs text-bakeryBrown/70 mb-6">36-hour fermented loaf with a blistered caramelized crust and an open, airy crumb.</p>
+                        <button onclick="alert('Added Rustic Country Sourdough to your tasting box!')" class="w-full bg-bakerySand hover:bg-bakeryBrown hover:text-bakeryCream py-3 rounded-xl text-xs uppercase tracking-widest font-bold transition-colors">
+                            Add To Tasting Box
+                        </button>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-white border border-bakeryBrown/10 rounded-3xl p-6 relative overflow-hidden group shadow-md">
+                        <div class="absolute top-4 right-4 bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Seasonal Fruit</div>
+                        <div class="h-60 rounded-2xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=800&q=80" alt="Berry Fruit Tart" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-bakeryBrown">Vanilla Bean Berry Tart</h3>
+                            <span class="font-serif text-xl text-bakeryTerracotta">$7.95</span>
+                        </div>
+                        <p class="text-xs text-bakeryBrown/70 mb-6">Sweet shortcrust pastry filled with velvety Madagascar vanilla custard and glazed fresh berries.</p>
+                        <button onclick="alert('Added Vanilla Bean Berry Tart to your tasting box!')" class="w-full bg-bakerySand hover:bg-bakeryBrown hover:text-bakeryCream py-3 rounded-xl text-xs uppercase tracking-widest font-bold transition-colors">
+                            Add To Tasting Box
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="custom" class="py-24 px-6 bg-bakerySand">
+            <div class="max-w-4xl mx-auto bg-bakeryCream border border-bakeryBrown/10 p-8 sm:p-16 rounded-3xl shadow-xl">
+                <div class="text-center max-w-md mx-auto mb-12 space-y-3">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-bakeryTerracotta">Celebrations & Weddings</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-bakeryBrown">Order a Custom Cake</h2>
+                    <p class="text-xs text-bakeryBrown/70 uppercase tracking-widest">Handcrafted celebration cakes designed for your special milestones.</p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Your custom cake inquiry has been received! Our master pastry chef will contact you within 24 hours.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-bakeryBrown/70 mb-2">Your Name</label>
+                            <input type="text" placeholder="Clara Sterling" class="w-full bg-white border border-bakeryBrown/20 px-4 py-3.5 text-xs text-bakeryBrown focus:outline-none focus:border-bakeryTerracotta rounded-xl" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-bakeryBrown/70 mb-2">Phone Number</label>
+                            <input type="tel" placeholder="(555) 019-2834" class="w-full bg-white border border-bakeryBrown/20 px-4 py-3.5 text-xs text-bakeryBrown focus:outline-none focus:border-bakeryTerracotta rounded-xl" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-bakeryBrown/70 mb-2">Occasion Type</label>
+                            <select class="w-full bg-white border border-bakeryBrown/20 px-4 py-3.5 text-xs text-bakeryBrown focus:outline-none focus:border-bakeryTerracotta rounded-xl">
+                                <option>Birthday Celebration</option>
+                                <option>Wedding Reception</option>
+                                <option>Anniversary</option>
+                                <option>Corporate Event</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-bakeryBrown/70 mb-2">Preferred Flavor Profile</label>
+                            <select class="w-full bg-white border border-bakeryBrown/20 px-4 py-3.5 text-xs text-bakeryBrown focus:outline-none focus:border-bakeryTerracotta rounded-xl">
+                                <option>Madagascar Vanilla Bean & Raspberry</option>
+                                <option>Dark Valrhona Chocolate & Salted Caramel</option>
+                                <option>Zesty Lemon Curd & Elderflower</option>
+                                <option>Spiced Carrot & Cream Cheese</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-bakeryBrown/70 mb-2">Event Date & Special Design Notes</label>
+                        <textarea rows="3" placeholder="Tell us about your theme, guest count, and any dietary preferences..." class="w-full bg-white border border-bakeryBrown/20 px-4 py-3.5 text-xs text-bakeryBrown focus:outline-none focus:border-bakeryTerracotta rounded-xl" required></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-bakeryTerracotta hover:bg-bakeryTerracotta/90 text-white py-4 text-xs uppercase tracking-[0.3em] font-bold rounded-xl transition-all shadow-md">
+                        Submit Custom Cake Inquiry
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer id="heritage" class="bg-bakeryBrown text-bakeryCream/80 py-16 px-6 border-t border-bakeryBrown/10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <span class="font-serif italic text-2xl text-bakeryCream tracking-wider uppercase block">Crumb <span class="text-bakeryTerracotta">&</span> Crown</span>
+                <p class="text-xs leading-relaxed text-bakeryCream/60">
+                    Baking daily with uncompromised dedication, ancient grains, and pure butter since 2012.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-bakeryCream font-bold mb-4">Hours</h3>
+                <ul class="space-y-2 text-xs text-bakeryCream/60">
+                    <li>Monday – Saturday: 7:00 AM – 6:00 PM</li>
+                    <li>Sunday: 7:00 AM – 4:00 PM</li>
+                    <li>Fresh bread available starting at 8:30 AM</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-bakeryCream font-bold mb-4">Navigation</h3>
+                <ul class="space-y-2 text-xs text-bakeryCream/60">
+                    <li><a href="#menu" class="hover:text-bakeryGold transition-colors">Patisserie Menu</a></li>
+                    <li><a href="#schedule" class="hover:text-bakeryGold transition-colors">Bake Timetable</a></li>
+                    <li><a href="#custom" class="hover:text-bakeryGold transition-colors">Custom Cakes</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-bakeryCream font-bold mb-4">Newsletter</h3>
+                <p class="text-xs text-bakeryCream/60 mb-4">Subscribe for weekend specials and pastry masterclass invites.</p>
+                <form class="flex" onsubmit="event.preventDefault(); alert('Subscribed successfully to Crumb & Crown Gazette!');">
+                    <input type="email" placeholder="your@email.com" class="bg-bakeryCream/10 text-xs text-bakeryCream px-4 py-3 border border-bakeryCream/20 focus:outline-none w-full rounded-l-xl placeholder-bakeryCream/40" required>
+                    <button type="submit" class="bg-bakeryTerracotta hover:bg-bakeryTerracotta/90 text-white px-5 text-xs uppercase tracking-widest font-bold rounded-r-xl transition-colors">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-bakeryCream/10 flex flex-col md:flex-row justify-between items-center text-xs text-bakeryCream/40">
+            <p>&copy; 2026 Crumb & Crown Bakery & Patisserie. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-bakeryCream transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-bakeryCream transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-bakeryCream transition-colors">Allergen Guide</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

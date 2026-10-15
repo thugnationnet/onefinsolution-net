@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENTINEL | Autonomous AI Cybersecurity & Threat Defense</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            50: '#eefcf6',
+                            500: '#10b981',
+                            600: '#059669',
+                            950: '#022c22'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 flex flex-col min-h-screen selection:bg-emerald-500 selection:text-slate-950">
+
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                        <svg class="w-6 h-6 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <a href="#" class="text-xl font-extrabold tracking-tight text-white">SENTINEL<span class="text-emerald-400">.CYBER</span></a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-slate-300 hover:text-emerald-400 text-sm font-medium transition-colors">Threat Intel</a>
+                    <a href="#solutions" class="text-slate-300 hover:text-emerald-400 text-sm font-medium transition-colors">Enterprise XDR</a>
+                    <a href="#pricing" class="text-slate-300 hover:text-emerald-400 text-sm font-medium transition-colors">Pricing</a>
+                    <a href="#compliance" class="text-slate-300 hover:text-emerald-400 text-sm font-medium transition-colors">Compliance</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#login" class="text-slate-300 hover:text-white text-sm font-medium px-4 py-2">SOC Login</a>
+                    <a href="#cta" class="bg-emerald-600 text-slate-950 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-600/20">Request Demo</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-slate-400 hover:text-white focus:outline-none" aria-label="Open mobile menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="relative bg-slate-950 overflow-hidden py-20 lg:py-32">
+            <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:24px_24px]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7">
+                        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 text-emerald-400 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-emerald-500/20 mb-6">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>DEFCON 1: Autonomous Defense Grid Active</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6 leading-[1.1]">
+                            Zero Trust, <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Zero Vulnerabilities.</span>
+                        </h1>
+                        <p class="text-slate-400 text-lg mb-8 font-light leading-relaxed max-w-xl">
+                            Sentinel delivers next-gen autonomous threat hunting, real-time XDR, and automated incident response powered by military-grade neural defenses.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#cta" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-8 py-4 rounded-xl transition-all text-sm text-center shadow-lg shadow-emerald-500/30 flex items-center justify-center space-x-2">
+                                <span>Deploy Shield Now</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </a>
+                            <a href="#demo" class="bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-semibold px-8 py-4 rounded-xl transition-all text-sm text-center flex items-center justify-center">
+                                View Live Attack Map
+                            </a>
+                        </div>
+
+                        <div class="mt-8 flex items-center space-x-8 text-sm text-slate-400">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span>Zero-Day Protection</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span>ISO 27001 & SOC2 Type II</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-5 relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-600 rounded-3xl blur-xl opacity-30"></div>
+                        <div class="relative bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-2xl overflow-hidden">
+                            <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                </div>
+                                <span class="text-xs font-mono text-slate-400">sentinel-defense-grid.log</span>
+                                <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono">Protected</span>
+                            </div>
+                            <div class="font-mono text-xs text-slate-300 space-y-2 bg-slate-950 p-4 rounded-xl border border-slate-800/80 overflow-x-auto">
+                                <p class="text-emerald-400">[02:46:12] Threat Vector Detected: SQLi payload from IP 185.220.101.5</p>
+                                <p class="text-amber-400">&gt; Isolating container node-auth-prod-7...</p>
+                                <p class="text-emerald-400">✓ Autonomous firewall rule injected successfully</p>
+                                <p class="text-slate-400">Forensic snapshot archived to secure vault.</p>
+                                <div class="p-2 bg-slate-900 rounded border border-slate-800 text-slate-300 mt-2 flex justify-between items-center">
+                                    <span>Attack Mitigated in</span>
+                                    <span class="text-emerald-400 font-bold">14ms</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 rounded-xl overflow-hidden border border-slate-800 relative h-32">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="Cyber Security Operations Center" class="w-full h-full object-cover opacity-60">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex items-end p-3">
+                                    <span class="text-xs font-mono text-emerald-400">Global Telemetry: 1.4M events/sec</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 bg-slate-950 border-t border-b border-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p class="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-8">Securing mission-critical infrastructure for Fortune 500 enterprises</p>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-8 items-center opacity-70">
+                    <div class="flex items-center justify-center space-x-2 text-slate-300 font-extrabold text-lg">
+                        <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <span>Aegis Financial</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2 text-slate-300 font-extrabold text-lg">
+                        <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                        <span>OmniHealth</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2 text-slate-300 font-extrabold text-lg">
+                        <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        <span>CloudSecure</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2 text-slate-300 font-extrabold text-lg">
+                        <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 4l7.5 15h-15L12 6z"/></svg>
+                        <span>Apex GovTech</span>
+                    </div>
+                    <div class="flex items-center justify-center space-x-2 text-slate-300 font-extrabold text-lg col-span-2 md:col-span-1">
+                        <svg class="w-6 h-6 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm1 14h-2v-2h2zm0-4h-2V7h2z"/></svg>
+                        <span>HyperGrid</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-24 bg-slate-900/50 border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-emerald-400 font-bold tracking-widest uppercase text-xs">Autonomous Protection</span>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-white">Next-Generation Threat Defense Suite</h2>
+                    <p class="mt-4 text-slate-400 text-base">Replace sluggish manual security audits with real-time neural protection across endpoints, clouds, and identity networks.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl hover:border-emerald-500/50 transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-emerald-500/20">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Autonomous XDR</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Correlates security telemetry across cloud workloads, Kubernetes clusters, and endpoints to neutralize multi-stage attacks instantly.</p>
+                        <ul class="space-y-2.5 text-sm text-slate-300">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Sub-millisecond threat isolation</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Automated incident playbooks</li>
+                        </ul>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl hover:border-emerald-500/50 transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-emerald-500/20">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">AI Vulnerability Scanning</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Continuously tests your entire digital attack surface against known CVEs and zero-day exploits before malicious actors strike.</p>
+                        <ul class="space-y-2.5 text-sm text-slate-300">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Real-time dependency auditing</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Penetration test automation</li>
+                        </ul>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl hover:border-emerald-500/50 transition-all group">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-emerald-500/20">
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Zero Trust Identity Vault</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Enforces strict biometric and context-aware access policies across all corporate resources and employee endpoints.</p>
+                        <ul class="space-y-2.5 text-sm text-slate-300">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Adaptive session verification</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>Passwordless enterprise auth</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-24 bg-slate-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-emerald-400 font-bold tracking-widest uppercase text-xs">Transparent Investment</span>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-white">Choose Your Defense Tier</h2>
+                    <p class="mt-4 text-slate-400 text-base">Protect your organization with scalable security packages designed for every growth stage.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <!-- Plan 1 -->
+                    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl">
+                        <h3 class="text-lg font-bold text-white mb-2">Startup Shield</h3>
+                        <p class="text-slate-400 text-sm mb-6">Essential protection for early-stage tech companies.</p>
+                        <div class="text-4xl font-extrabold text-white mb-6">$499<span class="text-sm font-normal text-slate-400"> / month</span></div>
+                        <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Up to 50 cloud endpoints</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Weekly vulnerability scans</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Standard email support</li>
+                        </ul>
+                        <button class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl transition-colors text-sm">Start 14-Day Trial</button>
+                    </div>
+
+                    <!-- Plan 2 (Highlighted) -->
+                    <div class="bg-gradient-to-b from-slate-900 to-slate-900/90 border-2 border-emerald-500 p-8 rounded-3xl relative shadow-2xl shadow-emerald-500/10">
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-slate-950 text-xs font-extrabold px-4 py-1 rounded-full uppercase tracking-widest">Most Popular</div>
+                        <h3 class="text-lg font-bold text-white mb-2">Enterprise XDR</h3>
+                        <p class="text-slate-400 text-sm mb-6">Full autonomy and real-time protection for scaleups.</p>
+                        <div class="text-4xl font-extrabold text-white mb-6">$1,899<span class="text-sm font-normal text-slate-400"> / month</span></div>
+                        <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Unlimited cloud & physical endpoints</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>24/7 Autonomous threat response</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Dedicated SOC analyst liaison</li>
+                        </ul>
+                        <button class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3 rounded-xl transition-colors text-sm shadow-lg shadow-emerald-500/20">Secure Your Organization</button>
+                    </div>
+
+                    <!-- Plan 3 -->
+                    <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl">
+                        <h3 class="text-lg font-bold text-white mb-2">Government & Air-Gapped</h3>
+                        <p class="text-slate-400 text-sm mb-6">Custom deployment for defense and high-security sectors.</p>
+                        <div class="text-4xl font-extrabold text-white mb-6">Custom</div>
+                        <ul class="space-y-3 text-sm text-slate-300 mb-8">
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>On-premise hardware appliances</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Strict compliance hardening</li>
+                            <li class="flex items-center"><svg class="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>24/7 Red-team support</li>
+                        </ul>
+                        <button class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl transition-colors text-sm">Contact Defense Sales</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="py-24 bg-slate-900/50 border-t border-slate-800/80">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-slate-900 border border-slate-800 p-8 sm:p-12 rounded-3xl shadow-2xl text-center">
+                    <span class="text-emerald-400 font-bold tracking-widest uppercase text-xs">Secure Your Perimeter</span>
+                    <h2 class="mt-2 text-3xl font-extrabold text-white">Schedule a Live Penetration & Threat Demo</h2>
+                    <p class="mt-2 text-slate-400 text-sm max-w-lg mx-auto mb-8">See how Sentinel intercepts simulated attacks in real time on your infrastructure.</p>
+
+                    <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Enter corporate email..." class="flex-grow bg-slate-950 border border-slate-800 rounded-xl px-4 py-3.5 text-slate-200 text-sm focus:outline-none focus:border-emerald-500" required>
+                        <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-500/20 text-sm shrink-0">
+                            Request Audit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <span class="text-lg font-extrabold text-white">SENTINEL<span class="text-emerald-400">.CYBER</span></span>
+                    </div>
+                    <p class="text-xs font-light leading-relaxed text-slate-500">
+                        Autonomous AI threat defense and enterprise security orchestration platform.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Platform</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#features" class="hover:text-emerald-400 transition-colors">Autonomous XDR</a></li>
+                        <li><a href="#features" class="hover:text-emerald-400 transition-colors">Vulnerability Scanner</a></li>
+                        <li><a href="#features" class="hover:text-emerald-400 transition-colors">Zero Trust Vault</a></li>
+                        <li><a href="#pricing" class="hover:text-emerald-400 transition-colors">Threat Intelligence</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Resources</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors">Security Advisories</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors">API Documentation</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors">SOC2 Compliance</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors">Incident Status</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Global SOC</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li class="flex items-start">
+                            <svg class="h-4 w-4 mr-2 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            500 Cyber Way, Sector 7, Washington, DC
+                        </li>
+                        <li class="flex items-center mt-2">
+                            <svg class="h-4 w-4 mr-2 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1.1 1.1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            1-800-SENTINEL
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-slate-600">
+                <p>&copy; 2026 Sentinel Cyber Technologies Inc. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

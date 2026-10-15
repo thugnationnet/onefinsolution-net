@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEGIS INSURANCE | Modern Coverage & Risk Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            950: '#022c22'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-100 flex flex-col min-h-screen selection:bg-emerald-500 selection:text-slate-950">
+
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                        <svg class="w-6 h-6 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <a href="#" class="text-xl font-extrabold tracking-tight text-white">AEGIS<span class="text-emerald-400">INSURANCE</span></a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#coverages" class="text-slate-300 hover:text-emerald-400 text-sm font-medium transition-colors">Coverages</a>
+                    <a href="#calculator" class="text-slate-300 hover:text-emerald-400 text-sm font-medium transition-colors">Instant Quote</a>
+                    <a href="#claims" class="text-slate-300 hover:text-emerald-400 text-sm font-medium transition-colors">Claims & Support</a>
+                    <a href="#reviews" class="text-slate-300 hover:text-emerald-400 text-sm font-medium transition-colors">Client Reviews</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#consultation" class="text-slate-300 hover:text-white text-sm font-medium px-4 py-2">Client Portal</a>
+                    <a href="#consultation" class="bg-emerald-600 text-slate-950 px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-600/20">Get Covered</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-slate-400 hover:text-white focus:outline-none" aria-label="Open mobile menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="relative bg-slate-950 overflow-hidden py-20 lg:py-32">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#22c55e_1px,transparent_1px)] [background-size:24px_24px]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7">
+                        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 text-emerald-400 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-emerald-500/20 mb-6">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>A+ Rated Financial Strength by AM Best</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6 leading-[1.1]">
+                            Smart Protection for <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Your Peace of Mind.</span>
+                        </h1>
+                        <p class="text-slate-400 text-lg mb-8 font-light leading-relaxed max-w-xl">
+                            Comprehensive auto, home, life, and business insurance with transparent pricing, instant digital quotes, and lightning-fast claim payouts.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#calculator" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-8 py-4 rounded-xl transition-all text-sm text-center shadow-lg shadow-emerald-500/20 flex items-center justify-center space-x-2">
+                                <span>Calculate Your Quote</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </a>
+                            <a href="#coverages" class="bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 font-semibold px-8 py-4 rounded-xl transition-all text-sm text-center flex items-center justify-center">
+                                Explore Policies
+                            </a>
+                        </div>
+
+                        <div class="mt-8 flex items-center space-x-8 text-sm text-slate-400">
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span>24/7 Dedicated Claims Concierge</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <svg class="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                <span>Zero Paperwork Hassle</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-5 relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl blur-xl opacity-30"></div>
+                        <div class="relative bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl overflow-hidden">
+                            <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-amber-500"></div>
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                </div>
+                                <span class="text-xs font-mono text-slate-400">policy-holder-portal.sys</span>
+                                <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2 py-0.5 rounded font-mono">Active Policy</span>
+                            </div>
+                            
+                            <div class="space-y-4 mb-6">
+                                <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-xs font-bold text-white">Comprehensive Home & Auto Bundle</span>
+                                        <span class="text-xs text-emerald-400 font-mono">Saved $640/yr</span>
+                                    </div>
+                                    <div class="w-full bg-slate-900 rounded-full h-2 mb-2">
+                                        <div class="bg-emerald-500 h-2 rounded-full w-full"></div>
+                                    </div>
+                                    <div class="flex justify-between text-[11px] text-slate-400">
+                                        <span>Coverage Limit: $1,500,000</span>
+                                        <span>Deductible: $500</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-xl overflow-hidden border border-slate-800 relative h-36">
+                                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Insurance Security" class="w-full h-full object-cover opacity-60">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex items-end p-4">
+                                    <div>
+                                        <span class="text-xs font-mono text-emerald-400 block">Reliability</span>
+                                        <span class="text-sm font-bold text-white">Over 250,000+ Protected Families Nationwide</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 bg-slate-950 border-t border-b border-slate-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">$2.4B+</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Claims Paid Out</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">98.2%</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Claim Satisfaction</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">250k</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Active Policyholders</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">15 Mins</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Avg. Claim Settlement</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="coverages" class="py-24 bg-slate-900/50 border-t border-slate-800/80">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-emerald-400 font-bold tracking-widest uppercase text-xs">Tailored Protection</span>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-white">Coverage Plans Built for Your Life</h2>
+                    <p class="mt-4 text-slate-400 text-base">Select from our comprehensive suite of personal and commercial insurance policies.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden hover:border-emerald-500/50 transition-all group">
+                        <div class="h-48 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="Home Insurance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent"></div>
+                            <span class="absolute bottom-3 left-4 bg-emerald-600 text-slate-950 text-xs font-bold px-3 py-1 rounded-full">Homeowners</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Property & Home Protection</h3>
+                            <p class="text-slate-400 text-sm mb-6">Full replacement cost coverage for your dwelling, personal belongings, and liability against unexpected disasters.</p>
+                            <a href="#consultation" class="text-emerald-400 hover:text-emerald-300 font-semibold text-sm flex items-center space-x-1">
+                                <span>Get Home Quote</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden hover:border-emerald-500/50 transition-all group">
+                        <div class="h-48 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=600&q=80" alt="Auto Insurance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent"></div>
+                            <span class="absolute bottom-3 left-4 bg-emerald-600 text-slate-950 text-xs font-bold px-3 py-1 rounded-full">Auto & Vehicle</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Comprehensive Auto Coverage</h3>
+                            <p class="text-slate-400 text-sm mb-6">Collision, comprehensive, roadside assistance, and accident forgiveness with low deductibles and multi-car discounts.</p>
+                            <a href="#consultation" class="text-emerald-400 hover:text-emerald-300 font-semibold text-sm flex items-center space-x-1">
+                                <span>Get Auto Quote</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden hover:border-emerald-500/50 transition-all group">
+                        <div class="h-48 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80" alt="Business Insurance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent"></div>
+                            <span class="absolute bottom-3 left-4 bg-emerald-600 text-slate-950 text-xs font-bold px-3 py-1 rounded-full">Commercial</span>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Business & Liability Security</h3>
+                            <p class="text-slate-400 text-sm mb-6">General liability, workers compensation, cyber risk, and professional indemnity tailored for modern businesses.</p>
+                            <a href="#consultation" class="text-emerald-400 hover:text-emerald-300 font-semibold text-sm flex items-center space-x-1">
+                                <span>Get Business Quote</span>
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator" class="py-24 bg-slate-950">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-slate-900 border border-slate-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+                    <div class="text-center max-w-xl mx-auto mb-10">
+                        <span class="text-emerald-400 font-bold tracking-widest uppercase text-xs">Instant Estimation</span>
+                        <h2 class="mt-2 text-3xl font-extrabold text-white">Calculate Your Estimated Premium</h2>
+                        <p class="mt-2 text-slate-400 text-sm">Adjust your coverage parameters to see estimated monthly rates instantly.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Insurance Type</label>
+                                <select id="calcType" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-emerald-500">
+                                    <option value="home">Homeowners Insurance</option>
+                                    <option value="auto">Auto & Vehicle Insurance</option>
+                                    <option value="life">Term Life Insurance</option>
+                                    <option value="business">Commercial Liability</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Desired Coverage Level</label>
+                                <select id="calcTier" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-emerald-500">
+                                    <option value="standard">Standard Protection ($500k)</option>
+                                    <option value="premium">Comprehensive Shield ($1.5M)</option>
+                                    <option value="maximum">Executive Platinum ($5M+)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between">
+                            <div>
+                                <span class="text-xs uppercase font-mono text-slate-400">Estimated Monthly Premium</span>
+                                <div id="calcResult" class="text-3xl font-extrabold text-emerald-400 mt-1">$48 /mo</div>
+                            </div>
+                            <a href="#consultation" class="mt-4 sm:mt-0 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-6 py-3 rounded-xl transition-all text-sm shadow-lg shadow-emerald-500/20">
+                                Lock In Rate
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="consultation" class="py-24 bg-slate-900/50 border-t border-slate-800/80">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-slate-900 border border-slate-800 p-8 sm:p-12 rounded-3xl shadow-2xl">
+                    <div class="text-center max-w-xl mx-auto mb-10">
+                        <span class="text-emerald-400 font-bold tracking-widest uppercase text-xs">Speak With a Broker</span>
+                        <h2 class="mt-2 text-3xl font-extrabold text-white">Schedule Your Risk Assessment</h2>
+                        <p class="mt-2 text-slate-400 text-sm">Our licensed insurance advisors will review your existing policies to uncover potential savings.</p>
+                    </div>
+
+                    <form class="space-y-6" onsubmit="event.preventDefault();">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Full Name</label>
+                                <input type="text" placeholder="Jane Smith" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-emerald-500" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Email Address</label>
+                                <input type="email" placeholder="jane@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-emerald-500" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Insurance Interest</label>
+                                <select class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-emerald-500">
+                                    <option>Homeowners Insurance</option>
+                                    <option>Auto Insurance Bundle</option>
+                                    <option>Term / Whole Life Insurance</option>
+                                    <option>Commercial Business Policy</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Phone Number</label>
+                                <input type="tel" placeholder="(555) 019-2834" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-emerald-500" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Notes or Specific Requirements</label>
+                            <textarea rows="4" placeholder="Mention current policies or specific coverage limits needed..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-emerald-500"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-4 rounded-xl transition-all shadow-lg shadow-emerald-500/20 text-sm">
+                            Request Free Consultation
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                        </div>
+                        <span class="text-lg font-extrabold text-white">AEGIS<span class="text-emerald-400">INSURANCE</span></span>
+                    </div>
+                    <p class="text-xs font-light leading-relaxed text-slate-500">
+                        Licensed digital insurance provider offering secure financial protection for families and enterprises nationwide.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Coverages</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#coverages" class="hover:text-emerald-400 transition-colors">Homeowners Protection</a></li>
+                        <li><a href="#coverages" class="hover:text-emerald-400 transition-colors">Auto & Vehicle Policies</a></li>
+                        <li><a href="#coverages" class="hover:text-emerald-400 transition-colors">Commercial Liability</a></li>
+                        <li><a href="#coverages" class="hover:text-emerald-400 transition-colors">Term Life Insurance</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Resources</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors">Claims Center</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors">Risk Assessment FAQ</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors">Policyholder Portal</a></li>
+                        <li><a href="#" class="hover:text-emerald-400 transition-colors">Safety Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold tracking-widest uppercase mb-4 text-white">Corporate Headquarters</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li class="flex items-start">
+                            <svg class="h-4 w-4 mr-2 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0 z"/></svg>
+                            100 Financial Plaza, Suite 1400, Chicago, IL
+                        </li>
+                        <li class="flex items-center mt-2">
+                            <svg class="h-4 w-4 mr-2 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1.1 1.1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            1-800-AEGIS-INS
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-slate-600">
+                <p>&copy; 2026 Aegis Insurance & Financial Services Inc. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const typeSelect = document.getElementById('calcType');
+        const tierSelect = document.getElementById('calcTier');
+        const calcResult = document.getElementById('calcResult');
+
+        function updateQuote() {
+            const type = typeSelect.value;
+            const tier = tierSelect.value;
+            
+            let base = 40;
+            if (type === 'home') base = 75;
+            if (type === 'auto') base = 55;
+            if (type === 'life') base = 30;
+            if (type === 'business') base = 120;
+
+            let multiplier = 1;
+            if (tier === 'premium') multiplier = 1.8;
+            if (tier === 'maximum') multiplier = 3.2;
+
+            const total = Math.round(base * multiplier);
+            calcResult.textContent = '$' + total + ' /mo';
+        }
+
+        typeSelect.addEventListener('change', updateQuote);
+        tierSelect.addEventListener('change', updateQuote);
+        updateQuote();
+    </script>
+</body>
+</html>

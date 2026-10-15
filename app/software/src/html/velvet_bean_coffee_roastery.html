@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELVET BEAN | Artisan Coffee & Roastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        coffeeDark: '#1E140F',
+                        coffeeRoast: '#2B1C15',
+                        coffeeAmber: '#D97736',
+                        coffeeGold: '#E5A93B',
+                        coffeeCream: '#F9F6F0',
+                        coffeeSand: '#EFEAE2'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-coffeeCream text-coffeeDark font-sans antialiased selection:bg-coffeeAmber/30">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-coffeeCream/90 backdrop-blur-md border-b border-coffeeDark/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2">
+                <span class="font-serif italic text-2xl sm:text-3xl font-bold tracking-tight text-coffeeDark">Velvet <span class="text-coffeeAmber">Bean</span></span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest text-coffeeDark/80">
+                <a href="#menu" class="hover:text-coffeeAmber transition-colors">Menu & Brews</a>
+                <a href="#origins" class="hover:text-coffeeAmber transition-colors">Single Origins</a>
+                <a href="#subscription" class="hover:text-coffeeAmber transition-colors">Bean Club</a>
+                <a href="#locations" class="hover:text-coffeeAmber transition-colors">Café Locations</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#subscription" class="bg-coffeeDark hover:bg-coffeeAmber text-coffeeCream px-6 py-3 text-xs uppercase tracking-widest font-bold rounded-full transition-all shadow-md">
+                    Order Beans
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden">
+        <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-6 bg-gradient-to-b from-coffeeSand via-coffeeCream to-coffeeCream">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-coffeeAmber/15 border border-coffeeAmber/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-coffeeDark">
+                        <span>☕ Direct Trade & Small-Batch Roasted</span>
+                    </div>
+                    <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl leading-tight font-normal text-coffeeDark">
+                        Crafted for the <span class="italic font-light text-coffeeAmber">love</span> of exquisite <span class="italic font-light text-coffeeGold">coffee</span>.
+                    </h1>
+                    <p class="text-coffeeDark/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        From single-origin pour-overs to velvety smooth flat whites, discover beans sustainably sourced from high-altitude volcanic soils worldwide.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        <a href="#menu" class="w-full sm:w-auto bg-coffeeAmber hover:bg-coffeeAmber/90 text-white px-8 py-4 text-center text-xs uppercase tracking-widest font-bold rounded-full shadow-lg transition-transform hover:scale-105">
+                            Explore Menu
+                        </a>
+                        <a href="#origins" class="w-full sm:w-auto bg-coffeeDark/10 hover:bg-coffeeDark/20 text-coffeeDark border border-coffeeDark/20 px-8 py-4 text-center text-xs uppercase tracking-widest font-semibold rounded-full transition-colors">
+                            Our Roastery Story
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" alt="Latte art and artisan coffee cup" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-coffeeGold text-coffeeDark p-5 rounded-2xl shadow-xl font-serif text-center transform -rotate-6">
+                        <span class="block text-2xl font-bold">100%</span>
+                        <span class="text-[10px] tracking-widest uppercase font-sans font-bold">Arabica Grade</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="origins" class="py-20 bg-coffeeSand px-6 border-y border-coffeeDark/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-coffeeAmber">Roasting Philosophy</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl text-coffeeDark">The Velvet Bean Journey</h2>
+                    <p class="text-coffeeDark/70 text-sm">Every batch is meticulously roasted in small quantities to unlock complex flavor notes.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-coffeeCream p-8 rounded-3xl border border-coffeeDark/10 shadow-sm text-center space-y-3">
+                        <span class="inline-block bg-coffeeAmber/20 text-coffeeDark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Step 01</span>
+                        <h3 class="font-serif text-xl font-bold text-coffeeDark">Ethical Sourcing</h3>
+                        <p class="text-xs text-coffeeDark/70">Partnering directly with micro-lot farmers in Ethiopia, Colombia, and Sumatra.</p>
+                    </div>
+                    <div class="bg-coffeeCream p-8 rounded-3xl border border-coffeeDark/10 shadow-sm text-center space-y-3">
+                        <span class="inline-block bg-coffeeAmber/20 text-coffeeDark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Step 02</span>
+                        <h3 class="font-serif text-xl font-bold text-coffeeDark">Precision Roasting</h3>
+                        <p class="text-xs text-coffeeDark/70">Custom roast profiles tailored to highlight bright acidity or rich chocolate body.</p>
+                    </div>
+                    <div class="bg-coffeeCream p-8 rounded-3xl border border-coffeeDark/10 shadow-sm text-center space-y-3">
+                        <span class="inline-block bg-coffeeAmber/20 text-coffeeDark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Step 03</span>
+                        <h3 class="font-serif text-xl font-bold text-coffeeDark">Barista Extraction</h3>
+                        <p class="text-xs text-coffeeDark/70">Calibrated espresso machines and artisan pour-over bars for immaculate cups.</p>
+                    </div>
+                    <div class="bg-coffeeCream p-8 rounded-3xl border border-coffeeDark/10 shadow-sm text-center space-y-3">
+                        <span class="inline-block bg-coffeeAmber/20 text-coffeeDark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Step 04</span>
+                        <h3 class="font-serif text-xl font-bold text-coffeeDark">Fresh Delivery</h3>
+                        <p class="text-xs text-coffeeDark/70">Shipped within 48 hours of roasting so you enjoy peak aromatic freshness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="py-24 px-6 bg-coffeeCream">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-coffeeAmber">Signature Drinks & Pastries</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl text-coffeeDark">From Our Barista Counter</h2>
+                    <p class="text-coffeeDark/70 text-sm">Prepared with care using house-made syrups, organic dairy, and oat milk options.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="bg-white border border-coffeeDark/10 rounded-3xl p-6 relative overflow-hidden group shadow-md">
+                        <div class="absolute top-4 right-4 bg-coffeeAmber text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">House Favorite</div>
+                        <div class="h-60 rounded-2xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=80" alt="Iced Honey Lavender Latte" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-coffeeDark">Honey Lavender Oat Latte</h3>
+                            <span class="font-serif text-xl text-coffeeAmber">$6.50</span>
+                        </div>
+                        <p class="text-xs text-coffeeDark/70 mb-6">Double shot espresso infused with organic lavender blossoms and raw wildflower honey.</p>
+                        <button onclick="alert('Added Honey Lavender Oat Latte to your quick order!')" class="w-full bg-coffeeSand hover:bg-coffeeDark hover:text-coffeeCream py-3 rounded-xl text-xs uppercase tracking-widest font-bold transition-colors">
+                            Order Drink
+                        </button>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-white border border-coffeeDark/10 rounded-3xl p-6 relative overflow-hidden group shadow-md">
+                        <div class="absolute top-4 right-4 bg-coffeeGold text-coffeeDark text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Single Origin</div>
+                        <div class="h-60 rounded-2xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=800&q=80" alt="Pour Over Coffee" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-coffeeDark">Yirgacheffe Pour-Over</h3>
+                            <span class="font-serif text-xl text-coffeeAmber">$5.75</span>
+                        </div>
+                        <p class="text-xs text-coffeeDark/70 mb-6">Light roast washed bean featuring bright jasmine floral notes and crisp bergamot finish.</p>
+                        <button onclick="alert('Added Yirgacheffe Pour-Over to your quick order!')" class="w-full bg-coffeeSand hover:bg-coffeeDark hover:text-coffeeCream py-3 rounded-xl text-xs uppercase tracking-widest font-bold transition-colors">
+                            Order Drink
+                        </button>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-white border border-coffeeDark/10 rounded-3xl p-6 relative overflow-hidden group shadow-md">
+                        <div class="absolute top-4 right-4 bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Artisan Bakery</div>
+                        <div class="h-60 rounded-2xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80" alt="Cardamom Bun" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-serif text-xl font-bold text-coffeeDark">Swedish Cardamom Knot</h3>
+                            <span class="font-serif text-xl text-coffeeAmber">$4.95</span>
+                        </div>
+                        <p class="text-xs text-coffeeDark/70 mb-6">Freshly baked brioche dough braided with freshly ground cardamom and pearl sugar crust.</p>
+                        <button onclick="alert('Added Swedish Cardamom Knot to your quick order!')" class="w-full bg-coffeeSand hover:bg-coffeeDark hover:text-coffeeCream py-3 rounded-xl text-xs uppercase tracking-widest font-bold transition-colors">
+                            Order Pastry
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="subscription" class="py-24 px-6 bg-coffeeSand">
+            <div class="max-w-4xl mx-auto bg-coffeeCream border border-coffeeDark/10 p-8 sm:p-16 rounded-3xl shadow-xl">
+                <div class="text-center max-w-md mx-auto mb-12 space-y-3">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-coffeeAmber">Fresh Roasted To Your Door</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl text-coffeeDark">Join The Bean Club</h2>
+                    <p class="text-xs text-coffeeDark/70 uppercase tracking-widest">Customize your coffee delivery schedule and flavor profile.</p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Welcome to Velvet Bean Club! Your first box is being curated by our head roaster.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-coffeeDark/70 mb-2">Your Name</label>
+                            <input type="text" placeholder="Julian Vance" class="w-full bg-white border border-coffeeDark/20 px-4 py-3.5 text-xs text-coffeeDark focus:outline-none focus:border-coffeeAmber rounded-xl" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-coffeeDark/70 mb-2">Email Address</label>
+                            <input type="email" placeholder="julian@example.com" class="w-full bg-white border border-coffeeDark/20 px-4 py-3.5 text-xs text-coffeeDark focus:outline-none focus:border-coffeeAmber rounded-xl" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-coffeeDark/70 mb-2">Roast Profile Preference</label>
+                            <select class="w-full bg-white border border-coffeeDark/20 px-4 py-3.5 text-xs text-coffeeDark focus:outline-none focus:border-coffeeAmber rounded-xl">
+                                <option>Light & Fruity (Single Origins)</option>
+                                <option>Medium & Balanced (House Blend)</option>
+                                <option>Dark & Bold (Espresso Roast)</option>
+                                <option>Decaf Swiss Water Process</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-coffeeDark/70 mb-2">Grind Type</label>
+                            <select class="w-full bg-white border border-coffeeDark/20 px-4 py-3.5 text-xs text-coffeeDark focus:outline-none focus:border-coffeeAmber rounded-xl">
+                                <option>Whole Bean (Recommended for freshness)</option>
+                                <option>Espresso Ground</option>
+                                <option>Drip / Filter Coffee Ground</option>
+                                <option>French Press / Coarse Ground</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-coffeeDark/70 mb-2">Delivery Frequency & Shipping Notes</label>
+                        <textarea rows="3" placeholder="Bi-weekly delivery, leave package near front porch..." class="w-full bg-white border border-coffeeDark/20 px-4 py-3.5 text-xs text-coffeeDark focus:outline-none focus:border-coffeeAmber rounded-xl" required></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-coffeeAmber hover:bg-coffeeAmber/90 text-white py-4 text-xs uppercase tracking-[0.3em] font-bold rounded-xl transition-all shadow-md">
+                        Start Coffee Subscription
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer id="locations" class="bg-coffeeDark text-coffeeCream/80 py-16 px-6 border-t border-coffeeDark/10">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <span class="font-serif italic text-2xl text-coffeeCream tracking-wider uppercase block">Velvet <span class="text-coffeeAmber">Bean</span></span>
+                <p class="text-xs leading-relaxed text-coffeeCream/60">
+                    Dedicated to exceptional specialty coffee, sustainable farming partnerships, and craft roasting since 2015.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-coffeeCream font-bold mb-4">Café Hours</h3>
+                <ul class="space-y-2 text-xs text-coffeeCream/60">
+                    <li>Monday – Friday: 6:30 AM – 6:00 PM</li>
+                    <li>Saturday – Sunday: 7:00 AM – 6:00 PM</li>
+                    <li>Roastery tours available Saturdays at 2 PM</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-coffeeCream font-bold mb-4">Navigation</h3>
+                <ul class="space-y-2 text-xs text-coffeeCream/60">
+                    <li><a href="#menu" class="hover:text-coffeeGold transition-colors">Menu & Drinks</a></li>
+                    <li><a href="#origins" class="hover:text-coffeeGold transition-colors">Roasting Process</a></li>
+                    <li><a href="#subscription" class="hover:text-coffeeGold transition-colors">Bean Club</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-coffeeCream font-bold mb-4">Newsletter</h3>
+                <p class="text-xs text-coffeeCream/60 mb-4">Subscribe for seasonal release announcements and brew guides.</p>
+                <form class="flex" onsubmit="event.preventDefault(); alert('Subscribed successfully to Velvet Bean Gazette!');">
+                    <input type="email" placeholder="your@email.com" class="bg-coffeeCream/10 text-xs text-coffeeCream px-4 py-3 border border-coffeeCream/20 focus:outline-none w-full rounded-l-xl placeholder-coffeeCream/40" required>
+                    <button type="submit" class="bg-coffeeAmber hover:bg-coffeeAmber/90 text-white px-5 text-xs uppercase tracking-widest font-bold rounded-r-xl transition-colors">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-coffeeCream/10 flex flex-col md:flex-row justify-between items-center text-xs text-coffeeCream/40">
+            <p>&copy; 2026 Velvet Bean Coffee & Roastery. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-coffeeCream transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-coffeeCream transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-coffeeCream transition-colors">Wholesale Inquiries</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

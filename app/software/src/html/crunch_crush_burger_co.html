@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUNCH & CRUSH | Ultimate Smash Burgers & Crispy Fries</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Bungee', 'cursive'],
+                    },
+                    colors: {
+                        fastRed: {
+                            DEFAULT: '#ff3333',
+                            dark: '#cc0000',
+                            light: '#ff6666',
+                        },
+                        fastYellow: {
+                            DEFAULT: '#ffcc00',
+                            dark: '#cca300',
+                            light: '#ffdd33',
+                        },
+                        fastDark: '#121212',
+                        fastCard: '#1e1e1e',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .text-stroke {
+            -webkit-text-stroke: 1.5px #121212;
+        }
+    </style>
+</head>
+<body class="bg-fastDark text-white font-sans antialiased selection:bg-fastYellow selection:text-fastDark">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-fastDark/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2">
+                <span class="font-display text-2xl sm:text-3xl text-fastYellow tracking-wider uppercase">CRUNCH<span class="text-fastRed">&</span>CRUSH</span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest text-zinc-300">
+                <a href="#menu" class="hover:text-fastYellow transition-colors">Menu</a>
+                <a href="#specials" class="hover:text-fastYellow transition-colors">Combo Deals</a>
+                <a href="#locations" class="hover:text-fastYellow transition-colors">Locations</a>
+                <a href="#rewards" class="hover:text-fastYellow transition-colors">App & Rewards</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#order" class="bg-fastRed hover:bg-fastRed-dark text-white px-6 py-3 text-xs uppercase tracking-widest font-black rounded-full shadow-lg shadow-fastRed/30 transition-all transform hover:scale-105">
+                    Order Online
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden">
+        <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-6 bg-gradient-to-b from-fastDark via-[#1a1005] to-fastDark">
+            <div class="absolute inset-0 z-0 opacity-25">
+                <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=2000&q=80" alt="Juicy gourmet smash burger background" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-fastDark via-fastDark/80 to-transparent"></div>
+            </div>
+
+            <div class="max-w-7xl w-full mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 bg-fastYellow/10 border border-fastYellow/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest text-fastYellow">
+                        <span>🔥 100% Fresh Smash Patties & Hand-Cut Fries</span>
+                    </div>
+                    <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl leading-none uppercase tracking-wide text-white">
+                        CRUNCH SO <span class="text-fastYellow">LOUD</span>, CRUSH SO <span class="text-fastRed">GOOD.</span>
+                    </h1>
+                    <p class="text-zinc-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-medium">
+                        Double smashed crispy-edged Angus beef, secret melted cheese blends, toasted brioche buns, and legendary house dipping sauces.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        <a href="#menu" class="w-full sm:w-auto bg-fastYellow hover:bg-fastYellow-light text-fastDark px-8 py-4 text-center text-xs uppercase tracking-widest font-black rounded-full shadow-xl transition-transform hover:scale-105">
+                            View Menu & Order
+                        </a>
+                        <a href="#specials" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 text-center text-xs uppercase tracking-widest font-bold rounded-full transition-colors">
+                            Today's Deals
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full overflow-hidden border-4 border-fastYellow shadow-2xl shadow-fastYellow/20 animate-pulse">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Delicious cheeseburger hero shot" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-fastRed text-white p-4 rounded-2xl shadow-xl font-display text-center transform -rotate-6">
+                        <span class="block text-2xl">ONLY</span>
+                        <span class="block text-3xl text-fastYellow">$9.99</span>
+                        <span class="text-[10px] tracking-widest uppercase">Combo Meal</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="py-24 bg-fastCard px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-xs font-bold uppercase tracking-[0.3em] text-fastYellow">Freshly Prepared</span>
+                    <h2 class="font-display text-4xl sm:text-5xl uppercase tracking-wide text-white">The Crush Menu</h2>
+                    <p class="text-zinc-400 text-sm">Every burger is smashed to order on our searing hot iron griddles.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="bg-fastDark border border-white/5 rounded-3xl p-6 relative overflow-hidden group hover:border-fastYellow/50 transition-all shadow-xl">
+                        <div class="absolute top-4 right-4 bg-fastRed text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Bestseller</div>
+                        <div class="h-56 rounded-2xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1583032015865-e39ce6f279f5?auto=format&fit=crop&w=800&q=80" alt="The Ultimate Crunch Burger" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display text-xl text-white">The Inferno Smash</h3>
+                            <span class="font-display text-xl text-fastYellow">$11.49</span>
+                        </div>
+                        <p class="text-xs text-zinc-400 mb-6">Dual Angus patties, melted ghost pepper cheese, crispy onion strings, jalapeños, and signature spicy crush sauce.</p>
+                        <button onclick="alert('Added Inferno Smash to your active cart!')" class="w-full bg-white/10 hover:bg-fastYellow hover:text-fastDark py-3 rounded-xl text-xs uppercase tracking-widest font-black transition-colors">
+                            Add To Order
+                        </button>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-fastDark border border-white/5 rounded-3xl p-6 relative overflow-hidden group hover:border-fastYellow/50 transition-all shadow-xl">
+                        <div class="absolute top-4 right-4 bg-fastYellow text-fastDark text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Popular</div>
+                        <div class="h-56 rounded-2xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80" alt="Double Bacon Crush" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display text-xl text-white">Double Bacon Crush</h3>
+                            <span class="font-display text-xl text-fastYellow">$12.99</span>
+                        </div>
+                        <p class="text-xs text-zinc-400 mb-6">Double beef patties, thick-cut Applewood smoked bacon, double American cheese, pickles, and smoky BBQ aioli.</p>
+                        <button onclick="alert('Added Double Bacon Crush to your active cart!')" class="w-full bg-white/10 hover:bg-fastYellow hover:text-fastDark py-3 rounded-xl text-xs uppercase tracking-widest font-black transition-colors">
+                            Add To Order
+                        </button>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-fastDark border border-white/5 rounded-3xl p-6 relative overflow-hidden group hover:border-fastYellow/50 transition-all shadow-xl">
+                        <div class="absolute top-4 right-4 bg-emerald-500 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Crispy</div>
+                        <div class="h-56 rounded-2xl overflow-hidden mb-6">
+                            <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=80" alt="Crispy Chicken Crunch Sandwich" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-display text-xl text-white">Crunch Clucker</h3>
+                            <span class="font-display text-xl text-fastYellow">$10.99</span>
+                        </div>
+                        <p class="text-xs text-zinc-400 mb-6">Buttermilk hand-breaded crispy chicken breast, shredded iceberg lettuce, pickles, and tangy honey mustard glaze.</p>
+                        <button onclick="alert('Added Crunch Clucker to your active cart!')" class="w-full bg-white/10 hover:bg-fastYellow hover:text-fastDark py-3 rounded-xl text-xs uppercase tracking-widest font-black transition-colors">
+                            Add To Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="specials" class="py-24 bg-fastDark px-6 relative">
+            <div class="max-w-7xl mx-auto bg-gradient-to-r from-fastRed to-rose-700 rounded-3xl p-8 sm:p-16 text-white shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 opacity-20 pointer-events-none">
+                    <span class="font-display text-9xl">COMBO</span>
+                </div>
+                <div class="max-w-xl space-y-6 relative z-10">
+                    <span class="bg-fastYellow text-fastDark font-black text-xs px-4 py-1.5 rounded-full uppercase tracking-widest inline-block">Midnight Munchies Deal</span>
+                    <h2 class="font-display text-4xl sm:text-6xl uppercase tracking-wide">The Monster Box</h2>
+                    <p class="text-white/90 text-sm sm:text-base font-medium">
+                        2 Smash Burgers of your choice + 1 Large Crinkle Cut Fries + 1 Loaded Cheese Fries + 4 Crispy Tenders + 2 Shakes. Enough to feed the whole squad!
+                    </p>
+                    <div class="flex items-center space-x-6">
+                        <span class="font-display text-4xl text-fastYellow">$27.99</span>
+                        <span class="line-through text-white/60 font-display text-2xl">$38.50</span>
+                    </div>
+                    <div>
+                        <button onclick="alert('Monster Box Combo deal added to order!')" class="bg-fastDark hover:bg-black text-fastYellow px-8 py-4 rounded-full font-display text-sm uppercase tracking-wider transition-all transform hover:scale-105 shadow-xl">
+                            Grab This Deal Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="order" class="py-24 bg-fastCard px-6">
+            <div class="max-w-4xl mx-auto bg-fastDark border border-white/10 p-8 sm:p-16 rounded-3xl shadow-2xl">
+                <div class="text-center max-w-md mx-auto mb-12 space-y-3">
+                    <span class="text-xs font-bold uppercase tracking-[0.3em] text-fastYellow">Fast Pickup & Drive-Thru</span>
+                    <h2 class="font-display text-3xl sm:text-4xl uppercase tracking-wide text-white">Skip The Line</h2>
+                    <p class="text-xs text-zinc-400 uppercase tracking-widest">Order ahead for lightning-fast counter pickup.</p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Your order has been transmitted to the kitchen! Estimated pickup time is 15 minutes.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 mb-2">Your Name</label>
+                            <input type="text" placeholder="Marcus Vance" class="w-full bg-white/5 border border-white/10 px-4 py-3.5 text-xs text-white focus:outline-none focus:border-fastYellow rounded-xl" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 mb-2">Phone Number</label>
+                            <input type="tel" placeholder="(555) 019-2834" class="w-full bg-white/5 border border-white/10 px-4 py-3.5 text-xs text-white focus:outline-none focus:border-fastYellow rounded-xl" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 mb-2">Pickup Location</label>
+                            <select class="w-full bg-white/5 border border-white/10 px-4 py-3.5 text-xs text-white focus:outline-none focus:border-fastYellow rounded-xl">
+                                <option class="bg-fastDark">Downtown Main Street (#101)</option>
+                                <option class="bg-fastDark">Westside Highway Plaza (#204)</option>
+                                <option class="bg-fastDark">University Campus Hub (#308)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 mb-2">Pickup Time</label>
+                            <select class="w-full bg-white/5 border border-white/10 px-4 py-3.5 text-xs text-white focus:outline-none focus:border-fastYellow rounded-xl">
+                                <option class="bg-fastDark">ASAP (Approx. 15 mins)</option>
+                                <option class="bg-fastDark">In 30 Minutes</option>
+                                <option class="bg-fastDark">In 1 Hour</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 mb-2">Order Notes / Extra Sauce Requests</label>
+                        <textarea rows="3" placeholder="Extra cheese, extra pickles, extra crush sauce on the side..." class="w-full bg-white/5 border border-white/10 px-4 py-3.5 text-xs text-white focus:outline-none focus:border-fastYellow rounded-xl" required></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-fastYellow hover:bg-fastYellow-light text-fastDark py-4 text-xs uppercase tracking-[0.3em] font-black rounded-xl transition-all shadow-lg">
+                        Confirm Express Order
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer id="locations" class="bg-black text-zinc-400 border-t border-white/10 py-16 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <span class="font-display text-2xl text-fastYellow tracking-wider uppercase block">CRUNCH<span class="text-fastRed">&</span>CRUSH</span>
+                <p class="text-xs leading-relaxed text-zinc-500">
+                    Serving legendary smashed burgers, crinkle fries, and thick shakes with zero compromise on quality or speed.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-bold mb-4">Hours</h3>
+                <ul class="space-y-2 text-xs text-zinc-500">
+                    <li>Sun - Thu: 10:30 AM - Midnight</li>
+                    <li>Fri - Sat: 10:30 AM - 3:00 AM</li>
+                    <li>Drive-Thru: 24/7 Select Locations</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-bold mb-4">Quick Links</h3>
+                <ul class="space-y-2 text-xs text-zinc-500">
+                    <li><a href="#menu" class="hover:text-fastYellow transition-colors">Menu Categories</a></li>
+                    <li><a href="#specials" class="hover:text-fastYellow transition-colors">Combo Deals</a></li>
+                    <li><a href="#order" class="hover:text-fastYellow transition-colors">Order Ahead</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-bold mb-4">Newsletter & Perks</h3>
+                <p class="text-xs text-zinc-500 mb-4">Join the Crunch Club for free fries every Friday.</p>
+                <form class="flex" onsubmit="event.preventDefault(); alert('Subscribed successfully to Crunch Club!');">
+                    <input type="email" placeholder="your@email.com" class="bg-white/5 text-xs text-white px-4 py-3 border border-white/10 focus:outline-none w-full rounded-l-xl" required>
+                    <button type="submit" class="bg-fastRed hover:bg-fastRed-dark text-white px-5 text-xs uppercase tracking-widest font-black rounded-r-xl transition-colors">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600">
+            <p>&copy; 2026 Crunch & Crush Burger Co. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-zinc-400 transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-zinc-400 transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-zinc-400 transition-colors">Nutrition Facts</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

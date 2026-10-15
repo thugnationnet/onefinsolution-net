@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOTANICA & BLOOM | Luxury Floral Studio & Gift Atelier</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        petal: '#FDFBF7',
+                        roseDust: '#E8D5D0',
+                        forest: '#23382B',
+                        forestLight: '#2F4C39',
+                        goldAccent: '#C29B38',
+                        blush: '#F4ECE6',
+                        earth: '#4A3B32',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-petal text-forest font-sans antialiased selection:bg-goldAccent selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-petal/90 backdrop-blur-md border-b border-roseDust/40 transition-all">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-12 h-12 rounded-full bg-forest text-petal flex items-center justify-center font-serif text-2xl font-bold shadow-md group-hover:scale-105 transition-transform">
+                    B&B
+                </div>
+                <div>
+                    <span class="font-serif font-bold tracking-[0.2em] text-lg uppercase block leading-tight">Botanica & Bloom</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-goldAccent font-semibold block">Floral & Gift Atelier</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.25em] text-forest/70">
+                <a href="#arrangements" class="hover:text-goldAccent transition-colors">Seasonal Bouquets</a>
+                <a href="#gifts" class="hover:text-goldAccent transition-colors">Curated Gifts</a>
+                <a href="#builder" class="hover:text-goldAccent transition-colors">Build a Box</a>
+                <a href="#subscriptions" class="hover:text-goldAccent transition-colors">Subscriptions</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openDeliveryModal()" class="bg-forest hover:bg-forestLight text-petal font-semibold px-6 py-3 text-xs uppercase tracking-[0.2em] rounded-full transition-all shadow-md">
+                    Same-Day Delivery
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-24">
+        <section class="relative min-h-[85vh] flex items-center justify-center px-6 py-20 bg-gradient-to-b from-petal to-blush/40">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="lg:col-span-7 space-y-8">
+                    <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-[0.3em] text-goldAccent bg-goldAccent/10 px-4 py-2 rounded-full border border-goldAccent/20">
+                        <span>Hand-tied Daily • Farm Fresh • Luxury Gifting</span>
+                    </span>
+                    <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]">
+                        Expressions <br><span class="italic text-goldAccent font-normal">Woven in Petals</span>.
+                    </h1>
+                    <p class="text-forest/80 text-base sm:text-xl max-w-xl font-light leading-relaxed">
+                        Artisanal floral designs, rare botanical stems, and curated luxury gift boxes crafted for life's most cherished moments.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        <a href="#arrangements" class="bg-forest hover:bg-forestLight text-white text-center font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full shadow-lg">
+                            Shop Collections
+                        </a>
+                        <button onclick="openDeliveryModal()" class="border border-forest/30 hover:border-goldAccent text-forest text-center font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full">
+                            Check Delivery Zip
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-5">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-roseDust/60 shadow-2xl relative overflow-hidden group">
+                        <div class="absolute -right-12 -top-12 w-48 h-48 bg-goldAccent/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="h-80 rounded-2xl overflow-hidden mb-6 relative">
+                            <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80" alt="Luxury Bouquet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/800x800/E8D5D0/23382B?text=Botanica+Bloom'">
+                        </div>
+                        <div class="space-y-3">
+                            <span class="text-[10px] uppercase font-bold tracking-[0.3em] text-goldAccent block">Signature Creation</span>
+                            <h3 class="font-serif text-2xl font-bold">The Velvet Rose & Eucalyptus Reserve</h3>
+                            <p class="text-xs text-forest/70 leading-relaxed">Garden roses, fragrant eucalyptus, and cascading ranunculus wrapped in artisan linen paper.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-y border-roseDust/60 bg-blush/50 py-6 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-6 text-forest/70 font-serif font-bold uppercase tracking-[0.25em] text-xs sm:text-sm">
+                <span class="hover:text-forest transition-colors cursor-default">✦ SAME-DAY LOCAL COURIER</span>
+                <span class="hover:text-forest transition-colors cursor-default">✦ SUSTAINABLE FLOWER FARMS</span>
+                <span class="hover:text-forest transition-colors cursor-default">✦ BESPOKE GIFT CURATION</span>
+                <span class="hover:text-forest transition-colors cursor-default">✦ WEDDING & EVENT FLORAL</span>
+            </div>
+        </div>
+
+        <section id="arrangements" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto space-y-16">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-4">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-goldAccent">Signature Collection</span>
+                        <h2 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight">Hand-Tied Arrangements</h2>
+                    </div>
+                    <p class="text-xs text-forest/70 max-w-sm leading-relaxed">Designed by master floral architects using pristine seasonal stems freshly harvested from sustainable eco-farms.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="bg-white p-6 rounded-3xl border border-roseDust/60 space-y-6 hover:shadow-xl transition-all group cursor-pointer" onclick="showNotification('Added Golden Autumnal Symphony to cart.')">
+                        <div class="h-72 rounded-2xl overflow-hidden bg-blush/30 relative">
+                            <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80" alt="Autumnal Symphony" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/E8D5D0/23382B?text=Bouquet+1'">
+                            <span class="absolute top-4 left-4 bg-petal/90 backdrop-blur-sm text-forest text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-roseDust">Best Seller</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl font-bold">Golden Autumnal Symphony</h3>
+                                <span class="font-serif font-bold text-goldAccent">$125</span>
+                            </div>
+                            <p class="text-xs text-forest/70">Warm peach garden roses, honey dahlias, and textured wheat grass.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-white p-6 rounded-3xl border border-roseDust/60 space-y-6 hover:shadow-xl transition-all group cursor-pointer" onclick="showNotification('Added Blush Parisian Hydrangea to cart.')">
+                        <div class="h-72 rounded-2xl overflow-hidden bg-blush/30 relative">
+                            <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80" alt="Blush Parisian" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/E8D5D0/23382B?text=Bouquet+2'">
+                            <span class="absolute top-4 left-4 bg-petal/90 backdrop-blur-sm text-forest text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-roseDust">Luxury</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl font-bold">Blush Parisian Hydrangea</h3>
+                                <span class="font-serif font-bold text-goldAccent">$165</span>
+                            </div>
+                            <p class="text-xs text-forest/70">Full antique hydrangeas, pink spray roses, and silver-dollar eucalyptus.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-white p-6 rounded-3xl border border-roseDust/60 space-y-6 hover:shadow-xl transition-all group cursor-pointer" onclick="showNotification('Added Emerald Forest Botanica to cart.')">
+                        <div class="h-72 rounded-2xl overflow-hidden bg-blush/30 relative">
+                            <img src="https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=800&q=80" alt="Emerald Forest" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/E8D5D0/23382B?text=Bouquet+3'">
+                            <span class="absolute top-4 left-4 bg-petal/90 backdrop-blur-sm text-forest text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-roseDust">Seasonal</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl font-bold">Emerald Forest Botanica</h3>
+                                <span class="font-serif font-bold text-goldAccent">$140</span>
+                            </div>
+                            <p class="text-xs text-forest/70">Deep green foliage textures, white calla lilies, and delicate wax flowers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gifts" class="py-24 px-6 bg-blush/40 border-y border-roseDust/60">
+            <div class="max-w-7xl mx-auto space-y-16">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-4">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-goldAccent">Artisanal Gifting</span>
+                        <h2 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight">Luxury Gift Sets & H Hampers</h2>
+                    </div>
+                    <p class="text-xs text-forest/70 max-w-sm leading-relaxed">Pair your bouquet with artisanal chocolates, hand-poured botanical soy candles, and organic sparkling rosés.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-3xl border border-roseDust/60 flex flex-col md:flex-row gap-8 items-center">
+                        <div class="w-full md:w-1/2 h-64 rounded-2xl overflow-hidden bg-blush/30">
+                            <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80" alt="Gift Box" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x600/E8D5D0/23382B?text=Gift+Set'">
+                        </div>
+                        <div class="w-full md:w-1/2 space-y-4">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-goldAccent">The Wellness Hamper</span>
+                            <h3 class="font-serif text-3xl font-bold">Botanical Serenity Box</h3>
+                            <p class="text-xs text-forest/70 leading-relaxed">Includes a mini dried floral bouquet, lavender soy candle, organic honey jar, and silk eye mask.</p>
+                            <div class="flex justify-between items-center pt-2">
+                                <span class="font-serif text-2xl font-bold text-goldAccent">$95</span>
+                                <button onclick="showNotification('Added Botanical Serenity Box to cart.')" class="bg-forest text-white text-xs uppercase tracking-widest font-bold px-5 py-3 rounded-full hover:bg-forestLight transition-colors">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-3xl border border-roseDust/60 flex flex-col md:flex-row gap-8 items-center">
+                        <div class="w-full md:w-1/2 h-64 rounded-2xl overflow-hidden bg-blush/30">
+                            <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80" alt="Champagne Gift" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x600/E8D5D0/23382B?text=Champagne+Set'">
+                        </div>
+                        <div class="w-full md:w-1/2 space-y-4">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-goldAccent">Celebration Suite</span>
+                            <h3 class="font-serif text-3xl font-bold">Rosé & Petals Celebration Crate</h3>
+                            <p class="text-xs text-forest/70 leading-relaxed">Organic sparkling rosé, artisanal strawberry truffles, and a petite signature table arrangement.</p>
+                            <div class="flex justify-between items-center pt-2">
+                                <span class="font-serif text-2xl font-bold text-goldAccent">$155</span>
+                                <button onclick="showNotification('Added Rosé & Petals Crate to cart.')" class="bg-forest text-white text-xs uppercase tracking-widest font-bold px-5 py-3 rounded-full hover:bg-forestLight transition-colors">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="builder" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-goldAccent">Custom Atelier</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold">Build Your Bespoke Gift Crate</h2>
+                    <p class="text-forest/80 text-sm leading-relaxed">
+                        Create a personalized gift experience by selecting your preferred flower palette, luxury keepsake box, and artisanal treats. Perfect for birthdays, anniversaries, and corporate clients.
+                    </p>
+                    <div class="space-y-4 pt-4">
+                        <div class="bg-white p-5 rounded-2xl border border-roseDust/60 flex items-center justify-between">
+                            <div>
+                                <h4 class="font-serif font-bold text-lg">1. Select Floral Theme</h4>
+                                <p class="text-xs text-forest/60">Blush Sunset • White Harmony • Golden Autumn</p>
+                            </div>
+                            <span class="text-goldAccent font-bold text-xs uppercase tracking-widest">Included</span>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-roseDust/60 flex items-center justify-between">
+                            <div>
+                                <h4 class="font-serif font-bold text-lg">2. Add Keepsake Item</h4>
+                                <p class="text-xs text-forest/60">Ceramic Vase • Scented Candle • Silk Ribbon</p>
+                            </div>
+                            <span class="text-goldAccent font-bold text-xs uppercase tracking-widest">+ $35</span>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-roseDust/60 flex items-center justify-between">
+                            <div>
+                                <h4 class="font-serif font-bold text-lg">3. Personalized Handwritten Note</h4>
+                                <p class="text-xs text-forest/60">Embossed card stock with custom calligraphy</p>
+                            </div>
+                            <span class="text-goldAccent font-bold text-xs uppercase tracking-widest">Complimentary</span>
+                        </div>
+                    </div>
+                    <button onclick="showNotification('Custom gift box configuration saved!')" class="bg-goldAccent hover:bg-goldAccent/90 text-white font-bold px-8 py-4 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-lg">
+                        Finalize Custom Crate ($185)
+                    </button>
+                </div>
+                <div class="lg:col-span-6">
+                    <div class="rounded-3xl overflow-hidden border border-roseDust/60 shadow-xl h-[450px]">
+                        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1000&q=80" alt="Gift Crate Assembly" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x800/E8D5D0/23382B?text=Builder'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-forest text-petal py-16 px-6 text-xs">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-goldAccent text-white flex items-center justify-center font-serif font-bold text-sm">
+                            B
+                        </div>
+                        <span class="font-serif font-bold tracking-wider text-base uppercase">Botanica & Bloom</span>
+                    </div>
+                    <p class="text-xs leading-relaxed text-petal/70 font-light">
+                        Elevating everyday moments through exquisite floral design and sustainable luxury gifting.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-goldAccent mb-4">Directory</h3>
+                    <ul class="space-y-2 text-xs text-petal/70">
+                        <li><a href="#arrangements" class="hover:text-white transition-colors">Seasonal Bouquets</a></li>
+                        <li><a href="#gifts" class="hover:text-white transition-colors">Curated Gifts</a></li>
+                        <li><a href="#builder" class="hover:text-white transition-colors">Build a Box</a></li>
+                        <li><a href="#subscriptions" class="hover:text-white transition-colors">Weekly Subscriptions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-goldAccent mb-4">Studio Hours</h3>
+                    <ul class="space-y-2 text-xs text-petal/70">
+                        <li>Monday – Saturday: 8am – 7pm</li>
+                        <li>Sunday: 9am – 4pm</li>
+                        <li>Same-Day Delivery cutoff: 2pm</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-goldAccent mb-4">Atelier Location</h3>
+                    <ul class="space-y-2 text-xs text-petal/70">
+                        <li>742 Conservatory Row, Suite A</li>
+                        <li>Pasadena, CA 91101</li>
+                        <li>Inquiries: hello@botanicaandbloom.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-petal/10 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest text-petal/50">
+                <p>&copy; 2026 BOTANICA & BLOOM ATELIER. ALL RIGHTS RESERVED.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <div id="deliveryModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-petal text-forest p-8 sm:p-12 rounded-3xl max-w-lg w-full mx-4 relative border border-roseDust/60 shadow-2xl space-y-6">
+            <button onclick="closeDeliveryModal()" class="absolute top-6 right-6 text-forest/60 hover:text-forest text-xs uppercase tracking-widest font-bold">Close ✕</button>
+            <div class="space-y-3 pt-2">
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-goldAccent">Express Courier</span>
+                <h3 class="font-serif text-3xl font-bold">Check Same-Day Delivery</h3>
+                <p class="text-xs text-forest/70 font-light leading-relaxed">Enter your delivery zip code to verify same-day availability for our fresh floral arrangements and gift crates.</p>
+                <form class="space-y-4 pt-2" onsubmit="event.preventDefault(); closeDeliveryModal(); showNotification('Great news! Same-day delivery is available for your zip code.');">
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-forest/60">Recipient Zip Code</label>
+                        <input type="text" placeholder="e.g., 91101" class="w-full bg-white text-forest text-xs px-4 py-3.5 rounded-xl border border-roseDust focus:outline-none focus:border-goldAccent" required>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-forest/60">Desired Delivery Date</label>
+                        <input type="date" class="w-full bg-white text-forest text-xs px-4 py-3.5 rounded-xl border border-roseDust focus:outline-none focus:border-goldAccent" required>
+                    </div>
+                    <button type="submit" class="w-full bg-forest hover:bg-forestLight text-white font-bold py-4 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-md">
+                        Check Availability
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="fixed bottom-6 right-6 z-50 bg-white text-forest px-6 py-4 rounded-2xl shadow-2xl border border-roseDust/60 text-xs tracking-wider transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <span id="notificationText">Notification message</span>
+    </div>
+
+    <script>
+        function showNotification(msg) {
+            const notif = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            text.innerText = msg;
+            notif.classList.remove('translate-y-20', 'opacity-0');
+            notif.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                notif.classList.remove('translate-y-0', 'opacity-100');
+                notif.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        function openDeliveryModal() {
+            document.getElementById('deliveryModal').classList.remove('hidden');
+        }
+
+        function closeDeliveryModal() {
+            document.getElementById('deliveryModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

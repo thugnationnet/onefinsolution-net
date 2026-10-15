@@ -1,0 +1,6 @@
+import Link from 'next/link';
+import { signInAction } from '@/app/actions';
+import { SubmitButton } from '@/components/submit-button';
+import { FormNotice } from '@/components/form-notice';
+export const metadata={title:'Sign In',robots:{index:false,follow:false}};
+export default async function SignIn({searchParams}:{searchParams:Promise<{error?:string;success?:string;next?:string}>}) {const params=await searchParams;return <div className="auth-wrap"><p className="eyebrow">WELCOME BACK</p><h1>Your workspace is waiting.</h1><p>Sign in to continue with One Fin.</p><FormNotice {...params} /><form action={signInAction} className="stack"><input type="hidden" name="next" value={params.next||''} /><label className="field">Email address<input name="email" type="email" required maxLength={254} autoComplete="email" /></label><label className="field">Password<input name="password" type="password" required maxLength={128} autoComplete="current-password" /></label><SubmitButton pendingText="Signing in…">Sign in</SubmitButton></form><div className="auth-links"><Link className="text-link" href="/forgot-password">Forgot password?</Link><Link className="text-link" href="/sign-up">Create an account</Link></div></div>;}

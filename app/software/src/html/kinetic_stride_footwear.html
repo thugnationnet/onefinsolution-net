@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINETIC & STRIDE | Engineered Footwear & Sneaker Culture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Chakra Petch', 'sans-serif'],
+                    },
+                    colors: {
+                        shoeDark: '#0A0B0E',
+                        shoeCard: '#151821',
+                        shoeAccent: '#CCFF00', // Electric Volt
+                        shoeMuted: '#94A3B8',
+                        shoeLight: '#F8FAFC',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-shoeDark text-shoeLight font-sans antialiased selection:bg-shoeAccent selection:text-shoeDark">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-shoeDark/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2">
+                <span class="font-display tracking-wider text-xl font-bold text-shoeLight">KINETIC <span class="text-shoeAccent">&</span> STRIDE</span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-[0.2em] text-shoeLight/80">
+                <a href="#drops" class="hover:text-shoeAccent transition-colors">Latest Drops</a>
+                <a href="#tech" class="hover:text-shoeAccent transition-colors">Carbon Tech</a>
+                <a href="#collection" class="hover:text-shoeAccent transition-colors">Footwear Catalog</a>
+                <a href="#reviews" class="hover:text-shoeAccent transition-colors">Athlete Hub</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#collection" class="bg-shoeAccent hover:bg-white text-shoeDark px-6 py-3 text-[10px] uppercase tracking-[0.2em] font-extrabold transition-all">
+                    Shop Kicks
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden">
+        <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-6 bg-shoeDark">
+            <div class="absolute inset-0 z-0 opacity-30">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1920&q=80" alt="Performance Sneaker" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-shoeDark via-shoeDark/70 to-transparent"></div>
+            
+            <div class="max-w-7xl w-full mx-auto relative z-10 text-center space-y-6">
+                <span class="inline-block text-[10px] font-bold uppercase tracking-[0.4em] text-shoeAccent bg-shoeAccent/10 border border-shoeAccent/30 px-4 py-1.5 rounded-full">
+                    Next-Gen Carbon Plate Technology
+                </span>
+                <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl tracking-wider font-extrabold uppercase leading-none">
+                    PROPEL YOUR <br><span class="text-shoeAccent">MOMENTUM</span>
+                </h1>
+                <p class="text-shoeMuted text-sm sm:text-base max-w-xl mx-auto font-light tracking-wide leading-relaxed">
+                    Engineered for explosive energy return, supreme ankle stabilization, and unmatched street-ready aesthetic.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 pt-6">
+                    <a href="#collection" class="w-full sm:w-auto bg-shoeAccent text-shoeDark hover:bg-white px-8 py-4 text-xs uppercase tracking-[0.2em] font-extrabold transition-all">
+                        Explore Collection
+                    </a>
+                    <a href="#tech" class="w-full sm:w-auto border border-white/20 hover:border-shoeAccent text-shoeLight px-8 py-4 text-xs uppercase tracking-[0.2em] font-extrabold transition-all">
+                        Discover Tech Specs
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="drops" class="py-16 px-6 bg-shoeCard border-y border-white/10">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div>
+                    <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-shoeAccent">Limited Edition Release</span>
+                    <h2 class="font-display text-3xl sm:text-4xl uppercase tracking-wide mt-1">Apex V3 'Volt Nebula'</h2>
+                    <p class="text-xs text-shoeMuted mt-2">Only 500 pairs worldwide. Equipped with nitrogen-infused foam and carbon fiber plate.</p>
+                </div>
+                <div class="flex items-center space-x-4 bg-shoeDark px-6 py-4 rounded-xl border border-white/10">
+                    <div class="text-center px-3"><span class="block font-display text-2xl font-bold text-shoeAccent">04</span><span class="text-[9px] uppercase tracking-widest text-shoeMuted">Days</span></div>
+                    <span class="text-shoeAccent font-bold">:</span>
+                    <div class="text-center px-3"><span class="block font-display text-2xl font-bold text-shoeAccent">18</span><span class="text-[9px] uppercase tracking-widest text-shoeMuted">Hours</span></div>
+                    <span class="text-shoeAccent font-bold">:</span>
+                    <div class="text-center px-3"><span class="block font-display text-2xl font-bold text-shoeAccent">42</span><span class="text-[9px] uppercase tracking-widest text-shoeMuted">Mins</span></div>
+                </div>
+                <button onclick="alert('You have registered for the Apex V3 drop reminder.')" class="bg-shoeAccent text-shoeDark hover:bg-white px-8 py-4 text-xs uppercase tracking-[0.2em] font-extrabold transition-all whitespace-nowrap">
+                    Set Drop Alert
+                </button>
+            </div>
+        </section>
+
+        <section id="collection" class="py-24 px-6 bg-shoeDark">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-white/10 pb-6">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-[0.3em] font-bold text-shoeAccent">Performance & Street</span>
+                        <h2 class="font-display text-3xl sm:text-5xl uppercase tracking-wide mt-2">Featured Footwear</h2>
+                    </div>
+                    <p class="text-xs text-shoeMuted tracking-widest mt-4 md:mt-0 uppercase">Select size at checkout • Free Express Global Shipping</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="group bg-shoeCard rounded-2xl overflow-hidden border border-white/10 hover:border-shoeAccent transition-all duration-300">
+                        <div class="h-[320px] bg-shoeDark overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80" alt="Kinetic Runner X1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-shoeAccent text-shoeDark text-[9px] uppercase tracking-[0.2em] px-3 py-1 font-extrabold rounded">Best Seller</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-display text-lg uppercase tracking-wide">Kinetic Runner X1</h3>
+                                    <p class="text-xs text-shoeMuted tracking-wider mt-1">Hyper-Volt / Carbon Tech</p>
+                                </div>
+                                <span class="font-display text-xl font-bold text-shoeAccent">$180</span>
+                            </div>
+                            <div class="flex gap-2 pt-2">
+                                <button onclick="alert('Added Kinetic Runner X1 to your cart.')" class="w-full bg-shoeAccent text-shoeDark hover:bg-white py-3 text-[10px] uppercase tracking-[0.2em] font-extrabold transition-colors rounded">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="group bg-shoeCard rounded-2xl overflow-hidden border border-white/10 hover:border-shoeAccent transition-all duration-300">
+                        <div class="h-[320px] bg-shoeDark overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?auto=format&fit=crop&w=800&q=80" alt="Strata Street High" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-white text-shoeDark text-[9px] uppercase tracking-[0.2em] px-3 py-1 font-extrabold rounded">New Wave</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-display text-lg uppercase tracking-wide">Strata Street High</h3>
+                                    <p class="text-xs text-shoeMuted tracking-wider mt-1">Obsidian / Reflexive</p>
+                                </div>
+                                <span class="font-display text-xl font-bold text-shoeAccent">$210</span>
+                            </div>
+                            <div class="flex gap-2 pt-2">
+                                <button onclick="alert('Added Strata Street High to your cart.')" class="w-full bg-shoeAccent text-shoeDark hover:bg-white py-3 text-[10px] uppercase tracking-[0.2em] font-extrabold transition-colors rounded">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="group bg-shoeCard rounded-2xl overflow-hidden border border-white/10 hover:border-shoeAccent transition-all duration-300">
+                        <div class="h-[320px] bg-shoeDark overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1608231387042-66d17b3070f5?auto=format&fit=crop&w=800&q=80" alt="Vortex Trail Grip" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-shoeAccent text-shoeDark text-[9px] uppercase tracking-[0.2em] px-3 py-1 font-extrabold rounded">All-Terrain</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-display text-lg uppercase tracking-wide">Vortex Trail Grip</h3>
+                                    <p class="text-xs text-shoeMuted tracking-wider mt-1">Titanium Grey / MudGuard</p>
+                                </div>
+                                <span class="font-display text-xl font-bold text-shoeAccent">$195</span>
+                            </div>
+                            <div class="flex gap-2 pt-2">
+                                <button onclick="alert('Added Vortex Trail Grip to your cart.')" class="w-full bg-shoeAccent text-shoeDark hover:bg-white py-3 text-[10px] uppercase tracking-[0.2em] font-extrabold transition-colors rounded">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech" class="py-24 px-6 bg-shoeCard border-y border-white/10">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-shoeAccent">Anatomy of Speed</span>
+                    <h2 class="font-display text-4xl sm:text-5xl uppercase tracking-wide">Engineered For Peak Biomechanics</h2>
+                    <p class="text-shoeMuted text-sm font-light leading-relaxed">
+                        Every pair of Kinetic & Stride shoes undergoes rigorous laboratory wind-tunnel and force-plate testing. We combine aerospace-grade carbon fiber plates with dual-density nitrogen foam to maximize energy return with every stride.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 pt-4 border-t border-white/10">
+                        <div>
+                            <span class="font-display text-3xl font-extrabold text-shoeAccent block">+42%</span>
+                            <span class="text-[10px] uppercase tracking-widest text-shoeMuted">Energy Return</span>
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl font-extrabold text-shoeAccent block">210g</span>
+                            <span class="text-[10px] uppercase tracking-widest text-shoeMuted">Featherlight Weight</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative h-[450px] rounded-2xl overflow-hidden border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=1000&q=80" alt="Sneaker Technology" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 px-6 bg-shoeDark text-center">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-shoeAccent">Inner Circle</span>
+                <h2 class="font-display text-3xl sm:text-4xl uppercase tracking-wide">Never Miss a Drop</h2>
+                <p class="text-shoeMuted text-xs uppercase tracking-widest">Get early access keys sent directly to your encrypted inbox.</p>
+                <form class="flex flex-col sm:flex-row gap-4 pt-4" onsubmit="event.preventDefault(); alert('You have been added to the Kinetic VIP drop list.');">
+                    <input type="email" placeholder="Enter your email address..." class="bg-shoeCard text-shoeLight text-xs px-6 py-4 border border-white/20 focus:outline-none focus:border-shoeAccent flex-grow rounded placeholder-shoeMuted" required>
+                    <button type="submit" class="bg-shoeAccent hover:bg-white text-shoeDark font-extrabold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-colors rounded">
+                        Join Drop List
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-shoeCard text-shoeMuted py-16 px-6 border-t border-white/10 text-xs">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <span class="font-display tracking-wider text-lg font-bold text-shoeLight uppercase block">KINETIC <span class="text-shoeAccent">&</span> STRIDE</span>
+                <p class="text-xs leading-relaxed text-shoeMuted">
+                    Redefining performance footwear and sneaker culture through relentless innovation and uncompromising design.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-shoeLight font-bold mb-4">Flagship Hubs</h3>
+                <ul class="space-y-2 text-xs">
+                    <li>Tokyo: Shibuya Crossing Lab</li>
+                    <li>New York: SoHo Sneaker Vault</li>
+                    <li>Berlin: Mitte Innovation Studio</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-shoeLight font-bold mb-4">Customer Support</h3>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" class="hover:text-shoeLight transition-colors">Size & Fit Guide</a></li>
+                    <li><a href="#" class="hover:text-shoeLight transition-colors">Global Returns & Exchanges</a></li>
+                    <li><a href="#" class="hover:text-shoeLight transition-colors">Track Your Order</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-shoeLight font-bold mb-4">Legal & Ethics</h3>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#" class="hover:text-shoeLight transition-colors">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-shoeLight transition-colors">Sustainability Charter</a></li>
+                    <li><a href="#" class="hover:text-shoeLight transition-colors">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest text-shoeMuted">
+            <p>&copy; 2026 KINETIC & STRIDE. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-shoeLight transition-colors">Instagram</a>
+                <a href="#" class="hover:text-shoeLight transition-colors">YouTube</a>
+                <a href="#" class="hover:text-shoeLight transition-colors">Strava Club</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

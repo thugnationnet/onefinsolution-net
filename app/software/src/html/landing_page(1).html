@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Realty - Find Your Dream Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 flex flex-col min-h-screen">
+
+    <header class="bg-white/95 backdrop-blur-sm border-b border-stone-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-3xl font-bold text-stone-900 serif-font tracking-tight">Prime<span class="text-amber-700">Realty</span></a>
+                </div>
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#properties" class="text-stone-600 hover:text-amber-700 px-3 py-2 text-sm font-medium transition-colors">Properties</a>
+                    <a href="#services" class="text-stone-600 hover:text-amber-700 px-3 py-2 text-sm font-medium transition-colors">Services</a>
+                    <a href="#agents" class="text-stone-600 hover:text-amber-700 px-3 py-2 text-sm font-medium transition-colors">Our Agents</a>
+                    <a href="#about" class="text-stone-600 hover:text-amber-700 px-3 py-2 text-sm font-medium transition-colors">About</a>
+                </nav>
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#contact" class="bg-stone-900 text-white px-5 py-2.5 rounded-sm text-sm font-medium hover:bg-amber-700 transition-colors duration-300">Contact Us</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-stone-600 hover:text-stone-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section class="relative bg-stone-900 overflow-hidden h-[90vh] min-h-[600px] flex items-center">
+            <div class="absolute inset-0">
+                <img class="w-full h-full object-cover opacity-60" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2850&q=80" alt="Luxury modern home exterior">
+                <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent"></div>
+            </div>
+            
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center lg:text-left max-w-3xl">
+                    <span class="block text-amber-500 font-semibold tracking-wider uppercase text-sm mb-4">Exceptional Properties</span>
+                    <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl lg:text-7xl mb-6">
+                        Discover Your Next <span class="text-amber-500 italic">Perfect</span> Home
+                    </h1>
+                    <p class="mt-3 text-base text-stone-300 sm:text-lg md:text-xl lg:max-w-2xl mb-10 font-light">
+                        Exclusive listings in the most sought-after neighborhoods. Experience unparalleled service and expertise with Prime Realty.
+                    </p>
+                    
+                    <!-- Search Bar Mockup -->
+                    <div class="bg-white p-2 rounded-md shadow-lg flex flex-col sm:flex-row gap-2 max-w-2xl">
+                        <input type="text" placeholder="Enter City, Neighborhood, or Zip" class="flex-grow px-4 py-3 text-stone-700 focus:outline-none rounded-md border border-transparent focus:border-stone-300">
+                        <select class="px-4 py-3 text-stone-600 bg-stone-50 border border-transparent rounded-md focus:outline-none focus:border-stone-300">
+                            <option>Property Type</option>
+                            <option>House</option>
+                            <option>Condo</option>
+                            <option>Townhouse</option>
+                        </select>
+                        <button class="bg-amber-700 hover:bg-amber-800 text-white px-8 py-3 rounded-md font-medium transition-colors w-full sm:w-auto">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Properties -->
+        <section id="properties" class="py-20 bg-stone-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-12">
+                    <div>
+                        <h2 class="text-3xl font-bold text-stone-900 sm:text-4xl">Featured Listings</h2>
+                        <p class="mt-4 text-lg text-stone-600 max-w-2xl">Hand-selected properties showcasing exceptional design and location.</p>
+                    </div>
+                    <a href="#" class="hidden sm:flex text-amber-700 font-medium hover:text-amber-800 items-center">
+                        View All Properties 
+                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Property 1 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-stone-100">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Modern Villa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 bg-amber-700 text-white text-xs font-bold px-3 py-1 uppercase tracking-wider rounded-sm">New Listing</div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-stone-900 serif-font">The Glass House</h3>
+                                <span class="text-xl font-semibold text-amber-700">$2,450,000</span>
+                            </div>
+                            <p class="text-stone-500 text-sm mb-4">123 Palisades Drive, Beverly Hills, CA</p>
+                            <div class="flex justify-between text-stone-600 text-sm border-t border-stone-100 pt-4">
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> 4 Beds</span>
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg> 3.5 Baths</span>
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg> 3,200 sqft</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property 2 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-stone-100">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Suburban Home" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-stone-900 serif-font">Oakwood Estate</h3>
+                                <span class="text-xl font-semibold text-amber-700">$1,875,000</span>
+                            </div>
+                            <p class="text-stone-500 text-sm mb-4">850 Sycamore Lane, Pasadena, CA</p>
+                            <div class="flex justify-between text-stone-600 text-sm border-t border-stone-100 pt-4">
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> 5 Beds</span>
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg> 4 Baths</span>
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg> 4,100 sqft</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Property 3 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow group border border-stone-100">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Luxury Condo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-stone-900 serif-font">Skyline Penthouse</h3>
+                                <span class="text-xl font-semibold text-amber-700">$3,200,000</span>
+                            </div>
+                            <p class="text-stone-500 text-sm mb-4">400 Grand Ave, Downtown LA, CA</p>
+                            <div class="flex justify-between text-stone-600 text-sm border-t border-stone-100 pt-4">
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg> 3 Beds</span>
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg> 3 Baths</span>
+                                <span class="flex items-center"><svg class="w-4 h-4 mr-1 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg> 2,800 sqft</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-amber-700 font-medium tracking-widest uppercase text-sm">What We Do</span>
+                    <h2 class="mt-2 text-3xl font-bold text-stone-900 sm:text-4xl serif-font">Comprehensive Real Estate Services</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-stone-100 rounded-full flex items-center justify-center mb-6 text-stone-900">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Buying a Home</h3>
+                        <p class="text-stone-600 font-light">We guide you through every step of the purchasing process, from initial search to final closing, ensuring you find the perfect match.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-stone-100 rounded-full flex items-center justify-center mb-6 text-stone-900">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Selling a Home</h3>
+                        <p class="text-stone-600 font-light">Our targeted marketing strategies and expert negotiation skills are designed to maximize your property's value in the current market.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 mx-auto bg-stone-100 rounded-full flex items-center justify-center mb-6 text-stone-900">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Property Management</h3>
+                        <p class="text-stone-600 font-light">Comprehensive management services for property owners looking to maximize returns without the day-to-day hassle.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-stone-100 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
+                    <div class="mb-10 lg:mb-0 relative">
+                        <!-- Decorative frame -->
+                        <div class="absolute -inset-4 border border-amber-700/30 translate-x-4 translate-y-4"></div>
+                        <img class="relative w-full object-cover h-[500px]" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Real estate agent showing home">
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-extrabold text-stone-900 sm:text-4xl serif-font mb-6">
+                            Redefining Luxury Real Estate
+                        </h2>
+                        <p class="text-lg text-stone-600 font-light mb-6">
+                            For over two decades, Prime Realty has been the trusted name in premium residential real estate. We don't just sell houses; we curate lifestyles.
+                        </p>
+                        <p class="text-lg text-stone-600 font-light mb-8">
+                            Our team of dedicated professionals combines deep local knowledge with global reach, ensuring that whether you are buying your first estate or expanding your investment portfolio, you receive unparalleled representation.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 border-t border-stone-300 pt-8">
+                            <div>
+                                <p class="text-4xl font-bold text-stone-900 mb-1">2.5B+</p>
+                                <p class="text-sm text-stone-500 uppercase tracking-wider">In Sales</p>
+                            </div>
+                            <div>
+                                <p class="text-4xl font-bold text-stone-900 mb-1">98%</p>
+                                <p class="text-sm text-stone-500 uppercase tracking-wider">Client Satisfaction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Contact Section -->
+        <section id="contact" class="bg-stone-900 relative">
+            <div class="absolute inset-0 opacity-10">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2850&q=80" class="w-full h-full object-cover" alt="Cityscape backdrop">
+            </div>
+            <div class="relative max-w-4xl mx-auto text-center py-24 px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold text-white sm:text-4xl serif-font mb-4">
+                    Ready to Start Your Journey?
+                </h2>
+                <p class="text-xl text-stone-400 font-light mb-10 max-w-2xl mx-auto">
+                    Connect with one of our expert agents today to discuss your real estate goals.
+                </p>
+                
+                <form class="bg-white p-8 rounded-lg shadow-2xl max-w-2xl mx-auto text-left">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium text-stone-700 mb-2">First Name</label>
+                            <input type="text" class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-amber-700 focus:border-amber-700">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-stone-700 mb-2">Last Name</label>
+                            <input type="text" class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-amber-700 focus:border-amber-700">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-stone-700 mb-2">Email Address</label>
+                        <input type="email" class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-amber-700 focus:border-amber-700">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-stone-700 mb-2">How can we help?</label>
+                        <textarea rows="4" class="w-full px-4 py-2 border border-stone-300 rounded-md focus:ring-amber-700 focus:border-amber-700"></textarea>
+                    </div>
+                    <button type="button" class="w-full bg-stone-900 text-white font-bold py-3 px-4 rounded-md hover:bg-amber-700 transition-colors duration-300">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-950 text-stone-400 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="text-2xl font-bold text-white serif-font tracking-tight mb-4 block">Prime<span class="text-amber-700">Realty</span></span>
+                    <p class="text-sm font-light leading-relaxed">
+                        Elevating the real estate experience through exceptional service, expert knowledge, and unmatched dedication.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase mb-4 text-white">Properties</h3>
+                    <ul class="space-y-3 font-light text-sm">
+                        <li><a href="#" class="hover:text-amber-500 transition-colors">Luxury Estates</a></li>
+                        <li><a href="#" class="hover:text-amber-500 transition-colors">Urban Condos</a></li>
+                        <li><a href="#" class="hover:text-amber-500 transition-colors">Waterfront Homes</a></li>
+                        <li><a href="#" class="hover:text-amber-500 transition-colors">New Developments</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase mb-4 text-white">Company</h3>
+                    <ul class="space-y-3 font-light text-sm">
+                        <li><a href="#" class="hover:text-amber-500 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-amber-500 transition-colors">Our Agents</a></li>
+                        <li><a href="#" class="hover:text-amber-500 transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-amber-500 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold tracking-wider uppercase mb-4 text-white">Contact Info</h3>
+                    <ul class="space-y-3 font-light text-sm">
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 mr-2 text-amber-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            9420 Wilshire Blvd, Beverly Hills, CA 90212
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 mr-2 text-amber-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            (555) 123-4567
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 mr-2 text-amber-700 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            info@primerealty.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-light">
+                <p>&copy; 2026 Prime Realty, Inc. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <!-- Social icons omitted for brevity, keeping structure -->
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

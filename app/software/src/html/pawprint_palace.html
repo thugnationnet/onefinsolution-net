@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAWPRINT & PALACE | Luxury Holistic Pet Care, Spa & Boutique</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        canvas: '#F7F5F0',
+                        olive: '#384635',
+                        oliveLight: '#4E614A',
+                        sand: '#E3DDD1',
+                        gold: '#C5A880',
+                        clay: '#B87D64',
+                        cream: '#FCFAF7',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-canvas text-olive font-sans antialiased selection:bg-gold selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-canvas/90 backdrop-blur-md border-b border-sand/60 transition-all">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-12 h-12 rounded-full bg-olive text-canvas flex items-center justify-center font-serif text-2xl font-bold shadow-md group-hover:scale-105 transition-transform">
+                    P&P
+                </div>
+                <div>
+                    <span class="font-serif font-bold tracking-[0.2em] text-lg uppercase block leading-tight">Pawprint & Palace</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-gold font-semibold block">Holistic Pet Sanctuary</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.25em] text-olive/70">
+                <a href="#services" class="hover:text-gold transition-colors">Sanctuary Services</a>
+                <a href="#nutrition" class="hover:text-gold transition-colors">Organic Kitchen</a>
+                <a href="#suites" class="hover:text-gold transition-colors">Boutique Boarding</a>
+                <a href="#membership" class="hover:text-gold transition-colors">Palace Club</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openBookingModal()" class="bg-olive hover:bg-oliveLight text-canvas font-semibold px-6 py-3 text-xs uppercase tracking-[0.2em] rounded-full transition-all shadow-md">
+                    Book Concierge Care
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-24">
+        <section class="relative min-h-[85vh] flex items-center justify-center px-6 py-20 bg-gradient-to-b from-canvas to-sand/30">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="lg:col-span-7 space-y-8">
+                    <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-[0.3em] text-gold bg-gold/10 px-4 py-2 rounded-full border border-gold/20">
+                        <span>Five-Star Spa • Holistic Nutrition • Veterinary Concierge</span>
+                    </span>
+                    <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]">
+                        Unconditional Love, <br><span class="italic text-gold font-normal">Exquisitely Cared For</span>.
+                    </h1>
+                    <p class="text-olive/80 text-base sm:text-xl max-w-xl font-light leading-relaxed">
+                        A sanctuary dedicated to your companion's longevity, wellness, and joy through bespoke grooming, organic nutrition, and integrative veterinary medicine.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        <a href="#services" class="bg-olive hover:bg-oliveLight text-white text-center font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full shadow-lg">
+                            Explore Services
+                        </a>
+                        <button onclick="openBookingModal()" class="border border-olive/30 hover:border-gold text-olive text-center font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full">
+                            Schedule Consult
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-5">
+                    <div class="bg-cream p-6 sm:p-8 rounded-3xl border border-sand shadow-2xl relative overflow-hidden group">
+                        <div class="absolute -right-12 -top-12 w-48 h-48 bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="h-80 rounded-2xl overflow-hidden mb-6 relative">
+                            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80" alt="Happy Dogs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/800x800/E3DDD1/384635?text=Pawprint+Palace'">
+                        </div>
+                        <div class="space-y-3">
+                            <span class="text-[10px] uppercase font-bold tracking-[0.3em] text-gold block">Signature Offering</span>
+                            <h3 class="font-serif text-2xl font-bold">The Royal Rejuvenation Spa & Vet Wellness</h3>
+                            <p class="text-xs text-olive/70 leading-relaxed">Aromatherapy coat treatment, organic paw balm massage, and comprehensive wellness screening.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="border-y border-sand/60 bg-sand/30 py-6 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-6 text-olive/70 font-serif font-bold uppercase tracking-[0.25em] text-xs sm:text-sm">
+                <span class="hover:text-olive transition-colors cursor-default">✦ 24/7 VETERINARY ON-SITE</span>
+                <span class="hover:text-olive transition-colors cursor-default">✦ CAGE-FREE LUXURY SUITES</span>
+                <span class="hover:text-olive transition-colors cursor-default">✦ 100% ORGANIC KITCHEN</span>
+                <span class="hover:text-olive transition-colors cursor-default">✦ FEAR-FREE CERTIFIED GROOMERS</span>
+            </div>
+        </div>
+
+        <section id="services" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto space-y-16">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-4">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-gold">Sanctuary Offerings</span>
+                        <h2 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight">Tailored Care & Wellness</h2>
+                    </div>
+                    <p class="text-xs text-olive/70 max-w-sm leading-relaxed">Designed by holistic veterinarians and animal behaviorists to ensure your pet thrives physically and emotionally.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="bg-cream p-6 rounded-3xl border border-sand space-y-6 hover:shadow-xl transition-all group cursor-pointer" onclick="showNotification('Selected Holistic Veterinary Care.')">
+                        <div class="h-72 rounded-2xl overflow-hidden bg-sand/30 relative">
+                            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=80" alt="Vet Care" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/E3DDD1/384635?text=Vet+Care'">
+                            <span class="absolute top-4 left-4 bg-canvas/90 backdrop-blur-sm text-olive text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-sand">Integrative Med</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl font-bold">Holistic Health Consult</h3>
+                                <span class="font-serif font-bold text-gold">$150</span>
+                            </div>
+                            <p class="text-xs text-olive/70">Acupuncture, herbal medicine, nutritional therapy, and thorough wellness diagnostics.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-cream p-6 rounded-3xl border border-sand space-y-6 hover:shadow-xl transition-all group cursor-pointer" onclick="showNotification('Selected Royal Spa & Grooming.')">
+                        <div class="h-72 rounded-2xl overflow-hidden bg-sand/30 relative">
+                            <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=800&q=80" alt="Grooming" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/E3DDD1/384635?text=Spa+Grooming'">
+                            <span class="absolute top-4 left-4 bg-canvas/90 backdrop-blur-sm text-olive text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-sand">Signature Spa</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl font-bold">Aromatherapy & Styling</h3>
+                                <span class="font-serif font-bold text-gold">$110</span>
+                            </div>
+                            <p class="text-xs text-olive/70">Hypoallergenic botanical baths, gentle blowout, claw pedicure, and blueberry facial scrub.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-cream p-6 rounded-3xl border border-sand space-y-6 hover:shadow-xl transition-all group cursor-pointer" onclick="showNotification('Selected Canine & Feline Day Club.')">
+                        <div class="h-72 rounded-2xl overflow-hidden bg-sand/30 relative">
+                            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" alt="Day Club" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/E3DDD1/384635?text=Day+Club'">
+                            <span class="absolute top-4 left-4 bg-canvas/90 backdrop-blur-sm text-olive text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-sand">Social Club</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl font-bold">Enrichment Day Club</h3>
+                                <span class="font-serif font-bold text-gold">$75 / day</span>
+                            </div>
+                            <p class="text-xs text-olive/70">Supervised socialization, cognitive puzzle games, turf exercise yards, and live webcam access.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nutrition" class="py-24 px-6 bg-sand/30 border-y border-sand/60">
+            <div class="max-w-7xl mx-auto space-y-16">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-4">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-gold">The Kitchen</span>
+                        <h2 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight">Fresh, Organic Pet Nutrition</h2>
+                    </div>
+                    <p class="text-xs text-olive/70 max-w-sm leading-relaxed">Human-grade meals formulated by veterinary nutritionists using pasture-raised meats, organic superfoods, and zero fillers.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-cream p-8 rounded-3xl border border-sand flex flex-col md:flex-row gap-8 items-center">
+                        <div class="w-full md:w-1/2 h-64 rounded-2xl overflow-hidden bg-sand/30">
+                            <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=800&q=80" alt="Fresh Dog Food" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x600/E3DDD1/384635?text=Dog+Meal'">
+                        </div>
+                        <div class="w-full md:w-1/2 space-y-4">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-gold">Canine Formula</span>
+                            <h3 class="font-serif text-3xl font-bold">Grass-Fed Beef & Ancient Grains</h3>
+                            <p class="text-xs text-olive/70 leading-relaxed">Loaded with omega-3 rich salmon oil, organic spinach, pumpkin, and pasture-raised beef liver.</p>
+                            <div class="flex justify-between items-center pt-2">
+                                <span class="font-serif text-2xl font-bold text-gold">$54 / week</span>
+                                <button onclick="showNotification('Added Canine Plan to subscription cart.')" class="bg-olive text-canvas text-xs uppercase tracking-widest font-bold px-5 py-3 rounded-full hover:bg-oliveLight transition-colors">Select Plan</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-cream p-8 rounded-3xl border border-sand flex flex-col md:flex-row gap-8 items-center">
+                        <div class="w-full md:w-1/2 h-64 rounded-2xl overflow-hidden bg-sand/30">
+                            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" alt="Cat Food" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/600x600/E3DDD1/384635?text=Cat+Meal'">
+                        </div>
+                        <div class="w-full md:w-1/2 space-y-4">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-gold">Feline Formula</span>
+                            <h3 class="font-serif text-3xl font-bold">Wild Caught Salmon & Bone Broth</h3>
+                            <p class="text-xs text-olive/70 leading-relaxed">High-protein, grain-free pate infused with catnip essence, taurine, and collagen-rich bone broth.</p>
+                            <div class="flex justify-between items-center pt-2">
+                                <span class="font-serif text-2xl font-bold text-gold">$48 / week</span>
+                                <button onclick="showNotification('Added Feline Plan to subscription cart.')" class="bg-olive text-canvas text-xs uppercase tracking-widest font-bold px-5 py-3 rounded-full hover:bg-oliveLight transition-colors">Select Plan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="suites" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-gold">Boutique Boarding</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold">Luxury Suites & Overnight Retreats</h2>
+                    <p class="text-olive/80 text-sm leading-relaxed">
+                        When you travel, your pet enjoys a vacation of their own. Private climate-controlled suites with orthopedic beds, ambient soothing music, 24-hour veterinary oversight, and bedtime storytelling.
+                    </p>
+                    <div class="space-y-4 pt-4">
+                        <div class="bg-cream p-5 rounded-2xl border border-sand flex items-center justify-between">
+                            <div>
+                                <h4 class="font-serif font-bold text-lg">1. The Executive Villa</h4>
+                                <p class="text-xs text-olive/60">Private glass-front room, webcam access, daily massage</p>
+                            </div>
+                            <span class="text-gold font-bold text-xs uppercase tracking-widest">$95/night</span>
+                        </div>
+                        <div class="bg-cream p-5 rounded-2xl border border-sand flex items-center justify-between">
+                            <div>
+                                <h4 class="font-serif font-bold text-lg">2. Feline Treehouse Suite</h4>
+                                <p class="text-xs text-olive/60">Multi-level climbing perches, bird-watching window view</p>
+                            </div>
+                            <span class="text-gold font-bold text-xs uppercase tracking-widest">$70/night</span>
+                        </div>
+                    </div>
+                    <button onclick="openBookingModal()" class="bg-gold hover:bg-gold/90 text-white font-bold px-8 py-4 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-lg">
+                        Reserve Suite
+                    </button>
+                </div>
+                <div class="lg:col-span-6">
+                    <div class="rounded-3xl overflow-hidden border border-sand shadow-xl h-[450px]">
+                        <img src="https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?auto=format&fit=crop&w=1000&q=80" alt="Pet Boarding Suite" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x800/E3DDD1/384635?text=Suites'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-olive text-canvas py-16 px-6 text-xs">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-gold text-white flex items-center justify-center font-serif font-bold text-sm">
+                            P
+                        </div>
+                        <span class="font-serif font-bold tracking-wider text-base uppercase">Pawprint & Palace</span>
+                    </div>
+                    <p class="text-xs leading-relaxed text-canvas/70 font-light">
+                        Elevating animal welfare through luxury care, holistic medicine, and unconditional devotion.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-4">Sanctuary</h3>
+                    <ul class="space-y-2 text-xs text-canvas/70">
+                        <li><a href="#services" class="hover:text-white transition-colors">Holistic Veterinary</a></li>
+                        <li><a href="#services" class="hover:text-white transition-colors">Spa & Grooming</a></li>
+                        <li><a href="#nutrition" class="hover:text-white transition-colors">Organic Kitchen</a></li>
+                        <li><a href="#suites" class="hover:text-white transition-colors">Boutique Boarding</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-4">Concierge Hours</h3>
+                    <ul class="space-y-2 text-xs text-canvas/70">
+                        <li>Monday – Saturday: 7am – 8pm</li>
+                        <li>Sunday: 8am – 6pm</li>
+                        <li>24/7 Emergency Veterinary On-Call</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-4">Location</h3>
+                    <ul class="space-y-2 text-xs text-canvas/70">
+                        <li>884 Pawsitive Way, Suite 100</li>
+                        <li>Beverly Hills, CA 90210</li>
+                        <li>Concierge: care@pawprintandpalace.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-canvas/10 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest text-canvas/50">
+                <p>&copy; 2026 PAWPRINT & PALACE SANCTUARY. ALL RIGHTS RESERVED.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Client Code of Conduct</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-canvas text-olive p-8 sm:p-12 rounded-3xl max-w-lg w-full mx-4 relative border border-sand shadow-2xl space-y-6">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-olive/60 hover:text-olive text-xs uppercase tracking-widest font-bold">Close ✕</button>
+            <div class="space-y-3 pt-2">
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-gold">Concierge Appointment</span>
+                <h3 class="font-serif text-3xl font-bold">Schedule Pet Sanctuary Visit</h3>
+                <p class="text-xs text-olive/70 font-light leading-relaxed">Please tell us about your companion and the service you require.</p>
+                <form class="space-y-4 pt-2" onsubmit="event.preventDefault(); closeBookingModal(); showNotification('Appointment request received! Our concierge will contact you shortly.');">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] uppercase font-bold tracking-widest text-olive/60">Pet Name & Breed</label>
+                            <input type="text" placeholder="e.g., Oliver (Golden Retriever)" class="w-full bg-cream text-olive text-xs px-4 py-3 rounded-xl border border-sand focus:outline-none focus:border-gold" required>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] uppercase font-bold tracking-widest text-olive/60">Service Required</label>
+                            <select class="w-full bg-cream text-olive text-xs px-4 py-3 rounded-xl border border-sand focus:outline-none focus:border-gold">
+                                <option>Holistic Veterinary Consult</option>
+                                <option>Royal Spa & Grooming</option>
+                                <option>Enrichment Day Club</option>
+                                <option>Luxury Boarding Suite</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-olive/60">Preferred Date</label>
+                        <input type="date" class="w-full bg-cream text-olive text-xs px-4 py-3 rounded-xl border border-sand focus:outline-none focus:border-gold" required>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-olive/60">Your Contact Phone / Email</label>
+                        <input type="text" placeholder="phone or email" class="w-full bg-cream text-olive text-xs px-4 py-3 rounded-xl border border-sand focus:outline-none focus:border-gold" required>
+                    </div>
+                    <button type="submit" class="w-full bg-olive hover:bg-oliveLight text-canvas font-bold py-4 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-md">
+                        Confirm Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="fixed bottom-6 right-6 z-50 bg-cream text-olive px-6 py-4 rounded-2xl shadow-2xl border border-sand text-xs tracking-wider transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <span id="notificationText">Notification message</span>
+    </div>
+
+    <script>
+        function showNotification(msg) {
+            const notif = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            text.innerText = msg;
+            notif.classList.remove('translate-y-20', 'opacity-0');
+            notif.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                notif.classList.remove('translate-y-0', 'opacity-100');
+                notif.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAGES & PLUME | Literary Sanctuary & Artisanal Stationery Atelier</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        parchment: '#F9F6F0',
+                        parchmentDark: '#EDE7DE',
+                        ink: '#2C2522',
+                        brass: '#C59B27',
+                        terracotta: '#A85739',
+                        sage: '#65745C',
+                        sand: '#D8CEBE',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-parchment text-ink font-sans antialiased selection:bg-brass selection:text-white">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-parchment/90 backdrop-blur-md border-b border-sand/40 transition-all">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-12 h-12 rounded-full bg-brass text-white flex items-center justify-center font-serif text-2xl font-bold italic shadow-md group-hover:rotate-12 transition-transform">
+                    P
+                </div>
+                <div>
+                    <span class="font-serif font-bold tracking-[0.2em] text-xl uppercase block leading-tight">Pages & Plume</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-terracotta font-semibold block">Books & Stationery Atelier</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.25em] text-ink/70">
+                <a href="#curated" class="hover:text-brass transition-colors">Rare Editions</a>
+                <a href="#stationery" class="hover:text-brass transition-colors">Fine Stationery</a>
+                <a href="#salons" class="hover:text-brass transition-colors">Literary Salons</a>
+                <a href="#atelier" class="hover:text-brass transition-colors">The Atelier</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openBookingModal()" class="bg-ink hover:bg-brass text-parchment font-semibold px-6 py-3 text-xs uppercase tracking-[0.2em] rounded-full transition-all shadow-md">
+                    Reserve Consultation
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-24">
+        <!-- Hero Section -->
+        <section class="relative min-h-[85vh] flex items-center justify-center px-6 py-20 bg-gradient-to-b from-parchment to-parchmentDark/40">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                <div class="lg:col-span-7 space-y-8">
+                    <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-[0.3em] text-terracotta bg-terracotta/10 px-4 py-2 rounded-full border border-terracotta/20">
+                        <span>Est. 1924 • Hand-Bound • Rare & Curated</span>
+                    </span>
+                    <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]">
+                        Where Words <br><span class="italic text-terracotta font-normal">Find Their Form</span>.
+                    </h1>
+                    <p class="text-ink/80 text-base sm:text-xl max-w-xl font-light leading-relaxed">
+                        A sanctuary for bibliophiles and writers. Explore first editions, archival leather-bound journals, handmade cotton papers, and bespoke calligraphy instruments.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        <a href="#curated" class="bg-brass hover:bg-brass/90 text-white text-center font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full shadow-lg">
+                            Explore Catalog
+                        </a>
+                        <button onclick="openBookingModal()" class="border border-ink/30 hover:border-brass text-ink text-center font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full">
+                            Book Stationery Consultation
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-5">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-sand shadow-2xl relative overflow-hidden group">
+                        <div class="absolute -right-12 -top-12 w-48 h-48 bg-brass/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="h-80 rounded-2xl overflow-hidden mb-6 relative">
+                            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Rare Books and Stationery" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/800x800/D8CEBE/2C2522?text=Books+&+Plume'">
+                        </div>
+                        <div class="space-y-3">
+                            <span class="text-[10px] uppercase font-bold tracking-[0.3em] text-brass block">Featured Collection</span>
+                            <h3 class="font-serif text-2xl font-bold">The Library of Alexandria Vellum Series</h3>
+                            <p class="text-xs text-ink/70 leading-relaxed">Hand-sewn goat skin bindings with 24k gold leaf stamping and acid-free Italian cotton parchment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marquee / Highlights -->
+        <div class="border-y border-sand bg-parchmentDark/50 py-6 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between items-center gap-6 text-ink/60 font-serif font-bold uppercase tracking-[0.25em] text-xs sm:text-sm">
+                <span class="hover:text-ink transition-colors cursor-default">✦ ARCHIVAL LEATHER JOURNALS</span>
+                <span class="hover:text-ink transition-colors cursor-default">✦ JAPANESE HEMP PAPERS</span>
+                <span class="hover:text-ink transition-colors cursor-default">✦ LIMITED FIRST EDITIONS</span>
+                <span class="hover:text-ink transition-colors cursor-default">✦ BESPOKE EMBOSSING</span>
+            </div>
+        </div>
+
+        <!-- Curated Catalog Section -->
+        <section id="curated" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto space-y-16">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-4">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-terracotta">Curated Collections</span>
+                        <h2 class="font-serif text-4xl sm:text-6xl font-bold tracking-tight">Masterpieces of Print & Paper</h2>
+                    </div>
+                    <p class="text-xs text-ink/70 max-w-sm leading-relaxed">Each item in our catalog is hand-selected from independent binderies, antique dealers, and master papermakers across Europe and Japan.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="bg-white p-6 rounded-3xl border border-sand space-y-6 hover:shadow-xl transition-all group cursor-pointer" onclick="showNotification('Added The Midnight Chronicles to inquiry list.')">
+                        <div class="h-72 rounded-2xl overflow-hidden bg-sand/30 relative">
+                            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80" alt="Leather Journals" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/D8CEBE/2C2522?text=Leather+Journal'">
+                            <span class="absolute top-4 left-4 bg-parchment/90 backdrop-blur-sm text-ink text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-sand">Stationery</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl font-bold">Archival Botanica Journal</h3>
+                                <span class="font-serif font-bold text-terracotta">$145</span>
+                            </div>
+                            <p class="text-xs text-ink/70">Hand-pressed botanical imprints on 300gsm cotton rag paper with leather wrap tie.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="bg-white p-6 rounded-3xl border border-sand space-y-6 hover:shadow-xl transition-all group cursor-pointer" onclick="showNotification('Added Rare Poetry Anthology to inquiry list.')">
+                        <div class="h-72 rounded-2xl overflow-hidden bg-sand/30 relative">
+                            <img src="https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=800&q=80" alt="Rare Books" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/D8CEBE/2C2522?text=Rare+Book'">
+                            <span class="absolute top-4 left-4 bg-parchment/90 backdrop-blur-sm text-ink text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-sand">Rare Edition</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl font-bold">Sonnets of the Solstice (1928)</h3>
+                                <span class="font-serif font-bold text-terracotta">$620</span>
+                            </div>
+                            <p class="text-xs text-ink/70">Numbered collectors' edition in original slipcase with uncut deckle edge pages.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="bg-white p-6 rounded-3xl border border-sand space-y-6 hover:shadow-xl transition-all group cursor-pointer" onclick="showNotification('Added Brass Calligraphy Set to inquiry list.')">
+                        <div class="h-72 rounded-2xl overflow-hidden bg-sand/30 relative">
+                            <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=800&q=80" alt="Calligraphy Set" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/D8CEBE/2C2522?text=Calligraphy+Set'">
+                            <span class="absolute top-4 left-4 bg-parchment/90 backdrop-blur-sm text-ink text-[9px] uppercase font-bold tracking-widest px-3 py-1.5 rounded-full border border-sand">Writing Tools</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-baseline">
+                                <h3 class="font-serif text-2xl font-bold">The Plume & Brass Nib Kit</h3>
+                                <span class="font-serif font-bold text-terracotta">$195</span>
+                            </div>
+                            <p class="text-xs text-ink/70">Solid cast brass pen holder, walnut inkwell, and six precision flexible steel nibs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Literary Salons & Workshops Section -->
+        <section id="salons" class="py-24 px-6 bg-parchmentDark/40 border-y border-sand">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-terracotta">Community & Culture</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold">The Sunday Reading Salons</h2>
+                    <p class="text-ink/80 text-sm leading-relaxed">
+                        Gather in our sunlit atrium for intimate poetry readings, bookbinding masterclasses, and quiet afternoon study sessions accompanied by single-origin pour-overs and artisanal teas.
+                    </p>
+                    <div class="space-y-4 pt-4">
+                        <div class="bg-white p-5 rounded-2xl border border-sand flex items-center justify-between">
+                            <div>
+                                <h4 class="font-serif font-bold text-lg">Introduction to Japanese Bookbinding</h4>
+                                <p class="text-xs text-ink/60">Next Session: Sunday, 2:00 PM • Limited to 10 guests</p>
+                            </div>
+                            <button onclick="showNotification('Reserved seat for Bookbinding Masterclass.')" class="bg-brass text-white text-xs uppercase tracking-widest font-bold px-4 py-2.5 rounded-full hover:bg-brass/90 transition-colors">Reserve</button>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-sand flex items-center justify-between">
+                            <div>
+                                <h4 class="font-serif font-bold text-lg">Poetry & Parchment Evening</h4>
+                                <p class="text-xs text-ink/60">Next Session: Thursday, 6:30 PM • Open to all writers</p>
+                            </div>
+                            <button onclick="showNotification('Reserved seat for Poetry Evening.')" class="bg-brass text-white text-xs uppercase tracking-widest font-bold px-4 py-2.5 rounded-full hover:bg-brass/90 transition-colors">Reserve</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-6">
+                    <div class="rounded-3xl overflow-hidden border border-sand shadow-xl h-[450px]">
+                        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1000&q=80" alt="Library Salon" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x800/D8CEBE/2C2522?text=Salon'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Atelier Services -->
+        <section id="atelier" class="py-24 px-6">
+            <div class="max-w-7xl mx-auto space-y-16">
+                <div class="text-center max-w-2xl mx-auto space-y-4">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-terracotta">Bespoke Services</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold">Custom Stationery & Bookbinding</h2>
+                    <p class="text-xs text-ink/70">Commission personalized wedding stationery, corporate leather journals, or custom book restorations from our master artisans.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-3xl border border-sand space-y-4">
+                        <span class="font-serif text-3xl font-bold text-brass">01</span>
+                        <h3 class="font-serif text-2xl font-bold">Wedding & Event Paper Suites</h3>
+                        <p class="text-xs text-ink/70 leading-relaxed">Letterpress invitations on handmade cotton paper with custom monogram wax seals and hand-dyed silk ribbons.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl border border-sand space-y-4">
+                        <span class="font-serif text-3xl font-bold text-brass">02</span>
+                        <h3 class="font-serif text-2xl font-bold">Antique Book Restoration</h3>
+                        <p class="text-xs text-ink/70 leading-relaxed">Meticulous repair of vintage bindings, spine reinforcement, and acid-neutralization for cherished family heirlooms.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl border border-sand space-y-4">
+                        <span class="font-serif text-3xl font-bold text-brass">03</span>
+                        <h3 class="font-serif text-2xl font-bold">Corporate & Author Journals</h3>
+                        <p class="text-xs text-ink/70 leading-relaxed">Custom debossed leather notebooks and hardcover book launches crafted to exact publisher and brand specifications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-ink text-parchment py-16 px-6 text-xs">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-brass text-white flex items-center justify-center font-serif font-bold text-sm">
+                        P
+                    </div>
+                    <span class="font-serif font-bold tracking-wider text-base uppercase">Pages & Plume</span>
+                </div>
+                <p class="text-xs leading-relaxed text-parchment/70 font-light">
+                    A timeless sanctuary for rare literature, fine stationery, and the enduring craft of handwriting.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brass mb-4">Directory</h3>
+                <ul class="space-y-2 text-xs text-parchment/70">
+                    <li><a href="#curated" class="hover:text-white transition-colors">Rare Editions</a></li>
+                    <li><a href="#stationery" class="hover:text-white transition-colors">Fine Stationery</a></li>
+                    <li><a href="#salons" class="hover:text-white transition-colors">Literary Salons</a></li>
+                    <li><a href="#atelier" class="hover:text-white transition-colors">Bespoke Atelier</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brass mb-4">Atelier Hours</h3>
+                <ul class="space-y-2 text-xs text-parchment/70">
+                    <li>Tuesday – Saturday: 10am – 7pm</li>
+                    <li>Sunday Salons: 1pm – 6pm</li>
+                    <li>Monday: Closed for Binding</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-brass mb-4">Location</h3>
+                <ul class="space-y-2 text-xs text-parchment/70">
+                    <li>420 Vellum Way, Literary Quarter</li>
+                    <li>Boston, MA 02116</li>
+                    <li>Inquiries: atelier@pagesandplume.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-parchment/10 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest text-parchment/50">
+            <p>&copy; 2026 PAGES & PLUME ATELIER. ALL RIGHTS RESERVED.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Consultation Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-parchment text-ink p-8 sm:p-12 rounded-3xl max-w-lg w-full mx-4 relative border border-sand shadow-2xl space-y-6">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-ink/60 hover:text-ink text-xs uppercase tracking-widest font-bold">Close ✕</button>
+            <div class="space-y-3 pt-2">
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-terracotta">Atelier Appointment</span>
+                <h3 class="font-serif text-3xl font-bold">Reserve a Consultation</h3>
+                <p class="text-xs text-ink/70 font-light leading-relaxed">Discuss custom wedding stationery, rare book acquisitions, or bespoke leather binding with our master curators.</p>
+                <form class="space-y-4 pt-2" onsubmit="event.preventDefault(); closeBookingModal(); showNotification('Appointment requested! Our master curator will contact you shortly.');">
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-ink/60">Your Name</label>
+                        <input type="text" placeholder="e.g., Eleanor Vance" class="w-full bg-white text-ink text-xs px-4 py-3.5 rounded-xl border border-sand focus:outline-none focus:border-brass" required>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-ink/60">Email Address</label>
+                        <input type="email" placeholder="e.g., eleanor@library.org" class="w-full bg-white text-ink text-xs px-4 py-3.5 rounded-xl border border-sand focus:outline-none focus:border-brass" required>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] uppercase font-bold tracking-widest text-ink/60">Consultation Topic</label>
+                        <select class="w-full bg-white text-ink text-xs px-4 py-3.5 rounded-xl border border-sand focus:outline-none focus:border-brass">
+                            <option>Custom Wedding Stationery Suite</option>
+                            <option>Rare First Edition Acquisition</option>
+                            <option>Antique Book Restoration</option>
+                            <option>Corporate Journal Commission</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-brass hover:bg-brass/90 text-white font-bold py-4 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-md">
+                        Request Consultation
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="fixed bottom-6 right-6 z-50 bg-white text-ink px-6 py-4 rounded-2xl shadow-2xl border border-sand text-xs tracking-wider transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <span id="notificationText">Notification message</span>
+    </div>
+
+    <script>
+        function showNotification(msg) {
+            const notif = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            text.innerText = msg;
+            notif.classList.remove('translate-y-20', 'opacity-0');
+            notif.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                notif.classList.remove('translate-y-0', 'opacity-100');
+                notif.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

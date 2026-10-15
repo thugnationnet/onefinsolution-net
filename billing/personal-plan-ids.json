@@ -1,0 +1,16 @@
+{
+  "accountId": "",
+  "mode": "test",
+  "prices": {
+    "daily": "",
+    "weekly": "",
+    "monthly": "",
+    "yearly": ""
+  },
+  "lookups": {
+    "daily": "onefin_v2_daily",
+    "weekly": "onefin_v2_weekly",
+    "monthly": "onefin_v2_monthly",
+    "yearly": "onefin_v2_yearly"
+  }
+}

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARVEST &amp; HEARTH | Artisan Butcher, Organic Produce &amp; Farm Fresh Eggs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        forest: {
+                            900: '#1b3022',
+                            800: '#274431',
+                            700: '#345a43',
+                        },
+                        earth: {
+                            50: '#fcfaf6',
+                            100: '#f3efe6',
+                            200: '#e5dcce',
+                            800: '#5c4d3c',
+                            900: '#3b3126',
+                        },
+                        amber: {
+                            600: '#d97706',
+                            700: '#b45309',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#fcfaf6] text-[#3b3126] font-sans antialiased selection:bg-[#d97706] selection:text-white">
+
+    <header class="bg-[#fcfaf6]/90 backdrop-blur-md border-b border-[#e5dcce] sticky top-0 z-50 transition-all">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex items-center space-x-3">
+                    <a href="#" class="text-2xl font-serif font-bold tracking-tight text-[#1b3022]">HARVEST<span class="text-[#d97706] font-normal">&amp;</span>HEARTH</a>
+                </div>
+                <nav class="hidden md:flex space-x-10 text-sm font-medium tracking-wide text-[#5c4d3c]">
+                    <a href="#butcher" class="hover:text-[#1b3022] transition-colors">Artisan Butcher</a>
+                    <a href="#produce" class="hover:text-[#1b3022] transition-colors">Organic Produce</a>
+                    <a href="#eggs" class="hover:text-[#1b3022] transition-colors">Pasture Eggs</a>
+                    <a href="#box" class="hover:text-[#1b3022] transition-colors">Weekly Box Builder</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#box" class="bg-[#1b3022] text-[#fcfaf6] px-7 py-3 rounded-full text-xs uppercase tracking-widest font-semibold hover:bg-[#274431] transition-all shadow-sm">Order Farm Box</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-[#1b3022] focus:outline-none" aria-label="Open mobile menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="relative bg-[#fcfaf6] py-20 lg:py-32 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-6 space-y-8">
+                        <div class="inline-flex items-center space-x-3 text-xs uppercase tracking-[0.25em] text-[#d97706] font-semibold bg-[#f3efe6] px-4 py-2 rounded-full">
+                            <span class="w-2 h-2 rounded-full bg-[#d97706]"></span>
+                            <span>Direct From Local Family Farms</span>
+                        </div>
+                        <h1 class="text-5xl sm:text-7xl font-serif font-bold text-[#1b3022] tracking-tight leading-[1.08]">
+                            True farm-to-table <br><span class="italic font-normal text-[#d97706]">freshness</span> &amp; heritage meats.
+                        </h1>
+                        <p class="text-[#5c4d3c] text-base sm:text-lg font-light leading-relaxed max-w-lg">
+                            We partner with regenerative local farms to bring you grass-fed butcher cuts, hand-picked seasonal vegetables, orchard-ripe fruits, and vibrant yolk pasture-raised eggs.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                            <a href="#box" class="bg-[#1b3022] text-[#fcfaf6] font-medium px-8 py-4 rounded-full transition-all text-xs uppercase tracking-widest text-center shadow-md hover:bg-[#274431]">
+                                Build Your Farm Box
+                            </a>
+                            <a href="#produce" class="bg-transparent border border-[#e5dcce] text-[#1b3022] font-medium px-8 py-4 rounded-full transition-all text-xs uppercase tracking-widest text-center hover:bg-[#f3efe6]">
+                                Explore Market Stand
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-6 relative">
+                        <div class="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl bg-[#e5dcce]">
+                            <img src="https://images.unsplash.com/photo-1610348725531-843dff563e2c?auto=format&fit=crop&w=1200&q=80" alt="Fresh Farm Produce and Butcher Goods" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-white/40 flex justify-between items-center">
+                                <div>
+                                    <span class="text-[10px] uppercase tracking-widest text-[#d97706] font-semibold block mb-1">Harvested Today</span>
+                                    <span class="text-lg font-serif font-bold text-[#1b3022]">Heirloom Veg &amp; Pasture Box</span>
+                                </div>
+                                <span class="text-sm font-semibold text-[#1b3022]">$45.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-[#f3efe6] border-t border-b border-[#e5dcce]">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-serif font-bold text-[#1b3022] mb-1">100%</div>
+                        <div class="text-[11px] text-[#5c4d3c] uppercase tracking-widest font-semibold">Grass-Fed &amp; Pasture Raised</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-serif font-bold text-[#1b3022] mb-1">Zero</div>
+                        <div class="text-[11px] text-[#5c4d3c] uppercase tracking-widest font-semibold">Synthetic Pesticides or Hormones</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-serif font-bold text-[#1b3022] mb-1">24 hrs</div>
+                        <div class="text-[11px] text-[#5c4d3c] uppercase tracking-widest font-semibold">From Farm Gate to Doorstep</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-serif font-bold text-[#1b3022] mb-1">12+</div>
+                        <div class="text-[11px] text-[#5c4d3c] uppercase tracking-widest font-semibold">Partner Family Farms</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="butcher" class="py-24 bg-[#fcfaf6]">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#d97706] font-semibold block mb-2">Our Market Departments</span>
+                        <h2 class="text-4xl font-serif font-bold text-[#1b3022]">Crafted by Nature &amp; Masters</h2>
+                    </div>
+                    <p class="text-[#5c4d3c] text-sm max-w-sm mt-4 md:mt-0 font-light">
+                        Explore our meticulous selection of dry-aged cuts, organic orchards, heirloom root veggies, and farm eggs.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Butcher Department -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[4/5] bg-[#e5dcce] mb-4">
+                            <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=800&q=80" alt="Artisan Butcher Cuts" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-[#1b3022]">Artisan Butcher</div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-[#1b3022] mb-1">Dry-Aged Steaks &amp; Chops</h3>
+                                <p class="text-xs text-[#5c4d3c]">Pasture-finished Angus, heritage pork &amp; lamb</p>
+                            </div>
+                            <span class="text-base font-semibold text-[#1b3022]">From $14/lb</span>
+                        </div>
+                    </div>
+
+                    <!-- Vegetable & Fruit Department -->
+                    <div id="produce" class="group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[4/5] bg-[#e5dcce] mb-4">
+                            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80" alt="Organic Vegetables and Fruits" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-[#1b3022]">Produce &amp; Orchard</div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-[#1b3022] mb-1">Organic Veg &amp; Tree Fruits</h3>
+                                <p class="text-xs text-[#5c4d3c]">Sun-ripened berries, leafy greens &amp; roots</p>
+                            </div>
+                            <span class="text-base font-semibold text-[#1b3022]">Seasonal</span>
+                        </div>
+                    </div>
+
+                    <!-- Eggs Department -->
+                    <div id="eggs" class="group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[4/5] bg-[#e5dcce] mb-4">
+                            <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=800&q=80" alt="Pasture Raised Eggs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-[#1b3022]">Farm Eggs</div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-[#1b3022] mb-1">Pasture-Raised Heritage Eggs</h3>
+                                <p class="text-xs text-[#5c4d3c]">Deep orange yolks, roaming free daily on clover</p>
+                            </div>
+                            <span class="text-base font-semibold text-[#1b3022]">$7.50 / Dozen</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="box" class="py-24 bg-[#f3efe6]">
+            <div class="max-w-4xl mx-auto px-6 lg:px-12">
+                <div class="bg-white border border-[#e5dcce] p-8 sm:p-14 rounded-3xl shadow-xl">
+                    <div class="text-center max-w-lg mx-auto mb-12">
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#d97706] font-semibold block mb-2">Custom Farm Crate</span>
+                        <h2 class="text-3xl font-serif font-bold text-[#1b3022]">Weekly Subscription Box Estimator</h2>
+                        <p class="text-sm text-[#5c4d3c] mt-2 font-light">Customize your household size and favorite farm goods to calculate your weekly delivery cost.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#5c4d3c] mb-2">Household Size</label>
+                                <select id="householdSize" class="w-full bg-[#fcfaf6] border border-[#e5dcce] rounded-xl px-4 py-3.5 text-[#3b3126] text-sm focus:outline-none focus:border-[#1b3022]">
+                                    <option value="solo">Solo Grazing (1-2 People)</option>
+                                    <option value="family" selected>Family Homestead (3-4 People)</option>
+                                    <option value="feast">Feast Gatherers (5+ People)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#5c4d3c] mb-2">Primary Butcher Selection</label>
+                                <select id="meatPreference" class="w-full bg-[#fcfaf6] border border-[#e5dcce] rounded-xl px-4 py-3.5 text-[#3b3126] text-sm focus:outline-none focus:border-[#1b3022]">
+                                    <option value="mixed">Mixed Butcher Cuts (Beef, Pork, Poultry)</option>
+                                    <option value="beef">Grass-Fed Beef &amp; Eggs Focus</option>
+                                    <option value="vegetable">Vegetarian (Extra Produce &amp; Double Eggs)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#fcfaf6] p-6 rounded-2xl border border-[#e5dcce] flex flex-col sm:flex-row items-center justify-between">
+                            <div>
+                                <span class="text-xs uppercase font-mono text-[#5c4d3c]">Estimated Weekly Box Total</span>
+                                <div id="calcResult" class="text-3xl font-serif font-bold text-[#1b3022] mt-1">$65.00 / wk</div>
+                            </div>
+                            <a href="#order" class="mt-4 sm:mt-0 bg-[#1b3022] text-[#fcfaf6] px-7 py-3.5 rounded-full text-xs uppercase tracking-widest font-semibold hover:bg-[#274431] transition-all">
+                                Reserve Your Subscription
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="order" class="py-24 bg-[#fcfaf6]">
+            <div class="max-w-4xl mx-auto px-6 lg:px-12">
+                <div class="bg-[#f3efe6] border border-[#e5dcce] p-8 sm:p-14 rounded-3xl shadow-sm">
+                    <div class="text-center max-w-lg mx-auto mb-12">
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#d97706] font-semibold block mb-2">Direct Delivery &amp; Pickup</span>
+                        <h2 class="text-3xl font-serif font-bold text-[#1b3022]">Start Your Fresh Food Journey</h2>
+                        <p class="text-sm text-[#5c4d3c] mt-2 font-light">Fill out your details below to schedule your first farm box delivery or market pickup.</p>
+                    </div>
+
+                    <form class="space-y-6" onsubmit="event.preventDefault(); alert('Thank you! Your farm subscription request has been received.');">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#5c4d3c] mb-2">Full Name</label>
+                                <input type="text" placeholder="Martha Stewart" class="w-full bg-white border border-[#e5dcce] rounded-xl px-4 py-3.5 text-[#3b3126] text-sm focus:outline-none focus:border-[#1b3022]" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#5c4d3c] mb-2">Email Address</label>
+                                <input type="email" placeholder="martha@farmhouse.com" class="w-full bg-white border border-[#e5dcce] rounded-xl px-4 py-3.5 text-[#3b3126] text-sm focus:outline-none focus:border-[#1b3022]" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#5c4d3c] mb-2">Delivery Method</label>
+                                <select class="w-full bg-white border border-[#e5dcce] rounded-xl px-4 py-3.5 text-[#3b3126] text-sm focus:outline-none focus:border-[#1b3022]">
+                                    <option>Weekly Doorstep Delivery (Cold Packed)</option>
+                                    <option>Saturday Farmers Market Pickup</option>
+                                    <option>Local Farm Store Curbside</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#5c4d3c] mb-2">Phone Number</label>
+                                <input type="tel" placeholder="(555) 382-9100" class="w-full bg-white border border-[#e5dcce] rounded-xl px-4 py-3.5 text-[#3b3126] text-sm focus:outline-none focus:border-[#1b3022]" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider font-semibold text-[#5c4d3c] mb-2">Delivery Address &amp; Gate Notes</label>
+                            <textarea rows="3" placeholder="Street address, apartment, or special drop-off instructions..." class="w-full bg-white border border-[#e5dcce] rounded-xl px-4 py-3.5 text-[#3b3126] text-sm focus:outline-none focus:border-[#1b3022]" required></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-[#1b3022] text-[#fcfaf6] py-4 rounded-full font-medium text-xs uppercase tracking-widest hover:bg-[#274431] transition-all shadow-md">
+                            Confirm Farm Box Subscription
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#1b3022] text-[#e5dcce] border-t border-[#274431]">
+        <div class="max-w-7xl mx-auto py-16 px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="text-2xl font-serif font-bold tracking-tight text-[#fcfaf6] block mb-4">HARVEST<span class="text-[#d97706] font-normal">&amp;</span>HEARTH</span>
+                    <p class="text-xs font-light leading-relaxed text-[#c2b6a3]">
+                        Bringing sustainable pasture meats, organic vegetables, orchard fruits, and farm-fresh eggs straight from local soil to your table.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest mb-4 text-[#fcfaf6]">Market Stand</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#butcher" class="hover:text-[#fcfaf6] transition-colors">Dry-Aged Butcher Shop</a></li>
+                        <li><a href="#produce" class="hover:text-[#fcfaf6] transition-colors">Organic Vegetables</a></li>
+                        <li><a href="#produce" class="hover:text-[#fcfaf6] transition-colors">Orchard Fresh Fruits</a></li>
+                        <li><a href="#eggs" class="hover:text-[#fcfaf6] transition-colors">Pasture-Raised Eggs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest mb-4 text-[#fcfaf6]">Farm Community</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#" class="hover:text-[#fcfaf6] transition-colors">Meet Our Growers</a></li>
+                        <li><a href="#" class="hover:text-[#fcfaf6] transition-colors">Regenerative Farming FAQ</a></li>
+                        <li><a href="#" class="hover:text-[#fcfaf6] transition-colors">Chef &amp; Restaurant Partners</a></li>
+                        <li><a href="#" class="hover:text-[#fcfaf6] transition-colors">Gift Farm Baskets</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest mb-4 text-[#fcfaf6]">Seasonal Journal</h3>
+                    <p class="text-xs font-light text-[#c2b6a3] mb-4">Subscribe for weekly harvest updates and recipes.</p>
+                    <form class="flex" onsubmit="event.preventDefault(); alert('Subscribed to Harvest Journal!');">
+                        <input type="email" placeholder="Enter your email" class="bg-[#274431] text-xs text-white px-4 py-3 rounded-l-xl focus:outline-none w-full border border-[#345a43]" required>
+                        <button type="submit" class="bg-[#d97706] text-white px-4 rounded-r-xl text-xs uppercase font-semibold hover:bg-[#b45309] transition-all">Join</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-[#274431] pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-[#c2b6a3]">
+                <p>&copy; 2026 Harvest &amp; Hearth Co. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-[#fcfaf6] transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-[#fcfaf6] transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const householdSelect = document.getElementById('householdSize');
+        const meatSelect = document.getElementById('meatPreference');
+        const calcResult = document.getElementById('calcResult');
+
+        function updateEstimator() {
+            const household = householdSelect.value;
+            const meat = meatSelect.value;
+            
+            let base = 65;
+            if (household === 'solo') base = 45;
+            if (household === 'family') base = 65;
+            if (household === 'feast') base = 95;
+
+            let multiplier = 1;
+            if (meat === 'beef') multiplier = 1.15;
+            if (meat === 'vegetable') multiplier = 0.90;
+
+            const total = Math.round(base * multiplier);
+            calcResult.textContent = '$' + total + '.00 / wk';
+        }
+
+        householdSelect.addEventListener('change', updateEstimator);
+        meatSelect.addEventListener('change', updateEstimator);
+        updateEstimator();
+    </script>
+</body>
+</html>

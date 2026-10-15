@@ -1,0 +1,20 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {runInNewContext} from 'node:vm';
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import * as jsx from 'react/jsx-runtime';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypeHighlight from 'rehype-highlight';
+import ts from 'typescript';
+test('response renderer supports tables, highlighted code and math without raw HTML or automatic remote images',()=>{
+ const exports={};const source=ts.transpileModule(readFileSync(new URL('../components/message-content.tsx',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX,esModuleInterop:true}}).outputText;
+ runInNewContext(source,{exports,require:name=>({'react/jsx-runtime':jsx,'react-markdown':ReactMarkdown,'remark-gfm':remarkGfm,'remark-math':remarkMath,'rehype-katex':rehypeKatex,'rehype-highlight':rehypeHighlight,sonner:{toast:{}}})[name]});
+ const html=renderToStaticMarkup(createElement(exports.MessageContent,{content:'| A | B |\n| --- | --- |\n| 1 | 2 |\n\n```js\nconst answer = 42;\n```\n\n$x^2$\n\n<script>alert(1)</script>\n\n![Reference](https://remote.test/private.png)\n\n[Bad](javascript:alert(1))'}));
+ assert.match(html,/<table>/);assert.match(html,/Copy code/);assert.match(html,/hljs-keyword/);assert.match(html,/class="katex"/);
+ assert.doesNotMatch(html,/<script>|<img |href="javascript:/);assert.match(html,/href="https:\/\/remote.test\/private.png"/);
+});

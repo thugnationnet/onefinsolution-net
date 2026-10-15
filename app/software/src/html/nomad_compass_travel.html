@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOMAD & COMPASS | Immersive Expedition & Adventure Travel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        voyage: {
+                            50: '#f4f7f6',
+                            100: '#e3ebec',
+                            200: '#c5d7d9',
+                            300: '#97b8bd',
+                            600: '#3c6e71',
+                            700: '#2b5154',
+                            800: '#234144',
+                            900: '#1a3335',
+                            950: '#0f1f21',
+                        },
+                        amberGold: {
+                            DEFAULT: '#e09f3e',
+                            light: '#f4bc65',
+                            dark: '#b5781a',
+                        },
+                        earth: {
+                            dark: '#2d302d',
+                            sand: '#f8f4ec',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-voyage-50 text-voyage-900 font-sans antialiased selection:bg-amberGold selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-voyage-950/80 backdrop-blur-md border-b border-voyage-800 text-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-amberGold text-voyage-950 flex items-center justify-center font-serif text-xl font-bold tracking-widest rounded-full shadow-lg">
+                    N
+                </div>
+                <div>
+                    <span class="font-serif text-xl font-bold tracking-wider block text-white">NOMAD & COMPASS</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-amberGold block">Expeditions & Journeys</span>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.2em] text-voyage-200">
+                <a href="#destinations" class="hover:text-amberGold transition-colors">Destinations</a>
+                <a href="#expeditions" class="hover:text-amberGold transition-colors">Expeditions</a>
+                <a href="#philosophy" class="hover:text-amberGold transition-colors">Philosophy</a>
+                <a href="#journal" class="hover:text-amberGold transition-colors">Journal</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="#planner" class="bg-amberGold text-voyage-950 px-5 py-2.5 text-xs uppercase tracking-widest font-bold rounded-sm hover:bg-amberGold-light transition-colors shadow-md">
+                    Plan Expedition
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden">
+        <section class="relative min-h-screen flex items-center justify-center py-20 px-6 lg:px-12 bg-voyage-950 text-white pt-28">
+            <div class="absolute inset-0 z-0 opacity-40">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=80" alt="Majestic mountain landscape and misty valley" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-voyage-950 via-voyage-950/60 to-transparent"></div>
+            </div>
+
+            <div class="max-w-7xl w-full mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-8 space-y-8">
+                    <div class="inline-flex items-center space-x-2 bg-voyage-900/80 border border-voyage-700 px-4 py-2 rounded-full text-xs font-medium tracking-widest uppercase text-amberGold">
+                        <span class="w-2 h-2 rounded-full bg-amberGold animate-pulse"></span>
+                        <span>Curated Remote Travel 2026/2027</span>
+                    </div>
+                    <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight">
+                        Go beyond <span class="italic font-normal text-amberGold block mt-2">the map.</span>
+                    </h1>
+                    <p class="text-voyage-200 text-base sm:text-lg font-light leading-relaxed max-w-2xl">
+                        Handcrafted private expeditions to Earth's most untouched frontiers. From deep-wilderness alpine traverses to remote coastal archipelagos, travel with world-class naturalists and cultural historians.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        <a href="#expeditions" class="bg-amberGold text-voyage-950 px-8 py-4 text-center text-xs uppercase tracking-[0.2em] font-bold rounded-sm hover:bg-amberGold-light transition-colors shadow-lg">
+                            Explore Expeditions
+                        </a>
+                        <a href="#planner" class="border border-voyage-400 text-white px-8 py-4 text-center text-xs uppercase tracking-[0.2em] font-bold rounded-sm hover:border-amberGold hover:text-amberGold transition-colors">
+                            Bespoke Journey
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute bottom-8 left-6 lg:left-12 right-6 lg:right-12 z-10 max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-voyage-800/80 text-voyage-300 text-xs uppercase tracking-widest">
+                <div>
+                    <span class="block text-white font-serif text-2xl font-bold">42+</span>
+                    <span>Remote Frontiers</span>
+                </div>
+                <div>
+                    <span class="block text-white font-serif text-2xl font-bold">1:4</span>
+                    <span>Expert Guide Ratio</span>
+                </div>
+                <div>
+                    <span class="block text-white font-serif text-2xl font-bold">100%</span>
+                    <span>Carbon Offset Logis</span>
+                </div>
+                <div>
+                    <span class="block text-white font-serif text-2xl font-bold">5-Star</span>
+                    <span>Wilderness Luxury</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="destinations" class="py-32 bg-voyage-50 px-6 lg:px-12">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                    <div>
+                        <span class="text-xs font-semibold uppercase tracking-[0.3em] text-amberGold-dark block mb-3">Untamed Frontiers</span>
+                        <h2 class="font-serif text-4xl sm:text-5xl font-bold text-voyage-950">Featured Regions</h2>
+                    </div>
+                    <p class="text-voyage-600 text-xs uppercase tracking-widest mt-4 md:mt-0 font-semibold">Hand-picked immersion sanctuaries</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Destination 1 -->
+                    <div class="group relative overflow-hidden rounded-sm shadow-xl bg-voyage-900 cursor-pointer aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Patagonia mountains and glaciers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-voyage-950 via-voyage-950/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 text-white space-y-2">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-amberGold font-semibold">South America</span>
+                            <h3 class="font-serif text-3xl font-bold">Patagonia Glaciers & Peaks</h3>
+                            <p class="text-xs text-voyage-200 font-light line-clamp-2">Trek across granite towers, ancient ice fields, and stay in exclusive eco-lodges.</p>
+                            <span class="inline-block text-xs uppercase tracking-widest text-amberGold pt-2 group-hover:translate-x-2 transition-transform">Discover Expedition &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Destination 2 -->
+                    <div class="group relative overflow-hidden rounded-sm shadow-xl bg-voyage-900 cursor-pointer aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80" alt="African savanna safari" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-voyage-950 via-voyage-950/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 text-white space-y-2">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-amberGold font-semibold">East Africa</span>
+                            <h3 class="font-serif text-3xl font-bold">Tanzanian Great Migration</h3>
+                            <p class="text-xs text-voyage-200 font-light line-clamp-2">Private mobile tented camps and bush flights over the Serengeti ecosystem.</p>
+                            <span class="inline-block text-xs uppercase tracking-widest text-amberGold pt-2 group-hover:translate-x-2 transition-transform">Discover Expedition &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Destination 3 -->
+                    <div class="group relative overflow-hidden rounded-sm shadow-xl bg-voyage-900 cursor-pointer aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?auto=format&fit=crop&w=800&q=80" alt="Nordic fjords and northern lights" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80">
+                        <div class="absolute inset-0 bg-gradient-to-t from-voyage-950 via-voyage-950/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 text-white space-y-2">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-amberGold font-semibold">Scandinavia</span>
+                            <h3 class="font-serif text-3xl font-bold">Lofoten Islands & Fjords</h3>
+                            <p class="text-xs text-voyage-200 font-light line-clamp-2">Sail deep fjords, kayak arctic waters, and view the aurora borealis from glass cabins.</p>
+                            <span class="inline-block text-xs uppercase tracking-widest text-amberGold pt-2 group-hover:translate-x-2 transition-transform">Discover Expedition &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophy" class="py-32 bg-voyage-900 text-white px-6 lg:px-12">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-amberGold block">The Nomad Standard</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold leading-tight">Travel That Leaves No Trace, Only Transformation</h2>
+                    <p class="text-voyage-200 font-light leading-relaxed">
+                        We believe true luxury is found in proximity to nature and authenticity of culture. Our itineraries bypass tourist corridors to connect you with indigenous communities, conservation scientists, and untouched wilderness.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 pt-4 border-t border-voyage-800">
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-amberGold block">12:1</span>
+                            <span class="text-xs uppercase tracking-widest text-voyage-300 mt-1 block">Max Group Size</span>
+                        </div>
+                        <div>
+                            <span class="font-serif text-3xl font-bold text-amberGold block">5%</span>
+                            <span class="text-xs uppercase tracking-widest text-voyage-300 mt-1 block">Funded to Conservation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+                    <div class="aspect-[4/5] overflow-hidden rounded-sm">
+                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=800&q=80" alt="Expedition explorer with compass" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-[4/5] overflow-hidden rounded-sm mt-8">
+                        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80" alt="Camping under starry night sky" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="planner" class="py-32 bg-voyage-950 text-white px-6 lg:px-12">
+            <div class="max-w-4xl mx-auto bg-voyage-900 border border-voyage-800 p-8 sm:p-16 rounded-sm shadow-2xl relative">
+                <div class="text-center max-w-lg mx-auto mb-12">
+                    <span class="text-xs font-semibold uppercase tracking-[0.3em] text-amberGold block mb-3">Custom Concierge</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Design Your Private Expedition</h2>
+                    <p class="text-xs text-voyage-300 uppercase tracking-widest mt-2">Collaborate with our lead expedition architects to curate your next odyssey.</p>
+                </div>
+
+                <form class="space-y-6" onsubmit="event.preventDefault(); alert('Expedition inquiry received. Our expedition lead will connect with your itinerary dossier within 24 hours.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-voyage-300 mb-2">Full Name</label>
+                            <input type="text" placeholder="Alexandra Vance" class="w-full bg-voyage-950 border border-voyage-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-amberGold rounded-sm" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-voyage-300 mb-2">Email Address</label>
+                            <input type="email" placeholder="alexandra@example.com" class="w-full bg-voyage-950 border border-voyage-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-amberGold rounded-sm" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-voyage-300 mb-2">Preferred Destination</label>
+                            <select class="w-full bg-voyage-950 border border-voyage-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-amberGold rounded-sm">
+                                <option>Patagonia & Andes Traverse</option>
+                                <option>East African Wilderness Safari</option>
+                                <option>Norwegian Fjords & Arctic Circle</option>
+                                <option>Himalayan High Altitude Trek</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-voyage-300 mb-2">Expedition Style</label>
+                            <select class="w-full bg-voyage-950 border border-voyage-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-amberGold rounded-sm">
+                                <option>Private Tailored Journey (Solo / Family)</option>
+                                <option>Small Group Expedition (Max 10 guests)</option>
+                                <option>Wilderness Conservation & Research</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-[0.2em] font-semibold text-voyage-300 mb-2">Expedition Goals & Timeframe</label>
+                        <textarea rows="4" placeholder="Describe your timeline, physical preferences, and specific wilderness experiences desired..." class="w-full bg-voyage-950 border border-voyage-700 px-4 py-3 text-xs text-white focus:outline-none focus:border-amberGold rounded-sm" required></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-amberGold text-voyage-950 py-4 text-xs uppercase tracking-[0.3em] font-bold rounded-sm hover:bg-amberGold-light transition-colors shadow-sm">
+                        Submit Expedition Request
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer id="journal" class="bg-voyage-950 text-voyage-300 border-t border-voyage-800 py-20 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-1 space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-amberGold text-voyage-950 flex items-center justify-center font-serif font-bold text-lg rounded-full">N</div>
+                    <span class="font-serif font-bold text-lg text-white">NOMAD & COMPASS</span>
+                </div>
+                <p class="text-xs font-light text-voyage-400 leading-relaxed">
+                    Extraordinary private expeditions and transformative journeys to the world's most remote environments.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-semibold mb-4">Expeditions</h3>
+                <ul class="space-y-2.5 text-xs font-light text-voyage-400">
+                    <li><a href="#destinations" class="hover:text-amberGold transition-colors">Patagonia & Antarctica</a></li>
+                    <li><a href="#destinations" class="hover:text-amberGold transition-colors">Serengeti & Ngorongoro</a></li>
+                    <li><a href="#destinations" class="hover:text-amberGold transition-colors">Lofoten & Svalbard</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-semibold mb-4">Standards</h3>
+                <ul class="space-y-2.5 text-xs font-light text-voyage-400">
+                    <li><a href="#" class="hover:text-white transition-colors">Safety & Medical Protocol</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Conservation Charter</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Private Aviation & Yachting</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-white font-semibold mb-4">Field Dispatch</h3>
+                <p class="text-xs font-light text-voyage-400 mb-4">Receive monthly photographic field notes from our guides across the globe.</p>
+                <form class="flex" onsubmit="event.preventDefault(); alert('Subscribed to Nomad Field Dispatches successfully.');">
+                    <input type="email" placeholder="your@email.com" class="bg-voyage-900 text-xs text-white px-4 py-3 border border-voyage-700 focus:outline-none w-full rounded-l-sm" required>
+                    <button type="submit" class="bg-amberGold text-voyage-950 px-5 text-xs uppercase tracking-widest font-bold rounded-r-sm hover:bg-amberGold-light transition-colors">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-voyage-900 flex flex-col md:flex-row justify-between items-center text-xs font-light text-voyage-500">
+            <p>&copy; 2026 Nomad & Compass Expeditions Inc. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-voyage-300 transition-colors">Terms of Exploration</a>
+                <a href="#" class="hover:text-voyage-300 transition-colors">Insurance & Liability</a>
+                <a href="#" class="hover:text-voyage-300 transition-colors">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

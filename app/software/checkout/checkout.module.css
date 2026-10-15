@@ -1,0 +1,193 @@
+.page {
+  display: grid;
+  min-height: 65vh;
+  place-items: center;
+  padding: 48px 20px;
+  background: linear-gradient(145deg, #f8f6fc, #fff 54%, #f4f7ff);
+}
+
+.card {
+  width: min(100%, 560px);
+  padding: clamp(24px, 5vw, 42px);
+  border: 1px solid #e7e2ef;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgb(38 29 62 / 10%);
+}
+
+.back {
+  display: inline-flex;
+  margin-bottom: 28px;
+  color: #65547e;
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.eyebrow {
+  color: #7354b9;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.card h1 {
+  margin: 10px 0;
+  color: #292137;
+  font-size: clamp(28px, 5vw, 38px);
+  letter-spacing: -.035em;
+}
+
+.intro,
+.note {
+  color: #6d6678;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.intro strong {
+  color: #332845;
+}
+
+.summary {
+  display: grid;
+  gap: 8px;
+  margin: 25px 0;
+  padding: 18px;
+  border: 1px solid #ebe7f1;
+  border-radius: 12px;
+  background: #faf9fc;
+}
+
+.summary > span,
+.summary > div > span {
+  color: #797284;
+  font-size: 12px;
+}
+
+.summary > strong {
+  color: #302541;
+  font-size: 16px;
+}
+
+.summary > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #eae5f0;
+}
+
+.summary b {
+  color: #392b52;
+  font-size: 14px;
+}
+
+.page :global(.software-checkout-form) {
+  display: grid;
+  gap: 10px;
+}
+
+.page :global(.software-checkout-form > label) {
+  color: #332845;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.page :global(.software-checkout-amount) {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid #dcd5e7;
+  border-radius: 10px;
+  background: #fff;
+  color: #766b86;
+}
+
+.page :global(.software-checkout-amount input) {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #302541;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.page :global(.software-checkout-save-card) {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: #5f576c;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.page :global(.software-checkout-save-card input) {
+  flex: none;
+  margin-top: 2px;
+  accent-color: #392b52;
+}
+
+.page :global(.software-checkout-payment) {
+  display: grid;
+  gap: 12px;
+}
+
+.page :global(.software-checkout-secure-note) {
+  margin: 0;
+  color: #625777;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.page :global(.software-checkout-cancel) {
+  min-height: 38px;
+  border: 1px solid #e5e0eb;
+  border-radius: 9px;
+  background: #fff;
+  color: #655b74;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.page :global(.software-checkout-form > p) {
+  margin: 0 0 7px;
+  color: #797284;
+  font-size: 12px;
+}
+
+.page :global(.software-checkout-form > p.software-checkout-error) {
+  color: #b42318;
+}
+
+.page :global(.software-checkout-form > button) {
+  min-height: 48px;
+  margin-top: 5px;
+  border: 0;
+  border-radius: 10px;
+  background: #392b52;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.page :global(.software-checkout-form > button:disabled) {
+  cursor: wait;
+  opacity: .65;
+}
+
+.page :global(.software-checkout-form > small) {
+  color: #797284;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.note {
+  margin: 18px 0 0;
+  font-size: 12px;
+}

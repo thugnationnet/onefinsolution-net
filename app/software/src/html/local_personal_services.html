@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CURTIS & CO. | Expert Neighborhood Craft Services</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        craftBg: '#FBF9F5',        /* Warm linen cream */
+                        craftCard: '#F4EFE6',      /* Soft taupe paper */
+                        craftDark: '#2C2825',      /* Deep espresso */
+                        craftGold: '#C59B27',      /* Antique brass */
+                        craftRust: '#A8573E',      /* Terracotta rust */
+                        craftGreen: '#3A5A40',     /* Heritage moss green */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-craftBg text-craftDark font-sans antialiased selection:bg-craftGold selection:text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-craftBg/90 backdrop-blur-md border-b border-craftDark/10">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-craftDark text-craftBg flex items-center justify-center font-serif font-bold text-xl">
+                    C
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold tracking-widest text-lg">CURTIS & CO.</span>
+                    <span class="text-[9px] uppercase tracking-[0.3em] text-craftRust font-semibold">Craft Concierge Services</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-[0.2em] text-craftDark/75">
+                <a href="#services" class="hover:text-craftRust transition-colors">Our Crafts</a>
+                <a href="#process" class="hover:text-craftRust transition-colors">How It Works</a>
+                <a href="#pricing" class="hover:text-craftRust transition-colors">Pricing & Rates</a>
+                <a href="#reviews" class="hover:text-craftRust transition-colors">Neighbors</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="tel:5554321098" class="hidden sm:flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-craftDark border border-craftDark/20 px-4 py-2.5 rounded-full hover:bg-craftDark hover:text-craftBg transition-all">
+                    <span>Call (555) 432-1098</span>
+                </a>
+                <button onclick="openBookingModal('General Concierge Service')" class="bg-craftRust hover:bg-craftRust/90 text-white font-bold px-6 py-3 text-xs uppercase tracking-[0.2em] rounded-full transition-all shadow-md">
+                    Book Service
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-24">
+        <section class="relative min-h-[85vh] flex items-center justify-center px-6 py-20 bg-craftBg">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-8">
+                    <span class="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-[0.3em] text-craftGold bg-craftGold/10 px-4 py-2 rounded-full border border-craftGold/20">
+                        <span>Established 1984 • Family Owned & Operated</span>
+                    </span>
+                    <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
+                        Mastered Craftsmanship <br><span class="italic font-normal text-craftRust">For Your Everyday Life</span>.
+                    </h1>
+                    <p class="text-craftDark/80 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+                        From delicate garment care and precision bespoke tailoring to secure residential locksmithing. We preserve your wardrobe and protect your home with old-world precision.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-2">
+                        <button onclick="openBookingModal('Schedule Pickup / Service')" class="bg-craftDark hover:bg-craftDark/90 text-craftBg text-center font-bold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full shadow-lg">
+                            Schedule Free Pickup
+                        </button>
+                        <a href="#services" class="border border-craftDark/30 hover:border-craftDark text-craftDark text-center font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-all rounded-full">
+                            Explore Our 3 Pillars
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-5 relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div class="h-64 rounded-3xl overflow-hidden shadow-xl border border-craftDark/10">
+                                <img src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=800&q=80" alt="Professional Dry Cleaning & Laundry" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x800/F4EFE6/2C2825?text=Laundry'">
+                            </div>
+                            <div class="h-40 rounded-3xl overflow-hidden shadow-xl border border-craftDark/10">
+                                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80" alt="Precision Tailoring" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x400/F4EFE6/2C2825?text=Tailoring'">
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-8">
+                            <div class="h-40 rounded-3xl overflow-hidden shadow-xl border border-craftDark/10">
+                                <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80" alt="Secure Locksmithing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x400/F4EFE6/2C2825?text=Locksmith'">
+                            </div>
+                            <div class="h-64 rounded-3xl overflow-hidden shadow-xl border border-craftDark/10 bg-craftCard p-6 flex flex-col justify-center text-center">
+                                <span class="font-serif text-3xl font-bold text-craftRust">100%</span>
+                                <span class="text-xs uppercase tracking-widest font-bold mt-2">Satisfaction Guarantee</span>
+                                <p class="text-[11px] text-craftDark/70 mt-2 font-light">Free re-cleaning, instant alterations check & emergency lockouts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-24 px-6 bg-craftCard border-y border-craftDark/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-craftRust">Our Three Master Services</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold">Dedicated Local Craftsmanship</h2>
+                    <p class="text-xs text-craftDark/75 tracking-wider uppercase">Professional care tailored to preserve your wardrobe, fit your style, and secure your premises.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Service 1: Laundry -->
+                    <div class="bg-craftBg p-8 rounded-3xl border border-craftDark/10 space-y-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="h-48 rounded-2xl overflow-hidden mb-6">
+                                <img src="https://images.unsplash.com/photo-1545173199-9df1e01e01f0?auto=format&fit=crop&w=800&q=80" alt="Laundry & Dry Cleaning" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-craftRust bg-craftRust/10 px-3 py-1 rounded-full">Pillar One</span>
+                            <h3 class="font-serif text-2xl font-bold">Laundry & Dry Cleaning</h3>
+                            <p class="text-xs text-craftDark/80 font-light leading-relaxed">
+                                Eco-friendly organic solvent dry cleaning, hand-finished shirt laundering, stain removal mastery, and convenient free doorstep pickup and delivery.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-craftDark/10 flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-widest">From $4.50 / item</span>
+                            <button onclick="openBookingModal('Laundry & Dry Cleaning')" class="bg-craftDark text-craftBg text-[10px] uppercase font-bold tracking-widest px-4 py-2.5 rounded-full hover:bg-craftRust transition-colors">
+                                Book Service
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Tailoring -->
+                    <div class="bg-craftBg p-8 rounded-3xl border border-craftDark/10 space-y-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="h-48 rounded-2xl overflow-hidden mb-6">
+                                <img src="https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?auto=format&fit=crop&w=800&q=80" alt="Tailoring & Alterations" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-craftGold bg-craftGold/10 px-3 py-1 rounded-full">Pillar Two</span>
+                            <h3 class="font-serif text-2xl font-bold">Tailoring & Alterations</h3>
+                            <p class="text-xs text-craftDark/80 font-light leading-relaxed">
+                                Master tailors with decades of experience. Expert suit fitting, bridal gown alterations, denim hem restorations, and bespoke garment reconstruction.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-craftDark/10 flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-widest">Custom Fittings</span>
+                            <button onclick="openBookingModal('Tailoring & Alterations')" class="bg-craftDark text-craftBg text-[10px] uppercase font-bold tracking-widest px-4 py-2.5 rounded-full hover:bg-craftRust transition-colors">
+                                Book Fitting
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Locksmith -->
+                    <div class="bg-craftBg p-8 rounded-3xl border border-craftDark/10 space-y-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="h-48 rounded-2xl overflow-hidden mb-6">
+                                <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80" alt="Master Locksmith" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-[9px] font-bold uppercase tracking-[0.3em] text-craftGreen bg-craftGreen/10 px-3 py-1 rounded-full">Pillar Three</span>
+                            <h3 class="font-serif text-2xl font-bold">24/7 Master Locksmith</h3>
+                            <p class="text-xs text-craftDark/80 font-light leading-relaxed">
+                                Licensed and insured residential and commercial security specialists. Emergency lockout response, lock rekeying, smart lock installations, and high-security key duplication.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-craftDark/10 flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-widest">24/7 Emergency</span>
+                            <button onclick="openBookingModal('Locksmith Services')" class="bg-craftDark text-craftBg text-[10px] uppercase font-bold tracking-widest px-4 py-2.5 rounded-full hover:bg-craftRust transition-colors">
+                                Request Locksmith
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="py-24 px-6 bg-craftBg">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-craftRust">Seamless Concierge</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl font-bold">How Curtis & Co. Works For You</h2>
+                        <p class="text-xs text-craftDark/80 font-light leading-relaxed">
+                            We value your time as much as our craftsmanship. Whether you need your suits dry cleaned, jeans tapered, or smart locks installed, our workflow is effortless.
+                        </p>
+                        <div class="pt-4">
+                            <button onclick="openBookingModal('Start Concierge Request')" class="bg-craftRust hover:bg-craftRust/90 text-white font-bold px-8 py-4 text-xs uppercase tracking-[0.2em] rounded-full shadow-md">
+                                Get Started Today
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="bg-craftCard p-8 rounded-3xl border border-craftDark/10 space-y-4">
+                            <span class="font-serif text-4xl font-bold text-craftRust">01</span>
+                            <h3 class="font-serif text-xl font-bold">Book Online or Call</h3>
+                            <p class="text-xs text-craftDark/75 font-light leading-relaxed">
+                                Choose your desired service, select a convenient pickup or on-site appointment time that fits your schedule.
+                            </p>
+                        </div>
+                        <div class="bg-craftCard p-8 rounded-3xl border border-craftDark/10 space-y-4">
+                            <span class="font-serif text-4xl font-bold text-craftRust">02</span>
+                            <h3 class="font-serif text-xl font-bold">Expert Execution</h3>
+                            <p class="text-xs text-craftDark/75 font-light leading-relaxed">
+                                Our master artisans inspect, clean, alter, or secure your items with meticulous care and attention to detail.
+                            </p>
+                        </div>
+                        <div class="bg-craftCard p-8 rounded-3xl border border-craftDark/10 space-y-4">
+                            <span class="font-serif text-4xl font-bold text-craftRust">03</span>
+                            <h3 class="font-serif text-xl font-bold">Quality Inspection</h3>
+                            <p class="text-xs text-craftDark/75 font-light leading-relaxed">
+                                Every garment undergoes a rigorous 3-point check, and every lock installation is tested for absolute security.
+                            </p>
+                        </div>
+                        <div class="bg-craftCard p-8 rounded-3xl border border-craftDark/10 space-y-4">
+                            <span class="font-serif text-4xl font-bold text-craftRust">04</span>
+                            <h3 class="font-serif text-xl font-bold">Delivered to You</h3>
+                            <p class="text-xs text-craftDark/75 font-light leading-relaxed">
+                                Freshly pressed clothes and altered apparel returned directly to your front door, neatly packaged and ready to wear.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-24 px-6 bg-craftCard border-y border-craftDark/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-craftGold">Transparent Rates</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold">Popular Service Estimates</h2>
+                    <p class="text-xs text-craftDark/75 tracking-wider uppercase">Honest, upfront pricing with no hidden fees or surprise surcharges.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-craftBg p-8 rounded-3xl border border-craftDark/10 space-y-6 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-craftRust">Dry Cleaning & Laundry</span>
+                                <h3 class="font-serif text-xl font-bold mt-1">Wardrobe Refresh</h3>
+                            </div>
+                            <span class="font-serif text-2xl font-bold">$35</span>
+                        </div>
+                        <ul class="space-y-3 text-xs text-craftDark/80 font-light border-y border-craftDark/10 py-6">
+                            <li class="flex items-center space-x-2"><span>✓ 5 Shirts laundered & pressed</span></li>
+                            <li class="flex items-center space-x-2"><span>✓ 1 Suit dry cleaned</span></li>
+                            <li class="flex items-center space-x-2"><span>✓ Free pickup & delivery</span></li>
+                            <li class="flex items-center space-x-2"><span>✓ 48-hour turnaround</span></li>
+                        </ul>
+                        <button onclick="openBookingModal('Wardrobe Refresh Package')" class="w-full bg-craftDark hover:bg-craftRust text-craftBg font-bold py-3 text-[10px] uppercase tracking-[0.2em] rounded-full transition-colors">
+                            Select Package
+                        </button>
+                    </div>
+
+                    <div class="bg-craftBg p-8 rounded-3xl border-2 border-craftRust space-y-6 shadow-md relative">
+                        <span class="absolute -top-3.5 right-8 bg-craftRust text-white font-bold text-[9px] uppercase tracking-widest px-3 py-1 rounded-full">Most Popular</span>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-craftRust">Tailoring & Alterations</span>
+                                <h3 class="font-serif text-xl font-bold mt-1">Custom Suit Tailoring</h3>
+                            </div>
+                            <span class="font-serif text-2xl font-bold">$65</span>
+                        </div>
+                        <ul class="space-y-3 text-xs text-craftDark/80 font-light border-y border-craftDark/10 py-6">
+                            <li class="flex items-center space-x-2"><span>✓ Jacket taper & sleeve adjustment</span></li>
+                            <li class="flex items-center space-x-2"><span>✓ Trouser hem & waist take-in</span></li>
+                            <li class="flex items-center space-x-2"><span>✓ In-home or shop fitting session</span></li>
+                            <li class="flex items-center space-x-2"><span>✓ Complimentary steam press</span></li>
+                        </ul>
+                        <button onclick="openBookingModal('Custom Suit Tailoring')" class="w-full bg-craftRust hover:bg-craftRust/90 text-white font-bold py-3 text-[10px] uppercase tracking-[0.2em] rounded-full transition-colors shadow-md">
+                            Select Package
+                        </button>
+                    </div>
+
+                    <div class="bg-craftBg p-8 rounded-3xl border border-craftDark/10 space-y-6 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-craftRust">Locksmith Security</span>
+                                <h3 class="font-serif text-xl font-bold mt-1">Home Security Overhaul</h3>
+                            </div>
+                            <span class="font-serif text-2xl font-bold">$120</span>
+                        </div>
+                        <ul class="space-y-3 text-xs text-craftDark/80 font-light border-y border-craftDark/10 py-6">
+                            <li class="flex items-center space-x-2"><span>✓ Rekey up to 4 exterior locks</span></li>
+                            <li class="flex items-center space-x-2"><span>✓ 4 duplicate master keys included</span></li>
+                            <li class="flex items-center space-x-2"><span>✓ Full deadbolt security audit</span></li>
+                            <li class="flex items-center space-x-2"><span>✓ Priority emergency dispatch</span></li>
+                        </ul>
+                        <button onclick="openBookingModal('Home Security Overhaul')" class="w-full bg-craftDark hover:bg-craftRust text-craftBg font-bold py-3 text-[10px] uppercase tracking-[0.2em] rounded-full transition-colors">
+                            Select Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews" class="py-24 px-6 bg-craftBg">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-craftRust">Neighborly Trust</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold">Trusted By Our Community</h2>
+                    <p class="text-xs text-craftDark/75 tracking-wider uppercase">Read how we've helped neighbors look sharp and stay secure for over 35 years.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-craftCard p-8 rounded-3xl border border-craftDark/10 space-y-4">
+                        <div class="flex text-craftGold space-x-1 text-sm">★★★★★</div>
+                        <p class="text-xs text-craftDark/80 font-light leading-relaxed italic">
+                            "Curtis & Co. saved my wedding weekend! Not only did they rush-alter my suit in 24 hours, but when I accidentally locked my keys inside after, their locksmith was at my door in 15 minutes."
+                        </p>
+                        <div class="pt-4 border-t border-craftDark/10">
+                            <span class="font-serif font-bold block text-sm">Marcus Vance</span>
+                            <span class="text-[10px] text-craftDark/60 uppercase tracking-widest">Neighborhood Resident</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-craftCard p-8 rounded-3xl border border-craftDark/10 space-y-4">
+                        <div class="flex text-craftGold space-x-1 text-sm">★★★★★</div>
+                        <p class="text-xs text-craftDark/80 font-light leading-relaxed italic">
+                            "Their weekly laundry and dry cleaning pickup service is an absolute lifesaver for working professionals. Impeccably pressed shirts and wonderful customer service every single time."
+                        </p>
+                        <div class="pt-4 border-t border-craftDark/10">
+                            <span class="font-serif font-bold block text-sm">Eleanor Sterling</span>
+                            <span class="text-[10px] text-craftDark/60 uppercase tracking-widest">Downtown District</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-craftCard p-8 rounded-3xl border border-craftDark/10 space-y-4">
+                        <div class="flex text-craftGold space-x-1 text-sm">★★★★★</div>
+                        <p class="text-xs text-craftDark/80 font-light leading-relaxed italic">
+                            "Master tailors who actually understand vintage and high-end fabrics. They tailored my grandfather's wool coat with absolute precision. True artisans."
+                        </p>
+                        <div class="pt-4 border-t border-craftDark/10">
+                            <span class="font-serif font-bold block text-sm">Dr. Julian Hayes</span>
+                            <span class="text-[10px] text-craftDark/60 uppercase tracking-widest">West End</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 px-6 bg-craftCard border-t border-craftDark/10">
+            <div class="max-w-4xl mx-auto bg-craftBg p-8 sm:p-12 rounded-3xl border border-craftDark/10 shadow-lg">
+                <div class="text-center max-w-xl mx-auto space-y-4 mb-10">
+                    <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-craftRust">Concierge Dispatch</span>
+                    <h2 class="font-serif text-3xl font-bold">Schedule Your Service Now</h2>
+                    <p class="text-xs text-craftDark/75">Fill out your request below and our team will confirm your appointment within minutes.</p>
+                </div>
+                <form class="space-y-6" onsubmit="event.preventDefault(); showNotification('Service request received! Our team will contact you shortly.');">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Your Full Name</label>
+                            <input type="text" placeholder="e.g., Sarah Jenkins" class="w-full bg-craftCard text-craftDark font-sans text-xs px-4 py-3.5 rounded-xl border border-craftDark/20 focus:outline-none focus:border-craftRust" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Phone Number</label>
+                            <input type="tel" placeholder="e.g., (555) 123-4567" class="w-full bg-craftCard text-craftDark font-sans text-xs px-4 py-3.5 rounded-xl border border-craftDark/20 focus:outline-none focus:border-craftRust" required>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Select Craft Service</label>
+                            <select class="w-full bg-craftCard text-craftDark font-sans text-xs px-4 py-3.5 rounded-xl border border-craftDark/20 focus:outline-none focus:border-craftRust">
+                                <option>Laundry & Dry Cleaning (Free Pickup)</option>
+                                <option>Tailoring & Alterations (Fitting)</option>
+                                <option>24/7 Master Locksmith / Security</option>
+                                <option>General Concierge Inquiry</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-widest">Preferred Date & Time</label>
+                            <input type="text" placeholder="e.g., Tomorrow, 10:00 AM" class="w-full bg-craftCard text-craftDark font-sans text-xs px-4 py-3.5 rounded-xl border border-craftDark/20 focus:outline-none focus:border-craftRust" required>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase font-bold tracking-widest">Special Notes / Address</label>
+                        <textarea rows="3" placeholder="Provide street address or any specific instructions for our artisans..." class="w-full bg-craftCard text-craftDark font-sans text-xs px-4 py-3.5 rounded-xl border border-craftDark/20 focus:outline-none focus:border-craftRust"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-craftRust hover:bg-craftRust/90 text-white font-bold py-4 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-md">
+                        Confirm & Dispatch Service
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-craftDark text-craftBg py-16 px-6 text-xs">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <span class="font-serif tracking-widest text-lg font-bold block text-craftBg">CURTIS & CO.</span>
+                <p class="text-xs leading-relaxed text-craftBg/70 font-light">
+                    Master neighborhood concierge providing professional dry cleaning, bespoke tailoring, and licensed locksmith services since 1984.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-craftGold mb-4">Our Craft Pillars</h3>
+                <ul class="space-y-2 text-xs text-craftBg/70 font-light">
+                    <li><a href="#services" class="hover:text-craftBg transition-colors">Laundry & Dry Cleaning</a></li>
+                    <li><a href="#services" class="hover:text-craftBg transition-colors">Tailoring & Alterations</a></li>
+                    <li><a href="#services" class="hover:text-craftBg transition-colors">Emergency Locksmith</a></li>
+                    <li><a href="#services" class="hover:text-craftBg transition-colors">Free Doorstep Pickup</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-craftGold mb-4">Service Hours</h3>
+                <ul class="space-y-2 text-xs text-craftBg/70 font-light">
+                    <li>Mon - Fri: 7:00 AM - 7:00 PM</li>
+                    <li>Saturday: 8:00 AM - 5:00 PM</li>
+                    <li>Sunday: 9:00 AM - 3:00 PM</li>
+                    <li>Locksmith Emergency: 24/7 On-Call</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs font-bold uppercase tracking-[0.3em] text-craftGold mb-4">Neighborhood Hub</h3>
+                <ul class="space-y-2 text-xs text-craftBg/70 font-light">
+                    <li>484 Heritage Artisan Way</li>
+                    <li>Metropolitan District</li>
+                    <li>Phone: (555) 432-1098</li>
+                    <li>Email: service@curtisandco.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-craftBg/10 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest text-craftBg/60">
+            <p>&copy; 2026 CURTIS & CO. CRAFT SERVICES. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-craftBg transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-craftBg transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-craftBg transition-colors">Licensing & Insurance</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-craftBg text-craftDark p-8 rounded-3xl max-w-md w-full mx-4 relative border border-craftDark/20 shadow-2xl space-y-6">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-craftDark/60 hover:text-craftDark text-xs uppercase tracking-widest font-bold">Close</button>
+            <div id="modalContent" class="space-y-4 pt-2">
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-craftRust">Quick Concierge Booking</span>
+                <h3 class="font-serif text-2xl font-bold" id="modalTitle">Schedule Service</h3>
+                <p class="text-xs text-craftDark/75 font-light leading-relaxed">Enter your contact details and our team will instantly dispatch your request.</p>
+                <div class="space-y-4 pt-2">
+                    <input type="text" placeholder="Full Name" class="w-full bg-craftCard text-craftDark text-xs px-4 py-3 rounded-xl border border-craftDark/20 focus:outline-none focus:border-craftRust">
+                    <input type="tel" placeholder="Phone Number" class="w-full bg-craftCard text-craftDark text-xs px-4 py-3 rounded-xl border border-craftDark/20 focus:outline-none focus:border-craftRust">
+                    <input type="text" placeholder="Pickup Address / Location" class="w-full bg-craftCard text-craftDark text-xs px-4 py-3 rounded-xl border border-craftDark/20 focus:outline-none focus:border-craftRust">
+                    <button onclick="closeBookingModal(); showNotification('Appointment successfully confirmed! We will call you shortly.');" class="w-full bg-craftRust hover:bg-craftRust/90 text-white font-bold py-3.5 text-xs uppercase tracking-[0.2em] rounded-full transition-colors shadow-md">
+                        Confirm Appointment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="fixed bottom-6 right-6 z-50 bg-craftDark text-craftBg px-6 py-4 rounded-2xl shadow-2xl border border-craftBg/20 text-xs tracking-wider transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <span id="notificationText">Notification message</span>
+    </div>
+
+    <script>
+        function showNotification(msg) {
+            const notif = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            text.innerText = msg;
+            notif.classList.remove('translate-y-20', 'opacity-0');
+            notif.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                notif.classList.remove('translate-y-0', 'opacity-100');
+                notif.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        function openBookingModal(serviceName) {
+            document.getElementById('modalTitle').innerText = serviceName;
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

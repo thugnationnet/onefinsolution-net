@@ -1,0 +1,54 @@
+/* Footer social icons — icons only, no labels */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem 1.25rem;
+}
+.footer-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(183, 207, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  color: #eaf2ff !important;
+  text-decoration: none !important;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+.footer-social-link svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: block;
+  pointer-events: none;
+}
+.footer-social-link:hover {
+  background: rgba(120, 221, 255, 0.16);
+  border-color: rgba(120, 221, 255, 0.55);
+  color: #78ddff !important;
+  transform: translateY(-2px);
+}
+.footer-social-link:focus-visible {
+  outline: 2px solid #78ddff;
+  outline-offset: 2px;
+}
+.site-footer .footer-social-link {
+  color: #eaf2ff !important;
+}
+@media (max-width: 760px) {
+  .footer-social {
+    order: 2;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,6 @@
+import { forgotPasswordAction } from '@/app/auth-actions';
+import Link from 'next/link';
+import { SubmitButton } from '@/components/submit-button';
+import { FormNotice } from '@/components/form-notice';
+export const metadata={title:'Forgot Password',robots:{index:false,follow:false}};
+export default async function ForgotPassword({searchParams}:{searchParams:Promise<{error?:string;success?:string}>}) {const params=await searchParams;return <div className="auth-wrap"><p className="eyebrow">ACCOUNT RECOVERY</p><h1>Forgot your password?</h1><p>Enter your account email. If it matches a verified account, we will send a link to choose a new password.</p><FormNotice {...params} /><form action={forgotPasswordAction} className="stack"><label className="field">Email address<input name="email" type="email" autoComplete="email" required maxLength={254} /></label><SubmitButton pendingText="Requesting link…">Send reset link</SubmitButton></form><p className="small-copy">Reset links expire after 30 minutes. Check your spam folder if the email does not arrive.</p><div className="auth-links"><Link className="text-link" href="/sign-in">Back to sign in</Link><Link className="text-link" href="/contact?category=account">Get help</Link></div></div>;}

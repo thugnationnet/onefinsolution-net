@@ -1,0 +1,13 @@
+{
+  "description": "Workspace-only one-time credit catalog. Chat plans are provisioned separately.",
+  "products": [
+    {
+      "code": "credits_50",
+      "name": "50 Credit Pack",
+      "description": "50 credits for Workspace only. One-time payment; does not start or extend a homepage chat subscription.",
+      "prices": [
+        { "code": "credits_50", "amount": 500, "credits": 50 }
+      ]
+    }
+  ]
+}

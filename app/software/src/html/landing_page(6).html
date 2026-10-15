@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHEL & CO. | Haute Horology & Luxury Timepieces</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .brand-font {
+            font-family: 'Cinzel', serif;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 flex flex-col min-h-screen">
+
+    <header class="bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800/60 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl sm:text-3xl font-bold text-zinc-100 brand-font tracking-widest">AETHEL<span class="text-amber-500 font-normal ml-1">&</span>CO.</a>
+                </div>
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#collection" class="text-zinc-400 hover:text-amber-400 px-3 py-2 text-xs font-medium tracking-[0.2em] uppercase transition-colors">Masterpieces</a>
+                    <a href="#complications" class="text-zinc-400 hover:text-amber-400 px-3 py-2 text-xs font-medium tracking-[0.2em] uppercase transition-colors">Complications</a>
+                    <a href="#heritage" class="text-zinc-400 hover:text-amber-400 px-3 py-2 text-xs font-medium tracking-[0.2em] uppercase transition-colors">Heritage</a>
+                    <a href="#appointment" class="text-zinc-400 hover:text-amber-400 px-3 py-2 text-xs font-medium tracking-[0.2em] uppercase transition-colors">Private Viewing</a>
+                </nav>
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#appointment" class="bg-amber-600 text-zinc-950 px-6 py-2.5 rounded-none text-xs font-semibold tracking-[0.2em] uppercase hover:bg-amber-500 transition-colors duration-300">Book Viewing</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-zinc-400 hover:text-zinc-100 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <section class="relative bg-zinc-950 overflow-hidden h-[90vh] min-h-[600px] flex items-center">
+            <div class="absolute inset-0">
+                <img class="w-full h-full object-cover opacity-40 filter contrast-125" src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=2850&auto=format&fit=crop" alt="Luxury mechanical watch chronograph dial macro">
+                <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/60 to-transparent"></div>
+            </div>
+            
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-left max-w-2xl">
+                    <span class="block text-amber-500 font-medium tracking-[0.3em] uppercase text-xs mb-4">Pinnacle of Swiss Horology</span>
+                    <h1 class="text-5xl font-light text-zinc-100 sm:text-6xl md:text-7xl mb-6 brand-font leading-[1.1]">
+                        TIMELESS <br><span class="italic text-amber-400 font-normal">Precision</span>
+                    </h1>
+                    <p class="mt-3 text-base text-zinc-400 sm:text-lg mb-10 font-light leading-relaxed">
+                        Discover master-crafted complications, rare limited editions, and iconic timepieces designed for discerning collectors and connoisseurs of fine craftsmanship.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 max-w-md">
+                        <a href="#collection" class="bg-amber-600 hover:bg-amber-500 text-zinc-950 px-8 py-4 font-semibold tracking-[0.2em] uppercase text-xs transition-colors text-center">
+                            Explore Collection
+                        </a>
+                        <a href="#appointment" class="bg-transparent border border-zinc-700 hover:border-amber-500 hover:text-amber-400 text-zinc-300 px-8 py-4 font-semibold tracking-[0.2em] uppercase text-xs transition-colors text-center">
+                            Private Salon
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="collection" class="py-24 bg-zinc-900/50 border-t border-zinc-800/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-zinc-800 pb-6">
+                    <div>
+                        <span class="text-amber-500 font-medium tracking-[0.25em] uppercase text-xs">Exquisite Portfolio</span>
+                        <h2 class="mt-2 text-4xl font-normal text-zinc-100 sm:text-5xl brand-font">Featured Masterpieces</h2>
+                    </div>
+                    <a href="#appointment" class="mt-4 md:mt-0 flex text-zinc-400 font-medium tracking-[0.2em] uppercase hover:text-amber-400 items-center text-xs transition-colors">
+                        View All Collections 
+                        <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Watch 1 -->
+                    <div class="bg-zinc-900 rounded-none overflow-hidden group border border-zinc-800 hover:border-amber-500/50 transition-all duration-300 flex flex-col">
+                        <div class="relative h-80 overflow-hidden bg-zinc-950 flex items-center justify-center p-6">
+                            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop" alt="Chronograph watch with leather strap" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-90">
+                            <div class="absolute top-4 left-4 bg-zinc-950/80 backdrop-blur-md text-amber-400 text-[10px] font-semibold uppercase px-3 py-1 tracking-[0.2em] border border-zinc-800">Limited Edition</div>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col justify-between">
+                            <div>
+                                <div class="mb-4">
+                                    <h3 class="text-2xl font-normal text-zinc-100 brand-font">Chronograph Automaton VIII</h3>
+                                </div>
+                                <p class="text-sm text-zinc-400 mb-6 font-light leading-relaxed">18k rose gold case, sapphire crystal exhibition caseback, self-winding mechanical movement with 72-hour power reserve.</p>
+                                <div class="grid grid-cols-2 gap-4 text-xs text-zinc-400 mb-6 border-t border-zinc-800 pt-4">
+                                    <div>
+                                        <span class="block uppercase text-zinc-500 font-medium tracking-widest mb-1">Caliber</span>
+                                        <span class="font-semibold text-zinc-200">In-house AETH-31</span>
+                                    </div>
+                                    <div>
+                                        <span class="block uppercase text-zinc-500 font-medium tracking-widest mb-1">Price</span>
+                                        <span class="font-semibold text-amber-400">$38,500</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#appointment" class="w-full text-center bg-zinc-800 text-zinc-200 hover:bg-amber-600 hover:text-zinc-950 uppercase text-xs font-semibold tracking-[0.2em] py-3.5 transition-colors">Inquire Availability</a>
+                        </div>
+                    </div>
+
+                    <!-- Watch 2 -->
+                    <div class="bg-zinc-900 rounded-none overflow-hidden group border border-zinc-800 hover:border-amber-500/50 transition-all duration-300 flex flex-col">
+                        <div class="relative h-80 overflow-hidden bg-zinc-950 flex items-center justify-center p-6">
+                            <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1000&auto=format&fit=crop" alt="Minimalist luxury watch" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-90">
+                            <div class="absolute top-4 left-4 bg-zinc-950/80 backdrop-blur-md text-zinc-300 text-[10px] font-semibold uppercase px-3 py-1 tracking-[0.2em] border border-zinc-800">Masterpiece</div>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col justify-between">
+                            <div>
+                                <div class="mb-4">
+                                    <h3 class="text-2xl font-normal text-zinc-100 brand-font">Grand Tourbillon Royal</h3>
+                                </div>
+                                <p class="text-sm text-zinc-400 mb-6 font-light leading-relaxed">Platinum case with hand-guilloché slate grey dial, visible flying tourbillon escapement at 6 o'clock.</p>
+                                <div class="grid grid-cols-2 gap-4 text-xs text-zinc-400 mb-6 border-t border-zinc-800 pt-4">
+                                    <div>
+                                        <span class="block uppercase text-zinc-500 font-medium tracking-widest mb-1">Caliber</span>
+                                        <span class="font-semibold text-zinc-200">Manual Tourbillon</span>
+                                    </div>
+                                    <div>
+                                        <span class="block uppercase text-zinc-500 font-medium tracking-widest mb-1">Price</span>
+                                        <span class="font-semibold text-amber-400">$125,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#appointment" class="w-full text-center bg-zinc-800 text-zinc-200 hover:bg-amber-600 hover:text-zinc-950 uppercase text-xs font-semibold tracking-[0.2em] py-3.5 transition-colors">Inquire Availability</a>
+                        </div>
+                    </div>
+
+                    <!-- Watch 3 -->
+                    <div class="bg-zinc-900 rounded-none overflow-hidden group border border-zinc-800 hover:border-amber-500/50 transition-all duration-300 flex flex-col">
+                        <div class="relative h-80 overflow-hidden bg-zinc-950 flex items-center justify-center p-6">
+                            <img src="https://images.unsplash.com/photo-1533139502658-0198f920d8e8?q=80&w=1000&auto=format&fit=crop" alt="Diver timepiece" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-90">
+                            <div class="absolute top-4 left-4 bg-zinc-950/80 backdrop-blur-md text-zinc-300 text-[10px] font-semibold uppercase px-3 py-1 tracking-[0.2em] border border-zinc-800">Professional</div>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col justify-between">
+                            <div>
+                                <div class="mb-4">
+                                    <h3 class="text-2xl font-normal text-zinc-100 brand-font">Abyssal Diver 300M</h3>
+                                </div>
+                                <p class="text-sm text-zinc-400 mb-6 font-light leading-relaxed">Grade 5 titanium construction, ceramic rotating bezel, engineered for extreme deep-sea exploration and absolute durability.</p>
+                                <div class="grid grid-cols-2 gap-4 text-xs text-zinc-400 mb-6 border-t border-zinc-800 pt-4">
+                                    <div>
+                                        <span class="block uppercase text-zinc-500 font-medium tracking-widest mb-1">Caliber</span>
+                                        <span class="font-semibold text-zinc-200">Automatic Dive Cal.</span>
+                                    </div>
+                                    <div>
+                                        <span class="block uppercase text-zinc-500 font-medium tracking-widest mb-1">Price</span>
+                                        <span class="font-semibold text-amber-400">$14,200</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#appointment" class="w-full text-center bg-zinc-800 text-zinc-200 hover:bg-amber-600 hover:text-zinc-950 uppercase text-xs font-semibold tracking-[0.2em] py-3.5 transition-colors">Inquire Availability</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="complications" class="py-24 bg-zinc-950">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-amber-500 font-medium tracking-[0.25em] uppercase text-xs">Horological Mastery</span>
+                    <h2 class="mt-2 text-4xl font-normal text-zinc-100 sm:text-5xl brand-font">Exceptional Complications</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="p-8 border border-zinc-800 bg-zinc-900/50 shadow-sm">
+                        <div class="w-14 h-14 bg-zinc-900 border border-zinc-700 flex items-center justify-center mb-6 text-amber-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-normal text-zinc-100 mb-3 brand-font">Perpetual Calendars</h3>
+                        <p class="text-zinc-400 font-light text-sm leading-relaxed">Mechanically programmed to account for irregular month lengths and leap years without manual adjustment until the year 2100.</p>
+                    </div>
+                    <div class="p-8 border border-zinc-800 bg-zinc-900/50 shadow-sm">
+                        <div class="w-14 h-14 bg-zinc-900 border border-zinc-700 flex items-center justify-center mb-6 text-amber-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-normal text-zinc-100 mb-3 brand-font">Minute Repeaters</h3>
+                        <p class="text-zinc-400 font-light text-sm leading-relaxed">Acoustic marvels equipped with micro-gongs and hammers that chime hours, quarter-hours, and minutes on demand.</p>
+                    </div>
+                    <div class="p-8 border border-zinc-800 bg-zinc-900/50 shadow-sm">
+                        <div class="w-14 h-14 bg-zinc-900 border border-zinc-700 flex items-center justify-center mb-6 text-amber-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-normal text-zinc-100 mb-3 brand-font">Flyback Chronographs</h3>
+                        <p class="text-zinc-400 font-light text-sm leading-relaxed">Advanced timing mechanisms allowing instant resetting and restarting of the chronograph function with a single push of a pusher.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="heritage" class="py-24 bg-zinc-900/50 border-t border-zinc-800/60 text-zinc-100 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center">
+                    <div class="mb-10 lg:mb-0 relative">
+                        <div class="absolute -inset-4 border border-amber-500/20 -translate-x-4 -translate-y-4"></div>
+                        <img class="relative w-full object-cover h-[500px] filter contrast-110" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1000&auto=format&fit=crop" alt="Watchmaker assembling miniature watch gears with loupe">
+                    </div>
+                    <div>
+                        <span class="text-amber-500 font-medium tracking-[0.25em] uppercase text-xs mb-2 block">Our Tradition</span>
+                        <h2 class="text-4xl font-light sm:text-5xl brand-font mb-6 leading-tight">
+                            CENTURIES OF <span class="italic text-amber-400">Mastery</span>.
+                        </h2>
+                        <p class="text-zinc-400 font-light mb-6 leading-relaxed text-base">
+                            Founded in Geneva, Aethel & Co. represents the unyielding pursuit of mechanical perfection. Every gear, spring, and jewel bearing is meticulously hand-finished by master watchmakers who carry forward centuries of Swiss tradition.
+                        </p>
+                        <p class="text-zinc-400 font-light mb-8 leading-relaxed text-base">
+                            We bridge traditional horological artistry with modern structural innovation, creating heirlooms designed to be treasured across generations.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 border-t border-zinc-800 pt-8">
+                            <div>
+                                <p class="text-4xl sm:text-5xl font-light brand-font mb-1 text-amber-400">1878</p>
+                                <p class="text-[10px] text-zinc-500 uppercase tracking-[0.2em] font-medium">Established in Geneva</p>
+                            </div>
+                            <div>
+                                <p class="text-4xl sm:text-5xl font-light brand-font mb-1 text-amber-400">100%</p>
+                                <p class="text-[10px] text-zinc-500 uppercase tracking-[0.2em] font-medium">In-House Manufacture</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="appointment" class="bg-zinc-950 relative border-t border-zinc-800/60">
+            <div class="max-w-4xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-amber-500 font-medium tracking-[0.25em] uppercase text-xs">Exclusive Access</span>
+                    <h2 class="mt-2 text-4xl font-normal text-zinc-100 sm:text-5xl brand-font">Private Salon Consultation</h2>
+                    <p class="text-zinc-400 font-light mt-3 max-w-lg mx-auto text-sm">
+                        Request a private appointment at our VIP showroom or schedule a virtual presentation with our master horologist.
+                    </p>
+                </div>
+                
+                <form class="bg-zinc-900 p-8 sm:p-12 border border-zinc-800 max-w-2xl mx-auto text-left">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2">First Name</label>
+                            <input type="text" class="w-full px-4 py-3.5 bg-zinc-950 border border-zinc-800 rounded-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 text-zinc-100 placeholder-zinc-600 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2">Last Name</label>
+                            <input type="text" class="w-full px-4 py-3.5 bg-zinc-950 border border-zinc-800 rounded-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 text-zinc-100 placeholder-zinc-600 text-sm">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2">Email Address</label>
+                        <input type="email" class="w-full px-4 py-3.5 bg-zinc-950 border border-zinc-800 rounded-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 text-zinc-100 placeholder-zinc-600 text-sm">
+                    </div>
+                    <div class="mb-8">
+                        <label class="block text-[10px] font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-2">Timepiece of Interest</label>
+                        <select class="w-full px-4 py-3.5 bg-zinc-950 border border-zinc-800 rounded-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 text-zinc-300 text-sm">
+                            <option>Select a masterpiece</option>
+                            <option>Chronograph Automaton VIII ($38,500)</option>
+                            <option>Grand Tourbillon Royal ($125,000)</option>
+                            <option>Abyssal Diver 300M ($14,200)</option>
+                            <option>Bespoke Custom Commission</option>
+                        </select>
+                    </div>
+                    <button type="button" class="w-full bg-amber-600 text-zinc-950 font-semibold tracking-[0.2em] uppercase py-4 px-4 rounded-none hover:bg-amber-500 transition-colors duration-300 text-xs">
+                        Confirm Appointment Request
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-zinc-950 text-zinc-400 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="text-2xl font-bold text-zinc-100 brand-font tracking-widest mb-4 block">AETHEL<span class="text-amber-500 font-normal ml-1">&</span>CO.</span>
+                    <p class="text-xs font-light leading-relaxed text-zinc-500">
+                        Purveyors of haute horology, rare mechanical complications, and exceptional Swiss craftsmanship.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase mb-4 text-zinc-200">Collections</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#collection" class="hover:text-amber-400 transition-colors">Chronographs</a></li>
+                        <li><a href="#collection" class="hover:text-amber-400 transition-colors">Tourbillon Series</a></li>
+                        <li><a href="#collection" class="hover:text-amber-400 transition-colors">Professional Divers</a></li>
+                        <li><a href="#collection" class="hover:text-amber-400 transition-colors">Limited Editions</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase mb-4 text-zinc-200">Boutique</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#heritage" class="hover:text-amber-400 transition-colors">Our Heritage</a></li>
+                        <li><a href="#appointment" class="hover:text-amber-400 transition-colors">Private Salons</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition-colors">Authentication & Servicing</a></li>
+                        <li><a href="#appointment" class="hover:text-amber-400 transition-colors">Concierge Desk</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-[10px] font-semibold tracking-[0.2em] uppercase mb-4 text-zinc-200">Flagship Salon</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li class="flex items-start">
+                            <svg class="h-4 w-4 mr-2 text-amber-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Rue du Rhône 42, 1204 Genève, Switzerland
+                        </li>
+                        <li class="flex items-center mt-2">
+                            <svg class="h-4 w-4 mr-2 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            +41 22 819 4000
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] font-light uppercase tracking-[0.2em] text-zinc-600">
+                <p>&copy; 2026 Aethel & Co. Horology. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-zinc-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-zinc-400 transition-colors">Terms of Authenticity</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

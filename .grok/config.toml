@@ -1,0 +1,13 @@
+﻿# Grok project configuration
+# MCP servers here apply to this workspace only.
+
+[mcp_servers.xai-docs]
+url = "https://docs.x.ai/api/mcp"
+enabled = true
+
+[mcp_servers.filesystem]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem", "C:/Users/EliteHp/Downloads/chatbot-template"]
+enabled = true
+startup_timeout_sec = 30
+tool_timeout_sec = 6000

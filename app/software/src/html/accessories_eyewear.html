@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMEN & LENS | Handcrafted Luxury Eyewear & Accessories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                    },
+                    colors: {
+                        lumenBg: '#FBF9F5',       /* Warm alabaster cream */
+                        lumenCard: '#F4EFE6',     /* Soft parchment tone */
+                        lumenDark: '#1E1B18',     /* Deep rich espresso */
+                        lumenGold: '#C5A880',     /* Brushed antique gold */
+                        lumenMuted: '#7A736B',    /* Warm stone gray */
+                        lumenAccent: '#3A4D39',   /* Deep botanical olive */
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-lumenBg text-lumenDark font-sans antialiased selection:bg-lumenGold selection:text-lumenDark">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-lumenBg/90 backdrop-blur-md border-b border-lumenDark/10">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="flex flex-col">
+                <span class="font-serif tracking-[0.25em] text-xl font-bold text-lumenDark">LUMEN & LENS</span>
+                <span class="text-[9px] uppercase tracking-[0.4em] text-lumenMuted font-medium">Eyewear & Accessories</span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-10 text-xs font-medium uppercase tracking-[0.25em] text-lumenDark/80">
+                <a href="#collection" class="hover:text-lumenGold transition-colors">Optical Frames</a>
+                <a href="#sunglasses" class="hover:text-lumenGold transition-colors">Sunwear</a>
+                <a href="#craft" class="hover:text-lumenGold transition-colors">Japanese Acetate</a>
+                <a href="#accessories" class="hover:text-lumenGold transition-colors">Leather Goods</a>
+            </nav>
+
+            <div class="flex items-center space-x-6">
+                <button onclick="openModal('Virtual Try-On Suite')" class="hidden sm:inline-block text-xs uppercase tracking-[0.2em] font-medium text-lumenDark hover:text-lumenGold transition-colors">
+                    Virtual Try-On
+                </button>
+                <a href="#collection" class="bg-lumenDark hover:bg-lumenAccent text-lumenBg px-6 py-3 text-[10px] uppercase tracking-[0.2em] font-semibold transition-all rounded-full">
+                    Shop Collection
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="overflow-hidden pt-24">
+        <section class="relative min-h-[90vh] flex items-center justify-center px-6 py-20 bg-lumenBg">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-8 z-10">
+                    <span class="inline-block text-[10px] font-semibold uppercase tracking-[0.4em] text-lumenGold bg-lumenGold/10 border border-lumenGold/30 px-4 py-2 rounded-full">
+                        Handcrafted in Sabae, Japan
+                    </span>
+                    <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl tracking-wide font-normal leading-[1.1]">
+                        The Art of <br><span class="italic font-light text-lumenGold">Uncompromising</span> Vision.
+                    </h1>
+                    <p class="text-lumenMuted text-sm sm:text-base max-w-lg font-light leading-relaxed">
+                        Meticulously carved from organic cellulose acetate and fitted with anti-reflective polarized mineral glass lenses. Designed for clarity, tailored for distinction.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-5 pt-4">
+                        <a href="#collection" class="bg-lumenDark hover:bg-lumenAccent text-lumenBg text-center px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold transition-all rounded-full shadow-lg">
+                            Explore Frames
+                        </a>
+                        <button onclick="openModal('Prescription Consultation')" class="border border-lumenDark/20 hover:border-lumenGold text-lumenDark text-center px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold transition-all rounded-full">
+                            Book Eye Exam
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-5 relative">
+                    <div class="relative h-[480px] sm:h-[540px] rounded-3xl overflow-hidden shadow-2xl border border-lumenDark/10">
+                        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1000&q=80" alt="Luxury Eyewear Model" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                        <div class="absolute bottom-6 left-6 right-6 bg-lumenDark/80 backdrop-blur-md p-5 rounded-2xl text-lumenBg border border-white/10 flex justify-between items-center">
+                            <div>
+                                <span class="text-[9px] uppercase tracking-[0.3em] text-lumenGold block">Featured Frame</span>
+                                <span class="font-serif text-lg tracking-wide">The Aurelius Tortoise</span>
+                            </div>
+                            <span class="font-serif text-lumenGold text-lg">$340</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="craft" class="py-24 px-6 bg-lumenCard border-y border-lumenDark/10">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto space-y-4 mb-16">
+                    <span class="text-[10px] uppercase tracking-[0.4em] font-semibold text-lumenGold">The Luminary Standard</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl tracking-wide">Four Decades of Optical Mastery</h2>
+                    <p class="text-xs text-lumenMuted tracking-wider uppercase">Each frame undergoes 250 distinct manual steps over 90 days.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-lumenBg p-8 rounded-3xl border border-lumenDark/10 space-y-4">
+                        <span class="text-lumenGold font-serif text-2xl font-bold">01</span>
+                        <h3 class="font-serif text-xl">Japanese Cellulose Acetate</h3>
+                        <p class="text-xs text-lumenMuted font-light leading-relaxed">
+                            Plant-based cotton and tree pulp derivatives cured for months to achieve hypoallergenic depth, rich luster, and supreme flexibility.
+                        </p>
+                    </div>
+                    <div class="bg-lumenBg p-8 rounded-3xl border border-lumenDark/10 space-y-4">
+                        <span class="text-lumenGold font-serif text-2xl font-bold">02</span>
+                        <h3 class="font-serif text-xl">Titanium Core Wire</h3>
+                        <p class="text-xs text-lumenMuted font-light leading-relaxed">
+                            Laser-engraved titanium reinforcement stems embedded in every temple arm for permanent structural adjustment and weightless durability.
+                        </p>
+                    </div>
+                    <div class="bg-lumenBg p-8 rounded-3xl border border-lumenDark/10 space-y-4">
+                        <span class="text-lumenGold font-serif text-2xl font-bold">03</span>
+                        <h3 class="font-serif text-xl">Mineral Glass Lenses</h3>
+                        <p class="text-xs text-lumenMuted font-light leading-relaxed">
+                            Scratch-resistant optical grade glass with multi-layer anti-reflective and oleophobic coatings providing 100% UV400 protection.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="collection" class="py-24 px-6 bg-lumenBg">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-lumenDark/10 pb-6">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-[0.3em] font-semibold text-lumenGold">Curated Catalogue</span>
+                        <h2 class="font-serif text-3xl sm:text-5xl tracking-wide mt-2">Optical & Sunwear</h2>
+                    </div>
+                    <div class="flex space-x-4 mt-6 md:mt-0 text-xs uppercase tracking-widest">
+                        <button onclick="filterFrames('all')" class="text-lumenDark font-semibold border-b border-lumenDark pb-1">All Models</button>
+                        <button onclick="filterFrames('optical')" class="text-lumenMuted hover:text-lumenDark transition-colors pb-1">Optical</button>
+                        <button onclick="filterFrames('sun')" class="text-lumenMuted hover:text-lumenDark transition-colors pb-1">Sunglasses</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="group bg-lumenCard rounded-3xl overflow-hidden border border-lumenDark/10 hover:border-lumenGold transition-all duration-300">
+                        <div class="h-[340px] bg-lumenBg overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=800&q=80" alt="The Cassian" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-lumenDark text-lumenBg text-[9px] uppercase tracking-[0.2em] px-3 py-1 font-semibold rounded-full">Bestseller</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-serif text-lg">The Cassian</h3>
+                                    <p class="text-xs text-lumenMuted tracking-wider mt-1">Brushed Champagne / Crystal</p>
+                                </div>
+                                <span class="font-serif text-lg font-semibold text-lumenGold">$320</span>
+                            </div>
+                            <button onclick="showNotification('Added The Cassian to your cart.')" class="w-full bg-lumenDark text-lumenBg hover:bg-lumenAccent py-3.5 text-[10px] uppercase tracking-[0.2em] font-semibold transition-colors rounded-full">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="group bg-lumenCard rounded-3xl overflow-hidden border border-lumenDark/10 hover:border-lumenGold transition-all duration-300">
+                        <div class="h-[340px] bg-lumenBg overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80" alt="Solstice Aviator" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-lumenGold text-lumenDark text-[9px] uppercase tracking-[0.2em] px-3 py-1 font-semibold rounded-full">Polarized Sun</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-serif text-lg">Solstice Aviator</h3>
+                                    <p class="text-xs text-lumenMuted tracking-wider mt-1">Matte Black / Gradient Smoke</p>
+                                </div>
+                                <span class="font-serif text-lg font-semibold text-lumenGold">$380</span>
+                            </div>
+                            <button onclick="showNotification('Added Solstice Aviator to your cart.')" class="w-full bg-lumenDark text-lumenBg hover:bg-lumenAccent py-3.5 text-[10px] uppercase tracking-[0.2em] font-semibold transition-colors rounded-full">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="group bg-lumenCard rounded-3xl overflow-hidden border border-lumenDark/10 hover:border-lumenGold transition-all duration-300">
+                        <div class="h-[340px] bg-lumenBg overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=800&q=80" alt="Vesper Round" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-4 left-4 bg-lumenDark text-lumenBg text-[9px] uppercase tracking-[0.2em] px-3 py-1 font-semibold rounded-full">New Release</span>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-serif text-lg">Vesper Round</h3>
+                                    <p class="text-xs text-lumenMuted tracking-wider mt-1">Japanese Tortoise / Olive</p>
+                                </div>
+                                <span class="font-serif text-lg font-semibold text-lumenGold">$350</span>
+                            </div>
+                            <button onclick="showNotification('Added Vesper Round to your cart.')" class="w-full bg-lumenDark text-lumenBg hover:bg-lumenAccent py-3.5 text-[10px] uppercase tracking-[0.2em] font-semibold transition-colors rounded-full">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="accessories" class="py-24 px-6 bg-lumenCard border-t border-lumenDark/10">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative h-[420px] rounded-3xl overflow-hidden border border-lumenDark/10">
+                    <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=1000&q=80" alt="Handcrafted Leather Eyewear Case" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-6">
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.4em] text-lumenGold">Complementary Craft</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl tracking-wide">Handcrafted Tuscan Leather Accessories</h2>
+                    <p class="text-lumenMuted text-sm font-light leading-relaxed">
+                        Protect your frames with vegetable-tanned full-grain leather cases, silk microfiber pouches, and solid brass chains forged by master artisans in Florence.
+                    </p>
+                    <ul class="space-y-3 text-xs uppercase tracking-widest text-lumenDark font-medium">
+                        <li class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-lumenGold"></span>
+                            <span>Vegetable-Tanned Italian Calfskin</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-lumenGold"></span>
+                            <span>Hand-Polished Solid Brass Hardware</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="w-2 h-2 rounded-full bg-lumenGold"></span>
+                            <span>Anti-Static Microfiber Cleaning Cloths Included</span>
+                        </li>
+                    </ul>
+                    <button onclick="openModal('Leather Accessories Catalog')" class="inline-block bg-lumenDark hover:bg-lumenAccent text-lumenBg px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold transition-all rounded-full shadow-lg">
+                        Shop Leather Goods
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 px-6 bg-lumenBg text-center">
+            <div class="max-w-2xl mx-auto space-y-6">
+                <span class="text-[10px] font-semibold uppercase tracking-[0.4em] text-lumenGold">Private Atelier</span>
+                <h2 class="font-serif text-3xl sm:text-4xl tracking-wide">Join the Optical Society</h2>
+                <p class="text-lumenMuted text-xs uppercase tracking-widest">Receive private invitations to seasonal trunk shows and limited small-batch releases.</p>
+                <form class="flex flex-col sm:flex-row gap-4 pt-4 max-w-md mx-auto" onsubmit="event.preventDefault(); showNotification('You have successfully subscribed to the Lumen & Lens Society.');">
+                    <input type="email" placeholder="Enter your email address..." class="bg-lumenCard text-lumenDark text-xs px-6 py-4 border border-lumenDark/20 focus:outline-none focus:border-lumenGold flex-grow rounded-full placeholder-lumenMuted" required>
+                    <button type="submit" class="bg-lumenDark hover:bg-lumenAccent text-lumenBg font-semibold px-8 py-4 text-xs uppercase tracking-[0.2em] transition-colors rounded-full whitespace-nowrap shadow-md">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-lumenDark text-lumenBg py-16 px-6 border-t border-lumenBg/10 text-xs">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="space-y-4">
+                <span class="font-serif tracking-[0.25em] text-lg font-bold block">LUMEN & LENS</span>
+                <p class="text-xs leading-relaxed text-lumenBg/70 font-light">
+                    Handcrafted luxury eyewear and optical accessories bridging Japanese acetate craftsmanship with timeless modernist design.
+                </p>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-lumenGold font-semibold mb-4">Flagship Boutiques</h3>
+                <ul class="space-y-2 text-xs text-lumenBg/80 font-light">
+                    <li>Paris: Rue Saint-Honoré</li>
+                    <li>Tokyo: Omotesando Hills</li>
+                    <li>New York: Greene Street, Soho</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-lumenGold font-semibold mb-4">Client Care</h3>
+                <ul class="space-y-2 text-xs text-lumenBg/80 font-light">
+                    <li><a href="#" class="hover:text-lumenGold transition-colors">Complimentary Adjustments</a></li>
+                    <li><a href="#" class="hover:text-lumenGold transition-colors">Prescription Lens FAQ</a></li>
+                    <li><a href="#" class="hover:text-lumenGold transition-colors">Global Shipping & Returns</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xs uppercase tracking-[0.3em] text-lumenGold font-semibold mb-4">Legal & Privacy</h3>
+                <ul class="space-y-2 text-xs text-lumenBg/80 font-light">
+                    <li><a href="#" class="hover:text-lumenGold transition-colors">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-lumenGold transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-lumenGold transition-colors">Warranty Registration</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-lumenBg/10 flex flex-col md:flex-row justify-between items-center text-[10px] tracking-widest text-lumenBg/60">
+            <p>&copy; 2026 LUMEN & LENS OPTICAL CO. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-lumenGold transition-colors">Instagram</a>
+                <a href="#" class="hover:text-lumenGold transition-colors">Journal</a>
+                <a href="#" class="hover:text-lumenGold transition-colors">Pinterest</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-lumenBg text-lumenDark p-8 rounded-3xl max-w-md w-full mx-4 relative border border-lumenDark/20 shadow-2xl space-y-6">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-lumenMuted hover:text-lumenDark text-sm uppercase tracking-widest font-bold">Close</button>
+            <div id="modalContent" class="space-y-4 pt-4">
+                <!-- Dynamic Modal Content -->
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="fixed bottom-6 right-6 z-50 bg-lumenDark text-lumenBg px-6 py-4 rounded-2xl shadow-2xl border border-white/10 text-xs tracking-wider transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <span id="notificationText">Notification message</span>
+    </div>
+
+    <script>
+        function showNotification(msg) {
+            const notif = document.getElementById('notification');
+            const text = document.getElementById('notificationText');
+            text.innerText = msg;
+            notif.classList.remove('translate-y-20', 'opacity-0');
+            notif.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                notif.classList.remove('translate-y-0', 'opacity-100');
+                notif.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        function openModal(title) {
+            const modal = document.getElementById('modal');
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+                <span class="text-[10px] uppercase tracking-[0.3em] font-semibold text-lumenGold">Boutique Service</span>
+                <h3 class="font-serif text-2xl">${title}</h3>
+                <p class="text-xs text-lumenMuted font-light leading-relaxed">Our optical concierges are ready to assist you with bespoke fitting and consultation.</p>
+                <div class="space-y-4 pt-2">
+                    <input type="text" placeholder="Full Name" class="w-full bg-lumenCard text-lumenDark text-xs px-4 py-3 rounded-xl border border-lumenDark/20 focus:outline-none focus:border-lumenGold">
+                    <input type="email" placeholder="Email Address" class="w-full bg-lumenCard text-lumenDark text-xs px-4 py-3 rounded-xl border border-lumenDark/20 focus:outline-none focus:border-lumenGold">
+                    <button onclick="closeModal(); showNotification('Request received. An optical expert will contact you shortly.');" class="w-full bg-lumenDark hover:bg-lumenAccent text-lumenBg py-3 text-xs uppercase tracking-[0.2em] font-semibold transition-colors rounded-xl shadow-md">
+                        Confirm Request
+                    </button>
+                </div>
+            `;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        function filterFrames(category) {
+            showNotification('Showing ' + category + ' collection.');
+        }
+    </script>
+</body>
+</html>

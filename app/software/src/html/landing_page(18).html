@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE & WOOD | Contemporary Furniture & Interior Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,450;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            200: '#e7e5e4',
+                            800: '#292524',
+                            900: '#1c1917',
+                        },
+                        amber: {
+                            700: '#b45309',
+                            800: '#92400e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#fcfbf9] text-[#2c2a29] font-sans antialiased selection:bg-[#d4b996] selection:text-[#1c1917]">
+
+    <header class="bg-[#fcfbf9]/90 backdrop-blur-md border-b border-[#e7e5e4] sticky top-0 z-50 transition-all">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex justify-between items-center h-24">
+                <div class="flex items-center space-x-3">
+                    <a href="#" class="text-2xl font-serif font-semibold tracking-widest text-[#1c1917]">LUXE<span class="text-[#a37c52] font-light">&amp;</span>WOOD</a>
+                </div>
+                <nav class="hidden md:flex space-x-10 text-sm font-medium tracking-wide text-[#57534e]">
+                    <a href="#collection" class="hover:text-[#1c1917] transition-colors">Collection</a>
+                    <a href="#craftsmanship" class="hover:text-[#1c1917] transition-colors">Craftsmanship</a>
+                    <a href="#calculator" class="hover:text-[#1c1917] transition-colors">Room Planner</a>
+                    <a href="#consultation" class="hover:text-[#1c1917] transition-colors">Interior Design</a>
+                </nav>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#consultation" class="bg-[#1c1917] text-[#fcfbf9] px-7 py-3 rounded-full text-xs uppercase tracking-widest font-semibold hover:bg-[#3d3835] transition-all shadow-sm">Book Studio Visit</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="text-[#1c1917] focus:outline-none" aria-label="Open mobile menu">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="relative bg-[#fcfbf9] py-20 lg:py-32 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-6 space-y-8">
+                        <div class="inline-flex items-center space-x-3 text-xs uppercase tracking-[0.25em] text-[#a37c52] font-semibold">
+                            <span class="w-8 h-[1px] bg-[#a37c52]"></span>
+                            <span>Handcrafted Living 2026</span>
+                        </div>
+                        <h1 class="text-5xl sm:text-7xl font-serif font-normal text-[#1c1917] tracking-tight leading-[1.08]">
+                            Objects of enduring <br><span class="italic font-light">elegance</span> &amp; warmth.
+                        </h1>
+                        <p class="text-[#78716c] text-base sm:text-lg font-light leading-relaxed max-w-lg">
+                            We curate and craft minimalist organic furniture using sustainably sourced timber, tactile linens, and timeless architectural silhouettes designed for mindful sanctuaries.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                            <a href="#collection" class="bg-[#1c1917] text-[#fcfbf9] font-medium px-8 py-4 rounded-full transition-all text-xs uppercase tracking-widest text-center shadow-md hover:bg-[#3d3835]">
+                                Explore Catalog
+                            </a>
+                            <a href="#calculator" class="bg-transparent border border-[#d6d3d1] text-[#1c1917] font-medium px-8 py-4 rounded-full transition-all text-xs uppercase tracking-widest text-center hover:bg-[#f5f5f4]">
+                                Calculate Room Setup
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-6 relative">
+                        <div class="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl bg-[#e7e5e4]">
+                            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80" alt="Minimalist Luxury Sofa" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 bg-white/85 backdrop-blur-md p-6 rounded-2xl border border-white/40 flex justify-between items-center">
+                                <div>
+                                    <span class="text-[10px] uppercase tracking-widest text-[#a37c52] font-semibold block mb-1">Featured Silhouette</span>
+                                    <span class="text-lg font-serif text-[#1c1917]">The Stockholm Lounge Sofa</span>
+                                </div>
+                                <span class="text-sm font-semibold text-[#1c1917]">$2,450</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-[#f5f5f4] border-t border-b border-[#e7e5e4]">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-serif text-[#1c1917] mb-1">100%</div>
+                        <div class="text-[11px] text-[#78716c] uppercase tracking-widest font-medium">Sustainable Oak &amp; Walnut</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-serif text-[#1c1917] mb-1">35 Yrs</div>
+                        <div class="text-[11px] text-[#78716c] uppercase tracking-widest font-medium">Structural Warranty</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-serif text-[#1c1917] mb-1">Bespoke</div>
+                        <div class="text-[11px] text-[#78716c] uppercase tracking-widest font-medium">Custom Dimensions</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-serif text-[#1c1917] mb-1">White Glove</div>
+                        <div class="text-[11px] text-[#78716c] uppercase tracking-widest font-medium">Complimentary Delivery</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="collection" class="py-24 bg-[#fcfbf9]">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#a37c52] font-semibold block mb-2">Curated Catalog</span>
+                        <h2 class="text-4xl font-serif text-[#1c1917]">Sculpted for Daily Living</h2>
+                    </div>
+                    <p class="text-[#78716c] text-sm max-w-sm mt-4 md:mt-0 font-light">
+                        Every piece is meticulously constructed by master cabinet makers using traditional joinery methods.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Item 1 -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[4/5] bg-[#e7e5e4] mb-4">
+                            <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?auto=format&fit=crop&w=800&q=80" alt="Dining Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-[#1c1917]">Dining</div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-xl text-[#1c1917] mb-1">Aarhus Solid Oak Table</h3>
+                                <p class="text-xs text-[#78716c]">Seats up to 8 guests comfortably</p>
+                            </div>
+                            <span class="text-base font-semibold text-[#1c1917]">$1,850</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[4/5] bg-[#e7e5e4] mb-4">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80" alt="Accent Chair" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-[#1c1917]">Seating</div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-xl text-[#1c1917] mb-1">Nordic Bouclé Armchair</h3>
+                                <p class="text-xs text-[#78716c]">High-density foam with textured wool</p>
+                            </div>
+                            <span class="text-base font-semibold text-[#1c1917]">$890</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="group cursor-pointer">
+                        <div class="relative overflow-hidden rounded-2xl aspect-[4/5] bg-[#e7e5e4] mb-4">
+                            <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=800&q=80" alt="Coffee Table" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-[#1c1917]">Living</div>
+                        </div>
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-serif text-xl text-[#1c1917] mb-1">Kobenhavn Walnut Coffee Table</h3>
+                                <p class="text-xs text-[#78716c]">Hand-finished organic contour edge</p>
+                            </div>
+                            <span class="text-base font-semibold text-[#1c1917]">$620</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator" class="py-24 bg-[#f2f0ec]">
+            <div class="max-w-4xl mx-auto px-6 lg:px-12">
+                <div class="bg-white border border-[#e7e5e4] p-8 sm:p-14 rounded-3xl shadow-xl">
+                    <div class="text-center max-w-lg mx-auto mb-12">
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#a37c52] font-semibold block mb-2">Interactive Tool</span>
+                        <h2 class="text-3xl font-serif text-[#1c1917]">Room Package Estimator</h2>
+                        <p class="text-sm text-[#78716c] mt-2 font-light">Select your space type and aesthetic tier to calculate package pricing instantly.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#57534e] mb-2">Room Type</label>
+                                <select id="roomType" class="w-full bg-[#fcfbf9] border border-[#d6d3d1] rounded-xl px-4 py-3.5 text-[#1c1917] text-sm focus:outline-none focus:border-[#1c1917]">
+                                    <option value="living">Living Room Sanctuary</option>
+                                    <option value="dining">Minimalist Dining Suite</option>
+                                    <option value="bedroom">Serene Bedroom Suite</option>
+                                    <option value="office">Executive Home Study</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#57534e] mb-2">Wood Finish</label>
+                                <select id="woodFinish" class="w-full bg-[#fcfbf9] border border-[#d6d3d1] rounded-xl px-4 py-3.5 text-[#1c1917] text-sm focus:outline-none focus:border-[#1c1917]">
+                                    <option value="oak">Danish White Oak</option>
+                                    <option value="walnut">American Black Walnut (+15%)</option>
+                                    <option value="ash">Natural Black Ash</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="bg-[#fcfbf9] p-6 rounded-2xl border border-[#e7e5e4] flex flex-col sm:flex-row items-center justify-between">
+                            <div>
+                                <span class="text-xs uppercase font-mono text-[#78716c]">Estimated Package Total</span>
+                                <div id="calcResult" class="text-3xl font-serif font-semibold text-[#1c1917] mt-1">$4,250</div>
+                            </div>
+                            <a href="#consultation" class="mt-4 sm:mt-0 bg-[#1c1917] text-[#fcfbf9] px-7 py-3.5 rounded-full text-xs uppercase tracking-widest font-semibold hover:bg-[#3d3835] transition-all">
+                                Request Fabric Samples
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="consultation" class="py-24 bg-[#fcfbf9]">
+            <div class="max-w-4xl mx-auto px-6 lg:px-12">
+                <div class="bg-[#f5f5f4] border border-[#e7e5e4] p-8 sm:p-14 rounded-3xl shadow-sm">
+                    <div class="text-center max-w-lg mx-auto mb-12">
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#a37c52] font-semibold block mb-2">Bespoke Guidance</span>
+                        <h2 class="text-3xl font-serif text-[#1c1917]">Schedule a Design Consultation</h2>
+                        <p class="text-sm text-[#78716c] mt-2 font-light">Meet with our interior stylists at our showroom or virtually for floor plan planning.</p>
+                    </div>
+
+                    <form class="space-y-6" onsubmit="event.preventDefault();">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#57534e] mb-2">Your Name</label>
+                                <input type="text" placeholder="Astrid Lindgren" class="w-full bg-white border border-[#d6d3d1] rounded-xl px-4 py-3.5 text-[#1c1917] text-sm focus:outline-none focus:border-[#1c1917]" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#57534e] mb-2">Email Address</label>
+                                <input type="email" placeholder="astrid@example.com" class="w-full bg-white border border-[#d6d3d1] rounded-xl px-4 py-3.5 text-[#1c1917] text-sm focus:outline-none focus:border-[#1c1917]" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#57534e] mb-2">Consultation Format</label>
+                                <select class="w-full bg-white border border-[#d6d3d1] rounded-xl px-4 py-3.5 text-[#1c1917] text-sm focus:outline-none focus:border-[#1c1917]">
+                                    <option>In-Person Showroom Visit</option>
+                                    <option>Virtual Video Consultation</option>
+                                    <option>In-Home Space Planning (Local)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider font-semibold text-[#57534e] mb-2">Phone Number</label>
+                                <input type="tel" placeholder="(555) 432-8765" class="w-full bg-white border border-[#d6d3d1] rounded-xl px-4 py-3.5 text-[#1c1917] text-sm focus:outline-none focus:border-[#1c1917]" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider font-semibold text-[#57534e] mb-2">Project Notes &amp; Dimensions</label>
+                            <textarea rows="4" placeholder="Tell us about your home layout, preferred woods, or items of interest..." class="w-full bg-white border border-[#d6d3d1] rounded-xl px-4 py-3.5 text-[#1c1917] text-sm focus:outline-none focus:border-[#1c1917]"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-[#1c1917] text-[#fcfbf9] py-4 rounded-full font-medium text-xs uppercase tracking-widest hover:bg-[#3d3835] transition-all shadow-md">
+                            Confirm Appointment Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#1c1917] text-[#a8a29e] border-t border-[#292524]">
+        <div class="max-w-7xl mx-auto py-16 px-6 lg:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="text-2xl font-serif tracking-widest text-[#fcfbf9] block mb-4">LUXE<span class="text-[#a37c52] font-light">&amp;</span>WOOD</span>
+                    <p class="text-xs font-light leading-relaxed text-[#78716c]">
+                        Crafting timeless furniture silhouettes and Scandinavian interiors for mindful living spaces across the globe.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest mb-4 text-[#fcfbf9]">Showrooms</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#" class="hover:text-[#fcfbf9] transition-colors">Copenhagen Flagship</a></li>
+                        <li><a href="#" class="hover:text-[#fcfbf9] transition-colors">Stockholm Design Hub</a></li>
+                        <li><a href="#" class="hover:text-[#fcfbf9] transition-colors">New York Tribeca Studio</a></li>
+                        <li><a href="#" class="hover:text-[#fcfbf9] transition-colors">Tokyo Aoyama Atelier</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest mb-4 text-[#fcfbf9]">Client Care</h3>
+                    <ul class="space-y-3 font-light text-xs">
+                        <li><a href="#" class="hover:text-[#fcfbf9] transition-colors">Wood Care &amp; Maintenance</a></li>
+                        <li><a href="#" class="hover:text-[#fcfbf9] transition-colors">White Glove Delivery</a></li>
+                        <li><a href="#" class="hover:text-[#fcfbf9] transition-colors">Warranty Registration</a></li>
+                        <li><a href="#" class="hover:text-[#fcfbf9] transition-colors">Trade Program</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest mb-4 text-[#fcfbf9]">Atelier Journal</h3>
+                    <p class="text-xs font-light text-[#78716c] mb-4">Subscribe for seasonal lookbooks and private preview access.</p>
+                    <form class="flex" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Enter your email" class="bg-[#292524] text-xs text-white px-4 py-3 rounded-l-xl focus:outline-none w-full border border-[#44403c]">
+                        <button type="submit" class="bg-[#a37c52] text-white px-4 rounded-r-xl text-xs uppercase font-semibold hover:bg-[#8f6b44] transition-all">Join</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-[#292524] pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-[#78716c]">
+                <p>&copy; 2026 Luxe &amp; Wood Atelier Inc. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-[#fcfbf9] transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-[#fcfbf9] transition-colors">Terms of Atelier</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const roomSelect = document.getElementById('roomType');
+        const woodSelect = document.getElementById('woodFinish');
+        const calcResult = document.getElementById('calcResult');
+
+        function updateEstimator() {
+            const room = roomSelect.value;
+            const wood = woodSelect.value;
+            
+            let base = 3800;
+            if (room === 'dining') base = 4200;
+            if (room === 'bedroom') base = 3400;
+            if (room === 'office') base = 2900;
+
+            let multiplier = 1;
+            if (wood === 'walnut') multiplier = 1.15;
+            if (wood === 'ash') multiplier = 0.95;
+
+            const total = Math.round(base * multiplier);
+            calcResult.textContent = '$' + total.toLocaleString();
+        }
+
+        roomSelect.addEventListener('change', updateEstimator);
+        woodSelect.addEventListener('change', updateEstimator);
+        updateEstimator();
+    </script>
+</body>
+</html>

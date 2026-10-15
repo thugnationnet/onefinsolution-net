@@ -1,0 +1,8 @@
+{
+  "name": "One Fin Software — Website Templates & Digital Products",
+  "description": "Production-ready website templates, dashboards, mobile UI kits, and custom software engineering with live full-page previews and single-file HTML downloads.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
