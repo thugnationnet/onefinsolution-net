@@ -1,8 +1,11 @@
 -- Durable Stripe webhook event ledger / inbox.
 -- Unique Stripe event IDs with processing state for idempotent delivery handling.
 -- Backward-compatible: new table only; no changes to existing billing tables.
+-- Idempotent: safe to re-run.
 
-create table stripe_webhook_events (
+begin;
+
+create table if not exists stripe_webhook_events (
   event_id text primary key,
   event_type text not null,
   livemode boolean not null,
@@ -16,5 +19,7 @@ create table stripe_webhook_events (
     check (status <> 'processed' or processed_at is not null)
 );
 
-create index stripe_webhook_events_status_updated_idx
+create index if not exists stripe_webhook_events_status_updated_idx
   on stripe_webhook_events (status, updated_at);
+
+commit;

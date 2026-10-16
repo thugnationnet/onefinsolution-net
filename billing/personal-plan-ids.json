@@ -1,16 +1,17 @@
 {
-  "accountId": "",
+  "accountId": "acct_1UQwSFCuXwkNn7VQ",
   "mode": "test",
   "prices": {
-    "daily": "",
-    "weekly": "",
-    "monthly": "",
-    "yearly": ""
+    "daily": "price_1UR1KrCuXwkNn7VQfjxlX0qn",
+    "weekly": "price_1UR1KsCuXwkNn7VQ8eT7QYDJ",
+    "monthly": "price_1UR1KtCuXwkNn7VQdMQfZUqi",
+    "yearly": "price_1UR1KtCuXwkNn7VQKUCm0HHJ"
   },
   "lookups": {
     "daily": "onefin_v2_daily",
     "weekly": "onefin_v2_weekly",
     "monthly": "onefin_v2_monthly",
     "yearly": "onefin_v2_yearly"
-  }
+  },
+  "site": "https://onefinsolution.net"
 }
