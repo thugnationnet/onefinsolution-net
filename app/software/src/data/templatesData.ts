@@ -5,6 +5,8 @@ export interface TemplateProduct {
   name: string;
   subtitle: string;
   price: number;
+  /** USD dollars (same as price; used by billing). */
+  priceUsd?: number;
   category: 'website' | 'dashboard' | 'commerce' | 'mobile' | 'saas';
   categoryLabel: string;
   format: string;
@@ -21,6 +23,7 @@ export interface TemplateProduct {
 }
 
 export const TEMPLATES: TemplateProduct[] = [
+  // STOREFRONT_TEMPLATES alias exported below for billing resolution
   {
     id: 'luma',
     name: 'Luma Creative Studio',
@@ -1133,7 +1136,7 @@ function templatePriceUsd(_filename: string, index: number): number {
   return TEMPLATE_PRICE_TIERS[index % TEMPLATE_PRICE_TIERS.length]!;
 }
 
-export const STOREFRONT_TEMPLATES: TemplateProduct[] = HTML_TEMPLATE_FILES.map((filename, index) => {
+export const HTML_STOREFRONT_TEMPLATES: TemplateProduct[] = HTML_TEMPLATE_FILES.map((filename, index) => {
   const category = templateCategory(filename);
   const name = templateNameFromFilename(filename);
   return {
@@ -1249,3 +1252,6 @@ export function generateMasterLandingHtml(): string {
 </body>
 </html>`;
 }
+
+/** Curated purchasable templates (billing / checkout allowlist). */
+export const STOREFRONT_TEMPLATES = TEMPLATES;

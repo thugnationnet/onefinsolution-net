@@ -1,5 +1,5 @@
 import { softwareCatalog } from '@/app/software/src/data/catalog';
-import { STOREFRONT_TEMPLATES } from '@/app/software/src/data/templatesData';
+import { TEMPLATES as STOREFRONT_TEMPLATES, HTML_STOREFRONT_TEMPLATES } from '@/app/software/src/data/templatesData';
 
 export type SoftwarePurchaseKind = 'template' | 'software';
 
@@ -80,9 +80,11 @@ export function getSoftwarePurchaseItem(
   if (!id || (kind !== 'template' && kind !== 'software')) return null;
 
   if (kind === 'template') {
-    const template = STOREFRONT_TEMPLATES.find((item) => item.id === id);
+    const template =
+      STOREFRONT_TEMPLATES.find((item) => item.id === id) ||
+      HTML_STOREFRONT_TEMPLATES.find((item) => item.id === id);
     if (!template) return null;
-    const priceCents = template.price * 100;
+    const priceCents = Math.round(Number(template.price) * 100);
     return {
       kind,
       id: template.id,
@@ -96,7 +98,15 @@ export function getSoftwarePurchaseItem(
 
   const product = softwareCatalog.find((item) => item.id === id);
   if (!product) return null;
-  const priceCents = product.priceUsd * 100;
+  const priceUsd =
+    typeof (product as { priceUsd?: number }).priceUsd === 'number'
+      ? (product as { priceUsd: number }).priceUsd
+      : typeof (product as { price?: number }).price === 'number'
+        ? (product as { price: number }).price
+        : NaN;
+  if (!Number.isFinite(priceUsd) || priceUsd <= 0) return null;
+
+  const priceCents = Math.round(priceUsd * 100);
   return {
     kind,
     id: product.id,

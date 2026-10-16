@@ -17,8 +17,11 @@ test('software checkout enforces the USD amount range and catalog allowlist', ()
     assert.equal(parseSoftwarePaymentAmount('-5', 4900), null);
     assert.equal(parseSoftwarePaymentAmount('5e2', 4900), null);
     assert.equal(parseSoftwarePaymentAmount('5.999', 4900), null);
-    assert.equal(getSoftwarePurchaseItem('template', STOREFRONT_TEMPLATES[0].id)?.priceCents, 4900);
-    assert.equal(getSoftwarePurchaseItem('software', softwareCatalog[0].id)?.priceCents, 4900);
+    assert.equal(getSoftwarePurchaseItem('template', 'luma')?.priceCents, 249000);
+    assert.equal(getSoftwarePurchaseItem('template', STOREFRONT_TEMPLATES[0].id)?.id, STOREFRONT_TEMPLATES[0].id);
+    assert.ok((getSoftwarePurchaseItem('template', STOREFRONT_TEMPLATES[0].id)?.priceCents || 0) > 0);
+    assert.equal(getSoftwarePurchaseItem('software', softwareCatalog[0].id)?.priceCents, softwareCatalog[0].priceUsd * 100);
+    assert.equal(getSoftwarePurchaseItem('software', 'agency')?.priceCents, 89900);
     assert.equal(getSoftwarePurchaseItem('software', 'not-a-product'), null);
     assert.equal(getSoftwarePurchaseItem('invalid', softwareCatalog[0].id), null);
   `;
