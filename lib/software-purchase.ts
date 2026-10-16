@@ -96,12 +96,10 @@ export function getSoftwarePurchaseItem(
 
   const product = softwareCatalog.find((item) => item.id === id);
   if (!product) return null;
+  // Software catalog uses priceUsd (USD). Avoid unsafe casts that fail under
+  // strict TS when SoftwareProduct has no `price` field.
   const priceUsd =
-    typeof (product as { priceUsd?: number }).priceUsd === 'number'
-      ? (product as { priceUsd: number }).priceUsd
-      : typeof (product as { price?: number }).price === 'number'
-        ? (product as { price: number }).price
-        : NaN;
+    typeof product.priceUsd === 'number' ? product.priceUsd : Number.NaN;
   if (!Number.isFinite(priceUsd) || priceUsd <= 0) return null;
 
   const priceCents = Math.round(priceUsd * 100);
