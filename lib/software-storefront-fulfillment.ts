@@ -1,5 +1,6 @@
 import 'server-only';
 import Stripe from 'stripe';
+import { normalizeBillingCurrency } from '@/lib/billing-currency';
 import { query, transaction } from '@/lib/db';
 import { sendBillingEmail, sendSoftwarePurchaseEmail, sendSoftwarePaymentFailedEmail, emailConfigured } from '@/lib/email';
 import {
@@ -73,7 +74,7 @@ export async function fulfillSoftwareStorefrontPayment(stripe: Stripe, event: St
   if (
     !item ||
     !stripeObjectMatchesMode(intent.livemode) ||
-    intent.currency !== 'usd' ||
+    !normalizeBillingCurrency(intent.currency) ||
     attemptAmount < 500 ||
     !metadata.user_id ||
     !metadata.purchase_id ||

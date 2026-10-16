@@ -3,6 +3,7 @@
 import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
 import Stripe from 'stripe';
+import { resolvePresentmentCurrency, convertUsdCentsToCurrency } from '@/lib/billing-currency';
 import { currentUser } from '@/lib/session';
 import { query } from '@/lib/db';
 import { throttle } from '@/lib/auth-service';
@@ -28,6 +29,22 @@ const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 
 const stripeId = (value: string | { id: string } | null) => typeof value === 'string' ? value : value?.id || null;
+
+
+async function softwareChargeAmount(
+  stripe: Stripe,
+  usdCents: number,
+  opts?: { paymentMethodCountry?: string | null },
+) {
+  const currency = await resolvePresentmentCurrency(stripe, {
+    paymentMethodCountry: opts?.paymentMethodCountry || null,
+  });
+  return {
+    amount: convertUsdCentsToCurrency(usdCents, currency),
+    currency,
+    usdCents,
+  };
+}
 
 export async function createSoftwarePaymentIntent(input: {
   kind: string;
@@ -130,35 +147,47 @@ export async function createSoftwarePaymentIntent(input: {
       };
     }
 
-    let intent: Stripe.PaymentIntent;
+    let intent: Stripe.PaymentIntent | null = null;
+    const __charge = await softwareChargeAmount(stripe, amountCents);
     if (purchase.stripe_payment_intent_id && purchase.status === 'pending' && purchase.amount_paid_cents === 0) {
-      // Reuse only the original pending deposit PI (idempotent retry), not later installments.
-      intent = await stripe.paymentIntents.retrieve(purchase.stripe_payment_intent_id);
+      const existing = await stripe.paymentIntents.retrieve(purchase.stripe_payment_intent_id);
       if (
-        intent.status === 'requires_payment_method' ||
-        intent.status === 'requires_confirmation' ||
-        intent.status === 'requires_action'
+        existing.status === 'requires_payment_method' ||
+        existing.status === 'requires_confirmation' ||
+        existing.status === 'requires_action'
       ) {
-        if (intent.amount !== amountCents) {
-          intent = await stripe.paymentIntents.update(intent.id, {
-            amount: amountCents,
+        if (existing.currency !== __charge.currency) {
+          try { await stripe.paymentIntents.cancel(existing.id); } catch { /* ignore */ }
+          intent = null;
+        } else if (existing.amount !== __charge.amount) {
+          intent = await stripe.paymentIntents.update(existing.id, {
+            amount: __charge.amount,
             metadata: {
-              ...intent.metadata,
+              ...existing.metadata,
+              presentment_currency: __charge.currency,
+              presentment_amount_cents: String(__charge.amount),
+              amount_usd_cents: String(__charge.usdCents),
               full_price_cents: String(purchase.total_price_cents),
               installment_amount_cents: String(amountCents),
             },
           });
+        } else {
+          intent = existing;
         }
       }
-    } else {
+    }
+    if (!intent || intent.status === 'canceled' || intent.status === 'succeeded') {
       intent = await stripe.paymentIntents.create({
-        amount: amountCents,
-        currency: 'usd',
+        amount: __charge.amount,
+        currency: __charge.currency,
         customer,
         receipt_email: user.email,
         automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
         setup_future_usage: input.savePaymentMethod ? 'off_session' : undefined,
         metadata: {
+          presentment_currency: __charge.currency,
+          presentment_amount_cents: String(__charge.amount),
+          amount_usd_cents: String(__charge.usdCents),
           app: 'onefin-software-store',
           billing_scope: 'software',
           flow: 'software-storefront-checkout',
@@ -184,9 +213,9 @@ export async function createSoftwarePaymentIntent(input: {
     await query(
       `insert into software_storefront_payments(
          purchase_id,user_id,amount_cents,currency,status,stripe_payment_intent_id,initiated_by
-       ) values ($1,$2,$3,'usd','pending',$4,'customer')
+       ) values ($1,$2,$3,$4,'pending',$5,'customer')
        on conflict (stripe_payment_intent_id) do nothing`,
-      [purchase.id, user.id, amountCents, intent.id],
+      [purchase.id, user.id, amountCents, __charge.currency, intent.id],
     );
 
     if (!purchase.stripe_payment_intent_id) {
@@ -197,7 +226,7 @@ export async function createSoftwarePaymentIntent(input: {
       );
     }
 
-    if (!intent.client_secret) return { error: 'Unable to start Software checkout.' };
+    if (!intent.client_secret) return { error: 'Unable to start Software checkout. Please try again.' };
     const saved = await listSoftwarePaymentMethods().catch(() => ({ methods: [] as Array<{ id: string; brand: string; last4: string }> }));
     return {
       savedMethods: [...(saved.methods || [])],
@@ -408,14 +437,18 @@ export async function createSoftwareBalancePaymentIntent(input: {
     const stripe = await verifiedStripe();
     const catalogItem = getSoftwarePurchaseItem(purchase.item_kind, purchase.item_id);
 
+    const __charge = await softwareChargeAmount(stripe, amountCents);
     const intent = await stripe.paymentIntents.create({
-      amount: amountCents,
-      currency: 'usd',
+      amount: __charge.amount,
+      currency: __charge.currency,
       customer,
       receipt_email: user.email,
       automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
       setup_future_usage: input.savePaymentMethod ? 'off_session' : undefined,
       metadata: {
+          presentment_currency: __charge.currency,
+          presentment_amount_cents: String(__charge.amount),
+          amount_usd_cents: String(__charge.usdCents),
         app: 'onefin-software-store',
         billing_scope: 'software',
         flow: 'software-storefront-balance',
@@ -440,9 +473,9 @@ export async function createSoftwareBalancePaymentIntent(input: {
     await query(
       `insert into software_storefront_payments(
          purchase_id,user_id,amount_cents,currency,status,stripe_payment_intent_id,initiated_by
-       ) values ($1,$2,$3,'usd','pending',$4,'customer')
+       ) values ($1,$2,$3,$4,'pending',$5,'customer')
        on conflict (stripe_payment_intent_id) do nothing`,
-      [purchase.id, user.id, amountCents, intent.id],
+      [purchase.id, user.id, amountCents, intent.currency || 'thb', intent.id],
     );
 
     if (!intent.client_secret) return { error: 'Unable to start the balance payment.' };
@@ -689,9 +722,10 @@ export async function createSoftwareRemainingPaymentIntent(input: {
     if (!customer) return { error: 'Software billing account unavailable.' };
     const stripe = await verifiedStripe();
 
+    const __chargeRem = await softwareChargeAmount(stripe, amountCents);
     const intent = await stripe.paymentIntents.create({
-      amount: amountCents,
-      currency: (purchase.currency || 'usd').toLowerCase(),
+      amount: __chargeRem.amount,
+      currency: __chargeRem.currency,
       customer,
       receipt_email: user.email,
       automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
@@ -700,6 +734,9 @@ export async function createSoftwareRemainingPaymentIntent(input: {
         app: 'onefin-software-store',
         billing_scope: 'software',
         flow: 'software-remaining-balance',
+        presentment_currency: __chargeRem.currency,
+        presentment_amount_cents: String(__chargeRem.amount),
+        amount_usd_cents: String(__chargeRem.usdCents),
         user_id: user.id,
         purchase_id: purchase.id,
         item_kind: purchase.item_kind,
@@ -707,10 +744,10 @@ export async function createSoftwareRemainingPaymentIntent(input: {
         agreed_price_cents: String(agreed),
         amount_cents: String(amountCents),
       },
-      description: `Software remaining balance · ${purchase.item_name} · $${(amountCents / 100).toFixed(2)}`,
+      description: `Software remaining balance · ${purchase.item_name} · ${(amountCents / 100).toFixed(2)}`,
     });
 
-    if (!intent.client_secret) return { error: 'Unable to start payment.' };
+    if (!intent.client_secret) return { error: 'Unable to start payment. Please try again.' };
 
     // Optional: confirm immediately with saved method
     if (input.paymentMethodId && input.paymentMethodId.startsWith('pm_')) {

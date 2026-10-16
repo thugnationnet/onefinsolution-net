@@ -1,3 +1,4 @@
+import { friendlyPaymentError } from './billing-currency';
 import 'server-only';
 import { randomUUID } from 'node:crypto';
 import type Stripe from 'stripe';
@@ -6,7 +7,7 @@ import { verifiedStripe } from '@/lib/stripe';
 import { workspaceCustomer } from '@/lib/workspace-stripe';
 import {
   workspaceCreditPack,
-  resolveWorkspaceCreditQuote,
+  resolveWorkspaceCreditQuote, resolveWorkspaceCreditPresentment,
   formatWorkspaceCreditUsd,
 } from '@/lib/workspace-credit-pack';
 import { requireOwnedPaymentMethod } from '@/lib/billing-scope';
@@ -191,16 +192,21 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
 
     let intent: Stripe.PaymentIntent;
     try {
+      const presentment = await resolveWorkspaceCreditPresentment(stripe, {
+        amountCents: reloadQuote.amountCents,
+        allowDefault: true,
+        paymentMethodCountry: paymentMethod.card?.country || null,
+      });
       intent = await stripe.paymentIntents.create(
         {
-          amount: reloadQuote.amountCents,
-          currency: workspaceCreditPack.currency,
+          amount: presentment.presentmentAmountCents,
+          currency: presentment.presentmentCurrency,
           customer: customerId,
           payment_method: paymentMethod.id,
           confirm: true,
           off_session: true,
           // Dashboard/Elements-managed PMs reject error_on_requires_action; status handled below.
-          description: `${reloadQuote.credits} One Fin Workspace credits (auto-reload - ${formatWorkspaceCreditUsd(reloadQuote.amountCents)})`,
+          description: `${reloadQuote.credits} One Fin Workspace credits (auto-reload - ${presentment.label})`,
           metadata: {
             app: 'chatbot-template',
             billing_scope: 'workspace',
@@ -210,14 +216,16 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
             user_id: userId,
             pack_id: reloadQuote.packId,
             amount_cents: String(reloadQuote.amountCents),
+            presentment_amount_cents: String(presentment.presentmentAmountCents),
+            presentment_currency: presentment.presentmentCurrency,
             credits: String(reloadQuote.credits),
-            price_id: reloadQuote.isDefaultPack ? workspaceCreditPack.priceId : '',
+            price_id: presentment.priceId || (reloadQuote.isDefaultPack ? workspaceCreditPack.priceId : ''),
           },
         },
         { idempotencyKey: `workspace-auto-reload:${userId}:${purchaseId}` },
       );
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Auto-reload charge failed.';
+      const message = friendlyPaymentError(error);
       await markAutoReloadFailure(userId, purchaseId, null, message);
       return { attempted: true, charged: false, error: message };
     }

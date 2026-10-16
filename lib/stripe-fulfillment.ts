@@ -6,6 +6,7 @@ import { managedPlan } from './subscription-catalog';
 import { applySoftwareStorefrontRefund } from './software-refund';
 import { queueBillingNotice } from './billing-notices';
 import { priceLabel } from './plans';
+import { normalizeBillingCurrency } from './billing-currency';
 import { stripeObjectMatchesMode } from './billing-environment';
 import { sitePath } from './site-url';
 import { assertWorkspaceCreditAmountCents, creditsFromAmountCents } from './workspace-credit-pack';
@@ -67,7 +68,7 @@ export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
       );
       return;
     }
-    if (intent.status !== 'succeeded' || !stripeObjectMatchesMode(intent.livemode) || intent.currency !== 'usd') {
+    if (intent.status !== 'succeeded' || !stripeObjectMatchesMode(intent.livemode) || !normalizeBillingCurrency(intent.currency)) {
       throw new Error('Unexpected Workspace credit payment.');
     }
     // Load the pending purchase first so flexible $5–$500 amounts are validated against the ledger.
@@ -86,7 +87,14 @@ export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
     if (credits !== creditsFromAmountCents(amountCents)) {
       throw new Error('Workspace credit purchase amount/credits mismatch.');
     }
-    if (intent.amount !== amountCents || intent.amount_received !== amountCents) {
+    const presentmentMeta = Number(intent.metadata?.presentment_amount_cents || 0);
+    const expectedPresentment =
+      presentmentMeta > 0 ? presentmentMeta : intent.currency === 'usd' ? amountCents : null;
+    if (expectedPresentment != null) {
+      if (intent.amount !== expectedPresentment || intent.amount_received !== expectedPresentment) {
+        throw new Error('Workspace credit payment amount mismatch.');
+      }
+    } else if (!intent.amount_received || intent.amount_received <= 0) {
       throw new Error('Workspace credit payment amount mismatch.');
     }
     // Metadata credits must match when present (auto-reload + manual).
@@ -162,7 +170,7 @@ export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
   } else if (['checkout.session.completed', 'checkout.session.async_payment_succeeded'].includes(event.type)) {
     const session = await stripe.checkout.sessions.retrieve((event.data.object as Stripe.Checkout.Session).id);
     if (session.metadata?.app !== 'chatbot-template' || session.mode !== 'payment' || session.payment_status !== 'paid') return;
-    if (!stripeObjectMatchesMode(session.livemode) || session.currency !== 'usd') throw new Error('Unexpected checkout currency or mode.');
+    if (!stripeObjectMatchesMode(session.livemode) || !normalizeBillingCurrency(session.currency)) throw new Error('Unexpected checkout currency or mode.');
     const user = await owner(session.customer, 'workspace');
     for await (const item of stripe.checkout.sessions.listLineItems(session.id, { limit: 100 })) {
       if (!item.price) throw new Error('Missing price.');
@@ -183,7 +191,7 @@ export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
     if (!invoiceId) throw new Error('Missing invoice ID.');
     const invoice = await stripe.invoices.retrieve(invoiceId);
     if (invoice.parent?.subscription_details?.metadata?.app !== 'chatbot-template') return;
-    if (!stripeObjectMatchesMode(invoice.livemode) || invoice.status !== 'paid' || invoice.currency !== 'usd') throw new Error('Unexpected invoice.');
+    if (!stripeObjectMatchesMode(invoice.livemode) || invoice.status !== 'paid' || !normalizeBillingCurrency(invoice.currency)) throw new Error('Unexpected invoice.');
     const user = await owner(invoice.customer);
     const source = invoice.parent.subscription_details.subscription;
     const subscriptionId = typeof source === 'string' ? source : source?.id;

@@ -11,6 +11,7 @@ import { fulfillStripeEvent } from './stripe-fulfillment';
 import { siteUrl } from './site-url';
 import { expectedStripeLivemode, stripeObjectMatchesMode } from './billing-environment';
 import type { Price, Product, ProductWithPrices, Subscription } from '@/types/billing';
+import { resolvePresentmentCurrency } from './billing-currency';
 
 function priceView(price: Stripe.Price): Price {
   return { id: price.id, type: price.recurring ? 'recurring' : 'one-time', currency: price.currency,
@@ -48,7 +49,7 @@ async function catalog() {
   for (const id of ids) {
     const price = await stripe.prices.retrieve(id, { expand: ['product'] });
     const product = price.product as Stripe.Product;
-    if (!stripeObjectMatchesMode(price.livemode) || !price.active || price.currency !== 'usd' || price.unit_amount === null || product.deleted || !product.active) throw new Error('Configured catalog contains an unavailable price.');
+    if (!stripeObjectMatchesMode(price.livemode) || !price.active || !['usd','thb'].includes(String(price.currency||'').toLowerCase()) || price.unit_amount === null || product.deleted || !product.active) throw new Error('Configured catalog contains an unavailable price.');
     const plan = creditPlans()[id];
     if (price.recurring || plan.kind !== 'pack') throw new Error('Workspace credit packs must use one-time Stripe prices.');
     const existing = products.get(product.id) || { ...productView(product), prices: [] };
@@ -122,13 +123,15 @@ export async function schedulePlanChange(planSelection: string) {
     const selectedPrice=await stripe.prices.retrieve(planSelection);
     const selectedPlan=managedPlan(selectedPrice);
     if(!selectedPlan) throw new Error('Choose an available subscription plan.');
-    const approved=await approvedPrice(stripe,selectedPlan.key);
+    const presentmentCurrency=await resolvePresentmentCurrency(stripe);
+    const approved=await approvedPrice(stripe,selectedPlan.key,presentmentCurrency);
     if(approved.id!==selectedPrice.id) throw new Error('This subscription price is no longer available.');
     planKey=selectedPlan.key;
   }
   const plan=findPlan(planKey),customer=await currentCustomer();
   if(!customer) throw new Error('No subscription found.');
-  const price=await approvedPrice(stripe,planKey);
+  const presentmentCurrency=await resolvePresentmentCurrency(stripe);
+  const price=await approvedPrice(stripe,planKey,presentmentCurrency);
   return transaction(async client=>{
     await client.query('select id from app_users where id=$1 for update',[user.id]);
     const list=await stripe.subscriptions.list({customer,status:'all',limit:100});

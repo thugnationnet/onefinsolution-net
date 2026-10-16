@@ -4,6 +4,7 @@ import { query, transaction } from './db';
 import { verifiedStripe } from './stripe';
 import { currentCustomer } from './stripe-billing';
 import { approvedPrice } from './subscription-catalog';
+import { resolvePresentmentCurrency } from './billing-currency';
 import { findPlan } from './plans';
 import { privateHash } from './abuse-identity';
 import { fulfillStripeEvent } from './stripe-fulfillment';
@@ -20,7 +21,8 @@ export async function prepareEnrollment(userId:string, key:string, mode:'trial'|
   if(key==='custom') throw new Error('Custom plans are arranged with our team. Choose a standard plan or contact support.');
   findPlan(key);
   const stripe=await verifiedStripe(),customer=await currentCustomer(true);
-  const price=await approvedPrice(stripe,key);
+  const presentmentCurrency=await resolvePresentmentCurrency(stripe);
+  const price=await approvedPrice(stripe,key,presentmentCurrency);
   const [resume]=await query<Enrollment>('select * from billing_enrollments where user_id=$1 and plan_key=$2 and mode=$3',[userId,key,mode]);
   if(resume?.consent_at && resume.setup_id && !resume.subscription_id) {
     const setup=await stripe.setupIntents.retrieve(resume.setup_id);
@@ -66,7 +68,12 @@ export async function completeEnrollment(userId: string, setupId: string, consen
     throw new Error('Unable to verify the card for this subscription.');
   }
 
-  const price = await approvedPrice(stripe, initial.plan_key), plan = findPlan(initial.plan_key);
+  // Prefer THB presentment for Thai-issued cards (e.g. Kasikorn) on this TH account.
+  const presentmentCurrency = await resolvePresentmentCurrency(stripe, {
+    paymentMethodCountry: paymentMethod.card?.country || null,
+  });
+  const price = await approvedPrice(stripe, initial.plan_key, presentmentCurrency);
+  const plan = findPlan(initial.plan_key);
 
   // Existing trial fingerprint logic and enrollment commit (preserved exactly)
   const enrollment = await transaction(async client => {

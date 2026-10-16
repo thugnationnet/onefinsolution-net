@@ -1,4 +1,5 @@
 import 'server-only';
+import type Stripe from 'stripe';
 import {
   WORKSPACE_CREDIT_DEFAULT_AMOUNT_CENTS,
   WORKSPACE_CREDIT_MAX_AMOUNT_CENTS,
@@ -9,6 +10,14 @@ import {
   formatWorkspaceCreditUsd,
   resolveWorkspaceCreditAmountCents,
 } from './workspace-credit-limits';
+import {
+  type BillingCurrency,
+  convertUsdCentsToCurrency,
+  formatMoney,
+  normalizeBillingCurrency,
+  priceLookupKeyForCurrency,
+  resolvePresentmentCurrency,
+} from './billing-currency';
 
 export {
   WORKSPACE_CREDIT_DEFAULT_AMOUNT_CENTS,
@@ -92,3 +101,89 @@ export function resolveWorkspaceCreditQuote(input?: {
     packId: isDefaultPack ? pack.id : `workspace_credits_custom_${amountCents}`,
   };
 }
+
+export type WorkspaceCreditPresentmentQuote = WorkspaceCreditQuote & {
+  /** Presentment minor units actually charged on the PaymentIntent. */
+  presentmentAmountCents: number;
+  presentmentCurrency: BillingCurrency;
+  /** USD baseline kept for credits math / DB. */
+  usdAmountCents: number;
+  priceId?: string;
+  label: string;
+};
+
+/**
+ * Adaptive presentment for Workspace credit charges.
+ * Credits always derive from USD baseline; PI currency follows account/card.
+ */
+export async function resolveWorkspaceCreditPresentment(
+  stripe: Stripe,
+  input?: {
+    amountUsd?: number | string | null;
+    amountCents?: number | string | null;
+    allowDefault?: boolean;
+    preferredCurrency?: string | null;
+    paymentMethodCountry?: string | null;
+  },
+): Promise<WorkspaceCreditPresentmentQuote> {
+  const base = resolveWorkspaceCreditQuote(input);
+  const presentmentCurrency = await resolvePresentmentCurrency(stripe, {
+    preferred: input?.preferredCurrency,
+    paymentMethodCountry: input?.paymentMethodCountry,
+  });
+  const presentmentAmountCents = convertUsdCentsToCurrency(base.amountCents, presentmentCurrency);
+
+  let priceId: string | undefined;
+  if (base.isDefaultPack) {
+    const baseLookup = 'onefin_credits_50';
+    const lookup = priceLookupKeyForCurrency(baseLookup, presentmentCurrency);
+    try {
+      const listed = await stripe.prices.list({ lookup_keys: [lookup], active: true, limit: 1 });
+      if (listed.data[0]) {
+        priceId = listed.data[0].id;
+      } else if (presentmentCurrency !== 'usd') {
+        const usdListed = await stripe.prices.list({
+          lookup_keys: [baseLookup],
+          active: true,
+          limit: 1,
+        });
+        const usdPrice = usdListed.data[0];
+        if (usdPrice?.currency === 'usd' && usdPrice.unit_amount === base.amountCents) {
+          const productId =
+            typeof usdPrice.product === 'string' ? usdPrice.product : usdPrice.product.id;
+          const created = await stripe.prices.create({
+            product: productId,
+            currency: presentmentCurrency,
+            unit_amount: presentmentAmountCents,
+            lookup_key: lookup,
+            transfer_lookup_key: true,
+            nickname: `Workspace 50 credits (${presentmentCurrency.toUpperCase()})`,
+            metadata: {
+              app: 'chatbot-template',
+              billing_scope: 'workspace',
+              kind: 'pack',
+              credits: String(base.credits),
+              baseline_price_id: usdPrice.id,
+              baseline_currency: 'usd',
+              presentment_currency: presentmentCurrency,
+            },
+          });
+          priceId = created.id;
+        }
+      }
+    } catch {
+      /* amount-only PI is acceptable */
+    }
+  }
+
+  return {
+    ...base,
+    presentmentAmountCents,
+    presentmentCurrency,
+    usdAmountCents: base.amountCents,
+    priceId,
+    label: formatMoney(presentmentAmountCents, presentmentCurrency),
+  };
+}
+
+export { formatMoney, convertUsdCentsToCurrency, normalizeBillingCurrency };

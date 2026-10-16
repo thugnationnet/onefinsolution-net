@@ -8,7 +8,7 @@ import { verifiedStripe } from '@/lib/stripe';
 import { query } from '@/lib/db';
 import { ensureSignupCredits } from '@/lib/credits';
 import { workspaceCreditCost } from '@/lib/credit-config';
-import { workspaceCreditPack, resolveWorkspaceCreditQuote, assertWorkspaceCreditAmountCents, WORKSPACE_CREDIT_MIN_AMOUNT_CENTS, WORKSPACE_CREDIT_MAX_AMOUNT_CENTS, formatWorkspaceCreditUsd } from '@/lib/workspace-credit-pack';
+import { workspaceCreditPack, resolveWorkspaceCreditQuote, resolveWorkspaceCreditPresentment, assertWorkspaceCreditAmountCents, WORKSPACE_CREDIT_MIN_AMOUNT_CENTS, WORKSPACE_CREDIT_MAX_AMOUNT_CENTS, formatWorkspaceCreditUsd } from '@/lib/workspace-credit-pack'
 import {
   readWorkspaceAutoReloadSettings,
   type WorkspaceAutoReloadSettings,
@@ -326,7 +326,15 @@ export async function createWorkspaceCreditPaymentIntent(
       } as const;
     }
 
-    let intentId = purchase.stripe_payment_intent;
+    // Presentment adapts to account default (THB) / Thai cards so local debit cards succeed.
+    const presentment = await resolveWorkspaceCreditPresentment(stripe, {
+      amountCents: Number(purchase.amount),
+      allowDefault: true,
+    });
+    const chargeAmount = presentment.presentmentAmountCents;
+    const chargeCurrency = presentment.presentmentCurrency;
+
+    let intentId: string | null = purchase.stripe_payment_intent;
     let clientSecret: string | null = null;
 
     if (intentId) {
@@ -337,15 +345,18 @@ export async function createWorkspaceCreditPaymentIntent(
       if (existing.status === 'succeeded') {
         return { error: 'This purchase was already paid.' } as const;
       }
-      if (
-        existing.amount !== Number(purchase.amount) &&
-        ['requires_payment_method', 'requires_confirmation', 'requires_action'].includes(existing.status)
-      ) {
+      const mutable = ['requires_payment_method', 'requires_confirmation', 'requires_action'].includes(existing.status);
+      if (mutable && existing.currency !== chargeCurrency) {
+        try { await stripe.paymentIntents.cancel(intentId); } catch { /* ignore */ }
+        intentId = null;
+      } else if (mutable && existing.amount !== chargeAmount) {
         const updated = await stripe.paymentIntents.update(intentId, {
-          amount: Number(purchase.amount),
+          amount: chargeAmount,
           metadata: {
             ...(existing.metadata || {}),
             amount_cents: String(purchase.amount),
+            presentment_amount_cents: String(chargeAmount),
+            presentment_currency: chargeCurrency,
             credits: String(purchase.credits),
             pack_id: quote.packId,
           },
@@ -354,10 +365,12 @@ export async function createWorkspaceCreditPaymentIntent(
       } else {
         clientSecret = existing.client_secret;
       }
-    } else {
+    }
+
+    if (!intentId) {
       const intent = await stripe.paymentIntents.create({
-        amount: Number(purchase.amount),
-        currency: 'usd',
+        amount: chargeAmount,
+        currency: chargeCurrency,
         customer,
         receipt_email: user.email,
         automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
@@ -370,9 +383,11 @@ export async function createWorkspaceCreditPaymentIntent(
           purchase_id: purchase.id,
           pack_id: quote.packId,
           amount_cents: String(purchase.amount),
+          presentment_amount_cents: String(chargeAmount),
+          presentment_currency: chargeCurrency,
           credits: String(purchase.credits),
         },
-        description: `Workspace credits · ${purchase.credits} credits (${formatWorkspaceCreditUsd(Number(purchase.amount))})`,
+        description: `Workspace credits · ${purchase.credits} credits (${presentment.label})`,
       });
       intentId = intent.id;
       clientSecret = intent.client_secret;
@@ -385,7 +400,7 @@ export async function createWorkspaceCreditPaymentIntent(
     }
 
     if (!clientSecret || !intentId) {
-      return { error: 'Unable to start Stripe payment.' } as const;
+      return { error: 'Unable to start Stripe payment. Please try again.' } as const;
     }
 
     let savedMethods: Array<{
