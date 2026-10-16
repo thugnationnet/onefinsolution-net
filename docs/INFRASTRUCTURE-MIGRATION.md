@@ -11,6 +11,8 @@ Controlled move of domain and service accounts. Application behavior, schema, pr
 | Stripe webhook | `https://onefinsolution.net/api/stripe/webhook` |
 | Health | `https://onefinsolution.net/api/health` |
 | Email domain | `onefinsolution.net` (Resend) |
+| Railway project | `generous-presence` (`9b0f6fbe-8159-488d-b3de-59d7b7bd194f`) |
+| Stripe account (test) | `acct_1UQwSFCuXwkNn7VQ` |
 
 ## Already handled in repo source
 
@@ -37,13 +39,20 @@ Set in Railway (production) and optionally `.env.local` (developer machines):
 
 Stripe objects **do not** move between accounts.
 
-### Test mode (done locally for (previous Stripe test account — credentials removed))
+### Test mode (current binding — use only these IDs)
 
-1. Keys + `STRIPE_EXPECTED_ACCOUNT_ID` stored only in gitignored `.env.local` (`STRIPE_MODE=test`).
-2. Workspace credit pack provisioned (`npm run stripe:provision -- --apply`).
-3. Personal plans provisioned with lookup keys `onefin_v2_daily|weekly|monthly|yearly` (`npm run stripe:provision:plans -- --apply`).
-4. Webhook endpoint ensured at `https://onefinsolution.net/api/stripe/webhook`; signing secret merged into `.env.local` as `STRIPE_WEBHOOK_SECRET`.
-5. `STRIPE_CREDIT_PLANS` merged into `.env.local` from generated output.
+| Item | Value |
+|------|--------|
+| Stripe account | `acct_1UQwSFCuXwkNn7VQ` |
+| Mode | `test` (`STRIPE_MODE=test`) |
+| Railway project name | `generous-presence` |
+| Railway project ID | `9b0f6fbe-8159-488d-b3de-59d7b7bd194f` |
+
+1. Secret + publishable test keys + `STRIPE_EXPECTED_ACCOUNT_ID=acct_1UQwSFCuXwkNn7VQ` live only in gitignored `.env.local` (and Railway secrets). **Never commit keys.**
+2. Do **not** use any older Stripe account, keys, or price IDs from prior projects.
+3. Products/prices must be provisioned on **this** account (`acct_1UQwSFCuXwkNn7VQ`) under lookup keys `onefin_v2_*` and workspace credit packs.
+4. Price IDs written to gitignored env only — re-provision here; never reuse foreign-account price IDs.
+
 
 ### Railway test-mode cutover (done for proactive-truth)
 
@@ -93,7 +102,7 @@ Verify locally: `npm run email:verify` and `npm run email:test-templates` (requi
 
 | Item | Value |
 |------|--------|
-| Project name | `proactive-truth` |
+| Project name | `generous-presence` (project id `9b0f6fbe-8159-488d-b3de-59d7b7bd194f`) |
 | Project ID | `282c45f7-8064-46cb-9a5d-a7c0084403fd` |
 | Environment | `production` (`1801cc68-16d2-4b82-a93c-0517681c4b55`) |
 | App service | `onefinsolution-com` (`33902053-6c56-447f-b233-081ade1aebdd`) |

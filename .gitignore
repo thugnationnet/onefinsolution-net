@@ -70,3 +70,5 @@ _analyze/
 
 # Windows shell artifact (accidental nul file)
 /nul
+.env.local
+.env*.local
