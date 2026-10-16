@@ -88,3 +88,13 @@ railway-e2e-*.txt
 
 .tmp-dev.*
 rw_vars_tmp.txt
+
+# Stripe Workbench destination dumps (contain secrets — never commit)
+Destination details.txt
+Destination details.txt.txt
+Destination_details.txt
+**/Destination details.txt
+
+.tmp-set-var.env
+.tmp-env.sh
+app/node_modules

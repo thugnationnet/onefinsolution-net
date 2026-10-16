@@ -13,24 +13,30 @@
  * Does NOT print full secrets.
  */
 import Stripe from 'stripe';
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import nextEnv from '@next/env';
 
 nextEnv.loadEnvConfig(process.cwd());
 
 const apply = process.argv.includes('--apply');
+const allowLive = process.argv.includes('--live');
 const site = process.env.NEXT_PUBLIC_SITE_URL || process.env.APP_BASE_URL || 'https://onefinsolution.net';
 const key = process.env.STRIPE_SECRET_KEY || '';
 if (!key.startsWith('sk_test_') && !key.startsWith('sk_live_')) {
   console.error('STRIPE_SECRET_KEY missing or invalid');
   process.exit(1);
 }
-if (process.env.STRIPE_MODE === 'live' || key.startsWith('sk_live_')) {
-  console.error('Refusing to provision against live mode in this script.');
+const isLive = process.env.STRIPE_MODE === 'live' || key.startsWith('sk_live_');
+if (isLive && !allowLive) {
+  console.error('Refusing live mode without --live flag.');
   process.exit(1);
 }
+if (isLive && allowLive) {
+  console.warn('WARNING: provisioning against LIVE Stripe account');
+}
 
-const stripe = new Stripe(key, { apiVersion: '2025-02-24.acacia' });
+const API_VERSION = process.env.STRIPE_API_VERSION || '2026-09-30.endive';
+const stripe = new Stripe(key, { apiVersion: API_VERSION });
 
 const SUB_PLANS = [
   { key: 'daily', name: 'Daily', amount: 500, interval: 'day', trialDays: 1 },
@@ -144,7 +150,7 @@ function report(label, obj) {
 
 async function main() {
   const account = await stripe.accounts.retrieve();
-  report('account', { id: account.id, mode: 'test' });
+  report('account', { id: account.id, mode: isLive ? 'live' : 'test', apiVersion: API_VERSION });
 
   const expected = process.env.STRIPE_EXPECTED_ACCOUNT_ID;
   if (expected && expected !== account.id) {
@@ -287,7 +293,7 @@ async function main() {
 
   const generated = {
     STRIPE_EXPECTED_ACCOUNT_ID: account.id,
-    STRIPE_MODE: 'test',
+    STRIPE_MODE: isLive ? 'live' : 'test',
     STRIPE_CREDIT_PLANS: JSON.stringify(creditPlansEnv),
     STRIPE_SOFTWARE_CATALOG: JSON.stringify(softwareCatalogEnv),
     SUBSCRIPTION_PRICE_IDS: subPrices,
@@ -297,11 +303,12 @@ async function main() {
     writeFileSync('billing/personal-plan-ids.json', JSON.stringify(planIds, null, 2) + '\n');
     writeFileSync('.env.stripe-generated', Object.entries({
       STRIPE_EXPECTED_ACCOUNT_ID: account.id,
-      STRIPE_MODE: 'test',
+      STRIPE_MODE: isLive ? 'live' : 'test',
       STRIPE_CREDIT_PLANS: generated.STRIPE_CREDIT_PLANS,
       STRIPE_SOFTWARE_CATALOG: generated.STRIPE_SOFTWARE_CATALOG,
     }).map(([k, v]) => `${k}=${v}`).join('\n') + '\n');
-    writeFileSync('.tmp_railway/catalog-provision.json', JSON.stringify({
+    mkdirSync('.tmp_railway', { recursive: true });
+  writeFileSync('.tmp_railway/catalog-provision.json', JSON.stringify({
       accountId: account.id,
       subscription: { productId: subProduct.id, prices: subPrices, lookups: subLookups },
       credits: creditPlansEnv,

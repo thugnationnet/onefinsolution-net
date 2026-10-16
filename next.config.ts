@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import path from "node:path";
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -7,13 +6,7 @@ const nextConfig: NextConfig = {
       bodySizeLimit: '6mb',
     },
   },
-  webpack(config) {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      stripe: path.resolve(process.cwd(), 'node_modules/stripe'),
-    };
-    return config;
-  },
+  // Avoid absolute webpack aliases into node_modules (can create phantom App Router paths).
 };
 
 export default nextConfig;

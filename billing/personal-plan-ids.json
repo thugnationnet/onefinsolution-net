@@ -1,11 +1,11 @@
 {
-  "accountId": "acct_1UQwSFCuXwkNn7VQ",
+  "accountId": "acct_1UQwRyCVjGU3nJVo",
   "mode": "test",
   "prices": {
-    "daily": "price_1UR1KrCuXwkNn7VQfjxlX0qn",
-    "weekly": "price_1UR1KsCuXwkNn7VQ8eT7QYDJ",
-    "monthly": "price_1UR1KtCuXwkNn7VQdMQfZUqi",
-    "yearly": "price_1UR1KtCuXwkNn7VQKUCm0HHJ"
+    "daily": "price_1URCXaCVjGU3nJVopP49D6Md",
+    "weekly": "price_1URCXaCVjGU3nJVooB4dEVan",
+    "monthly": "price_1URCXbCVjGU3nJVo5r3y9N15",
+    "yearly": "price_1URCXcCVjGU3nJVoE0EVhL2K"
   },
   "lookups": {
     "daily": "onefin_v2_daily",
