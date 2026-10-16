@@ -87,9 +87,9 @@ export default async function SoftwareAccountPage() {
                   const remaining = Math.max(0, purchase.total_price_cents - paidAmount);
                   const paymentLabel =
                     purchase.status === 'paid'
-                      ? 'Fully paid'
+                      ? 'Paid in full'
                       : purchase.status === 'partially_paid'
-                        ? 'Partially paid'
+                        ? 'Deposit / balance due (not paid in full)'
                         : purchase.status === 'failed'
                           ? 'Failed'
                           : 'Pending';

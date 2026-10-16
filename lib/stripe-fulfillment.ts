@@ -3,6 +3,7 @@ import Stripe from 'stripe';
 import { query, transaction } from './db';
 import { creditPlans } from './credit-config';
 import { managedPlan } from './subscription-catalog';
+import { applySoftwareStorefrontRefund } from './software-refund';
 import { queueBillingNotice } from './billing-notices';
 import { priceLabel } from './plans';
 import { stripeObjectMatchesMode } from './billing-environment';
@@ -283,6 +284,8 @@ export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
     );
   } else if (event.type === 'charge.refunded') {
     const charge = event.data.object as Stripe.Charge;
+    // Software ledger first. Failures must surface so Stripe retries.
+    await applySoftwareStorefrontRefund(charge);
     try {
       const user = await owner(charge.customer);
       const amount =

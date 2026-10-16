@@ -17,6 +17,7 @@ import {
 type Enrollment = { user_id:string; request_id:string; plan_key:string; mode:'trial'|'paid'; setup_id:string|null; subscription_id:string|null; price_id:string|null; trial_end:string|null; consent_at:Date|null; created_at:Date };
 const objectId = (object: string | { id?:string } | null) => typeof object === 'string' ? object : object?.id;
 export async function prepareEnrollment(userId:string, key:string, mode:'trial'|'paid') {
+  if(key==='custom') throw new Error('Custom plans are arranged with our team. Choose a standard plan or contact support.');
   findPlan(key);
   const stripe=await verifiedStripe(),customer=await currentCustomer(true);
   const price=await approvedPrice(stripe,key);

@@ -471,6 +471,7 @@ export function WorkspaceApplication({
           <section className="workspace-panel workspace-reload-panel">
             <div>
               <p className="workspace-eyebrow">CREDIT RELOADS</p>
+              <p className="workspace-muted-copy" style={{marginTop:4}}>Uses a Workspace-only card. Subscription cards are never used for credits or auto-reload.</p>
               <h2>{autoReloadEnabled ? 'Automatic reloads are on' : 'Automatic reloads are off'}</h2>
               <p>
                 When your balance falls to the threshold, Workspace can charge your saved Workspace card

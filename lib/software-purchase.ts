@@ -6,7 +6,7 @@ export type SoftwarePurchaseKind = 'template' | 'software';
 /** Payment status only — never conflated with inquiry/project status. */
 export type SoftwarePaymentStatus = 'pending' | 'partially_paid' | 'paid' | 'failed';
 
-export type SoftwarePaymentAttemptStatus = 'pending' | 'succeeded' | 'failed' | 'canceled';
+export type SoftwarePaymentAttemptStatus = 'pending' | 'succeeded' | 'failed' | 'canceled' | 'refunded';
 
 export interface SoftwarePurchaseItem {
   kind: SoftwarePurchaseKind;
