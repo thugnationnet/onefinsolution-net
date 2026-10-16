@@ -1,0 +1,5 @@
+{
+  "browser_url": "https://access.stripe.com/stripecli/oauth2/device",
+  "verification_code": "BRRW-XFXX",
+  "next_step": "stripe login --complete-device"
+}
