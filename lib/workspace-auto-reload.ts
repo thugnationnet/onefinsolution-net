@@ -199,7 +199,7 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
           payment_method: paymentMethod.id,
           confirm: true,
           off_session: true,
-          error_on_requires_action: true,
+          // Dashboard/Elements-managed PMs reject error_on_requires_action; status handled below.
           description: `${reloadQuote.credits} One Fin Workspace credits (auto-reload - ${formatWorkspaceCreditUsd(reloadQuote.amountCents)})`,
           metadata: {
             app: 'chatbot-template',
