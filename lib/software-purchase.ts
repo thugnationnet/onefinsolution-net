@@ -1,5 +1,5 @@
 import { softwareCatalog } from '@/app/software/src/data/catalog';
-import { TEMPLATES as STOREFRONT_TEMPLATES, HTML_STOREFRONT_TEMPLATES } from '@/app/software/src/data/templatesData';
+import { STOREFRONT_TEMPLATES } from '@/app/software/src/data/templatesData';
 
 export type SoftwarePurchaseKind = 'template' | 'software';
 
@@ -30,7 +30,6 @@ export interface SoftwarePurchaseTotals {
   amountPaidCents: number;
 }
 
-
 type SoftwareStripeCatalogEntry = {
   productId?: string;
   priceId?: string;
@@ -60,10 +59,10 @@ export function getSoftwareStripeCatalogMap(): Record<string, SoftwareStripeCata
   return cachedSoftwareStripeCatalog ?? {};
 }
 
-function stripeIdsFor(kind: SoftwarePurchaseKind, id: string): Pick<
-  SoftwarePurchaseItem,
-  'stripeProductId' | 'stripePriceId' | 'stripeProductLookupKey'
-> {
+function stripeIdsFor(
+  kind: SoftwarePurchaseKind,
+  id: string,
+): Pick<SoftwarePurchaseItem, 'stripeProductId' | 'stripePriceId' | 'stripeProductLookupKey'> {
   const entry = getSoftwareStripeCatalogMap()[`${kind}:${id}`];
   if (!entry) return {};
   return {
@@ -80,11 +79,10 @@ export function getSoftwarePurchaseItem(
   if (!id || (kind !== 'template' && kind !== 'software')) return null;
 
   if (kind === 'template') {
-    const template =
-      STOREFRONT_TEMPLATES.find((item) => item.id === id) ||
-      HTML_STOREFRONT_TEMPLATES.find((item) => item.id === id);
+    const template = STOREFRONT_TEMPLATES.find((item) => item.id === id);
     if (!template) return null;
     const priceCents = Math.round(Number(template.price) * 100);
+    if (!Number.isFinite(priceCents) || priceCents <= 0) return null;
     return {
       kind,
       id: template.id,
