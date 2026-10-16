@@ -1,6 +1,6 @@
 import 'server-only';
 import type Stripe from 'stripe';
-import { query, transaction } from '@/lib/db';
+import { transaction } from '@/lib/db';
 import { stripeObjectMatchesMode } from '@/lib/billing-environment';
 import {
   recomputePurchasePaymentFields,
@@ -59,11 +59,11 @@ export async function applySoftwareStorefrontRefund(
     }
     if (payment.status !== 'succeeded') return;
 
+    // Match columns that exist on software_storefront_payments (no updated_at required).
     await client.query(
       `update software_storefront_payments
        set status = 'refunded',
-           succeeded_at = null,
-           updated_at = now()
+           succeeded_at = null
        where id = $1`,
       [payment.id],
     );
@@ -100,18 +100,17 @@ export async function applySoftwareStorefrontRefund(
       throw new Error('Software refund recompute incorrectly marked purchase as fully paid.');
     }
 
+    // Match fulfillment update shape (no updated_at column on purchases).
     await client.query(
-      `update software_storefront_purchases
-       set amount_paid_cents = $2,
-           status = $3,
-           paid_at = case
-             when $4::text = 'set' then coalesce(paid_at, now())
-             when $4::text = 'clear' then null
-             else paid_at
-           end,
-           updated_at = now()
+      `update software_storefront_purchases set
+         amount_paid_cents = $2,
+         status = $3,
+         paid_at = case
+           when $3 = 'paid' then coalesce(paid_at, now())
+           else null
+         end
        where id = $1`,
-      [purchase.id, recomputed.amountPaidCents, recomputed.status, recomputed.paidAt],
+      [purchase.id, recomputed.amountPaidCents, recomputed.status],
     );
 
     updatedPurchaseId = purchase.id;
