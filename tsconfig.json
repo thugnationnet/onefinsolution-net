@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,10 +23,24 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "stripe": ["./node_modules/stripe/esm/stripe.esm.node.d.ts"]
+      "@/*": [
+        "./*"
+      ],
+      "stripe": [
+        "./node_modules/stripe/esm/stripe.esm.node.d.ts"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "app/software", "app/server.ts", "app/vite.config.ts", "app/src", "app/dist"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "_archive",
+    "app/software/dist",
+    "app/software/node_modules"
+  ]
 }

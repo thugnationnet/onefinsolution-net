@@ -72,3 +72,19 @@ _analyze/
 /nul
 .env.local
 .env*.local
+
+# Local archives and agent temp (not production)
+/_archive/
+.e2e-tmp/
+.test-artifacts/
+.tmp_railway/
+.tmp/
+.tmp-*
+e2e-*.txt
+remaining-*.txt
+railway-e2e-*.txt
+.env.e2e*
+.env.stripe-generated
+
+.tmp-dev.*
+rw_vars_tmp.txt

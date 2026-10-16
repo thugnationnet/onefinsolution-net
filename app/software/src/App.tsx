@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 import { TemplatePreviewModal } from './components/TemplatePreviewModal';
 import { softwareCatalog, softwareServices, type SoftwareProduct } from './data/catalog';
-import { STOREFRONT_TEMPLATES, type TemplateProduct } from './data/templatesData';
+import { HTML_STOREFRONT_TEMPLATES as STOREFRONT_TEMPLATES, type TemplateProduct } from './data/templatesData';
 
 const formatUsd = (amount: number) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(amount);
