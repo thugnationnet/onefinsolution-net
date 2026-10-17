@@ -6,9 +6,9 @@ import {writeFileSync} from 'node:fs';
 // Keep amounts/keys/intervals/trials identical to lib/plans.ts business logic.
 const plans = [
   { key: 'daily', name: 'Daily', amount: 500, interval: 'day', trialDays: 1 },
-  { key: 'weekly', name: 'Weekly', amount: 1300, interval: 'week', trialDays: 3 },
-  { key: 'monthly', name: 'Monthly', amount: 3000, interval: 'month', trialDays: 5 },
-  { key: 'yearly', name: 'Yearly', amount: 24900, interval: 'year', trialDays: 15 },
+  { key: 'weekly', name: 'Weekly', amount: 1300, interval: 'week', trialDays: 1 },
+  { key: 'monthly', name: 'Monthly', amount: 3000, interval: 'month', trialDays: 1 },
+  { key: 'yearly', name: 'Yearly', amount: 24900, interval: 'year', trialDays: 2 },
 ];
 const lookupKey = (key) => {
   const plan = plans.find((value) => value.key === key);

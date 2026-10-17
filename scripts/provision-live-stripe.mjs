@@ -55,9 +55,9 @@ const stripe = new Stripe(key, {
 // App plan definitions (amounts in smallest currency unit — satang for THB)
 const personalPlans = [
   { key: 'daily', name: 'Daily', amount: 500, interval: 'day', trialDays: 1 },
-  { key: 'weekly', name: 'Weekly', amount: 1300, interval: 'week', trialDays: 3 },
-  { key: 'monthly', name: 'Monthly', amount: 3500, interval: 'month', trialDays: 7 },
-  { key: 'yearly', name: 'Yearly', amount: 30000, interval: 'year', trialDays: 7 },
+  { key: 'weekly', name: 'Weekly', amount: 1300, interval: 'week', trialDays: 1 },
+  { key: 'monthly', name: 'Monthly', amount: 3500, interval: 'month', trialDays: 1 },
+  { key: 'yearly', name: 'Yearly', amount: 30000, interval: 'year', trialDays: 2 },
 ];
 
 // Default credit packs if none exist in live (THB)

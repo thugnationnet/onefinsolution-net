@@ -40,9 +40,9 @@ const stripe = new Stripe(key, { apiVersion: API_VERSION });
 
 const SUB_PLANS = [
   { key: 'daily', name: 'Daily', amount: 500, interval: 'day', trialDays: 1 },
-  { key: 'weekly', name: 'Weekly', amount: 1300, interval: 'week', trialDays: 3 },
-  { key: 'monthly', name: 'Monthly', amount: 3000, interval: 'month', trialDays: 5 },
-  { key: 'yearly', name: 'Yearly', amount: 24900, interval: 'year', trialDays: 15 },
+  { key: 'weekly', name: 'Weekly', amount: 1300, interval: 'week', trialDays: 1 },
+  { key: 'monthly', name: 'Monthly', amount: 3000, interval: 'month', trialDays: 1 },
+  { key: 'yearly', name: 'Yearly', amount: 24900, interval: 'year', trialDays: 2 },
 ];
 
 function parseCatalogItems(path, kind) {
