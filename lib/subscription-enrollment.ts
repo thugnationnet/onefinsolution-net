@@ -70,7 +70,7 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
         if (existing.status === 'trialing' || existing.status === 'active') {
           return {
             clientSecret: null as string | null,
-            setupId: resume.request_id,
+            enrollmentId: resume.request_id,
             confirmKind: 'none' as const,
             subscriptionId: existing.id,
           };
@@ -79,7 +79,7 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
         if (pi?.client_secret) {
           return {
             clientSecret: pi.client_secret,
-            setupId: resume.request_id,
+            enrollmentId: resume.request_id,
             confirmKind: 'payment' as const,
             subscriptionId: existing.id,
           };
@@ -174,7 +174,7 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
 
     return {
       clientSecret: null as string | null,
-      setupId: enrollment.request_id,
+      enrollmentId: enrollment.request_id,
       confirmKind: 'none' as const,
       subscriptionId: subscription.id,
     };
@@ -215,7 +215,7 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
       );
       return {
         clientSecret: null as string | null,
-        setupId: enrollment.request_id,
+        enrollmentId: enrollment.request_id,
         confirmKind: 'none' as const,
         subscriptionId: subscription.id,
       };
@@ -230,16 +230,16 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
 
   return {
     clientSecret: pi.client_secret,
-    setupId: enrollment.request_id,
+    enrollmentId: enrollment.request_id,
     confirmKind: 'payment' as const,
     subscriptionId: subscription.id,
   };
 }
 
 
-export async function completeEnrollment(userId: string, setupId: string, consent: boolean) {
+export async function completeEnrollment(userId: string, enrollmentId: string, consent: boolean) {
   if (!consent) throw new Error('Confirm the recurring payment terms before continuing.');
-  if (!setupId) throw new Error('Missing enrollment reference.');
+  if (!enrollmentId) throw new Error('Missing enrollment reference.');
 
   const stripe = await verifiedStripe();
   const customer = await currentCustomer(true);
@@ -251,7 +251,7 @@ export async function completeEnrollment(userId: string, setupId: string, consen
        and (request_id::text=$2 or setup_id=$2 or subscription_id=$2)
      order by created_at desc
      limit 1`,
-    [userId, setupId],
+    [userId, enrollmentId],
   );
   if (!enrollment) throw new Error('Enrollment not found.');
   if (!enrollment.subscription_id) {

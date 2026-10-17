@@ -101,19 +101,3 @@ export async function requireOwnedPaymentMethod(
   }
   return paymentMethod;
 }
-
-/** Ensures a SetupIntent belongs to the server-resolved scoped customer. */
-export function assertSetupIntentOwnedByCustomer(
-  setup: Stripe.SetupIntent,
-  customerId: string,
-): void {
-  if (!stripeObjectMatchesMode(setup.livemode)) {
-    throw new BillingScopeError('Card setup mode mismatch.');
-  }
-  if (stripeCustomerId(setup.customer) !== customerId) {
-    throw new BillingScopeError('Card setup does not belong to this billing account.');
-  }
-  if (setup.status !== 'succeeded') {
-    throw new BillingScopeError('Card setup is not complete.');
-  }
-}

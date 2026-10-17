@@ -7,7 +7,7 @@ import { prepareSubscription, finishSubscription } from '@/app/subscription-acti
 import { findPlan, priceLabel } from '@/lib/plans';
 import { publicSitePath } from '@/lib/site-url';
 
-function PayForm({ planKey, mode, setupId, complete }: { planKey: string; mode: 'trial' | 'paid'; setupId: string; complete: (value: string) => Promise<void>; }) {
+function PayForm({ planKey, mode, enrollmentId, complete }: { planKey: string; mode: 'trial' | 'paid'; enrollmentId: string; complete: (value: string) => Promise<void>; }) {
   const stripe = useStripe();
   const elements = useElements();
   const [busy, setBusy] = useState(false);
@@ -24,7 +24,7 @@ function PayForm({ planKey, mode, setupId, complete }: { planKey: string; mode: 
     try {
       const result = await stripe.confirmPayment({ elements, confirmParams: { return_url: returnUrl }, redirect: 'if_required' });
       if (result.error) throw new Error(result.error.message);
-      await complete(setupId);
+      await complete(enrollmentId);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Please try again.');
     } finally {
@@ -43,7 +43,7 @@ function PayForm({ planKey, mode, setupId, complete }: { planKey: string; mode: 
         <input type="checkbox" required checked={consent} onChange={(event) => setConsent(event.target.checked)} />
       </label>
       {error && <p role="alert" className="notice error">{error}</p>}
-      <button className="button" disabled={busy || !stripe || !consent}>{busy ? 'Processing…' : 'Pay & subscribe'}</button>
+      <button className="button" disabled={busy || !stripe || !consent}>{busy ? 'Processing...' : 'Pay & subscribe'}</button>
       <p className="muted small">You pay the plan amount in this step. There is no separate card setup.</p>
     </form>
   );
@@ -70,33 +70,33 @@ function PaymentConfirmation({ done }: { done: () => void }) {
     }}>
       <PaymentElement />
       {error && <p role="alert" className="notice error">{error}</p>}
-      <button className="button" disabled={busy || !stripe}>{busy ? 'Confirming…' : 'Confirm payment'}</button>
+      <button className="button" disabled={busy || !stripe}>{busy ? 'Confirming...' : 'Confirm payment'}</button>
     </form>
   );
 }
 
-export function SubscriptionForm({ planKey, resumeSetup, paymentSecret }: { planKey: string; resumeSetup?: string | null; paymentSecret?: string | null; }) {
+export function SubscriptionForm({ planKey, resumeEnrollmentId, paymentSecret }: { planKey: string; resumeEnrollmentId?: string | null; paymentSecret?: string | null; }) {
   const plan = useMemo(() => findPlan(planKey), [planKey]);
   const [mode, setMode] = useState<'trial' | 'paid'>(plan.trialDays > 0 ? 'trial' : 'paid');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
-  const [setup, setSetup] = useState<{ clientSecret: string; setupId: string } | null>(null);
+  const [enrollment, setEnrollment] = useState<{ clientSecret: string; enrollmentId: string } | null>(null);
   const [paymentClientSecret, setPaymentClientSecret] = useState(paymentSecret || '');
   const stripe = useMemo(() => (process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) : null), []);
   const cancelledUrl = publicSitePath('/pricing');
 
-  async function complete(setupId: string) {
-    const result = await finishSubscription(setupId, true);
+  async function complete(enrollmentId: string) {
+    const result = await finishSubscription(enrollmentId, true);
     if (result.error) throw new Error(result.error);
     if (result.data?.paymentSecret) {
       setPaymentClientSecret(result.data.paymentSecret);
-      setSetup(null);
+      setEnrollment(null);
       setNotice('Additional payment confirmation is required to finish.');
       return;
     }
     setNotice(mode === 'trial' ? 'Trial started. Your plan is active.' : 'Subscription active. Thank you.');
-    setSetup(null);
+    setEnrollment(null);
   }
 
   if (!stripe) return <p className="notice error">Payments are not configured.</p>;
@@ -122,7 +122,7 @@ export function SubscriptionForm({ planKey, resumeSetup, paymentSecret }: { plan
             : `Subscribe now — pay ${priceLabel(plan)} in this step. No separate card setup.`}
         </p>
       </div>
-      {plan.trialDays > 0 && !setup ? (
+      {plan.trialDays > 0 && !enrollment ? (
         <div className="row gap-sm">
           <button type="button" className={mode === 'trial' ? 'button' : 'button secondary'} onClick={() => setMode('trial')} disabled={busy}>Free trial</button>
           <button type="button" className={mode === 'paid' ? 'button' : 'button secondary'} onClick={() => setMode('paid')} disabled={busy}>Subscribe & pay</button>
@@ -130,20 +130,20 @@ export function SubscriptionForm({ planKey, resumeSetup, paymentSecret }: { plan
       ) : null}
       {notice && <p className="notice">{notice}</p>}
       {error && <p className="notice error" role="alert">{error}</p>}
-      {setup ? (
-        <Elements stripe={stripe} options={{ clientSecret: setup.clientSecret }} key={setup.clientSecret}>
-          <PayForm planKey={planKey} mode={mode} setupId={setup.setupId} complete={complete} />
+      {enrollment ? (
+        <Elements stripe={stripe} options={{ clientSecret: enrollment.clientSecret }} key={enrollment.clientSecret}>
+          <PayForm planKey={planKey} mode={mode} enrollmentId={enrollment.enrollmentId} complete={complete} />
         </Elements>
       ) : (
         <button className="button" disabled={busy} onClick={async () => {
           setBusy(true); setError('');
           try {
-            if (resumeSetup) await complete(resumeSetup);
+            if (resumeEnrollmentId) await complete(resumeEnrollmentId);
             else {
               const result = await prepareSubscription(planKey, mode);
               if (result.error) throw new Error(result.error);
-              if (result.data?.clientSecret && result.data.setupId) {
-                setSetup({ clientSecret: result.data.clientSecret, setupId: result.data.setupId });
+              if (result.data?.clientSecret && result.data.enrollmentId) {
+                setEnrollment({ clientSecret: result.data.clientSecret, enrollmentId: result.data.enrollmentId });
               } else if (result.data?.subscriptionId) {
                 setNotice(mode === 'trial' ? 'Trial started. No card was required.' : 'Your subscription is active.');
               } else {
@@ -154,7 +154,7 @@ export function SubscriptionForm({ planKey, resumeSetup, paymentSecret }: { plan
             setError(error instanceof Error ? error.message : 'Please try again.');
           } finally { setBusy(false); }
         }}>
-          {busy ? 'Working…' : resumeSetup ? 'Accept terms & finish' : mode === 'trial' ? 'Start free trial' : 'Continue to payment'}
+          {busy ? 'Working...' : resumeEnrollmentId ? 'Accept terms & finish' : mode === 'trial' ? 'Start free trial' : 'Continue to payment'}
         </button>
       )}
       <p><a className="text-link" href={cancelledUrl}>Cancel and return to pricing</a></p>

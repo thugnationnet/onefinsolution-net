@@ -7,7 +7,7 @@ import { currentUser } from '@/lib/session';
 export default async function SubscribePage({
   searchParams,
 }: {
-  searchParams: Promise<{ plan?: string; mode?: string; setup?: string }>;
+  searchParams: Promise<{ plan?: string; mode?: string }>;
 }) {
   const user = await currentUser();
   if (!user) redirect('/sign-in');
@@ -30,7 +30,7 @@ export default async function SubscribePage({
           : `Pay ${priceLabel(plan)} now to subscribe. No separate card-setup step.`}
       </p>
       <p className="muted">Signed in as {user.email}</p>
-      <SubscriptionForm planKey={plan.key} resumeSetup={params.setup} />
+      <SubscriptionForm planKey={plan.key} />
       <p>
         <Link className="text-link" href="/pricing?billing=cancelled">
           Cancel and return to pricing
