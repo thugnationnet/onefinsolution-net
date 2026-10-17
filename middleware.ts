@@ -27,11 +27,12 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/api/internal/');
 
   // Canonicalize browser traffic to the primary .net domain so session cookies match.
+  // Build an absolute public URL — request.nextUrl keeps Railway's internal :8080 port,
+  // which must never leak into Location headers (browsers would hit net:8080 and fail).
   if (!skipCanonical && LEGACY_HOSTS.has(host) && host !== CANONICAL_HOST) {
-    const url = request.nextUrl.clone();
-    url.protocol = 'https:';
-    url.host = CANONICAL_HOST;
-    const redirect = NextResponse.redirect(url, 308);
+    const { pathname: path, search } = request.nextUrl;
+    const target = `https://${CANONICAL_HOST}${path}${search}`;
+    const redirect = NextResponse.redirect(target, 308);
     return applySecurityHeaders(redirect);
   }
 
