@@ -4,6 +4,7 @@ import { query, transaction } from './db';
 import { creditPlans } from './credit-config';
 import { managedPlan } from './subscription-catalog';
 import { applySoftwareStorefrontRefund } from './software-refund';
+import { fulfillSoftwareStorefrontPayment } from './software-storefront-fulfillment';
 import { queueBillingNotice } from './billing-notices';
 import { priceLabel } from './plans';
 import { normalizeBillingCurrency } from './billing-currency';
@@ -50,10 +51,173 @@ async function recordSubscription(user: string, sub: Stripe.Subscription) {
   }
   if(['canceled','unpaid','paused','incomplete_expired'].includes(sub.status)) await query('update membership_access set expires_at=least(expires_at,now()),updated_at=now() where subscription_id=$1',[sub.id]);
 }
+export async function applyWorkspaceCreditsFromPaymentIntent(
+  stripe: Stripe,
+  paymentIntentId: string,
+): Promise<void> {
+  const intent = await stripe.paymentIntents.retrieve(paymentIntentId, { expand: ['payment_method'] });
+  if (intent.metadata?.app !== 'chatbot-template' || intent.metadata.flow !== 'workspace-credit-purchase') {
+    return;
+  }
+  if (intent.status !== 'succeeded') {
+    throw new Error(`Workspace credit PaymentIntent is not succeeded (${intent.status}).`);
+  }
+  if (!stripeObjectMatchesMode(intent.livemode) || !normalizeBillingCurrency(intent.currency)) {
+    throw new Error('Unexpected Workspace credit payment.');
+  }
+
+  const purchaseId = intent.metadata.purchase_id;
+  const userId = intent.metadata.user_id;
+  if (!purchaseId || !userId || !/^[0-9a-f-]{36}$/i.test(purchaseId) || !/^[0-9a-f-]{36}$/i.test(userId)) {
+    throw new Error('Invalid Workspace credit purchase metadata.');
+  }
+
+  let purchaseRows = await query<{ amount: number; credits: number; status: string }>(
+    `select amount, credits, status from workspace_credit_purchases
+     where id=$1 and user_id=$2 and (stripe_payment_intent is null or stripe_payment_intent=$3)`,
+    [purchaseId, userId, intent.id],
+  );
+  let purchase = purchaseRows[0];
+
+  // Self-heal for hosted Checkout races: create ledger row from trusted PI metadata.
+  if (!purchase) {
+    const metaAmount = Number(intent.metadata.amount_cents || 0);
+    const metaCredits = Number(intent.metadata.credits || 0);
+    if (!metaAmount || !metaCredits) {
+      throw new Error('Workspace credit purchase record unavailable.');
+    }
+    assertWorkspaceCreditAmountCents(metaAmount);
+    if (metaCredits !== creditsFromAmountCents(metaAmount)) {
+      throw new Error('Workspace credit purchase amount/credits mismatch.');
+    }
+    await query(
+      `insert into workspace_credit_purchases(id, user_id, amount, credits, status, stripe_payment_intent)
+       values ($1,$2,$3,$4,'pending',$5)
+       on conflict (id) do nothing`,
+      [purchaseId, userId, metaAmount, metaCredits, intent.id],
+    );
+    purchaseRows = await query<{ amount: number; credits: number; status: string }>(
+      `select amount, credits, status from workspace_credit_purchases where id=$1 and user_id=$2`,
+      [purchaseId, userId],
+    );
+    purchase = purchaseRows[0];
+  }
+  if (!purchase) throw new Error('Workspace credit purchase record unavailable.');
+  if (purchase.status === 'succeeded') return;
+
+  const amountCents = Number(purchase.amount);
+  const credits = Number(purchase.credits);
+  assertWorkspaceCreditAmountCents(amountCents);
+  if (credits !== creditsFromAmountCents(amountCents)) {
+    throw new Error('Workspace credit purchase amount/credits mismatch.');
+  }
+  const presentmentMeta = Number(intent.metadata?.presentment_amount_cents || 0);
+  const expectedPresentment =
+    presentmentMeta > 0 ? presentmentMeta : intent.currency === 'usd' ? amountCents : null;
+  if (expectedPresentment != null) {
+    if (intent.amount !== expectedPresentment || intent.amount_received !== expectedPresentment) {
+      throw new Error('Workspace credit payment amount mismatch.');
+    }
+  } else if (!intent.amount_received || intent.amount_received <= 0) {
+    throw new Error('Workspace credit payment amount mismatch.');
+  }
+  if (intent.metadata.credits && Number(intent.metadata.credits) !== credits) {
+    throw new Error('Workspace credit metadata mismatch.');
+  }
+
+  const customerId = typeof intent.customer === 'string' ? intent.customer : intent.customer?.id;
+  const paymentOwner = await owner(customerId || null, 'workspace');
+  if (paymentOwner !== userId) throw new Error('Workspace credit payment owner mismatch.');
+
+  const method = intent.payment_method;
+  const saveForOffSession = intent.setup_future_usage === 'off_session';
+
+  await transaction(async client => {
+    const { rows } = await client.query(
+      `select id from workspace_credit_purchases
+       where id=$1 and user_id=$2 and amount=$3 and credits=$4
+         and (stripe_payment_intent is null or stripe_payment_intent=$5)
+       for update`,
+      [purchaseId, userId, amountCents, credits, intent.id],
+    );
+    if (!rows.length) throw new Error('Workspace credit purchase record unavailable.');
+    await client.query('select grant_credits($1,$2,$3)', [userId, `workspace:payment-intent:${intent.id}`, credits]);
+    let receiptUrl: string | null = null;
+    try {
+      const charges = await stripe.charges.list({ payment_intent: intent.id, limit: 1 });
+      receiptUrl = charges.data[0]?.receipt_url || null;
+    } catch {
+      /* receipt is optional */
+    }
+    await client.query(
+      `insert into workspace_credit_transactions(user_id,purchase_id,stripe_payment_intent,amount,currency,credits,receipt_url)
+       values ($1,$2,$3,$4,$5,$6,$7)
+       on conflict (purchase_id) do nothing`,
+      [
+        userId,
+        purchaseId,
+        intent.id,
+        amountCents,
+        normalizeBillingCurrency(intent.currency) || intent.currency,
+        credits,
+        receiptUrl,
+      ],
+    );
+    if (receiptUrl) {
+      await client.query(
+        `update workspace_credit_purchases set receipt_url = coalesce(receipt_url, $2) where id=$1`,
+        [purchaseId, receiptUrl],
+      );
+    }
+    await client.query(
+      `update workspace_credit_purchases
+       set status='succeeded',
+           stripe_payment_intent=$3,
+           completed_at=coalesce(completed_at,now())
+       where id=$1 and user_id=$2`,
+      [purchaseId, userId, intent.id],
+    );
+    if (
+      saveForOffSession &&
+      method &&
+      typeof method !== 'string' &&
+      method.type === 'card' &&
+      method.card
+    ) {
+      await client.query(
+        `insert into workspace_credit_settings(user_id,payment_method_id,card_brand,card_last4,card_exp_month,card_exp_year,updated_at)
+         values($1,$2,$3,$4,$5,$6,now())
+         on conflict(user_id) do update set payment_method_id=excluded.payment_method_id,card_brand=excluded.card_brand,
+           card_last4=excluded.card_last4,card_exp_month=excluded.card_exp_month,card_exp_year=excluded.card_exp_year,updated_at=now()`,
+        [userId, method.id, method.card.brand, method.card.last4, method.card.exp_month, method.card.exp_year],
+      );
+    }
+  });
+
+  try {
+    const amount =
+      typeof intent.amount_received === 'number'
+        ? `$${(intent.amount_received / 100).toFixed(2)} USD`
+        : typeof intent.amount === 'number'
+          ? `$${(intent.amount / 100).toFixed(2)} USD`
+          : null;
+    await queueBillingNotice(
+      `workspace-credits-pi:${intent.id}`,
+      userId,
+      amount ? `Credits purchased - ${amount}` : 'Workspace credits added',
+      `Your workspace credit purchase completed successfully${amount ? ` (${amount})` : ''}. Credits are available immediately in ${sitePath('/workspace')}.`,
+    );
+  } catch {
+    /* credit receipt is best-effort */
+  }
+}
+
+
 export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
   if (!stripeObjectMatchesMode(event.livemode)) throw new Error('Stripe event mode does not match the application.');
   if (['payment_intent.succeeded', 'payment_intent.payment_failed', 'payment_intent.canceled'].includes(event.type)) {
-    const intent = await stripe.paymentIntents.retrieve((event.data.object as Stripe.PaymentIntent).id, { expand: ['payment_method'] });
+    const intentId = (event.data.object as Stripe.PaymentIntent).id;
+    const intent = await stripe.paymentIntents.retrieve(intentId);
     if (intent.metadata?.app !== 'chatbot-template' || intent.metadata.flow !== 'workspace-credit-purchase') return;
     const purchaseId = intent.metadata.purchase_id;
     const userId = intent.metadata.user_id;
@@ -63,114 +227,47 @@ export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
     if (event.type !== 'payment_intent.succeeded') {
       await query(
         `update workspace_credit_purchases set status='failed'
-         where id=$1 and user_id=$2 and stripe_payment_intent=$3 and status='pending'`,
+         where id=$1 and user_id=$2 and (stripe_payment_intent is null or stripe_payment_intent=$3) and status='pending'`,
         [purchaseId, userId, intent.id],
       );
       return;
     }
-    if (intent.status !== 'succeeded' || !stripeObjectMatchesMode(intent.livemode) || !normalizeBillingCurrency(intent.currency)) {
-      throw new Error('Unexpected Workspace credit payment.');
-    }
-    // Load the pending purchase first so flexible $5–$500 amounts are validated against the ledger.
-    const purchaseRows = await query<{ amount: number; credits: number; status: string }>(
-      `select amount, credits, status from workspace_credit_purchases
-       where id=$1 and user_id=$2 and (stripe_payment_intent is null or stripe_payment_intent=$3)`,
-      [purchaseId, userId, intent.id],
-    );
-    const purchase = purchaseRows[0];
-    if (!purchase) throw new Error('Workspace credit purchase record unavailable.');
-    if (purchase.status === 'succeeded') return; // idempotent
-
-    const amountCents = Number(purchase.amount);
-    const credits = Number(purchase.credits);
-    assertWorkspaceCreditAmountCents(amountCents);
-    if (credits !== creditsFromAmountCents(amountCents)) {
-      throw new Error('Workspace credit purchase amount/credits mismatch.');
-    }
-    const presentmentMeta = Number(intent.metadata?.presentment_amount_cents || 0);
-    const expectedPresentment =
-      presentmentMeta > 0 ? presentmentMeta : intent.currency === 'usd' ? amountCents : null;
-    if (expectedPresentment != null) {
-      if (intent.amount !== expectedPresentment || intent.amount_received !== expectedPresentment) {
-        throw new Error('Workspace credit payment amount mismatch.');
-      }
-    } else if (!intent.amount_received || intent.amount_received <= 0) {
-      throw new Error('Workspace credit payment amount mismatch.');
-    }
-    // Metadata credits must match when present (auto-reload + manual).
-    if (intent.metadata.credits && Number(intent.metadata.credits) !== credits) {
-      throw new Error('Workspace credit metadata mismatch.');
-    }
-
-    const customerId = typeof intent.customer === 'string' ? intent.customer : intent.customer?.id;
-    const paymentOwner = await owner(customerId || null, 'workspace');
-    if (paymentOwner !== userId) throw new Error('Workspace credit payment owner mismatch.');
-
-    const method = intent.payment_method;
-    await transaction(async client => {
-      const { rows } = await client.query(
-        `select id from workspace_credit_purchases
-         where id=$1 and user_id=$2 and amount=$3 and credits=$4
-           and (stripe_payment_intent is null or stripe_payment_intent=$5)
-         for update`,
-        [purchaseId, userId, amountCents, credits, intent.id],
-      );
-      if (!rows.length) throw new Error('Workspace credit purchase record unavailable.');
-      await client.query('select grant_credits($1,$2,$3)', [userId, `workspace:payment-intent:${intent.id}`, credits]);
-      let receiptUrl: string | null = null;
-      try {
-        const full = await stripe.paymentIntents.retrieve(intent.id, { expand: ['latest_charge'] });
-        const charge = full.latest_charge;
-        if (charge && typeof charge !== 'string') receiptUrl = charge.receipt_url || null;
-      } catch {
-        receiptUrl = null;
-      }
-      await client.query(
-        `insert into workspace_credit_transactions(user_id,purchase_id,stripe_payment_intent,amount,currency,credits,receipt_url)
-         values($1,$2,$3,$4,$5,$6,$7) on conflict(stripe_payment_intent) do nothing`,
-        [userId, purchaseId, intent.id, amountCents, 'usd', credits, receiptUrl],
-      );
-      if (receiptUrl) {
-        await client.query(
-          `update workspace_credit_purchases set receipt_url = coalesce(receipt_url, $2) where id=$1`,
-          [purchaseId, receiptUrl],
-        );
-      }
-      await client.query(
-        `update workspace_credit_purchases set status='succeeded',completed_at=coalesce(completed_at,now())
-         where id=$1 and user_id=$2 and stripe_payment_intent=$3`,
-        [purchaseId, userId, intent.id],
-      );
-      if (method && typeof method !== 'string' && method.type === 'card' && method.card) {
-        await client.query(
-          `insert into workspace_credit_settings(user_id,payment_method_id,card_brand,card_last4,card_exp_month,card_exp_year,updated_at)
-           values($1,$2,$3,$4,$5,$6,now())
-           on conflict(user_id) do update set payment_method_id=excluded.payment_method_id,card_brand=excluded.card_brand,
-             card_last4=excluded.card_last4,card_exp_month=excluded.card_exp_month,card_exp_year=excluded.card_exp_year,updated_at=now()`,
-          [userId, method.id, method.card.brand, method.card.last4, method.card.exp_month, method.card.exp_year],
-        );
-      }
-    });
-    try {
-      const amount =
-        typeof intent.amount_received === 'number'
-          ? `$${(intent.amount_received / 100).toFixed(2)} USD`
-          : typeof intent.amount === 'number'
-            ? `$${(intent.amount / 100).toFixed(2)} USD`
-            : null;
-      await queueBillingNotice(
-        `workspace-credits-pi:${intent.id}`,
-        userId,
-        amount ? `Credits purchased - ${amount}` : 'Workspace credits added',
-        `Your workspace credit purchase completed successfully${amount ? ` (${amount})` : ''}. Credits are available immediately in ${sitePath('/workspace')}.`,
-      );
-    } catch {
-      /* credit receipt is best-effort */
-    }
+    await applyWorkspaceCreditsFromPaymentIntent(stripe, intentId);
   } else if (['checkout.session.completed', 'checkout.session.async_payment_succeeded'].includes(event.type)) {
-    const session = await stripe.checkout.sessions.retrieve((event.data.object as Stripe.Checkout.Session).id);
-    if (session.metadata?.app !== 'chatbot-template' || session.mode !== 'payment' || session.payment_status !== 'paid') return;
-    if (!stripeObjectMatchesMode(session.livemode) || !normalizeBillingCurrency(session.currency)) throw new Error('Unexpected checkout currency or mode.');
+    const session = await stripe.checkout.sessions.retrieve((event.data.object as Stripe.Checkout.Session).id, {
+      expand: ['payment_intent'],
+    });
+    if (session.mode !== 'payment') return;
+    if (session.payment_status !== 'paid' && event.type === 'checkout.session.completed') {
+      // async_payment_succeeded handles delayed methods; ignore unpaid completed shells
+      if (session.payment_status !== 'paid') return;
+    }
+    if (!stripeObjectMatchesMode(session.livemode)) return;
+
+    // Software storefront is fulfilled via payment_intent.* webhooks (isolated module).
+    if (session.metadata?.flow === 'software-storefront') {
+      return;
+    }
+
+    // Hosted Workspace credit Checkout (primary low-friction path).
+    // Credits are applied from the PaymentIntent metadata (same as Elements flow).
+    if (
+      session.metadata?.app === 'chatbot-template' &&
+      (session.metadata?.flow === 'workspace-credit-purchase' ||
+        session.metadata?.billing_scope === 'workspace')
+    ) {
+      const piId =
+        typeof session.payment_intent === 'string'
+          ? session.payment_intent
+          : session.payment_intent?.id || null;
+      if (!piId) throw new Error('Workspace Checkout session is missing payment_intent.');
+      await applyWorkspaceCreditsFromPaymentIntent(stripe, piId);
+      return;
+    }
+
+    // Legacy catalog price Checkout (creditPlans / managed prices).
+    if (session.metadata?.app !== 'chatbot-template' || session.payment_status !== 'paid') return;
+    if (!normalizeBillingCurrency(session.currency)) throw new Error('Unexpected checkout currency or mode.');
     const user = await owner(session.customer, 'workspace');
     for await (const item of stripe.checkout.sessions.listLineItems(session.id, { limit: 100 })) {
       if (!item.price) throw new Error('Missing price.');
@@ -290,6 +387,20 @@ export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
       'Payment failed - action needed',
       `We could not complete your payment${amount ? ` (${amount})` : ''}. Access will not extend until payment is confirmed. Open ${sitePath('/dashboard/billing')} to update your card or authenticate the payment.`,
     );
+  } else if (event.type === 'checkout.session.expired' || event.type === 'checkout.session.async_payment_failed') {
+    const session = event.data.object as Stripe.Checkout.Session;
+    if (session.metadata?.app !== 'chatbot-template') return;
+    if (
+      session.metadata?.flow === 'workspace-credit-purchase' &&
+      session.metadata.purchase_id &&
+      session.metadata.user_id
+    ) {
+      await query(
+        `update workspace_credit_purchases set status='failed'
+         where id=$1 and user_id=$2 and status='pending'`,
+        [session.metadata.purchase_id, session.metadata.user_id],
+      );
+    }
   } else if (event.type === 'charge.refunded') {
     const charge = event.data.object as Stripe.Charge;
     // Software ledger first. Failures must surface so Stripe retries.

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useAuth } from '@/lib/auth';
 
 const navigationLinks = [
+  { href: '/checkout/credits', label: 'Buy credits' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },
   { href: '/support', label: 'Help center' },

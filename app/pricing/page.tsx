@@ -1,89 +1,78 @@
-import { Suspense } from 'react';
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { PageHeading } from '@/components/page-heading';
-import { BillingStatusBanner } from '@/components/billing-status-banner';
 import { plans, priceLabel } from '@/lib/plans';
-import { billingEnvironment } from '@/lib/billing-environment';
+import {
+  WORKSPACE_CREDIT_AMOUNT_PRESETS_USD,
+  WORKSPACE_CREDIT_DEFAULT_AMOUNT_CENTS,
+  WORKSPACE_CREDITS_PER_USD,
+} from '@/lib/workspace-credit-limits';
 
-export const metadata = {
-  title: 'AI Chat Plans and Workspace Credits',
-  description: 'Compare One Fin Solution chat subscriptions and learn about separate one-time Workspace credit packs.',
+export const metadata: Metadata = {
+  title: 'Pricing | One Fin Solution',
+  description:
+    'Buy Workspace credits for API and flagship model access. One-time Stripe Checkout — no forced subscription.',
   alternates: { canonical: '/pricing' },
-  openGraph: {
-    type: 'website',
-    siteName: 'One Fin Solution',
-    title: 'AI Chat Plans and Workspace Credits',
-    description: 'Compare chat subscriptions and separate Workspace credit packs.',
-    url: '/pricing',
-    images: [
-      { url: '/images/iages4.jpg', width: 2000, height: 1094, alt: 'Artificial intelligence network visual' },
-      { url: '/logo/one-fin-logo.png', width: 1254, height: 1254, alt: 'One Fin Solution logo' },
-    ],
-  },
 };
 
-export default function Pricing() {
-  const mode = billingEnvironment();
+export default function PricingPage() {
+  const defaultUsd = WORKSPACE_CREDIT_DEFAULT_AMOUNT_CENTS / 100;
+  const presets = WORKSPACE_CREDIT_AMOUNT_PRESETS_USD;
 
   return (
     <div className="page-wrap">
-      <Suspense fallback={null}>
-        <BillingStatusBanner />
-      </Suspense>
-      <PageHeading
-        eyebrow="PLANS & PRICING"
-        title="Choose the time that fits your work."
-        description="Homepage chat subscriptions include unlimited responses during an active trial or paid period. Choose your billing interval and start with a card-backed free trial."
-      />
-      <div className="notice">
-        {mode === 'test'
-          ? 'Sandbox billing: these are the configured plan prices. Payments are in test mode; no real charges are taken.'
-          : 'Secure live billing: subscription payments are processed by Stripe.'}
-      </div>
-      <section className="pricing-grid" aria-label="All four personal plans">
+      <p className="eyebrow">Pricing</p>
+      <h1>Workspace credits for premium AI access</h1>
+      <p className="lede">
+        Pay once with Stripe Checkout on our secure domain. Credits unlock immediately for Workspace
+        API / flagship model usage. No card is saved on first purchase. Subscriptions remain available
+        only if you want recurring chat plans later.
+      </p>
+
+      <section className="panel" style={{ marginBottom: 28 }}>
+        <p className="eyebrow">Primary</p>
+        <h2 style={{ marginTop: 0 }}>Workspace credits</h2>
+        <p>
+          ${defaultUsd} default pack · custom amounts welcome · $1 = {WORKSPACE_CREDITS_PER_USD} credits.
+          Popular packs: {presets.map(p => `$${p}`).join(', ')}.
+        </p>
+        <p>
+          <Link className="button" href="/checkout/credits">
+            Buy credits — secure checkout
+          </Link>
+        </p>
+        <p className="muted" style={{ fontSize: 13 }}>
+          Checkout is hosted on <code>pay.onefinsolution.net</code> (Stripe custom domain).
+        </p>
+      </section>
+
+      <h2>Optional chat subscriptions</h2>
+      <p className="lede">
+        These plans are optional. Most customers start with Workspace credits above.
+      </p>
+      <div className="price-grid">
         {plans
-          .filter((plan) => plan.key !== 'custom')
-          .map((plan) => (
-            <article className={`panel price-card ${plan.key === 'monthly' ? 'featured' : ''}`} key={plan.key}>
-              <span className="eyebrow">{plan.trialDays}-DAY FREE TRIAL</span>
-              <h2>{plan.name}</h2>
-              <div className="price">
-                ${plan.amount / 100}
-                <small> USD / {plan.interval}</small>
-              </div>
-              <p>Unlimited homepage chat during your trial and active paid membership.</p>
-              <ul>
-                <li>Valid payment card required before trial starts</li>
-                <li>Then {priceLabel(plan)}, billed automatically</li>
-                <li>Cancel before the trial ends to avoid the first charge</li>
-                <li>Switch plans later; the change applies at next renewal</li>
-              </ul>
-              <Link className="button" href={`/subscribe?plan=${plan.key}&mode=trial`}>
-                Start free trial
-              </Link>
-              <Link className="text-link" href={`/subscribe?plan=${plan.key}&mode=paid`}>
-                Or subscribe now
-              </Link>
+          .filter(p => p.key !== 'custom' && p.amount > 0)
+          .map(plan => (
+            <article key={plan.key} className="panel price-card">
+              <h3>{plan.name}</h3>
+              <p className="price">{priceLabel(plan)}</p>
+              {plan.trialDays ? <p className="muted">{plan.trialDays}-day trial</p> : null}
+              <p>
+                <Link className="button secondary" href={`/subscribe?plan=${plan.key}`}>
+                  View {plan.name}
+                </Link>
+              </p>
             </article>
           ))}
-      </section>
-      <section className="panel">
-        <h2>Workspace credits (separate)</h2>
-        <p>
-          Workspace AI uses a separate one-time credit pack. Buy credits when you need them from Workspace settings on
-          this same site.
-        </p>
-        <Link className="button secondary" href="/workspace">
-          Open Workspace
-        </Link>
-      </section>
-      <section className="panel">
-        <h2>Business</h2>
-        <p>Need seats, invoicing, or a custom agreement? Contact sales and we will configure the right plan.</p>
-        <Link className="button secondary" href="/contact">
-          Contact sales
-        </Link>
-      </section>
+      </div>
+
+      <p style={{ marginTop: 28 }}>
+        Already signed in? Open your{' '}
+        <Link className="text-link" href="/workspace">
+          Workspace
+        </Link>{' '}
+        to buy credits or manage billing.
+      </p>
     </div>
   );
 }

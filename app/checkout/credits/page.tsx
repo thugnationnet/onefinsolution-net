@@ -18,8 +18,6 @@ export default async function CheckoutCreditsPage() {
   if (!user) redirect('/sign-in');
 
   const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '';
-  if (!publishableKey) throw new Error('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is required.');
-
   const minUsd = (WORKSPACE_CREDIT_MIN_AMOUNT_CENTS / 100).toFixed(0);
   const maxUsd = (WORKSPACE_CREDIT_MAX_AMOUNT_CENTS / 100).toFixed(0);
 
@@ -28,11 +26,16 @@ export default async function CheckoutCreditsPage() {
       <p className="eyebrow">Secure checkout</p>
       <h1>Add Workspace credits</h1>
       <p className="lede">
-        One-time card payment. Choose any amount from ${minUsd} to ${maxUsd}. Credits never expire and are used only
-        for Workspace AI tasks ($1 = {WORKSPACE_CREDITS_PER_USD} credits).
+        One-time payment through Stripe Checkout. Choose any amount from ${minUsd} to ${maxUsd}.
+        Credits never expire and power Workspace AI / API tasks ($1 = {WORKSPACE_CREDITS_PER_USD}{' '}
+        credits). Your card is not saved on this purchase.
       </p>
       <p className="muted">Signed in as {user.email}</p>
-      <WorkspaceCreditCheckout mode="credits" publishableKey={publishableKey} returnPath="/workspace" />
+      <WorkspaceCreditCheckout
+        mode="credits"
+        publishableKey={publishableKey}
+        returnPath="/workspace"
+      />
       <p>
         <Link className="text-link" href="/workspace?billing=cancelled">
           Cancel and return to Workspace

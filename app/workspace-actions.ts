@@ -4,6 +4,10 @@ import { randomUUID } from 'node:crypto';
 import Stripe from 'stripe';
 import { currentUser } from '@/lib/session';
 import { workspaceCustomer } from '@/lib/workspace-stripe';
+import {
+  createWorkspaceCreditCheckoutSession,
+  finalizeWorkspaceCreditCheckoutSession,
+} from '@/lib/workspace-checkout';
 import { verifiedStripe } from '@/lib/stripe';
 import { query } from '@/lib/db';
 import { ensureSignupCredits } from '@/lib/credits';
@@ -457,6 +461,69 @@ export async function createWorkspaceCreditPaymentIntent(
   }
 }
 
+
+
+export async function startWorkspaceCreditCheckout(amountUsd?: number | string | null) {
+  const user = await currentUser();
+  if (!user?.id) return { error: 'Sign in required.' } as const;
+  try {
+    const session = await createWorkspaceCreditCheckoutSession({
+      userId: user.id,
+      amountUsd,
+    });
+    return {
+      url: session.url,
+      sessionId: session.sessionId,
+      purchaseId: session.purchaseId,
+      credits: session.quote.credits,
+      amountCents: session.quote.usdAmountCents,
+      presentmentLabel: session.quote.label,
+    } as const;
+  } catch (error) {
+    console.error('startWorkspaceCreditCheckout failed', error);
+    return {
+      error: error instanceof Error ? error.message : 'Unable to start Checkout.',
+    } as const;
+  }
+}
+
+export async function confirmWorkspaceCreditCheckoutSession(input: {
+  sessionId?: string | null;
+  purchaseId?: string | null;
+}) {
+  const user = await currentUser();
+  if (!user?.id) return { status: 'failed' as const, error: 'Sign in required.' };
+  const sessionId = typeof input.sessionId === 'string' ? input.sessionId.trim() : '';
+  if (!sessionId.startsWith('cs_')) {
+    return { status: 'failed' as const, error: 'Missing checkout session.' };
+  }
+  try {
+    const status = await finalizeWorkspaceCreditCheckoutSession({
+      userId: user.id,
+      sessionId,
+      purchaseId: input.purchaseId || null,
+    });
+    if (status === 'succeeded') {
+      revalidatePath('/workspace');
+      revalidatePath('/checkout/credits');
+      const billing = await getWorkspaceBillingData();
+      return {
+        status: 'succeeded' as const,
+        credits: 'error' in billing ? undefined : billing.balance,
+      } as const;
+    }
+    if (status === 'pending') {
+      return { status: 'pending' as const };
+    }
+    return { status: 'failed' as const, error: 'Payment did not complete.' } as const;
+  } catch (error) {
+    console.error('confirmWorkspaceCreditCheckoutSession failed', error);
+    return {
+      status: 'failed' as const,
+      error: error instanceof Error ? error.message : 'Unable to confirm Checkout.',
+    } as const;
+  }
+}
 
 export async function workspaceCreditPurchaseStatus(purchaseId: string) {
   const user = await currentUser();

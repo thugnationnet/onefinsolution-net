@@ -5,6 +5,10 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const MESSAGES: Record<string, { tone: 'success' | 'error' | 'info'; text: string }> = {
   success: { tone: 'success', text: 'Payment completed successfully. Your account is up to date.' },
+  credits_added: {
+    tone: 'success',
+    text: 'Workspace credits added. Your balance is ready for API / flagship model usage.',
+  },
   failed: { tone: 'error', text: 'Payment did not complete. No charge was finalized. You can try again when ready.' },
   cancelled: { tone: 'info', text: 'Checkout was cancelled. Your plan and credits were not changed.' },
   action_required: {
@@ -19,10 +23,10 @@ export function BillingStatusBanner({ param = 'billing' }: { param?: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const status = params.get(param);
-  const purchase = params.get('purchase');
+  const purchase = params.get('purchase') || params.get('purchase_id');
   const message = useMemo(() => {
     if (!status) return null;
-    if (status === 'success' && purchase) {
+    if ((status === 'success' || status === 'credits_added') && purchase) {
       return {
         tone: 'success' as const,
         text: 'Workspace credit purchase completed. Your balance will refresh shortly if it has not already.',
@@ -40,6 +44,9 @@ export function BillingStatusBanner({ param = 'billing' }: { param?: string }) {
     if (!status && !purchase) return;
     const next = new URLSearchParams(params.toString());
     next.delete(param);
+      next.delete('session_id');
+      next.delete('purchase_id');
+      next.delete('purchase');
     // keep purchase id briefly for fulfillment polling; drop billing flag after show
     const query = next.toString();
     const timer = window.setTimeout(() => {

@@ -4,12 +4,14 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { WorkspaceCreditCheckout } from '@/components/workspace-credit-checkout';
 import { ArrowUp, ChevronLeft, ChevronRight, CreditCard, FileText, History, LayoutGrid, Plus, Settings, Wallet, UserRound, X } from 'lucide-react';
 import {
   getWorkspaceBillingData,
   saveWorkspaceCard,
   setWorkspaceAutoReloadSettings,
   workspaceCreditPurchaseStatus,
+  confirmWorkspaceCreditCheckoutSession,
 } from '@/app/workspace-actions';
 import { ConversationTools, exportConversation } from './conversation-tools';
 import { MessageContent } from './message-content';
@@ -193,6 +195,8 @@ export function WorkspaceApplication({
       next.delete('payment_intent');
       next.delete('payment_intent_client_secret');
       next.delete('redirect_status');
+      next.delete('session_id');
+      next.delete('purchase_id');
       const query = next.toString();
       router.replace(query ? `/workspace?${query}` : '/workspace', { scroll: false });
     }
@@ -362,10 +366,10 @@ export function WorkspaceApplication({
               <span className="workspace-metric-label">AVAILABLE WORKSPACE CREDITS</span>
               <strong>{loading ? '…' : balance ?? (isAuthenticated ? '—' : 'Sign in')}</strong>
               <span className="workspace-muted-copy">{'creditCost' in data ? `${data.creditCost} credit${data.creditCost === 1 ? '' : 's'} used when a task completes successfully.` : isAuthenticated ? 'Credit pricing is temporarily unavailable.' : 'Sign in to view your balance and Workspace credit usage.'}</span>
-              <button className="workspace-primary-button" type="button" onClick={() => void beginPurchase()} disabled={isAuthenticated && !publishableKey}>
+              <button className="workspace-primary-button" type="button" onClick={() => void beginPurchase()} disabled={!isAuthenticated}>
                 <Plus size={16} /> {isAuthenticated ? 'Add credits · $5' : 'Sign in to add credits'}
               </button>
-              {isAuthenticated && !publishableKey && <span className="workspace-muted-copy">Credit checkout is not configured yet.</span>}
+              {!isAuthenticated && <span className="workspace-muted-copy">Sign in to buy credits.</span>}
             </article>
             <article className="workspace-metric-card">
               <span className="workspace-metric-label">COMPLETED TASKS</span>
@@ -625,7 +629,7 @@ export function WorkspaceApplication({
                 <h2 id="workspace-access-title">Add credits to continue</h2>
                 <p>You need more Workspace credits to run this task. Add a one-time credit pack; it does not start a chat subscription.</p>
                 <div className="workspace-access-actions">
-                  <button className="workspace-primary-button" type="button" disabled={!publishableKey} onClick={() => { setAccessPrompt(null); void beginPurchase(); }}>
+                  <button className="workspace-primary-button" type="button" disabled={false} onClick={() => { setAccessPrompt(null); void beginPurchase(); }}>
                     <Plus size={16} /> Add credits · $5
                   </button>
                   {!publishableKey && <span className="workspace-muted-copy">Credit checkout is not configured yet.</span>}
