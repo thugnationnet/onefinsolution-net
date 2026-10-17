@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { PaymentMethodsPanel } from '@/components/payment-methods-panel';
-import planIds from '@/billing/personal-plan-ids.json';
+import { loadPersonalPlanIds } from '@/lib/personal-plan-ids';
 import { findPlan, plans, priceLabel } from '@/lib/plans';
 import { currentUser } from '@/lib/session';
 import { ownedQuery } from '@/lib/db';
@@ -14,8 +14,8 @@ import { PlanSwitcher } from '@/components/plan-switcher';
 import { PlanManagement } from '@/components/plan-management';
 import { BillingStatusBanner } from '@/components/billing-status-banner';
 
-function planTitle(priceId: string) {
-  const key = Object.entries(planIds.prices).find(([, id]) => id === priceId)?.[0];
+function planTitle(priceId: string, prices: Record<string, string>) {
+  const key = Object.entries(prices).find(([, id]) => id === priceId)?.[0];
   return key ? `${findPlan(key).name} - ${priceLabel(findPlan(key))}` : 'Legacy subscription';
 }
 
@@ -25,6 +25,7 @@ export default async function Billing({
   searchParams: Promise<{ setup_intent?: string }>;
 }) {
   const params = await searchParams;
+  const planIds = loadPersonalPlanIds();
   const user = await currentUser();
   if (!user) redirect('/sign-in');
 
@@ -67,7 +68,7 @@ export default async function Billing({
             return (
             <article className="panel" key={sub.id}>
               <div className="flex justify-between gap-4">
-                <h2>{planTitle(sub.price_id)}</h2>
+                <h2>{planTitle(sub.price_id, planIds.prices)}</h2>
                 <span className="badge">{sub.status}</span>
               </div>
               <p className="small-copy break-all">Reference: {sub.id}</p>
