@@ -125,7 +125,8 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
       : null;
 
   if (trialEndUnix) {
-    await query('update billing_enrollments set trial_end=to_timestamp($1) where user_id=$2 and request_id=$3', [
+    // billing_enrollments.trial_end is bigint (unix seconds), not timestamptz.
+    await query('update billing_enrollments set trial_end=$1 where user_id=$2 and request_id=$3', [
       trialEndUnix, userId, enrollment.request_id,
     ]);
   }
