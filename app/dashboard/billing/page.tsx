@@ -12,18 +12,16 @@ import { PageHeading } from '@/components/page-heading';
 import { PlanSwitcher } from '@/components/plan-switcher';
 import { PlanManagement } from '@/components/plan-management';
 import { BillingStatusBanner } from '@/components/billing-status-banner';
+import { verifiedStripe } from '@/lib/stripe';
+import { managedPlan } from '@/lib/subscription-catalog';
+import { formatMoney, normalizeBillingCurrency } from '@/lib/billing-currency';
 
 function planTitle(priceId: string, prices: Record<string, string>) {
   const key = Object.entries(prices).find(([, id]) => id === priceId)?.[0];
   return key ? `${findPlan(key).name} - ${priceLabel(findPlan(key))}` : 'Legacy subscription';
 }
 
-export default async function Billing({
-  searchParams,
-}: {
-  searchParams: Promise<{ setup_intent?: string }>;
-}) {
-  const params = await searchParams;
+export default async function Billing() {
   const planIds = loadPersonalPlanIds();
   const user = await currentUser();
   if (!user) redirect('/sign-in');
@@ -36,6 +34,15 @@ export default async function Billing({
     ),
     readPreferences(user.id),
   ]);
+  const stripe = verifiedStripe();
+  const verifiedPlans = new Map(await Promise.all([...new Set(subscriptions.map(sub => String(sub.price_id)))].map(async id => {
+    try {
+      const price = await stripe.prices.retrieve(id);
+      const plan = managedPlan(price);
+      const currency = normalizeBillingCurrency(price.currency);
+      return [id, plan && currency ? { key: plan.key, label: `${formatMoney(price.unit_amount!, currency)} / ${plan.interval}` } : null] as const;
+    } catch { return [id, null] as const; }
+  })));
 
   return (
     <div className="page-wrap">
@@ -61,13 +68,14 @@ export default async function Billing({
       <section className="stack">
         {subscriptions.length ? (
           subscriptions.map((sub) => {
-            const currentPlanKey = Object.entries(planIds.prices).find(([, id]) => id === sub.price_id)?.[0] || null;
+            const verifiedPlan = verifiedPlans.get(sub.price_id);
+            const currentPlanKey = verifiedPlan?.key || Object.entries(planIds.prices).find(([, id]) => id === sub.price_id)?.[0] || null;
             const currentPlan = plans.find((plan) => plan.key === currentPlanKey);
             const nextPlan = plans.find((plan) => plan.key === sub.next_plan_key);
             return (
             <article className="panel" key={sub.id}>
               <div className="flex justify-between gap-4">
-                <h2>{planTitle(sub.price_id, planIds.prices)}</h2>
+                <h2>{verifiedPlan ? `${findPlan(verifiedPlan.key).name} - ${verifiedPlan.label}` : planTitle(sub.price_id, planIds.prices)}</h2>
                 <span className="badge">{sub.status}</span>
               </div>
               <p className="small-copy break-all">Reference: {sub.id}</p>
@@ -96,7 +104,7 @@ export default async function Billing({
               {['active', 'trialing'].includes(sub.status) && !sub.cancel_at_period_end && currentPlanKey ? (
                 <PlanSwitcher
                   currentPlanKey={currentPlanKey}
-                  currentPriceLabel={currentPlan ? priceLabel(currentPlan) : null}
+                  currentPriceLabel={verifiedPlan?.label || (currentPlan ? priceLabel(currentPlan) : null)}
                   renewalDate={sub.period_end}
                   scheduledPlanKey={plans.some((plan) => plan.key === sub.next_plan_key) ? sub.next_plan_key : null}
                   scheduledPlanName={nextPlan?.name || null}
@@ -119,7 +127,7 @@ export default async function Billing({
       <section className="panel stack section-space">
         <div>
           <h2>Payment methods</h2>
-          <p className="muted">Cards saved after a successful subscription payment. There is no separate card-setup step.</p>
+          <p className="muted">Add a card, choose your default for renewals, or remove an unused payment method.</p>
         </div>
         <PaymentMethodsPanel />
       </section>

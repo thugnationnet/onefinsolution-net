@@ -1,4 +1,5 @@
 import 'server-only';
+import { createHash } from 'node:crypto';
 import Stripe from 'stripe';
 import { query, transaction } from './db';
 import { creditPlans } from './credit-config';
@@ -11,6 +12,8 @@ import { normalizeBillingCurrency } from './billing-currency';
 import { stripeObjectMatchesMode } from './billing-environment';
 import { sitePath } from './site-url';
 import { assertWorkspaceCreditAmountCents, creditsFromAmountCents } from './workspace-credit-pack';
+import { setSubscriptionDefault } from './subscription-payment-methods';
+import { stripeCustomerId, stripePaymentMethodId } from './billing-scope';
 
 async function owner(
   customer: string | Stripe.Customer | Stripe.DeletedCustomer | null,
@@ -42,6 +45,11 @@ async function recordSubscription(user: string, sub: Stripe.Subscription) {
   await query('update billing_subscriptions set next_plan_key=null,next_plan_at=null where id=$1 and next_plan_at<=$2',[sub.id,new Date(item.current_period_start*1000).toISOString()]);
   const plan=managedPlan(item.price);
   if(plan && sub.status==='trialing' && sub.trial_end && sub.default_payment_method) {
+    if (/^[0-9a-f-]{36}$/i.test(sub.metadata.enrollment_id || '')) {
+      await query(`insert into billing_trial_claims(user_id,card_hash,request_id) values($1,$2,$3)
+        on conflict(user_id) do nothing`,
+        [user, createHash('sha256').update(`subscription-customer:${stripeCustomerId(sub.customer)}`).digest('hex'), sub.metadata.enrollment_id]);
+    }
     const [claim]=await query('select 1 from billing_trial_claims where user_id=$1 and request_id=$2',[user,sub.metadata.enrollment_id]);
     if(claim) {
       await query(`insert into membership_access(subscription_id,user_id,plan_key,expires_at) values($1,$2,$3,$4)
@@ -237,6 +245,67 @@ export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
     const session = await stripe.checkout.sessions.retrieve((event.data.object as Stripe.Checkout.Session).id, {
       expand: ['payment_intent'],
     });
+    if (session.metadata?.app === 'chatbot-template' && session.metadata.billing_scope === 'subscription') {
+      if (!stripeObjectMatchesMode(session.livemode) || session.status !== 'complete' ||
+          !['paid', 'no_payment_required'].includes(session.payment_status)) throw new Error('Subscription checkout is not complete.');
+      const customer = stripeCustomerId(session.customer);
+      const user = await owner(session.customer);
+      if (!customer || session.metadata.user_id !== user || session.client_reference_id !== user) throw new Error('Checkout owner mismatch.');
+      if (session.mode === 'setup' && session.metadata.flow === 'subscription-card-setup') {
+        const id = typeof session.setup_intent === 'string' ? session.setup_intent : session.setup_intent?.id;
+        if (!id) throw new Error('Missing card setup.');
+        const setup = await stripe.setupIntents.retrieve(id);
+        const method = stripePaymentMethodId(setup.payment_method);
+        if (!stripeObjectMatchesMode(setup.livemode) || setup.status !== 'succeeded' ||
+            stripeCustomerId(setup.customer) !== customer || setup.metadata?.billing_scope !== 'subscription' ||
+            setup.metadata?.user_id !== user || !method) throw new Error('Card setup is not verified.');
+        // Persist completion so webhook retries and browser returns do not reset a later default.
+        await transaction(async client => {
+          await client.query('select id from app_users where id=$1 for update', [user]);
+          const reference = `subscription-card-saved:${session.id}`;
+          if ((await client.query('select 1 from billing_notices where reference=$1', [reference])).rows.length) return;
+          await setSubscriptionDefault(stripe, customer, method);
+          await client.query('insert into billing_notices(reference,user_id,subject,body) values($1,$2,$3,$4)',
+            [reference, user, 'Subscription payment method saved', 'Your new card is now the default for Home Page Chat Plus renewals.']);
+        });
+        for await (const sub of stripe.subscriptions.list({ customer, status: 'all', limit: 100 })) {
+          if (sub.metadata.app === 'chatbot-template') await recordSubscription(user, sub);
+        }
+        return;
+      }
+      if (session.mode !== 'subscription' || session.metadata.flow !== 'subscription-checkout') throw new Error('Unexpected subscription checkout flow.');
+      const subscriptionId = typeof session.subscription === 'string' ? session.subscription : session.subscription?.id;
+      if (!subscriptionId) throw new Error('Missing subscription.');
+      const sub = await stripe.subscriptions.retrieve(subscriptionId);
+      if (!stripeObjectMatchesMode(sub.livemode) || stripeCustomerId(sub.customer) !== customer ||
+          sub.metadata.enrollment_id !== session.metadata.enrollment_id || sub.metadata.billing_scope !== 'subscription') {
+        throw new Error('Subscription checkout mismatch.');
+      }
+      const method = stripePaymentMethodId(sub.default_payment_method);
+      if (!method && ['active', 'trialing'].includes(sub.status)) throw new Error('Subscription payment method is not saved yet.');
+      if (session.metadata.mode === 'trial') {
+        await query(`insert into billing_trial_claims(user_id,card_hash,request_id) values($1,$2,$3)
+          on conflict(user_id) do nothing`,
+          [user, createHash('sha256').update(`subscription-customer:${customer}`).digest('hex'), session.metadata.enrollment_id]);
+      }
+      await query(`update billing_enrollments set subscription_id=$1,trial_end=$2,consent_at=coalesce(consent_at,now())
+        where user_id=$3 and request_id=$4`, [sub.id, sub.trial_end, user, session.metadata.enrollment_id]);
+      if (method) {
+        const customerRecord = await stripe.customers.retrieve(customer);
+        if (!customerRecord.deleted && !customerRecord.invoice_settings.default_payment_method) {
+          await stripe.customers.update(customer, { invoice_settings: { default_payment_method: method } });
+        }
+      }
+      await recordSubscription(user, sub);
+      const invoice = typeof sub.latest_invoice === 'string' ? sub.latest_invoice : sub.latest_invoice?.id;
+      if (invoice) {
+        const latest = await stripe.invoices.retrieve(invoice);
+        if (latest.status === 'paid') await fulfillStripeEvent(stripe, {
+          type: 'invoice.paid', livemode: session.livemode, data: { object: { id: invoice } },
+        } as Stripe.Event);
+      }
+      return;
+    }
     if (session.mode !== 'payment') return;
     if (session.payment_status !== 'paid' && event.type === 'checkout.session.completed') {
       // async_payment_succeeded handles delayed methods; ignore unpaid completed shells

@@ -14,6 +14,9 @@ import { fulfillStripeEvent } from '@/lib/stripe-fulfillment';
 import { expectedStripeLivemode, stripeObjectMatchesMode } from '@/lib/billing-environment';
 import { query } from '@/lib/db';
 import type Stripe from 'stripe';
+import { sitePath } from '@/lib/site-url';
+import { setSubscriptionDefault } from '@/lib/subscription-payment-methods';
+import { resolvePresentmentCurrency } from '@/lib/billing-currency';
 
 async function context() {
   const user = await currentUser();
@@ -92,15 +95,7 @@ export async function listPaymentMethodsAction(): Promise<
 export async function setDefaultPaymentMethodAction(paymentMethodId: string) {
   try {
     const { customer, stripe } = await context();
-    await requireOwnedPaymentMethod(stripe, customer, paymentMethodId);
-    await stripe.customers.update(customer, {
-      invoice_settings: { default_payment_method: paymentMethodId },
-    });
-    for await (const sub of stripe.subscriptions.list({ customer, status: 'all', limit: 100 })) {
-      if (sub.metadata.app === 'chatbot-template' && !['canceled', 'incomplete_expired'].includes(sub.status)) {
-        await stripe.subscriptions.update(sub.id, { default_payment_method: paymentMethodId });
-      }
-    }
+    await setSubscriptionDefault(stripe, customer, paymentMethodId);
     return { success: true as const, message: 'Default payment method updated.' };
   } catch (error) {
     return {
@@ -126,12 +121,40 @@ export async function detachPaymentMethodAction(paymentMethodId: string) {
       }
     }
 
+    for await (const sub of stripe.subscriptions.list({ customer, status: 'all', limit: 100 })) {
+      if (!['canceled', 'incomplete_expired'].includes(sub.status) && stripePaymentMethodId(sub.default_payment_method) === paymentMethodId) {
+        return { error: 'This card is used for subscription renewal. Set another default card first.' };
+      }
+    }
     await stripe.paymentMethods.detach(paymentMethodId);
     return { success: true as const, message: 'Payment method removed.' };
   } catch (error) {
     return {
       error: error instanceof Error ? error.message : 'Unable to remove this payment method.',
     };
+  }
+}
+
+export async function addSubscriptionPaymentMethodAction() {
+  try {
+    const user = await currentUser();
+    if (!user) throw new Error('Please sign in.');
+    await throttle(`payment-method:${user.id}`, 20);
+    const customer = await currentCustomer(true);
+    if (!customer) throw new Error('Billing account unavailable.');
+    const stripe = verifiedStripe();
+    const metadata = { app: 'chatbot-template', billing_scope: 'subscription', flow: 'subscription-card-setup', user_id: user.id };
+    const session = await stripe.checkout.sessions.create({
+      mode: 'setup', customer, client_reference_id: user.id,
+      allowed_payment_method_types: ['card'], currency: await resolvePresentmentCurrency(stripe),
+      metadata, setup_intent_data: { metadata },
+      success_url: sitePath('/subscribe/return?session_id={CHECKOUT_SESSION_ID}'),
+      cancel_url: sitePath('/dashboard/billing?billing=cancelled'),
+    }, { idempotencyKey: `subscription-card:${user.id}:${randomUUID()}` });
+    if (!session.url || !stripeObjectMatchesMode(session.livemode)) throw new Error('Card setup is unavailable.');
+    return { url: session.url };
+  } catch (error) {
+    return { error: error instanceof Error ? error.message : 'Unable to add a payment method.' };
   }
 }
 

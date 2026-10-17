@@ -9,8 +9,8 @@ export async function prepareSubscription(key:string,mode:'trial'|'paid') {
   await throttle(`enroll:${user.id}`,20);
   try{return {data:await prepareEnrollment(user.id,key,mode)};}catch(error){return {error:error instanceof Error?error.message:'Unable to start subscription checkout.'};}
 }
-export async function finishSubscription(enrollmentId:string,consent:boolean) {
+export async function finishSubscription(sessionId:string) {
   const user=await currentUser();if(!user)throw new Error('Please sign in first.');
   await throttle(`subscribe:${user.id}`,20);
-  try{const data=await completeEnrollment(user.id,enrollmentId,consent);revalidatePath('/dashboard');return {data};}catch(error){return {error:error instanceof Error?error.message:'Unable to finish subscription.'};}
+  try{const data=await completeEnrollment(user.id,sessionId);revalidatePath('/dashboard/billing');revalidatePath('/');return {data};}catch(error){return {error:error instanceof Error?error.message:'Unable to finish checkout.'};}
 }

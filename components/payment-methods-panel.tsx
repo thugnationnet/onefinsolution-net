@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState, useTransition } from 'react';
 import {
+  addSubscriptionPaymentMethodAction,
   detachPaymentMethodAction,
   listPaymentMethodsAction,
   setDefaultPaymentMethodAction,
@@ -37,13 +38,21 @@ export function PaymentMethodsPanel() {
       <div>
         <h3 className="text-base font-semibold">Saved payment methods</h3>
         <p className="muted text-sm">
-          Cards appear here after a successful subscription payment. There is no separate card-setup step.
+          Manage cards for your Home Page Chat Plus subscription. New cards are saved securely on Stripe and become your default for renewals.
         </p>
       </div>
+      <div><Button type="button" disabled={pending} onClick={() => startTransition(async () => {
+        setError(''); setNotice('');
+        try {
+          const result = await addSubscriptionPaymentMethodAction();
+          if (result.error || !result.url) setError(result.error || 'Unable to open Stripe Checkout.');
+          else window.location.assign(result.url);
+        } catch { setError('Unable to open Stripe Checkout. Please try again.'); }
+      })}>{pending ? 'Please wait…' : 'Add payment method'}</Button></div>
       {error ? <p className="notice error" role="alert">{error}</p> : null}
       {notice ? <p className="notice">{notice}</p> : null}
       {methods.length === 0 ? (
-        <p className="muted text-sm">No cards on file yet. Complete a subscription payment to save a card for renewals.</p>
+        <p className="muted text-sm">No payment method saved. Add a card for your subscription or trial renewal.</p>
       ) : (
         <ul className="stack gap-sm">
           {methods.map((method) => (

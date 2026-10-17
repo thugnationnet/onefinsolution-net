@@ -34,7 +34,7 @@ export async function currentCustomer(create=false) {
   const customer=await stripe.customers.create({
     email:user.email,
     metadata: billingCustomerMetadata('subscription', user.id),
-  });
+  }, { idempotencyKey: `subscription-customer:${user.id}` });
   await query('insert into billing_customers(user_id,customer_id) values($1,$2) on conflict(user_id) do nothing',[user.id,customer.id]);
   const [saved]=await query('select customer_id from billing_customers where user_id=$1',[user.id]);
   if(saved?.customer_id!==customer.id) throw new Error('Billing account conflict.');
@@ -100,7 +100,9 @@ export function createStripeBilling() {
         const stripe = await verifiedStripe();
         const sub = await stripe.subscriptions.retrieve(id);
         const subCustomerId = typeof sub.customer === 'string' ? sub.customer : sub.customer?.id;
-        if (!customer || !subCustomerId || subCustomerId !== customer || !stripeObjectMatchesMode(sub.livemode)) throw new Error('Subscription not found.');
+        if (!customer || !subCustomerId || subCustomerId !== customer || !stripeObjectMatchesMode(sub.livemode) ||
+            sub.metadata.app !== 'chatbot-template' || (sub.metadata.billing_scope && sub.metadata.billing_scope !== 'subscription') ||
+            !['active', 'trialing', 'past_due', 'unpaid'].includes(sub.status)) throw new Error('Subscription not found.');
         if (settings.cancel_at_period_end && sub.schedule) {
           const schedule = await stripe.subscriptionSchedules.retrieve(typeof sub.schedule === 'string' ? sub.schedule : sub.schedule.id);
           if (schedule.metadata?.app !== 'chatbot-template') throw new Error('Subscription schedule is managed outside this app.');
@@ -130,14 +132,13 @@ export async function schedulePlanChange(planSelection: string) {
   }
   const plan=findPlan(planKey),customer=await currentCustomer();
   if(!customer) throw new Error('No subscription found.');
-  const presentmentCurrency=await resolvePresentmentCurrency(stripe);
-  const price=await approvedPrice(stripe,planKey,presentmentCurrency);
   return transaction(async client=>{
     await client.query('select id from app_users where id=$1 for update',[user.id]);
     const list=await stripe.subscriptions.list({customer,status:'all',limit:100});
     const active=list.data.filter(sub=>!['canceled','incomplete_expired'].includes(sub.status));
     if(list.has_more||active.length!==1||!['active','trialing'].includes(active[0].status)) throw new Error('Resolve your existing subscription before changing plans.');
     const sub=active[0],item=sub.items.data[0];
+    const price=await approvedPrice(stripe,planKey,item.price.currency);
     if(!stripeObjectMatchesMode(sub.livemode)||sub.metadata.app!=='chatbot-template'||sub.cancel_at_period_end||sub.items.data.length!==1||item.quantity!==1) throw new Error('Reactivate renewal or contact support before switching plans.');
     const schedule=sub.schedule?await stripe.subscriptionSchedules.retrieve(typeof sub.schedule==='string'?sub.schedule:sub.schedule.id):null;
     if(schedule&&schedule.metadata?.app!=='chatbot-template') throw new Error('This schedule is managed outside One Fin.');

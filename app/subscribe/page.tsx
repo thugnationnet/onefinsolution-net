@@ -13,7 +13,8 @@ export default async function SubscribePage({
   if (!user) redirect('/sign-in');
 
   const params = await searchParams;
-  const plan = findPlan(params.plan || '');
+  let plan;
+  try { plan = findPlan(params.plan || ''); } catch { redirect('/pricing'); }
   if (!plan || plan.key === 'custom') redirect('/pricing');
   const mode = params.mode === 'paid' ? 'paid' : 'trial';
   if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
@@ -26,11 +27,11 @@ export default async function SubscribePage({
       <h1>{mode === 'trial' ? `Start ${plan.name} free trial` : `Subscribe to ${plan.name}`}</h1>
       <p className="lede">
         {mode === 'trial'
-          ? `${plan.trialDays}-day free trial with no card setup now. Pay ${priceLabel(plan)} when the trial ends (or subscribe & pay now).`
-          : `Pay ${priceLabel(plan)} now to subscribe. No separate card-setup step.`}
+          ? `Try ${plan.name} free for ${plan.trialDays} days. Add your payment method securely on Stripe Checkout for renewal after the trial.`
+          : `Pay ${priceLabel(plan)} on Stripe Checkout to subscribe.`}
       </p>
       <p className="muted">Signed in as {user.email}</p>
-      <SubscriptionForm planKey={plan.key} />
+      <SubscriptionForm planKey={plan.key} initialMode={mode} />
       <p>
         <Link className="text-link" href="/pricing?billing=cancelled">
           Cancel and return to pricing

@@ -12,6 +12,7 @@ import {
 } from '@/app/account-actions';
 import {
   cancelSubscriptionAction,
+  reactivateSubscriptionAction,
   updateUserModelSettings,
 } from '@/app/actions';
 import { PaymentMethodsPanel } from '@/components/payment-methods-panel';
@@ -143,10 +144,10 @@ export function SettingsModal({
     setCanceling(true);
     setMessage(null);
     setError(null);
-    const result = await cancelSubscriptionAction(subscription.subscriptionId);
+    const result = await (subscription.isCancelled ? reactivateSubscriptionAction : cancelSubscriptionAction)(subscription.subscriptionId);
     if (!result.success) setError(result.error || 'Unable to cancel subscription.');
     else {
-      setMessage('Cancellation scheduled for the end of the current period.');
+      setMessage(subscription.isCancelled ? 'Automatic renewal reactivated.' : 'Cancellation scheduled for the end of the current period.');
       await onSettingsChanged?.();
       await load();
     }
@@ -427,9 +428,9 @@ export function SettingsModal({
                         <Link className="button secondary" href="/dashboard/billing" onClick={onClose}>
                           Plans & billing
                         </Link>
-                        {!subscription.isCancelled ? (
+                        {['active', 'trialing', 'past_due'].includes(subscription.status || '') ? (
                           <Button type="button" variant="outline" disabled={canceling} onClick={() => void onCancelSubscription()}>
-                            {canceling ? 'Canceling…' : 'Cancel at period end'}
+                            {canceling ? 'Updating…' : subscription.isCancelled ? 'Reactivate renewal' : 'Cancel at period end'}
                           </Button>
                         ) : null}
                       </div>
