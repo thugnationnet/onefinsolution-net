@@ -11,13 +11,13 @@ function CardForm({
   planKey,
   mode,
   setupId,
-  clientSecret,
+  confirmKind,
   complete,
 }: {
   planKey: string;
   mode: 'trial' | 'paid';
   setupId: string;
-  clientSecret: string;
+  confirmKind: 'payment' | 'setup';
   complete: (value: string) => Promise<void>;
 }) {
   const stripe = useStripe();
@@ -34,18 +34,21 @@ function CardForm({
     setBusy(true);
     setError('');
     try {
-      const existing = await stripe.retrieveSetupIntent(clientSecret);
-      if (existing.setupIntent?.status === 'succeeded') {
-        await complete(setupId);
-        return;
-      }
-      const result = await stripe.confirmSetup({
-        elements,
-        confirmParams: { return_url: setupReturnUrl },
-        redirect: 'if_required',
-      });
+      // Confirm the REAL subscription invoice (or $0 trial setup). No separate card-save step.
+      const result =
+        confirmKind === 'setup'
+          ? await stripe.confirmSetup({
+              elements,
+              confirmParams: { return_url: setupReturnUrl },
+              redirect: 'if_required',
+            })
+          : await stripe.confirmPayment({
+              elements,
+              confirmParams: { return_url: setupReturnUrl },
+              redirect: 'if_required',
+            });
       if (result.error) throw new Error(result.error.message);
-      await complete(result.setupIntent?.id || setupId);
+      await complete(setupId);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Please try again.');
     } finally {
@@ -58,8 +61,8 @@ function CardForm({
       <PaymentElement />
       <label className="setting-row">
         <span>
-          I authorize One Fin to save this card and charge {priceLabel(plan)} automatically{' '}
-          {mode === 'trial' ? `after my ${plan.trialDays}-day free trial` : 'starting today'}, until I cancel. I agree to
+          I authorize One Fin to charge {priceLabel(plan)}{' '}
+          {mode === 'trial' ? `after my ${plan.trialDays}-day free trial` : 'in this step'}, save this card for renewals until I cancel. I agree to
           the{' '}
           <Link className="text-link" href={publicSitePath('/payment-policy')}>
             payment and cancellation terms
@@ -74,7 +77,7 @@ function CardForm({
         </p>
       )}
       <button className="button" disabled={busy || !stripe || !consent}>
-        {busy ? 'Verifying card...' : mode === 'trial' ? 'Verify card & start free trial' : 'Verify card & subscribe'}
+        {busy ? 'Processing…' : mode === 'trial' ? 'Start free trial' : 'Pay & subscribe'}
       </button>
     </form>
   );
@@ -128,7 +131,7 @@ export function SubscriptionForm({
   resumeSetup?: string;
 }) {
   const stripe = useMemo(() => loadStripe(publishableKey), [publishableKey]);
-  const [setup, setSetup] = useState<{ clientSecret: string; setupId: string } | null>(null);
+  const [setup, setSetup] = useState<{ clientSecret: string; setupId: string; confirmKind: 'payment' | 'setup' } | null>(null);
   const [paymentSecret, setPaymentSecret] = useState<string | null>(null);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
@@ -194,7 +197,7 @@ export function SubscriptionForm({
             planKey={planKey}
             mode={mode}
             setupId={setup.setupId}
-            clientSecret={setup.clientSecret}
+            confirmKind={setup.confirmKind}
             complete={complete}
           />
         </Elements>
@@ -210,7 +213,17 @@ export function SubscriptionForm({
               else {
                 const result = await prepareSubscription(planKey, mode);
                 if (result.error) throw new Error(result.error);
-                if (result.data) setSetup(result.data);
+                if (result.data?.clientSecret && result.data.setupId) {
+                  setSetup({
+                    clientSecret: result.data.clientSecret,
+                    setupId: result.data.setupId,
+                    confirmKind: result.data.confirmKind === 'setup' ? 'setup' : 'payment',
+                  });
+                } else if (result.data?.subscriptionId && !result.data.clientSecret) {
+                  setNotice('Your subscription is already active.');
+                } else if (result.data) {
+                  throw new Error('Unable to start checkout.');
+                }
               }
             } catch (error) {
               setError(error instanceof Error ? error.message : 'Please try again.');
@@ -223,7 +236,7 @@ export function SubscriptionForm({
             ? 'Preparing...'
             : resumeSetup
               ? 'Accept displayed terms & finish subscription'
-              : 'Continue to secure card setup'}
+              : 'Continue to payment'}
         </button>
       )}
       <p>

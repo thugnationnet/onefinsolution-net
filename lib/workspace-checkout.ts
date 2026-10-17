@@ -22,7 +22,7 @@ export type WorkspaceCheckoutSessionResult = {
  *
  * Design choices for conversion:
  * - mode=payment one-time charge (no subscription)
- * - no setup_future_usage / no forced card-on-file on first purchase
+ * - setup_future_usage on the real charge so the paid card is saved after success (no separate verification hold)
  * - 3DS handled entirely by Stripe-hosted Checkout (custom domain when active)
  * - Custom domain pay.onefinsolution.net is applied by Stripe Dashboard when active
  */
@@ -108,8 +108,10 @@ export async function createWorkspaceCreditCheckoutSession(input: {
         success_url: successUrl,
         cancel_url: cancelUrl,
         line_items: lineItems,
-        // One-time capture only — do not request off-session mandates on first buy.
+        // Full pack amount charged once; card saved after success for optional reloads.
         payment_intent_data: {
+          // Save card only after the full credit purchase succeeds (no separate $1/$2 hold).
+          setup_future_usage: 'off_session',
           metadata: sharedMetadata,
           description: productName,
         },

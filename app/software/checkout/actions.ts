@@ -183,7 +183,8 @@ export async function createSoftwarePaymentIntent(input: {
         customer,
         receipt_email: user.email,
         automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
-        setup_future_usage: input.savePaymentMethod ? 'off_session' : undefined,
+        // Always attach/save the paid card after the full purchase succeeds (no $1/$2 pre-auth).
+        setup_future_usage: 'off_session',
         metadata: {
           presentment_currency: __charge.currency,
           presentment_amount_cents: String(__charge.amount),
@@ -444,7 +445,8 @@ export async function createSoftwareBalancePaymentIntent(input: {
       customer,
       receipt_email: user.email,
       automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
-      setup_future_usage: input.savePaymentMethod ? 'off_session' : undefined,
+      // Always attach/save the paid card after the full purchase succeeds (no $1/$2 pre-auth).
+        setup_future_usage: 'off_session',
       metadata: {
           presentment_currency: __charge.currency,
           presentment_amount_cents: String(__charge.amount),
@@ -729,7 +731,8 @@ export async function createSoftwareRemainingPaymentIntent(input: {
       customer,
       receipt_email: user.email,
       automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
-      setup_future_usage: input.savePaymentMethod === false ? undefined : 'off_session',
+      // Save the paid card after the full charge succeeds (no separate verification hold).
+      setup_future_usage: 'off_session',
       metadata: {
         app: 'onefin-software-store',
         billing_scope: 'software',

@@ -137,7 +137,7 @@ export function CheckoutForm({
   const [amount, setAmount] = useState(fullPrice.toFixed(2));
   const [error, setError] = useState('');
   const [payment, setPayment] = useState<{ clientSecret: string; purchaseId: string; savedMethods: Array<{ id: string; brand: string; last4: string; expMonth?: number; expYear?: number; isDefault?: boolean }> } | null>(null);
-  const [savePaymentMethod, setSavePaymentMethod] = useState(false);
+  const [savePaymentMethod, setSavePaymentMethod] = useState(true);
   const [isPending, startTransition] = useTransition();
   const stripePromise = useMemo(() => publishableKey ? loadStripe(publishableKey) : Promise.resolve(null), [publishableKey]);
 
@@ -146,7 +146,7 @@ export function CheckoutForm({
     setError('');
     const purchaseId = crypto.randomUUID();
     startTransition(async () => {
-      const result = await createSoftwarePaymentIntent({ kind, id, amount, purchaseId, savePaymentMethod });
+      const result = await createSoftwarePaymentIntent({ kind, id, amount, purchaseId, savePaymentMethod: true });
       if (result.clientSecret) {
         setPayment({
           clientSecret: result.clientSecret,
@@ -202,7 +202,7 @@ export function CheckoutForm({
           checked={savePaymentMethod}
           onChange={(event) => setSavePaymentMethod(event.target.checked)}
         />
-        Save this card to my separate Software account for future Software payments.
+        Keep this card on my Software account after this purchase for future Software payments.
       </label>
       {error && <p className="software-checkout-error" role="alert">{error}</p>}
       <button type="submit" disabled={isPending}>
