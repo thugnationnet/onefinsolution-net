@@ -98,3 +98,8 @@ Destination_details.txt
 .tmp-set-var.env
 .tmp-env.sh
 app/node_modules
+.stripe-live-ids.json
+.railway-live-sync-result.json
+_tmp_*.txt
+_tmp_*.html
+.tmp_*.txt
