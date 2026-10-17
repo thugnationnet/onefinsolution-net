@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
- * Provision Stripe test Products + one-time Prices for the software storefront.
+ * Provision Stripe Products + one-time Prices for the software storefront (test or --live).
  * Idempotent via price lookup_keys. Does not change PaymentIntent amount logic.
  *
  * Usage: npm run stripe:provision-software
- * Env: STRIPE_SECRET_KEY (sk_test_…), optional STRIPE_EXPECTED_ACCOUNT_ID
+ * Env: STRIPE_SECRET_KEY (sk_test_… or sk_live_… with --live), optional STRIPE_EXPECTED_ACCOUNT_ID
+ * Flags: --live (use live secret; write *.live artifacts)
  *
  * Writes:
  *   .stripe-software-ids.json
@@ -22,13 +23,19 @@ loadEnvConfig(process.cwd());
 
 const SECRET = process.env.STRIPE_SECRET_KEY || '';
 const EXPECTED_ACCOUNT = process.env.STRIPE_EXPECTED_ACCOUNT_ID || '';
+const LIVE = process.argv.includes('--live');
 
 if (!SECRET) {
   console.error('Missing STRIPE_SECRET_KEY');
   process.exit(1);
 }
-if (!SECRET.startsWith('sk_test_')) {
-  console.error('Refusing non-test STRIPE_SECRET_KEY (expected sk_test_…)');
+if (LIVE) {
+  if (!SECRET.startsWith('sk_live_')) {
+    console.error('Refusing non-live STRIPE_SECRET_KEY with --live (expected sk_live_…)');
+    process.exit(1);
+  }
+} else if (!SECRET.startsWith('sk_test_')) {
+  console.error('Refusing non-test STRIPE_SECRET_KEY (expected sk_test_…). Pass --live for production.');
   process.exit(1);
 }
 
@@ -48,6 +55,19 @@ const CATALOG = [
   { id: 'portfolio', name: 'Portfolio Site', priceUsd: 599 },
   { id: 'booking', name: 'Booking System', priceUsd: 699 },
   { id: 'education', name: 'Education Portal', priceUsd: 649 },
+];
+
+/** Curated featured templates (TEMPLATES in templatesData.ts) — stable lookup keys. */
+const CURATED_TEMPLATES = [
+  { id: 'luma', name: 'Luma Creative Studio', priceUsd: 2490 },
+  { id: 'nova', name: 'Nova Admin Dashboard', priceUsd: 3490 },
+  { id: 'forma', name: 'Forma Goods Store', priceUsd: 2990 },
+  { id: 'flow', name: 'Flow Wellness App UI', priceUsd: 1790 },
+  { id: 'arc', name: 'Arc Architecture Portfolio', priceUsd: 2290 },
+  { id: 'spark', name: 'Spark Finance Dashboard', priceUsd: 3190 },
+  { id: 'kinetix', name: 'Kinetix AI SaaS Landing', priceUsd: 2890 },
+  { id: 'atelier', name: 'Atelier Culinary & Hospitality', priceUsd: 2190 },
+  { id: 'pulse', name: 'Pulse DevOps & Status Portal', priceUsd: 2590 },
 ];
 
 const TEMPLATE_PRICE_TIERS = [
@@ -123,7 +143,7 @@ async function assertAccount() {
     console.error(`Stripe account mismatch: got ${account.id}, expected ${EXPECTED_ACCOUNT}`);
     process.exit(1);
   }
-  console.log(`Stripe account: ${account.id} (test)`);
+  console.log(`Stripe account: ${account.id} (${LIVE ? 'live' : 'test'})`);
 }
 
 /**
@@ -282,6 +302,30 @@ async function main() {
   }
 
   console.log(`\nProvisioning ${HTML_TEMPLATE_FILES.length} template products…`);
+  console.log(`
+Provisioning ${CURATED_TEMPLATES.length} curated templates…`);
+  for (const item of CURATED_TEMPLATES) {
+    const productLookup = `onefin_software_template_${item.id}`;
+    const priceLookup = `onefin_software_template_${item.id}_usd`;
+    const row = await provisionOne({
+      kind: 'template',
+      id: item.id,
+      name: `OneFin Template · ${item.name}`,
+      priceUsd: item.priceUsd,
+      productLookup,
+      priceLookup,
+    });
+    rows.push(row);
+    catalogMap[`template:${item.id}`] = {
+      productId: row.productId,
+      priceId: row.priceId,
+      priceUsd: row.priceUsd,
+      kind: 'template',
+      lookup: productLookup,
+    };
+    console.log(`  ✓ curated template ${item.id}  $${item.priceUsd}`);
+  }
+
   for (let i = 0; i < HTML_TEMPLATE_FILES.length; i++) {
     const filename = HTML_TEMPLATE_FILES[i];
     const slug = sanitizeLookupSlug(filename);
@@ -307,13 +351,14 @@ async function main() {
     console.log(`  ✓ template ${slug}  $${priceUsd}`);
   }
 
-  const outPath = resolve(process.cwd(), '.stripe-software-ids.json');
+  const outPath = resolve(process.cwd(), LIVE ? '.stripe-software-ids.live.json' : '.stripe-software-ids.json');
   const payload = {
     generatedAt: new Date().toISOString(),
+    mode: LIVE ? 'live' : 'test',
     accountHint: EXPECTED_ACCOUNT || 'unknown',
     counts: {
       catalog: CATALOG.length,
-      templates: HTML_TEMPLATE_FILES.length,
+      templates: HTML_TEMPLATE_FILES.length + CURATED_TEMPLATES.length,
       total: rows.length,
     },
     items: rows,
@@ -322,7 +367,7 @@ async function main() {
   writeFileSync(outPath, JSON.stringify(payload, null, 2), 'utf8');
 
   const envValue = JSON.stringify(catalogMap);
-  const envSnippetPath = resolve(process.cwd(), '.env.stripe-software-generated');
+  const envSnippetPath = resolve(process.cwd(), LIVE ? '.env.stripe-software-generated.live' : '.env.stripe-software-generated');
   // Escape for dotenv single-quoted value
   const escaped = envValue.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
   writeFileSync(
@@ -333,7 +378,7 @@ async function main() {
 
   console.log('\nDone.');
   console.log(
-    `  Created/reused: ${rows.length} (catalog ${CATALOG.length} + templates ${HTML_TEMPLATE_FILES.length})`,
+    `  Created/reused: ${rows.length} (catalog ${CATALOG.length} + curated ${CURATED_TEMPLATES.length} + html ${HTML_TEMPLATE_FILES.length})`,
   );
   console.log(`  Wrote ${outPath}`);
   console.log(`  Wrote ${envSnippetPath}`);

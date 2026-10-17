@@ -103,3 +103,5 @@ app/node_modules
 _tmp_*.txt
 _tmp_*.html
 .tmp_*.txt
+.stripe-software-ids.live.json
+.env.stripe-software-generated.live

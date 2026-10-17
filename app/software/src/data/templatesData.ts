@@ -1253,5 +1253,13 @@ export function generateMasterLandingHtml(): string {
 </html>`;
 }
 
-/** Curated purchasable templates (billing / checkout allowlist). */
-export const STOREFRONT_TEMPLATES = TEMPLATES;
+/** Purchasable storefront templates (billing / checkout allowlist).
+ *  Includes curated TEMPLATES + full HTML library so every /software link resolves.
+ *  Dedupes by id (HTML filenames take precedence if ever overlapping).
+ */
+export const STOREFRONT_TEMPLATES: TemplateProduct[] = (() => {
+  const byId = new Map<string, TemplateProduct>();
+  for (const item of TEMPLATES) byId.set(item.id, item);
+  for (const item of HTML_STOREFRONT_TEMPLATES) byId.set(item.id, item);
+  return Array.from(byId.values());
+})();
