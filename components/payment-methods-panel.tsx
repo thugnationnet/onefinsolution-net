@@ -148,8 +148,8 @@ export function PaymentMethodsPanel({ compact = false }: { compact?: boolean }) 
         <div>
           <h3 className="text-base font-semibold text-slate-900">Subscription cards only</h3>
           <p className="muted text-sm">
-            These cards pay Chat Plus plans and renewals only. They never charge workspace credits —
-            save a separate card under Workspace → Credit reloads for auto-reload.
+            These cards pay Chat Plus plans and renewals only. They never charge Workspace credits —
+            save a separate card under Workspace → Payment settings for automatic top-ups.
           </p>
         </div>
         <Button type="button" variant="outline" onClick={() => void startAddCard()}>

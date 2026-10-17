@@ -145,7 +145,7 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
       ),
     );
 
-    // Only block on a recent pending auto-reload (not manual checkout drafts).
+    // Only block on a recent pending automatic top-up (not manual checkout drafts).
     if (pending) {
       const age = Date.now() - new Date(pending.created_at).getTime();
       if (Number.isFinite(age) && age < PENDING_STALE_MS) {
@@ -260,7 +260,7 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
     const message =
       intent.status === 'requires_action'
         ? 'Card requires authentication; complete a manual credit purchase or update the card.'
-        : `Auto-reload ended with status ${intent.status}.`;
+        : `Automatic top-up ended with status ${intent.status}.`;
     await markAutoReloadFailure(userId, purchaseId, intent.id, message);
     return { attempted: true, charged: false, error: message };
   } catch (error) {
@@ -268,7 +268,7 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
     return {
       attempted: true,
       charged: false,
-      error: error instanceof Error ? error.message : 'Auto-reload failed.',
+      error: error instanceof Error ? error.message : 'Automatic top-up failed.',
     };
   }
 }

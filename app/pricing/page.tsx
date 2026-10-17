@@ -41,7 +41,7 @@ export default function PricingPage() {
           </Link>
         </p>
         <p className="muted" style={{ fontSize: 13 }}>
-          Checkout is hosted on <code>pay.onefinsolution.net</code> (Stripe custom domain).
+          Secure checkout · credits appear in Workspace right after payment.
         </p>
       </section>
 

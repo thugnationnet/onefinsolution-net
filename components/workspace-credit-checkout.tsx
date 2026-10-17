@@ -87,10 +87,10 @@ function CardSetupForm({ returnPath = '/workspace' }: { returnPath?: string }) {
         </p>
       ) : null}
       <button type="submit" className="button" disabled={busy || !stripe || !elements}>
-        {busy ? 'Saving…' : 'Save card for auto-reload'}
+        {busy ? 'Saving…' : 'Save card for automatic top-ups'}
       </button>
       <p className="muted" style={{ margin: 0, fontSize: 13 }}>
-        Banks may ask you to verify the card once when saving it for future automatic reloads.
+        Your bank may ask you to verify the card once. We only use it for Workspace credit top-ups you enable.
       </p>
     </form>
   );
@@ -175,8 +175,8 @@ function CardSetupPanel({
 }
 
 /**
- * Credits mode → Stripe-hosted Checkout (primary, low-friction, custom domain).
- * Card mode → optional SetupIntent for auto-reload only (not required to buy).
+ * Credits mode → Stripe-hosted Checkout (primary, low-friction).
+ * Card mode → optional saved card for automatic top-ups only (not required to buy).
  */
 export function WorkspaceCreditCheckout({
   mode,
@@ -316,7 +316,7 @@ export function WorkspaceCreditCheckout({
           </div>
         ) : null}
         <div style={{ opacity: 0.75, marginTop: 4 }}>
-          Secure checkout on <code style={{ fontSize: 12 }}>pay.onefinsolution.net</code>
+          Encrypted checkout · card details stay with our payment partner
         </div>
       </div>
 
@@ -333,12 +333,12 @@ export function WorkspaceCreditCheckout({
         onClick={() => void payWithHostedCheckout()}
         style={{ minHeight: 48, fontSize: 16 }}
       >
-        {busy ? 'Redirecting to secure checkout…' : 'Continue to secure checkout'}
+        {busy ? 'Opening secure checkout…' : 'Continue to secure checkout'}
       </button>
 
       <p className="muted" style={{ margin: 0, fontSize: 12, lineHeight: 1.45 }}>
-        You complete payment on Stripe&apos;s hosted page (custom domain when active). After a
-        successful payment you return to Workspace with credits added automatically.
+        You&apos;ll finish payment on a secure checkout page, then return here with credits added
+        automatically. Workspace cards are separate from chat subscription billing.
       </p>
     </div>
   );

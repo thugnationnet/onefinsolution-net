@@ -591,9 +591,9 @@ export async function setWorkspaceAutoReloadSettings(input: {
   amountCents?: number | string | null;
 }): Promise<{ ok?: true; error?: string; autoReload?: WorkspaceAutoReloadSettings }> {
   const user = await currentUser();
-  if (!user) return { error: 'Please sign in to manage Workspace auto-reload.' };
+  if (!user) return { error: 'Please sign in to manage Workspace automatic top-ups.' };
   if (!input || typeof input.enabled !== 'boolean') {
-    return { error: 'Invalid auto-reload settings.' };
+    return { error: 'Invalid automatic top-up settings.' };
   }
 
   const threshold =
@@ -601,7 +601,7 @@ export async function setWorkspaceAutoReloadSettings(input: {
       ? 1
       : Math.floor(Number(input.threshold));
   if (!Number.isSafeInteger(threshold) || threshold < 0 || threshold > 1_000_000) {
-    return { error: 'Choose a valid auto-reload threshold.' };
+    return { error: 'Choose a valid automatic top-up threshold.' };
   }
 
   let reloadAmountCents = workspaceCreditPack.amount;
@@ -618,7 +618,7 @@ export async function setWorkspaceAutoReloadSettings(input: {
     }
   } catch (error) {
     return {
-      error: error instanceof Error ? error.message : 'Invalid auto-reload amount.',
+      error: error instanceof Error ? error.message : 'Invalid automatic top-up amount.',
     };
   }
 
@@ -628,7 +628,7 @@ export async function setWorkspaceAutoReloadSettings(input: {
       [user.id],
     );
     if (input.enabled && !card?.payment_method_id) {
-      return { error: 'Save a Workspace card before enabling auto-reload.' };
+      return { error: 'Save a Workspace card before enabling automatic top-ups.' };
     }
 
     await query(
@@ -670,8 +670,8 @@ export async function setWorkspaceAutoReloadSettings(input: {
       return {
         error:
           error instanceof Error && /auto_reload|reload_amount/i.test(error.message)
-            ? 'Auto-reload is not available until database migrations 015/016 are applied.'
-            : 'Unable to update auto-reload settings. Please try again.',
+            ? 'Automatic top-ups are not available until database migrations 015/016 are applied.'
+            : 'Unable to update automatic top-up settings. Please try again.',
       };
     }
   }

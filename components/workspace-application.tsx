@@ -475,18 +475,18 @@ export function WorkspaceApplication({
           <section className="workspace-panel workspace-reload-panel">
             <div>
               <p className="workspace-eyebrow">CREDIT RELOADS</p>
-              <p className="workspace-muted-copy" style={{marginTop:4}}>Uses a Workspace-only card. Subscription cards are never used for credits or auto-reload.</p>
-              <h2>{autoReloadEnabled ? 'Automatic reloads are on' : 'Automatic reloads are off'}</h2>
+              <p className="workspace-muted-copy" style={{marginTop:4}}>Uses a Workspace-only card. Chat subscription cards are never charged for credits or automatic top-ups.</p>
+              <h2>{autoReloadEnabled ? 'Automatic top-ups are on' : 'Automatic top-ups are off'}</h2>
               <p>
-                When your balance falls to the threshold, Workspace can charge your saved Workspace card
-                off-session for your chosen reload amount (min $5, max $500).
-                Subscription cards are never used.
+                When your Workspace balance falls to the threshold you set, we automatically charge your
+                saved Workspace card for your chosen top-up amount (min $5, max $500). You can turn this
+                off anytime. Chat subscription cards are never used for Workspace credits.
               </p>
               {isAuthenticated ? (
                 <div className="workspace-auto-reload-controls" style={{ display: 'grid', gap: 12, marginTop: 16 }}>
                   
                   <label style={{ display: 'grid', gap: 6 }}>
-                    <span>Reload amount (USD) — min $5, max $500</span>
+                    <span>Top-up amount (USD) — min $5, max $500</span>
                     <input
                       type="number"
                       min={WORKSPACE_CREDIT_MIN_AMOUNT_CENTS / 100}
@@ -550,15 +550,15 @@ export function WorkspaceApplication({
                             }
                             setNotice(
                               result.autoReload.enabled
-                                ? 'Auto-reload enabled for low Workspace balances.'
-                                : 'Auto-reload disabled.',
+                                ? 'Automatic top-ups enabled for low Workspace balances.'
+                                : 'Automatic top-ups turned off.',
                             );
                             void refreshData();
                           }
                         })();
                       }}
                     />
-                    <span>Enable low-balance auto-reload</span>
+                    <span>Enable low-balance automatic top-ups</span>
                   </label>
                   <label style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                     <span>Threshold</span>
@@ -595,10 +595,10 @@ export function WorkspaceApplication({
                     <span className="workspace-muted-copy">credits remaining</span>
                   </label>
                   {!card ? (
-                    <p className="workspace-empty-copy">Save a Workspace card before enabling auto-reload.</p>
+                    <p className="workspace-empty-copy">Save a Workspace card before enabling automatic top-ups.</p>
                   ) : null}
                   {autoReloadLastError ? (
-                    <p className="workspace-empty-copy">Last auto-reload issue: {autoReloadLastError}</p>
+                    <p className="workspace-empty-copy">Last automatic top-up issue: {autoReloadLastError}</p>
                   ) : null}
                 </div>
               ) : (
