@@ -16,8 +16,9 @@ export default async function SubscribePage({
   const plan = findPlan(params.plan || '');
   if (!plan || plan.key === 'custom') redirect('/pricing');
   const mode = params.mode === 'paid' ? 'paid' : 'trial';
-  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '';
-  if (!publishableKey) throw new Error('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is required.');
+  if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
+    throw new Error('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is required.');
+  }
 
   return (
     <div className="page-wrap">
@@ -25,11 +26,11 @@ export default async function SubscribePage({
       <h1>{mode === 'trial' ? `Start ${plan.name} free trial` : `Subscribe to ${plan.name}`}</h1>
       <p className="lede">
         {mode === 'trial'
-          ? `Card required. ${priceLabel(plan)} after ${plan.trialDays} day${plan.trialDays === 1 ? '' : 's'} unless you cancel.`
-          : `${priceLabel(plan)} starts after your card is verified.`}
+          ? `${plan.trialDays}-day free trial with no card setup now. Pay ${priceLabel(plan)} when the trial ends (or subscribe & pay now).`
+          : `Pay ${priceLabel(plan)} now to subscribe. No separate card-setup step.`}
       </p>
       <p className="muted">Signed in as {user.email}</p>
-      <SubscriptionForm planKey={plan.key} mode={mode} publishableKey={publishableKey} resumeSetup={params.setup} />
+      <SubscriptionForm planKey={plan.key} resumeSetup={params.setup} />
       <p>
         <Link className="text-link" href="/pricing?billing=cancelled">
           Cancel and return to pricing

@@ -9,7 +9,6 @@ import { redirect } from 'next/navigation';
 import { readPreferences } from '@/lib/account-service';
 import { accountDate } from '@/lib/dashboard';
 import { PageHeading } from '@/components/page-heading';
-import { BillingCard } from '@/components/billing-card';
 import { PlanSwitcher } from '@/components/plan-switcher';
 import { PlanManagement } from '@/components/plan-management';
 import { BillingStatusBanner } from '@/components/billing-status-banner';
@@ -120,18 +119,10 @@ export default async function Billing({
       <section className="panel stack section-space">
         <div>
           <h2>Payment methods</h2>
-          <p className="muted">Add, update, remove, or set a default card for homepage chat billing.</p>
+          <p className="muted">Cards saved after a successful subscription payment. There is no separate card-setup step.</p>
         </div>
         <PaymentMethodsPanel />
       </section>
-
-      {subscriptions.length > 0 && /^pk_test_/.test(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '') && (
-        <BillingCard
-          publishableKey={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!}
-          unpaidIds={subscriptions.filter((sub) => ['past_due', 'incomplete'].includes(sub.status)).map((sub) => sub.id)}
-          resumeSetup={params.setup_intent}
-        />
-      )}
       <div className="notice">
         This page manages homepage chat subscriptions only. Workspace credit purchases and payment methods are separate.
         Need an invoice copy or a payment correction?{' '}

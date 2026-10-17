@@ -1,13 +1,9 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState, useTransition } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useCallback, useEffect, useState, useTransition } from 'react';
 import {
   listSoftwarePaymentMethods,
-  prepareSoftwareCardUpdate,
   removeSoftwarePaymentMethod,
-  saveSoftwareCard,
   setSoftwareDefaultPaymentMethod,
   updateSoftwareBillingProfile,
 } from '../checkout/actions';
@@ -15,41 +11,6 @@ import type { SoftwareBillingProfile } from '@/lib/software-billing-profile';
 import styles from './software-account.module.css';
 
 type Card = { id: string; brand: string; last4: string; expMonth: number; expYear: number; isDefault: boolean };
-
-function SetupForm({ onDone }: { onDone: () => void }) {
-  const stripe = useStripe();
-  const elements = useElements();
-  const [error, setError] = useState('');
-  const [busy, startTransition] = useTransition();
-
-  function submit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!stripe || !elements) return;
-    setError('');
-    startTransition(async () => {
-      try {
-        const { error: submitError } = await elements.submit();
-        if (submitError) throw new Error(submitError.message || 'Check the card details.');
-        const result = await stripe.confirmSetup({ elements, redirect: 'if_required' });
-        if (result.error) throw new Error(result.error.message || 'Card verification failed.');
-        if (result.setupIntent?.status !== 'succeeded') throw new Error('Card setup has not completed.');
-        const saved = await saveSoftwareCard(result.setupIntent.id);
-        if (saved.error) throw new Error(saved.error);
-        onDone();
-      } catch (failure) {
-        setError(failure instanceof Error ? failure.message : 'Unable to save this card.');
-      }
-    });
-  }
-
-  return (
-    <form className={styles.cardForm} onSubmit={submit}>
-      <PaymentElement options={{ layout: 'tabs' }} />
-      {error && <p className={styles.error} role="alert">{error}</p>}
-      <button type="submit" disabled={busy || !stripe}>{busy ? 'Saving card…' : 'Save Software payment method'}</button>
-    </form>
-  );
-}
 
 function TextField({
   name,
@@ -72,18 +33,15 @@ function TextField({
 
 export function SoftwareBillingManager({
   profile,
-  publishableKey,
 }: {
   profile: SoftwareBillingProfile;
-  publishableKey: string;
+  publishableKey?: string;
 }) {
   const [cards, setCards] = useState<Card[]>([]);
-  const [clientSecret, setClientSecret] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [savingProfile, startProfileTransition] = useTransition();
-  const stripe = useMemo(() => loadStripe(publishableKey), [publishableKey]);
 
   const refreshCards = useCallback(async () => {
     const result = await listSoftwarePaymentMethods();
@@ -113,16 +71,6 @@ export function SoftwareBillingManager({
     });
   }
 
-  async function addCard() {
-    setError('');
-    setMessage('');
-    const result = await prepareSoftwareCardUpdate();
-    if (result.error || !result.clientSecret) {
-      setError(result.error || 'Unable to prepare secure card setup.');
-      return;
-    }
-    setClientSecret(result.clientSecret);
-  }
 
   async function updateCard(id: string, action: 'default' | 'remove') {
     setError('');
@@ -166,19 +114,18 @@ export function SoftwareBillingManager({
           <TextField name="shippingPostal" label="Shipping postal code" value={profile.shippingPostal} />
           <TextField name="shippingCountry" label="Shipping country code" value={profile.shippingCountry} />
         </div>
-        <button type="submit" disabled={savingProfile}>{savingProfile ? 'Saving…' : 'Save Software billing details'}</button>
+        <button type="submit" disabled={savingProfile}>{savingProfile ? 'Savingâ€¦' : 'Save Software billing details'}</button>
       </form>
 
       <section className={styles.cards}>
         <div className={styles.cardsHeading}>
-          <div><h2>Software payment methods</h2><p>Only cards on your separate Software Stripe customer are listed here.</p></div>
-          <button type="button" onClick={() => void addCard()} disabled={!publishableKey}>Add card</button>
+          <div><h2>Software payment methods</h2><p>Cards appear after a successful purchase or balance payment. No separate card-setup step.</p></div>
         </div>
-        {loading ? <p>Loading Software cards…</p> : cards.length === 0 ? <p>No Software payment methods saved yet.</p> : (
+        {loading ? <p>Loading Software cardsâ€¦</p> : cards.length === 0 ? <p>No Software cards yet. Complete a purchase to save a card.</p> : (
           <ul>
             {cards.map((card) => (
               <li key={card.id}>
-                <span><strong>{card.brand} ···· {card.last4}</strong><small>Expires {String(card.expMonth).padStart(2, '0')}/{card.expYear}{card.isDefault ? ' · Default' : ''}</small></span>
+                <span><strong>{card.brand} Â·Â·Â·Â· {card.last4}</strong><small>Expires {String(card.expMonth).padStart(2, '0')}/{card.expYear}{card.isDefault ? ' Â· Default' : ''}</small></span>
                 <span className={styles.cardActions}>
                   {!card.isDefault && <button type="button" onClick={() => void updateCard(card.id, 'default')}>Make default</button>}
                   <button type="button" onClick={() => void updateCard(card.id, 'remove')}>Remove</button>
@@ -186,15 +133,6 @@ export function SoftwareBillingManager({
               </li>
             ))}
           </ul>
-        )}
-        {clientSecret && (
-          <Elements stripe={stripe} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
-            <SetupForm onDone={() => {
-              setClientSecret('');
-              setMessage('Software card saved and set as default.');
-              void refreshCards();
-            }} />
-          </Elements>
         )}
       </section>
     </div>

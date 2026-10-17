@@ -17,7 +17,6 @@ import {
 import { stripeObjectMatchesMode } from '@/lib/billing-environment';
 import {
   assertCustomerMatchesScope,
-  assertSetupIntentOwnedByCustomer,
   requireOwnedPaymentMethod,
   stripePaymentMethodId,
 } from '@/lib/billing-scope';
@@ -557,58 +556,7 @@ export async function listSoftwarePaymentMethods() {
   }
 }
 
-export async function prepareSoftwareCardUpdate() {
-  const user = await currentUser();
-  if (!user) return { error: 'Please sign in to manage software payment methods.' } as const;
-  try {
-    await throttle(`software-payment-method:${user.id}`, 10);
-    const customer = await softwareCustomer(user.id, true);
-    if (!customer) throw new Error('Software billing account unavailable.');
-    const stripe = await verifiedStripe();
-    const setup = await stripe.setupIntents.create({
-      customer,
-      usage: 'off_session',
-      allowed_payment_method_types: ['card'],
-      metadata: { app: 'onefin-software-store', billing_scope: 'software', flow: 'software-card', user_id: user.id },
-    }, { idempotencyKey: `software-card:${user.id}:${randomUUID()}` });
-    if (!setup.client_secret || !stripeObjectMatchesMode(setup.livemode)) throw new Error('Software card setup unavailable.');
-    return { clientSecret: setup.client_secret } as const;
-  } catch (error) {
-    console.error('Unable to prepare software payment method:', error);
-    return { error: 'Unable to prepare secure card setup.' } as const;
-  }
-}
 
-export async function saveSoftwareCard(setupIntentId: string) {
-  const user = await currentUser();
-  if (!user) return { error: 'Please sign in to manage software payment methods.' } as const;
-  if (!/^seti_[a-zA-Z0-9]+$/.test(setupIntentId)) return { error: 'Invalid card setup reference.' } as const;
-  try {
-    const customer = await softwareCustomer(user.id);
-    const stripe = await verifiedStripe();
-    if (!customer) throw new Error('Software card verification failed.');
-    const setup = await stripe.setupIntents.retrieve(setupIntentId, { expand: ['payment_method'] });
-    assertSetupIntentOwnedByCustomer(setup, customer);
-    const setupMetadata = setup.metadata || {};
-    if (
-      setupMetadata.app !== 'onefin-software-store' ||
-      setupMetadata.billing_scope !== 'software' ||
-      setupMetadata.flow !== 'software-card' ||
-      setupMetadata.user_id !== user.id
-    ) {
-      throw new Error('Software card verification failed.');
-    }
-    const methodId = stripePaymentMethodId(setup.payment_method);
-    if (!methodId) throw new Error('Software card verification failed.');
-    const savedMethod = await requireOwnedPaymentMethod(stripe, customer, methodId);
-    await stripe.customers.update(customer, { invoice_settings: { default_payment_method: savedMethod.id } });
-    revalidatePath('/software/account');
-    return { success: true } as const;
-  } catch (error) {
-    console.error('Unable to save software payment method:', error);
-    return { error: 'Unable to verify and save this card.' } as const;
-  }
-}
 
 export async function setSoftwareDefaultPaymentMethod(paymentMethodIdValue: string) {
   const user = await currentUser();

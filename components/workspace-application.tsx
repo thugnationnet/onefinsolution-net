@@ -8,7 +8,6 @@ import { WorkspaceCreditCheckout } from '@/components/workspace-credit-checkout'
 import { ArrowUp, ChevronLeft, ChevronRight, CreditCard, FileText, History, LayoutGrid, Plus, Settings, Wallet, UserRound, X } from 'lucide-react';
 import {
   getWorkspaceBillingData,
-  saveWorkspaceCard,
   setWorkspaceAutoReloadSettings,
   workspaceCreditPurchaseStatus,
   confirmWorkspaceCreditCheckoutSession,
@@ -136,7 +135,6 @@ export function WorkspaceApplication({
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const purchaseId = params.get('purchase');
-    const setupIntentId = params.get('setup_intent');
     const billing = params.get('billing');
     let active = true;
 
@@ -144,7 +142,7 @@ export function WorkspaceApplication({
       setNotice('Your Workspace credit purchase is complete.');
       void refreshData();
     } else if (billing === 'card_saved') {
-      setNotice('Workspace payment method saved.');
+      setNotice('Workspace credits updated.');
       void refreshData();
     } else if (billing === 'cancelled') {
       setNotice('Checkout was cancelled. Your Workspace credits were not changed.');
@@ -168,29 +166,11 @@ export function WorkspaceApplication({
         });
     }
 
-    if (setupIntentId) {
-      setNotice('Verifying your Workspace payment method…');
-      void saveWorkspaceCard(setupIntentId)
-        .then((result) => {
-          if (!active) return;
-          if (result.error) setError(result.error);
-          else {
-            setError('');
-            setNotice('Workspace payment method saved.');
-            void refreshData();
-          }
-        })
-        .catch((failure: unknown) => {
-          if (active) setError(failure instanceof Error ? failure.message : 'Unable to verify the saved payment method.');
-        });
-    }
 
-    if (purchaseId || setupIntentId || billing) {
+    if (purchaseId || billing) {
       const next = new URLSearchParams(params);
       // Keep task id if present; drop payment return params after handling.
       next.delete('purchase');
-      next.delete('setup_intent');
-      next.delete('setup_intent_client_secret');
       next.delete('billing');
       next.delete('payment_intent');
       next.delete('payment_intent_client_secret');
@@ -289,15 +269,6 @@ export function WorkspaceApplication({
     location.assign('/checkout/credits');
   }
 
-  function beginCardSetup() {
-    if (!isAuthenticated) {
-      setAccessPrompt('signin');
-      return;
-    }
-    setError('');
-    setNotice('');
-    location.assign('/checkout/card');
-  }
 
   const dateTime = (value: string) => new Date(value).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
   const toggleSidebar = () => {
@@ -380,7 +351,7 @@ export function WorkspaceApplication({
               <span className="workspace-metric-label">PAYMENT METHOD</span>
               <strong className="workspace-card-value">{card?.card_last4 ? `•••• ${card.card_last4}` : isAuthenticated ? 'Not added' : 'Sign in required'}</strong>
               <span className="workspace-muted-copy">{card?.card_brand ? `${card.card_brand} · Expires ${card.card_exp_month}/${card.card_exp_year}` : 'Cards are used only for one-time Workspace purchases.'}</span>
-              <button className="workspace-link-button" type="button" onClick={() => void beginCardSetup()} disabled={isAuthenticated && !publishableKey}>Manage payment method</button>
+              <Link className="workspace-link-button" href="/workspace?panel=credits">Add credits</Link>
             </article>
           </section>
 

@@ -340,7 +340,7 @@ export function SettingsModal({
               </section>
 
               <section className="settings-section">
-                <PaymentMethodsPanel compact />
+                <PaymentMethodsPanel />
               </section>
             </TabsContent>
 

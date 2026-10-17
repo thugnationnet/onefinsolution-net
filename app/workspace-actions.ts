@@ -24,7 +24,6 @@ import { revalidatePath } from 'next/cache';
 import { expectedStripeLivemode, stripeObjectMatchesMode } from '@/lib/billing-environment';
 import {
   assertCustomerMatchesScope,
-  assertSetupIntentOwnedByCustomer,
   requireOwnedPaymentMethod,
   stripeCustomerId as scopedStripeCustomerId,
   stripePaymentMethodId,
@@ -562,27 +561,6 @@ export async function workspaceCreditPurchaseStatus(purchaseId: string) {
   }
 }
 
-export async function prepareWorkspaceCardUpdate() {
-  const user = await currentUser();
-  if (!user) return { error: 'Please sign in to manage Workspace payment settings.' } as const;
-  try {
-    await throttle(`workspace-payment-method:${user.id}`, 10);
-    const customer = await workspaceCustomer(user.id, true);
-    if (!customer) throw new Error('Billing account unavailable.');
-    const stripe = await verifiedStripe();
-    const setup = await stripe.setupIntents.create({
-      customer,
-      usage: 'off_session',
-      allowed_payment_method_types: ['card'],
-      metadata: { app: 'chatbot-template', flow: 'workspace-credit-card', user_id: user.id },
-    }, { idempotencyKey: `workspace-card:${user.id}:${randomUUID()}` });
-    if (!setup.client_secret) throw new Error('Card setup is unavailable.');
-    return { clientSecret: setup.client_secret } as const;
-  } catch (error) {
-    console.error('Unable to prepare Workspace card setup:', error);
-    return { error: 'Unable to prepare secure card setup. Please try again.' } as const;
-  }
-}
 
 export async function setWorkspaceAutoReloadSettings(input: {
   enabled: boolean;
@@ -678,41 +656,3 @@ export async function setWorkspaceAutoReloadSettings(input: {
 }
 
 
-export async function saveWorkspaceCard(setupIntentId: string) {
-  const user = await currentUser();
-  if (!user) return { error: 'Please sign in to manage Workspace payment settings.' } as const;
-  if (!/^seti_[a-zA-Z0-9]+$/.test(setupIntentId)) return { error: 'Invalid card setup reference.' } as const;
-  try {
-    const customer = await workspaceCustomer(user.id);
-    const stripe = await verifiedStripe();
-    if (!customer) throw new Error('Card verification failed.');
-    const setup = await stripe.setupIntents.retrieve(setupIntentId, { expand: ['payment_method'] });
-    assertSetupIntentOwnedByCustomer(setup, customer);
-    const metadata = setup.metadata || {};
-    if (
-      metadata.app !== 'chatbot-template' ||
-      metadata.flow !== 'workspace-credit-card' ||
-      metadata.user_id !== user.id
-    ) {
-      throw new Error('Card verification failed.');
-    }
-    const methodId = stripePaymentMethodId(setup.payment_method);
-    if (!methodId) throw new Error('Card verification failed.');
-    const method = await requireOwnedPaymentMethod(stripe, customer, methodId);
-    if (method.type !== 'card' || !method.card) throw new Error('Card verification failed.');
-    await query(
-      `insert into workspace_credit_settings(user_id,payment_method_id,card_brand,card_last4,card_exp_month,card_exp_year,updated_at)
-       values($1,$2,$3,$4,$5,$6,now())
-       on conflict(user_id) do update set payment_method_id=excluded.payment_method_id,card_brand=excluded.card_brand,
-         card_last4=excluded.card_last4,card_exp_month=excluded.card_exp_month,card_exp_year=excluded.card_exp_year,updated_at=now()`,
-      [user.id, method.id, method.card.brand, method.card.last4, method.card.exp_month, method.card.exp_year],
-    );
-    await stripe.customers.update(customer, { invoice_settings: { default_payment_method: method.id } });
-    revalidatePath('/workspace');
-    revalidatePath('/account');
-    return { success: true } as const;
-  } catch (error) {
-    console.error('Unable to save Workspace card:', error);
-    return { error: 'Unable to verify and save this card. Please try again.' } as const;
-  }
-}

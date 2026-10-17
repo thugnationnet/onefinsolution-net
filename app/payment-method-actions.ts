@@ -5,7 +5,6 @@ import { currentCustomer } from '@/lib/stripe-billing';
 import { verifiedStripe } from '@/lib/stripe';
 import {
   assertCustomerMatchesScope,
-  assertSetupIntentOwnedByCustomer,
   requireOwnedPaymentMethod,
   stripePaymentMethodId,
 } from '@/lib/billing-scope';
@@ -60,12 +59,6 @@ export async function listPaymentMethodsAction(): Promise<
       [user.id],
     );
     if (legacyCustomers.some(({ customer_id }) => customer_id === customer)) {
-      for await (const setup of stripe.setupIntents.list({ customer, limit: 100 })) {
-        if (setup.metadata?.app === 'chatbot-template' && setup.metadata.flow === 'workspace-credit-card') {
-          const id = stripePaymentMethodId(setup.payment_method);
-          if (id) legacyWorkspaceIds.add(id);
-        }
-      }
       for await (const intent of stripe.paymentIntents.list({ customer, limit: 100 })) {
         if (intent.metadata?.app === 'chatbot-template' && intent.metadata.flow === 'workspace-credit-purchase') {
           const id = stripePaymentMethodId(intent.payment_method);
@@ -94,49 +87,6 @@ export async function listPaymentMethodsAction(): Promise<
   }
 }
 
-export async function prepareCardUpdate() {
-  try {
-    const { user, customer, stripe } = await context();
-    const setup = await stripe.setupIntents.create(
-      {
-        customer,
-        usage: 'off_session',
-        allowed_payment_method_types: ['card'],
-        metadata: { app: 'chatbot-template', purpose: 'update-card', user_id: user.id },
-      } as Stripe.SetupIntentCreateParams,
-      { idempotencyKey: `onefin-card:${user.id}:${randomUUID()}` },
-    );
-    if (!stripeObjectMatchesMode(setup.livemode)) throw new Error();
-    return { secret: setup.client_secret };
-  } catch {
-    return { error: 'Unable to prepare a card update. Please try again.' };
-  }
-}
-
-export async function finishCardUpdate(setupId: string) {
-  try {
-    const { user, customer, stripe } = await context();
-    const setup = await stripe.setupIntents.retrieve(setupId);
-    assertSetupIntentOwnedByCustomer(setup, customer);
-    if (setup.metadata?.purpose !== 'update-card' || setup.metadata.user_id !== user.id) {
-      throw new Error('Unable to save this card. Please retry verification.');
-    }
-    const method = stripePaymentMethodId(setup.payment_method);
-    if (!method) throw new Error('Unable to save this card. Please retry verification.');
-    await requireOwnedPaymentMethod(stripe, customer, method);
-    await stripe.customers.update(customer, {
-      invoice_settings: { default_payment_method: method },
-    });
-    for await (const sub of stripe.subscriptions.list({ customer, status: 'all', limit: 100 })) {
-      if (sub.metadata.app === 'chatbot-template' && !['canceled', 'incomplete_expired'].includes(sub.status)) {
-        await stripe.subscriptions.update(sub.id, { default_payment_method: method });
-      }
-    }
-    return { success: true };
-  } catch {
-    return { error: 'Unable to save this card. Please retry verification.' };
-  }
-}
 
 
 export async function setDefaultPaymentMethodAction(paymentMethodId: string) {
