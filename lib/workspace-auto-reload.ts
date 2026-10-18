@@ -154,21 +154,24 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
       }
     }
 
-    const customerId = await workspaceCustomer(userId, false);
-    if (!customerId) return { attempted: false, skipped: 'no_customer' };
+    let customerId: string | null;
+    try {
+      customerId = await workspaceCustomer(userId, false);
+    } catch {
+      await disableUnavailableAutoReload(userId, 'Automatic top-ups were turned off because the Workspace billing account is no longer available.');
+      return { attempted: false, skipped: 'customer_unavailable' };
+    }
+    if (!customerId) {
+      await disableUnavailableAutoReload(userId, 'Automatic top-ups were turned off because no Workspace billing account is available.');
+      return { attempted: false, skipped: 'no_customer' };
+    }
 
     const stripe = await verifiedStripe();
     let paymentMethod: Stripe.PaymentMethod;
     try {
       paymentMethod = await requireOwnedPaymentMethod(stripe, customerId, settings.payment_method_id);
     } catch {
-      await query(
-        `update workspace_credit_settings set auto_reload_enabled=false,
-           payment_method_id=null,card_brand=null,card_last4=null,card_exp_month=null,card_exp_year=null,
-           last_auto_reload_error='Automatic top-ups were turned off because the selected Workspace card is no longer available.'
-         where user_id=$1`,
-        [userId],
-      ).catch(() => undefined);
+      await disableUnavailableAutoReload(userId, 'Automatic top-ups were turned off because the selected Workspace card is no longer available.');
       return { attempted: false, skipped: 'payment_method_unavailable' };
     }
 
@@ -279,6 +282,16 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
       error: error instanceof Error ? error.message : 'Automatic top-up failed.',
     };
   }
+}
+
+async function disableUnavailableAutoReload(userId: string, message: string): Promise<void> {
+  await query(
+    `update workspace_credit_settings set auto_reload_enabled=false,
+       payment_method_id=null,card_brand=null,card_last4=null,card_exp_month=null,card_exp_year=null,
+       last_auto_reload_error=$2
+     where user_id=$1`,
+    [userId, message],
+  ).catch(() => undefined);
 }
 
 async function markAutoReloadFailure(
