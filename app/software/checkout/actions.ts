@@ -288,13 +288,7 @@ export async function startSoftwareHostedCheckout(input: {
       customer_update: { address: 'auto', name: 'auto' },
       locale: 'auto',
     }, { idempotencyKey: `software-hosted-checkout:${input.purchaseId}` });
-    const paymentIntentId = typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id;
-    if (!session.url || !paymentIntentId) throw new Error('Hosted checkout is unavailable.');
-    await query(
-      `update software_storefront_purchases set stripe_payment_intent_id=$1
-       where id=$2 and stripe_payment_intent_id=$3`,
-      [paymentIntentId, input.purchaseId, draft.id],
-    );
+    if (!session.url) throw new Error('Hosted checkout is unavailable.');
     return { url: session.url };
   } catch (error) {
     console.error('Unable to start hosted Software checkout:', error);

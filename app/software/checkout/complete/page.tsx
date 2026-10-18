@@ -23,6 +23,7 @@ export default async function SoftwareCheckoutCompletePage({
   const params = await searchParams;
   const user = await currentUser();
   const purchaseId = typeof params.purchase_id === 'string' ? params.purchase_id : '';
+  const sessionId = typeof params.session_id === 'string' ? params.session_id : '';
   if (!user) redirect(`/sign-in?next=${encodeURIComponent(`/software/checkout/complete?purchase_id=${purchaseId}`)}`);
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(purchaseId)) notFound();
 
@@ -43,6 +44,31 @@ export default async function SoftwareCheckoutCompletePage({
 
   let purchase = record;
   let confirmationIssue = false;
+  if (sessionId.startsWith('cs_') && record.status === 'pending') {
+    try {
+      const stripe = await verifiedStripe();
+      const session = await stripe.checkout.sessions.retrieve(sessionId, { expand: ['payment_intent'] });
+      const paymentIntentId = typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id;
+      if (
+        !paymentIntentId || session.metadata?.app !== 'onefin-software-store' ||
+        session.metadata?.billing_scope !== 'software' || session.metadata?.purchase_id !== purchaseId ||
+        session.metadata?.user_id !== user.id || session.client_reference_id !== user.id ||
+        !stripeObjectMatchesMode(session.livemode)
+      ) notFound();
+      await query('update software_storefront_purchases set stripe_payment_intent_id=$1 where id=$2 and user_id=$3', [paymentIntentId, purchaseId, user.id]);
+      const intent = await stripe.paymentIntents.retrieve(paymentIntentId);
+      if (intent.status === 'succeeded' || intent.status === 'canceled') {
+        await fulfillSoftwareStorefrontPayment(stripe, {
+          id: `software-checkout-return:${intent.id}`,
+          type: intent.status === 'succeeded' ? 'payment_intent.succeeded' : 'payment_intent.canceled',
+          livemode: intent.livemode, data: { object: intent },
+        } as unknown as Stripe.Event);
+      }
+    } catch (error) {
+      console.error('Unable to confirm hosted Software checkout:', error);
+      confirmationIssue = true;
+    }
+  }
   if (record.stripe_payment_intent_id && record.status === 'pending') {
     const stripe = await verifiedStripe();
     const intent = await stripe.paymentIntents.retrieve(record.stripe_payment_intent_id);
