@@ -195,8 +195,13 @@ export async function applyWorkspaceCreditsFromPaymentIntent(
       await client.query(
         `insert into workspace_credit_settings(user_id,payment_method_id,card_brand,card_last4,card_exp_month,card_exp_year,updated_at)
          values($1,$2,$3,$4,$5,$6,now())
-         on conflict(user_id) do update set payment_method_id=excluded.payment_method_id,card_brand=excluded.card_brand,
-           card_last4=excluded.card_last4,card_exp_month=excluded.card_exp_month,card_exp_year=excluded.card_exp_year,updated_at=now()`,
+         on conflict(user_id) do update set
+           payment_method_id=case when workspace_credit_settings.payment_method_id is null then excluded.payment_method_id else workspace_credit_settings.payment_method_id end,
+           card_brand=case when workspace_credit_settings.payment_method_id is null then excluded.card_brand else workspace_credit_settings.card_brand end,
+           card_last4=case when workspace_credit_settings.payment_method_id is null then excluded.card_last4 else workspace_credit_settings.card_last4 end,
+           card_exp_month=case when workspace_credit_settings.payment_method_id is null then excluded.card_exp_month else workspace_credit_settings.card_exp_month end,
+           card_exp_year=case when workspace_credit_settings.payment_method_id is null then excluded.card_exp_year else workspace_credit_settings.card_exp_year end,
+           updated_at=now()`,
         [userId, method.id, method.card.brand, method.card.last4, method.card.exp_month, method.card.exp_year],
       );
     }
@@ -217,6 +222,56 @@ export async function applyWorkspaceCreditsFromPaymentIntent(
     );
   } catch {
     /* credit receipt is best-effort */
+  }
+}
+
+/**
+ * Finalize a Workspace-only Checkout setup session. The first saved card is
+ * selected as the default; later cards remain available until the account
+ * holder explicitly switches the default in Workspace billing.
+ */
+export async function applyWorkspaceCardSetupIntent(
+  stripe: Stripe,
+  setupIntentId: string,
+): Promise<void> {
+  const setup = await stripe.setupIntents.retrieve(setupIntentId, { expand: ['payment_method'] });
+  if (
+    setup.metadata?.app !== 'chatbot-template' ||
+    setup.metadata?.billing_scope !== 'workspace' ||
+    setup.metadata?.flow !== 'workspace-card-setup'
+  ) return;
+  if (!stripeObjectMatchesMode(setup.livemode) || setup.status !== 'succeeded') {
+    throw new Error('Workspace card setup did not succeed.');
+  }
+  const userId = setup.metadata.user_id;
+  if (!userId || !/^[0-9a-f-]{36}$/i.test(userId)) throw new Error('Invalid Workspace card setup metadata.');
+  const customerId = stripeCustomerId(setup.customer);
+  if (!customerId || await owner(customerId, 'workspace') !== userId) {
+    throw new Error('Workspace card setup owner mismatch.');
+  }
+  const method = setup.payment_method;
+  if (!method || typeof method === 'string' || method.type !== 'card' || !method.card) {
+    throw new Error('Workspace card setup is missing its card.');
+  }
+  if (stripeCustomerId(method.customer) !== customerId) {
+    throw new Error('Workspace card is not attached to its billing account.');
+  }
+
+  const [existing] = await query<{ payment_method_id: string | null }>(
+    'select payment_method_id from workspace_credit_settings where user_id=$1', [userId],
+  );
+  if (!existing?.payment_method_id) {
+    await query(
+      `insert into workspace_credit_settings(user_id,payment_method_id,card_brand,card_last4,card_exp_month,card_exp_year,updated_at)
+       values($1,$2,$3,$4,$5,$6,now())
+       on conflict(user_id) do update set payment_method_id=excluded.payment_method_id,
+         card_brand=excluded.card_brand,card_last4=excluded.card_last4,
+         card_exp_month=excluded.card_exp_month,card_exp_year=excluded.card_exp_year,updated_at=now()`,
+      [userId, method.id, method.card.brand, method.card.last4, method.card.exp_month, method.card.exp_year],
+    );
+    await stripe.customers.update(customerId, {
+      invoice_settings: { default_payment_method: method.id },
+    });
   }
 }
 
@@ -245,7 +300,18 @@ export async function fulfillStripeEvent(stripe: Stripe, event: Stripe.Event) {
     const session = await stripe.checkout.sessions.retrieve((event.data.object as Stripe.Checkout.Session).id, {
       expand: ['payment_intent'],
     });
-    if (session.metadata?.app === 'chatbot-template' && session.metadata.billing_scope === 'subscription') {
+    if (session.metadata?.app === 'chatbot-template' && session.metadata.billing_scope === 'workspace' && session.metadata.flow === 'workspace-card-setup') {
+      if (!stripeObjectMatchesMode(session.livemode) || session.status !== 'complete' || session.mode !== 'setup') {
+        throw new Error('Workspace card setup checkout is not complete.');
+      }
+      const customer = stripeCustomerId(session.customer);
+      if (!customer || session.metadata.user_id !== await owner(session.customer, 'workspace') || session.client_reference_id !== session.metadata.user_id) {
+        throw new Error('Workspace card setup owner mismatch.');
+      }
+      const setupId = typeof session.setup_intent === 'string' ? session.setup_intent : session.setup_intent?.id;
+      if (!setupId) throw new Error('Missing Workspace card setup.');
+      await applyWorkspaceCardSetupIntent(stripe, setupId);
+    } else if (session.metadata?.app === 'chatbot-template' && session.metadata.billing_scope === 'subscription') {
       if (!stripeObjectMatchesMode(session.livemode) || session.status !== 'complete' ||
           !['paid', 'no_payment_required'].includes(session.payment_status)) throw new Error('Subscription checkout is not complete.');
       const customer = stripeCustomerId(session.customer);

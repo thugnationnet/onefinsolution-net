@@ -41,6 +41,8 @@ export async function POST(request: Request) {
     'invoice.payment_action_required',
     'checkout.session.completed',
     'checkout.session.async_payment_succeeded',
+    'checkout.session.async_payment_failed',
+    'checkout.session.expired',
     'customer.subscription.created',
     'customer.subscription.updated',
     'customer.subscription.deleted',

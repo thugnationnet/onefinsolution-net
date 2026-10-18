@@ -6,6 +6,8 @@ import { currentUser } from '@/lib/session';
 import { workspaceCustomer } from '@/lib/workspace-stripe';
 import {
   createWorkspaceCreditCheckoutSession,
+  createWorkspaceCardSetupCheckoutSession,
+  finalizeWorkspaceCardSetupCheckoutSession,
   finalizeWorkspaceCreditCheckoutSession,
 } from '@/lib/workspace-checkout';
 import { verifiedStripe } from '@/lib/stripe';
@@ -93,6 +95,14 @@ async function saveWorkspaceCardSummary(userId: string, method: Stripe.PaymentMe
       method?.card?.exp_year ?? null,
     ],
   );
+  if (!method) {
+    await query(
+      `update workspace_credit_settings set auto_reload_enabled=false,
+       last_auto_reload_error='Automatic top-ups were turned off because no Workspace card remains.'
+       where user_id=$1`,
+      [userId],
+    ).catch(() => undefined);
+  }
 }
 
 export async function listWorkspacePaymentMethods() {
@@ -104,8 +114,12 @@ export async function listWorkspacePaymentMethods() {
     const stripe = await verifiedStripe();
     const customerRecord = await stripe.customers.retrieve(customer);
     assertCustomerMatchesScope(customerRecord, 'workspace', user.id);
+    const [settings] = await query<{ payment_method_id: string | null }>(
+      'select payment_method_id from workspace_credit_settings where user_id=$1', [user.id],
+    );
     const defaultValue = customerRecord.invoice_settings?.default_payment_method;
-    const defaultId = typeof defaultValue === 'string' ? defaultValue : defaultValue?.id || null;
+    const stripeDefaultId = typeof defaultValue === 'string' ? defaultValue : defaultValue?.id || null;
+    const defaultId = settings?.payment_method_id || stripeDefaultId;
     const methods: WorkspaceSavedPaymentMethod[] = [];
     for await (const method of stripe.paymentMethods.list({ customer, type: 'card', limit: 100 })) {
       methods.push({
@@ -154,10 +168,7 @@ export async function confirmWorkspaceCreditWithSavedMethod(
     const customerId = await workspaceCustomer(user.id, false);
     if (!customerId) return { error: 'Workspace billing account unavailable.' };
     const stripe = await verifiedStripe();
-    const pm = await stripe.paymentMethods.retrieve(paymentMethodId);
-    if (pm.customer !== customerId) {
-      return { error: 'Payment method is not saved on your Workspace account.' };
-    }
+    await requireOwnedPaymentMethod(stripe, customerId, paymentMethodId);
 
     const confirmed = await stripe.paymentIntents.confirm(purchase.stripe_payment_intent, {
       payment_method: paymentMethodId,
@@ -174,29 +185,6 @@ export async function confirmWorkspaceCreditWithSavedMethod(
       return { error: `Payment status: ${confirmed.status}` };
     }
 
-    await query(
-      `insert into workspace_credit_settings(user_id, payment_method_id, card_brand, card_last4, card_exp_month, card_exp_year, updated_at)
-       values ($1,$2,$3,$4,$5,$6,now())
-       on conflict (user_id) do update set
-         payment_method_id=excluded.payment_method_id,
-         card_brand=excluded.card_brand,
-         card_last4=excluded.card_last4,
-         card_exp_month=excluded.card_exp_month,
-         card_exp_year=excluded.card_exp_year,
-         updated_at=now()`,
-      [
-        user.id,
-        paymentMethodId,
-        pm.card?.brand || null,
-        pm.card?.last4 || null,
-        pm.card?.exp_month || null,
-        pm.card?.exp_year || null,
-      ],
-    );
-    await stripe.customers
-      .update(customerId, { invoice_settings: { default_payment_method: paymentMethodId } })
-      .catch(() => undefined);
-
     revalidatePath('/workspace');
     return { ok: true, paymentIntentId: confirmed.id };
   } catch (error) {
@@ -204,6 +192,33 @@ export async function confirmWorkspaceCreditWithSavedMethod(
     return {
       error: error instanceof Error ? error.message : 'Unable to confirm payment with saved card.',
     };
+  }
+}
+
+export async function startWorkspaceCardSetupCheckout() {
+  const user = await currentUser();
+  if (!user?.id) return { error: 'Sign in required.' } as const;
+  try {
+    return await createWorkspaceCardSetupCheckoutSession({ userId: user.id });
+  } catch (error) {
+    console.error('startWorkspaceCardSetupCheckout failed', error);
+    return { error: error instanceof Error ? error.message : 'Unable to start card setup.' } as const;
+  }
+}
+
+export async function confirmWorkspaceCardSetupCheckoutSession(sessionId: string) {
+  const user = await currentUser();
+  if (!user?.id) return { status: 'failed' as const, error: 'Sign in required.' };
+  try {
+    const status = await finalizeWorkspaceCardSetupCheckoutSession({ userId: user.id, sessionId });
+    if (status === 'succeeded') {
+      revalidatePath('/workspace');
+      return { status } as const;
+    }
+    return { status, ...(status === 'failed' ? { error: 'Card setup did not complete.' } : {}) } as const;
+  } catch (error) {
+    console.error('confirmWorkspaceCardSetupCheckoutSession failed', error);
+    return { status: 'failed' as const, error: error instanceof Error ? error.message : 'Unable to confirm card setup.' };
   }
 }
 
@@ -607,6 +622,12 @@ export async function setWorkspaceAutoReloadSettings(input: {
     );
     if (input.enabled && !card?.payment_method_id) {
       return { error: 'Save a Workspace card before enabling automatic top-ups.' };
+    }
+    if (input.enabled && card?.payment_method_id) {
+      const customer = await workspaceCustomer(user.id, false);
+      if (!customer) return { error: 'Workspace billing account unavailable.' };
+      const stripe = await verifiedStripe();
+      await requireOwnedPaymentMethod(stripe, customer, card.payment_method_id);
     }
 
     await query(

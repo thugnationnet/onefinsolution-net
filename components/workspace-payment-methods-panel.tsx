@@ -5,9 +5,10 @@ import {
   listWorkspacePaymentMethods,
   removeWorkspacePaymentMethod,
   setWorkspaceDefaultPaymentMethod,
+  startWorkspaceCardSetupCheckout,
 } from '@/app/workspace-actions';
 
-/** List/manage cards saved after credit purchases — no SetupIntent add-card flow. */
+/** Manage Workspace-only cards through hosted Stripe Checkout. */
 export function WorkspacePaymentMethodsPanel() {
   const [methods, setMethods] = useState<Array<{ id: string; brand: string; last4: string; isDefault?: boolean; expMonth?: number | null; expYear?: number | null }>>([]);
   const [error, setError] = useState('');
@@ -29,6 +30,16 @@ export function WorkspacePaymentMethodsPanel() {
 
   useEffect(() => { refresh(); }, [refresh]);
 
+  function addCard() {
+    startTransition(async () => {
+      setError('');
+      const result = await startWorkspaceCardSetupCheckout();
+      if ('error' in result && result.error) { setError(result.error); return; }
+      if (!('url' in result) || !result.url) { setError('Unable to open secure card setup.'); return; }
+      window.location.assign(result.url);
+    });
+  }
+
   return (
     <div className="stack gap-md">
       <div>
@@ -36,6 +47,12 @@ export function WorkspacePaymentMethodsPanel() {
         <p className="muted small">
           Cards appear after a successful credit purchase. Add credits to save a card — there is no separate setup step.
         </p>
+      </div>
+      <div className="row gap-sm">
+        <button type="button" className="button secondary" disabled={pending} onClick={addCard}>
+          {pending ? 'Opening secure card setup…' : 'Add card'}
+        </button>
+        <button type="button" className="button secondary" disabled={pending} onClick={refresh}>Refresh</button>
       </div>
       {error ? <p className="notice error" role="alert">{error}</p> : null}
       {notice ? <p className="notice">{notice}</p> : null}
@@ -55,14 +72,14 @@ export function WorkspacePaymentMethodsPanel() {
                     setError('');
                     const r = await setWorkspaceDefaultPaymentMethod(method.id);
                     if (r && 'error' in r && r.error) setError(String(r.error));
-                    else { setNotice('Default updated.'); refresh(); }
+                    else { setNotice('Default updated.'); window.dispatchEvent(new Event('workspace-payment-methods-changed')); refresh(); }
                   })}>Make default</button>
                 ) : null}
                 <button type="button" className="button secondary" disabled={pending} onClick={() => startTransition(async () => {
                   setError('');
                   const r = await removeWorkspacePaymentMethod(method.id);
                   if (r && 'error' in r && r.error) setError(String(r.error));
-                  else { setNotice('Card removed.'); refresh(); }
+                  else { setNotice('Card removed.'); window.dispatchEvent(new Event('workspace-payment-methods-changed')); refresh(); }
                 })}>Remove</button>
               </div>
             </li>

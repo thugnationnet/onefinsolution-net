@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { WorkspaceCreditCheckout } from '@/components/workspace-credit-checkout';
+import { WorkspacePaymentMethodsPanel } from '@/components/workspace-payment-methods-panel';
 import { ArrowUp, ChevronLeft, ChevronRight, CreditCard, FileText, History, LayoutGrid, Plus, Settings, Wallet, UserRound, X } from 'lucide-react';
 import {
   getWorkspaceBillingData,
@@ -133,17 +134,25 @@ export function WorkspaceApplication({
   }, []);
 
   useEffect(() => {
+    const refreshBilling = () => { void refreshData(); };
+    window.addEventListener('workspace-payment-methods-changed', refreshBilling);
+    return () => window.removeEventListener('workspace-payment-methods-changed', refreshBilling);
+  }, [refreshData]);
+
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const purchaseId = params.get('purchase');
     const billing = params.get('billing');
     let active = true;
 
-    if (paymentConfirmed || billing === 'success') {
+    if ((paymentConfirmed && billing !== 'card_saved') || billing === 'success') {
       setNotice('Your Workspace credit purchase is complete.');
       void refreshData();
     } else if (billing === 'card_saved') {
-      setNotice('Workspace credits updated.');
+      setNotice('Workspace card saved.');
       void refreshData();
+    } else if (billing === 'card_cancelled') {
+      setNotice('Card setup was cancelled.');
     } else if (billing === 'cancelled') {
       setNotice('Checkout was cancelled. Your Workspace credits were not changed.');
     } else if (billing === 'failed') {
@@ -447,6 +456,7 @@ export function WorkspaceApplication({
             <div>
               <p className="workspace-eyebrow">CREDIT RELOADS</p>
               <p className="workspace-muted-copy" style={{marginTop:4}}>Uses a Workspace-only card. Chat subscription cards are never charged for credits or automatic top-ups.</p>
+              {isAuthenticated ? <WorkspacePaymentMethodsPanel /> : null}
               <h2>{autoReloadEnabled ? 'Automatic top-ups are on' : 'Automatic top-ups are off'}</h2>
               <p>
                 When your Workspace balance falls to the threshold you set, we automatically charge your
@@ -498,7 +508,7 @@ export function WorkspaceApplication({
                     <input
                       type="checkbox"
                       checked={autoReloadEnabled}
-                      disabled={autoReloadBusy || (!card && !autoReloadEnabled)}
+                      disabled={autoReloadBusy || (!autoReload?.hasPaymentMethod && !autoReloadEnabled)}
                       onChange={(event) => {
                         void (async () => {
                           setAutoReloadBusy(true);
@@ -565,7 +575,7 @@ export function WorkspaceApplication({
                     />
                     <span className="workspace-muted-copy">credits remaining</span>
                   </label>
-                  {!card ? (
+                  {!autoReload?.hasPaymentMethod ? (
                     <p className="workspace-empty-copy">Save a Workspace card before enabling automatic top-ups.</p>
                   ) : null}
                   {autoReloadLastError ? (

@@ -17,6 +17,50 @@ export type WorkspaceCheckoutSessionResult = {
   quote: WorkspaceCreditPresentmentQuote;
 };
 
+export type WorkspaceCardSetupSessionResult = {
+  sessionId: string;
+  url: string;
+};
+
+/**
+ * Saves a card to the dedicated Workspace Stripe Customer.  This is a hosted
+ * Checkout redirect, so authentication and card collection stay in Stripe and
+ * the application never handles card details or a separate authorization hold.
+ */
+export async function createWorkspaceCardSetupCheckoutSession(input: {
+  userId: string;
+}): Promise<WorkspaceCardSetupSessionResult> {
+  const stripe = await verifiedStripe();
+  const customer = await workspaceCustomer(input.userId, true);
+  if (!customer) throw new Error('Workspace billing account unavailable.');
+
+  const metadata: Stripe.MetadataParam = {
+    app: 'chatbot-template',
+    billing_scope: 'workspace',
+    flow: 'workspace-card-setup',
+    checkout: 'hosted',
+    user_id: input.userId,
+  };
+  const session = await stripe.checkout.sessions.create(
+    {
+      mode: 'setup',
+      customer,
+      client_reference_id: input.userId,
+      success_url: sitePath('/workspace?billing=card_saved&session_id={CHECKOUT_SESSION_ID}'),
+      cancel_url: sitePath('/workspace?billing=card_cancelled'),
+      allowed_payment_method_types: ['card'],
+      metadata,
+      setup_intent_data: { metadata },
+      billing_address_collection: 'auto',
+      customer_update: { address: 'auto', name: 'auto' },
+      locale: 'auto',
+    },
+    { idempotencyKey: `workspace-card-setup:${input.userId}:${randomUUID()}` },
+  );
+  if (!session.url) throw new Error('Card setup is temporarily unavailable. Please try again.');
+  return { sessionId: session.id, url: session.url };
+}
+
 /**
  * Hosted Stripe Checkout for Workspace credits (primary low-friction path).
  *
@@ -219,4 +263,29 @@ export async function finalizeWorkspaceCreditCheckoutSession(input: {
   if (intent.status === 'canceled') return 'failed';
   if (session.payment_status === 'paid') return 'succeeded';
   return 'pending';
+}
+
+/** Idempotently verifies a hosted Workspace card setup after the browser returns. */
+export async function finalizeWorkspaceCardSetupCheckoutSession(input: {
+  userId: string;
+  sessionId: string;
+}): Promise<'succeeded' | 'pending' | 'failed'> {
+  if (!input.sessionId.startsWith('cs_')) throw new Error('Invalid checkout session.');
+  const stripe = await verifiedStripe();
+  const session = await stripe.checkout.sessions.retrieve(input.sessionId, { expand: ['setup_intent'] });
+  if (
+    session.mode !== 'setup' ||
+    session.metadata?.app !== 'chatbot-template' ||
+    session.metadata?.billing_scope !== 'workspace' ||
+    session.metadata?.flow !== 'workspace-card-setup' ||
+    session.metadata?.user_id !== input.userId ||
+    session.client_reference_id !== input.userId
+  ) throw new Error('Checkout session does not belong to this Workspace account.');
+  if (session.status === 'expired') return 'failed';
+  if (session.status !== 'complete') return 'pending';
+  const setupIntentId = typeof session.setup_intent === 'string' ? session.setup_intent : session.setup_intent?.id;
+  if (!setupIntentId) return 'failed';
+  const { applyWorkspaceCardSetupIntent } = await import('@/lib/stripe-fulfillment');
+  await applyWorkspaceCardSetupIntent(stripe, setupIntentId);
+  return 'succeeded';
 }

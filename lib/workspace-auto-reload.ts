@@ -158,11 +158,19 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
     if (!customerId) return { attempted: false, skipped: 'no_customer' };
 
     const stripe = await verifiedStripe();
-    const paymentMethod = await requireOwnedPaymentMethod(
-      stripe,
-      customerId,
-      settings.payment_method_id,
-    );
+    let paymentMethod: Stripe.PaymentMethod;
+    try {
+      paymentMethod = await requireOwnedPaymentMethod(stripe, customerId, settings.payment_method_id);
+    } catch {
+      await query(
+        `update workspace_credit_settings set auto_reload_enabled=false,
+           payment_method_id=null,card_brand=null,card_last4=null,card_exp_month=null,card_exp_year=null,
+           last_auto_reload_error='Automatic top-ups were turned off because the selected Workspace card is no longer available.'
+         where user_id=$1`,
+        [userId],
+      ).catch(() => undefined);
+      return { attempted: false, skipped: 'payment_method_unavailable' };
+    }
 
     const reloadQuote = (() => {
       try {

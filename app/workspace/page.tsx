@@ -4,6 +4,7 @@ import { BillingStatusBanner } from '@/components/billing-status-banner';
 import { currentUser } from '@/lib/session';
 import {
   confirmWorkspaceCreditCheckoutSession,
+  confirmWorkspaceCardSetupCheckoutSession,
   getWorkspaceBillingData,
   workspaceCreditPurchaseStatus,
 } from '@/app/workspace-actions';
@@ -32,7 +33,10 @@ export default async function Workspace({
   let paymentConfirmed = false;
 
   // Hosted Checkout return: finalize credits from session (idempotent with webhook).
-  if (user && sessionId.startsWith('cs_')) {
+  if (user && sessionId.startsWith('cs_') && params.billing === 'card_saved') {
+    const finalized = await confirmWorkspaceCardSetupCheckoutSession(sessionId);
+    paymentConfirmed = 'status' in finalized && finalized.status === 'succeeded';
+  } else if (user && sessionId.startsWith('cs_')) {
     const finalized = await confirmWorkspaceCreditCheckoutSession({
       sessionId,
       purchaseId: purchaseId || null,
