@@ -23,6 +23,7 @@ import {
 import { updateSoftwareBillingProfile as persistSoftwareBillingProfile, type SoftwareBillingProfile } from '@/lib/software-billing-profile';
 import { syncSoftwareCustomerProfile } from '@/lib/software-stripe';
 import { fulfillSoftwareStorefrontPayment } from '@/lib/software-storefront-fulfillment';
+import { sitePath } from '@/lib/site-url';
 
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -55,6 +56,7 @@ export async function createSoftwarePaymentIntent(input: {
   agreedPrice?: string;
 }): Promise<{
   clientSecret?: string;
+  paymentIntentId?: string;
   error?: string;
   agreedPriceCents?: number;
   amountCents?: number;
@@ -231,6 +233,7 @@ export async function createSoftwarePaymentIntent(input: {
     return {
       savedMethods: [...(saved.methods || [])],
       clientSecret: intent.client_secret,
+      paymentIntentId: intent.id,
       agreedPriceCents: purchase.total_price_cents,
       amountCents,
       remainingBalanceCents: Math.max(0, remaining - amountCents),
@@ -238,6 +241,64 @@ export async function createSoftwarePaymentIntent(input: {
   } catch (error) {
     console.error('Unable to create software payment intent:', error);
     return { error: 'Unable to start Software checkout. Please try again.' };
+  }
+}
+
+/**
+ * Starts the initial Software inquiry payment in hosted Stripe Checkout. The
+ * Checkout Session uses Stripe's configured custom payment domain (pay.*),
+ * while the return URL remains on the signed-in application.
+ */
+export async function startSoftwareHostedCheckout(input: {
+  kind: string; id: string; amount: string; purchaseId: string;
+}): Promise<{ url?: string; error?: string }> {
+  const prepared = await createSoftwarePaymentIntent({ ...input, savePaymentMethod: true });
+  if (!prepared.paymentIntentId || !prepared.clientSecret) {
+    return { error: prepared.error || 'Unable to start secure checkout.' };
+  }
+  try {
+    const stripe = await verifiedStripe();
+    const draft = await stripe.paymentIntents.retrieve(prepared.paymentIntentId);
+    if (
+      !stripeObjectMatchesMode(draft.livemode) ||
+      draft.metadata.app !== 'onefin-software-store' ||
+      draft.metadata.billing_scope !== 'software' ||
+      draft.metadata.purchase_id !== input.purchaseId ||
+      !draft.customer
+    ) throw new Error('Software payment verification failed.');
+    const metadata: Stripe.MetadataParam = { ...draft.metadata, checkout: 'hosted' };
+    const session = await stripe.checkout.sessions.create({
+      mode: 'payment',
+      customer: typeof draft.customer === 'string' ? draft.customer : draft.customer.id,
+      client_reference_id: draft.metadata.user_id,
+      success_url: sitePath(`/software/checkout/complete?purchase_id=${encodeURIComponent(input.purchaseId)}&session_id={CHECKOUT_SESSION_ID}`),
+      cancel_url: sitePath(`/software/checkout?kind=${encodeURIComponent(input.kind)}&id=${encodeURIComponent(input.id)}`),
+      allowed_payment_method_types: ['card'],
+      line_items: [{
+        quantity: 1,
+        price_data: {
+          currency: draft.currency,
+          unit_amount: draft.amount,
+          product_data: { name: draft.metadata.item_name || 'Software inquiry payment', metadata },
+        },
+      }],
+      payment_intent_data: { setup_future_usage: 'off_session', metadata },
+      metadata,
+      billing_address_collection: 'auto',
+      customer_update: { address: 'auto', name: 'auto' },
+      locale: 'auto',
+    }, { idempotencyKey: `software-hosted-checkout:${input.purchaseId}` });
+    const paymentIntentId = typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id;
+    if (!session.url || !paymentIntentId) throw new Error('Hosted checkout is unavailable.');
+    await query(
+      `update software_storefront_purchases set stripe_payment_intent_id=$1
+       where id=$2 and stripe_payment_intent_id=$3`,
+      [paymentIntentId, input.purchaseId, draft.id],
+    );
+    return { url: session.url };
+  } catch (error) {
+    console.error('Unable to start hosted Software checkout:', error);
+    return { error: error instanceof Error ? error.message : 'Unable to start secure checkout.' };
   }
 }
 

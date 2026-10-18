@@ -6,6 +6,7 @@ import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-
 import {
   confirmSoftwarePaymentWithSavedMethod,
   createSoftwarePaymentIntent,
+  startSoftwareHostedCheckout,
   listSoftwarePaymentMethods,
   softwarePurchaseStatus,
 } from './actions';
@@ -146,17 +147,8 @@ export function CheckoutForm({
     setError('');
     const purchaseId = crypto.randomUUID();
     startTransition(async () => {
-      const result = await createSoftwarePaymentIntent({ kind, id, amount, purchaseId, savePaymentMethod: true });
-      if (result.clientSecret) {
-        setPayment({
-          clientSecret: result.clientSecret,
-          purchaseId,
-          savedMethods: Array.isArray((result as { savedMethods?: Array<{ id: string; brand: string; last4: string }> }).savedMethods)
-            ? (result as { savedMethods: Array<{ id: string; brand: string; last4: string }> }).savedMethods
-            : [],
-        });
-        return;
-      }
+      const result = await startSoftwareHostedCheckout({ kind, id, amount, purchaseId });
+      if (result.url) { window.location.assign(result.url); return; }
       setError(result.error || 'Unable to prepare secure checkout. Please try again.');
     });
   }
@@ -206,9 +198,9 @@ export function CheckoutForm({
       </label>
       {error && <p className="software-checkout-error" role="alert">{error}</p>}
       <button type="submit" disabled={isPending}>
-        {isPending ? 'Preparing secure payment…' : 'Continue to secure payment'}
+        {isPending ? 'Opening secure checkout…' : 'Continue to secure payment'}
       </button>
-      <small>Payment is collected securely here. Subscription and Workspace payment details are not used.</small>
+      <small>You will complete payment in secure Stripe Checkout. Subscription and Workspace payment details are not used.</small>
     </form>
   );
 }
