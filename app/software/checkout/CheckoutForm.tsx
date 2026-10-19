@@ -25,15 +25,12 @@ const appearance = {
 export function CheckoutForm({
   kind,
   id,
-  fullPrice,
   publishableKey,
 }: {
   kind: 'template' | 'software';
   id: string;
-  fullPrice: number;
   publishableKey: string;
 }) {
-  const [amount, setAmount] = useState(fullPrice.toFixed(2));
   const [error, setError] = useState('');
   const [session, setSession] = useState<{ clientSecret: string; purchaseId: string } | null>(null);
   const [scriptReady, setScriptReady] = useState(false);
@@ -110,7 +107,6 @@ export function CheckoutForm({
       const result = await startSoftwareEmbeddedCheckout({
         kind,
         id,
-        amount,
         purchaseId: crypto.randomUUID(),
       });
       if (result.clientSecret && result.purchaseId) {
@@ -155,29 +151,12 @@ export function CheckoutForm({
               setError('');
             }}
           >
-            Change amount or cancel
+            Cancel checkout
           </button>
         </div>
       ) : (
         <form className="software-checkout-form" onSubmit={startCheckout}>
-          <label htmlFor="software-payment-amount">Choose your payment amount (USD)</label>
-          <div className="software-checkout-amount">
-            <span aria-hidden="true">$</span>
-            <input
-              id="software-payment-amount"
-              type="number"
-              min="5"
-              max={fullPrice}
-              step="0.01"
-              inputMode="decimal"
-              required
-              value={amount}
-              onChange={(event) => setAmount(event.target.value)}
-              aria-describedby="software-payment-hint"
-            />
-            <span>USD</span>
-          </div>
-          <p id="software-payment-hint">Minimum $5.00. Full listed price: ${fullPrice.toFixed(2)} USD.</p>
+          <p>Your payment is the full listed price in THB. Partial payments are not available.</p>
           {error ? <p className="software-checkout-error" role="alert">{error}</p> : null}
           <button type="submit" disabled={isPending}>
             {isPending ? 'Preparing secure payment…' : 'Continue to secure payment'}

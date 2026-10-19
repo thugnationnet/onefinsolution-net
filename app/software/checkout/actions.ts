@@ -61,6 +61,9 @@ export async function createSoftwarePaymentIntent(input: {
   remainingBalanceCents?: number;
   savedMethods?: Array<{ id: string; brand: string; last4: string; expMonth?: number; expYear?: number; isDefault?: boolean }>;
 }> {
+  if (typeof input?.amount === 'string') {
+    return { error: 'Partial Software payments are no longer available. Use the full-price embedded checkout.' };
+  }
   const user = await currentUser();
   if (!user) return { error: 'Sign in to continue to the software checkout.' };
   if (!input || typeof input !== 'object' ||
@@ -73,7 +76,7 @@ export async function createSoftwarePaymentIntent(input: {
   if (!item) return { error: 'That Software item is no longer available.' };
 
   // Agreed project price drives remaining balance; catalog is the default.
-  let agreedPriceCents = item.priceCents;
+  let agreedPriceCents = item.priceMinor;
   if (input.agreedPrice != null && String(input.agreedPrice).trim() !== '') {
     const parsedAgreed = parseSoftwarePaymentAmount(String(input.agreedPrice), 50_000_000, 500);
     if (parsedAgreed == null) return { error: 'Enter a valid agreed project price.' };
@@ -197,7 +200,7 @@ export async function createSoftwarePaymentIntent(input: {
           item_kind: item.kind,
           item_id: item.id,
           item_name: item.name,
-          catalog_price_usd: String(Math.round(item.priceCents / 100)),
+          catalog_price_thb: String(item.priceMinor / 100),
           ...(item.stripePriceId ? { stripe_price_id: item.stripePriceId } : {}),
           ...(item.stripeProductId ? { stripe_product_id: item.stripeProductId } : {}),
           ...(item.stripeProductLookupKey
@@ -244,22 +247,18 @@ export async function createSoftwarePaymentIntent(input: {
 
 /** Creates an embedded Checkout Session for an initial Software purchase. */
 export async function startSoftwareEmbeddedCheckout(input: {
-  kind: string; id: string; amount: string; purchaseId: string;
+  kind: string; id: string; purchaseId: string;
 }): Promise<{ clientSecret?: string; purchaseId?: string; error?: string }> {
   const user = await currentUser();
   if (!user) return { error: 'Sign in to continue to the software checkout.' };
   if (!input || typeof input !== 'object' ||
       typeof input.kind !== 'string' || typeof input.id !== 'string' ||
-      typeof input.amount !== 'string' || typeof input.purchaseId !== 'string' ||
+      typeof input.purchaseId !== 'string' ||
       !uuid.test(input.purchaseId)) {
     return { error: 'Invalid purchase request.' };
   }
   const item = getSoftwarePurchaseItem(input.kind, input.id);
   if (!item) return { error: 'That Software item is no longer available.' };
-  const amountCents = parseSoftwarePaymentAmount(input.amount, item.priceCents, 500);
-  if (amountCents === null) {
-    return { error: `Choose an amount from $5.00 up to $${(item.priceCents / 100).toFixed(2)}.` };
-  }
 
   try {
     await throttle(`software-purchase:${user.id}`, 10);
@@ -274,6 +273,29 @@ export async function startSoftwareEmbeddedCheckout(input: {
       throw new Error('Software billing customer verification failed.');
     }
 
+    const listedPrices = await stripe.prices.list({
+      lookup_keys: [item.priceLookupKey],
+      active: true,
+      limit: 2,
+    });
+    const catalogPrice = listedPrices.data[0];
+    if (
+      listedPrices.data.length !== 1 ||
+      !catalogPrice ||
+      !stripeObjectMatchesMode(catalogPrice.livemode) ||
+      catalogPrice.currency !== 'thb' ||
+      catalogPrice.unit_amount !== item.priceMinor ||
+      catalogPrice.type !== 'one_time'
+    ) {
+      throw new Error(`The fixed THB price for ${item.name} is not configured correctly.`);
+    }
+    const productId = stripeId(catalogPrice.product);
+    if (!productId) throw new Error(`The Stripe Product for ${item.name} is unavailable.`);
+    const catalogProduct = await stripe.products.retrieve(productId);
+    if (!catalogProduct.active || catalogProduct.metadata.onefin_lookup !== item.productLookupKey) {
+      throw new Error(`The Stripe Product for ${item.name} does not match the Software catalog.`);
+    }
+
     const [purchase] = await query<{
       id: string;
       status: string;
@@ -283,7 +305,7 @@ export async function startSoftwareEmbeddedCheckout(input: {
       `insert into software_storefront_purchases(
          id,user_id,item_kind,item_id,item_name,customer_email,
          amount_paid_cents,total_price_cents,currency,status,inquiry_status
-       ) values($1,$2,$3,$4,$5,$6,0,$7,'usd','pending','inquiry')
+       ) values($1,$2,$3,$4,$5,$6,0,$7,'thb','pending','inquiry')
        on conflict(id) do update set customer_email=excluded.customer_email
        where software_storefront_purchases.user_id=excluded.user_id
          and software_storefront_purchases.item_id=excluded.item_id
@@ -292,41 +314,28 @@ export async function startSoftwareEmbeddedCheckout(input: {
          and software_storefront_purchases.amount_paid_cents=0
          and software_storefront_purchases.total_price_cents=excluded.total_price_cents
        returning id,status,amount_paid_cents,total_price_cents`,
-      [input.purchaseId, user.id, item.kind, item.id, item.name, user.email, item.priceCents],
+      [input.purchaseId, user.id, item.kind, item.id, item.name, user.email, item.priceMinor],
     );
     if (!purchase || !['pending', 'partially_paid'].includes(purchase.status)) {
       return { error: 'This purchase request is no longer available.' };
     }
-    const remaining = remainingBalanceCents({
-      agreedPriceCents: purchase.total_price_cents,
-      amountPaidCents: purchase.amount_paid_cents,
-    });
-    if (amountCents > remaining) {
-      return {
-        error: remaining > 0
-          ? `Outstanding balance is $${(remaining / 100).toFixed(2)}. Enter up to that amount.`
-          : 'This project is already fully paid.',
-      };
-    }
-
-    const charge = await softwareChargeAmount(stripe, amountCents);
     const metadata: Stripe.MetadataParam = {
       app: 'onefin-software-store',
       billing_scope: 'software',
       flow: 'software-storefront-checkout',
-      checkout: 'embedded-form',
+      checkout: 'embedded-form-fixed-price',
       initiated_by: 'customer',
       user_id: user.id,
       purchase_id: purchase.id,
       item_kind: item.kind,
       item_id: item.id,
       item_name: item.name,
-      catalog_price_usd: String(Math.round(item.priceCents / 100)),
-      full_price_cents: String(purchase.total_price_cents),
-      installment_amount_cents: String(amountCents),
-      amount_usd_cents: String(charge.usdCents),
-      presentment_amount_cents: String(charge.amount),
-      presentment_currency: charge.currency,
+      catalog_price_thb: String(item.priceMinor / 100),
+      full_price_satang: String(purchase.total_price_cents),
+      stripe_price_id: catalogPrice.id,
+      stripe_product_id: productId,
+      stripe_price_lookup_key: item.priceLookupKey,
+      stripe_product_lookup_key: item.productLookupKey,
     };
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -334,16 +343,7 @@ export async function startSoftwareEmbeddedCheckout(input: {
       customer,
       client_reference_id: user.id,
       return_url: sitePath(`/software/checkout/complete?purchase_id=${encodeURIComponent(input.purchaseId)}&session_id={CHECKOUT_SESSION_ID}`),
-      line_items: [{
-        quantity: 1,
-        price_data: {
-          currency: charge.currency,
-          unit_amount: charge.amount,
-          ...(item.stripeProductId
-            ? { product: item.stripeProductId }
-            : { product_data: { name: item.name, metadata } }),
-        },
-      }],
+      line_items: [{ price: catalogPrice.id, quantity: 1 }],
       customer_update: { name: 'auto' },
       billing_address_collection: 'auto',
       phone_number_collection: { enabled: false },
@@ -535,6 +535,9 @@ export async function createSoftwareBalancePaymentIntent(input: {
 }> {
   const user = await currentUser();
   if (!user) return { error: 'Sign in to continue to the software checkout.' };
+  if (input?.purchaseId) {
+    return { error: 'Partial Software payments are no longer available. Contact support about an existing balance.' };
+  }
   if (!input || typeof input.purchaseId !== 'string' || typeof input.amount !== 'string' || !uuid.test(input.purchaseId)) {
     return { error: 'Invalid payment request.' };
   }
@@ -767,6 +770,9 @@ export async function createSoftwareRemainingPaymentIntent(input: {
 }> {
   const user = await currentUser();
   if (!user) return { error: 'Sign in to continue.' };
+  if (input?.purchaseId) {
+    return { error: 'Partial Software payments are no longer available. Contact support about an existing balance.' };
+  }
   if (!input?.purchaseId || !uuid.test(input.purchaseId)) {
     return { error: 'Invalid purchase.' };
   }
@@ -895,6 +901,9 @@ export async function confirmSoftwarePaymentWithSavedMethod(input: {
 }): Promise<{ error?: string; ok?: true; status?: string; clientSecret?: string }> {
   const user = await currentUser();
   if (!user) return { error: 'Sign in to continue.' };
+  if (input?.purchaseId) {
+    return { error: 'Partial Software payments are no longer available. Contact support about an existing balance.' };
+  }
   if (!input?.paymentMethodId?.startsWith('pm_') || !input.clientSecret) {
     return { error: 'Invalid payment request.' };
   }

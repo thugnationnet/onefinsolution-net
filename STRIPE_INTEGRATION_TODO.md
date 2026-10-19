@@ -6,8 +6,8 @@ The Software storefront and Chat subscriptions now use embedded Stripe Checkout 
 
 There are no product or key placeholders in the implementation:
 
-- Software product and payment amounts are validated server-side. Checkout uses each catalog Stripe Product ID with dynamic `price_data` so installment amounts can vary without creating duplicate Products.
-- The live Stripe catalog contains 12 Software products and 51 templates, each with an active USD Price and stable lookup key. Run `npm run stripe:provision-software -- --live` to reconcile the catalog and generate the complete `STRIPE_SOFTWARE_CATALOG` mapping.
+- Software purchases have fixed full prices in THB from ฿3,500 to ฿8,000. Embedded Checkout uses a server-verified Stripe Price ID; customers cannot enter a partial amount.
+- The Stripe catalog provisioner manages 12 Software products and 51 templates, each with an active THB Price, a THB default Price, and a stable `_thb` lookup key. Run `npm run stripe:provision-software -- --live` to reconcile the catalog and generate the complete `STRIPE_SOFTWARE_CATALOG` mapping.
 - Stripe credentials are read from deployment environment variables and are not stored in source code.
 
 ## Configured Parameters
@@ -35,7 +35,7 @@ There are no product or key placeholders in the implementation:
 | `saved_payment_method_options.payment_method_save` | `enabled` |
 | `integration_identifier` | `custom_embedded_web_0001` |
 | `payment_intent_data.setup_future_usage` | `off_session` |
-| `line_items` | Selected catalog Product ID with server-generated amount and currency; falls back to inline product data when no catalog mapping is configured |
+| `line_items` | One active catalog Price in THB for the selected item; full price only |
 | `return_url` | Software payment completion page |
 | Checkout Form layout | `expanded` |
 | Stripe.js | Loaded from `https://js.stripe.com/dahlia/stripe.js` |
@@ -68,12 +68,12 @@ Subscriptions continue to use Stripe Billing for recurring invoices and renewals
 1. Configure `STRIPE_MODE`, `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`, and `NEXT_PUBLIC_SITE_URL` in the deployment environment. Ensure the secret and publishable keys use the same test/live mode.
 2. Register the Stripe webhook endpoint at `/api/stripe/webhook` and enable at least `payment_intent.succeeded`, `payment_intent.payment_failed`, and `payment_intent.canceled`.
 3. Keep Software, Workspace, and subscription Customers isolated in their respective billing scopes. Software Customer IDs are stored in `software_billing_customers`; subscription Customer IDs are stored in `billing_customers`.
-4. After provisioning live Software catalog items, run `node scripts/sync-live-stripe-to-railway.mjs` to deploy the generated full catalog mapping. Railway CLI authentication is required.
+4. If Software catalog IDs are used in payment metadata, run `node scripts/sync-live-stripe-to-railway.mjs` to deploy the generated full catalog mapping. Stripe Price lookup keys are used to resolve and validate Checkout prices.
 5. Test in Stripe test mode before enabling live keys. Stripe test card `4242 4242 4242 4242` can be used with a future expiry, any CVC, and any valid postal code. Use Stripe's documented test cards for authentication-required and declined-payment cases.
-6. Verify a successful purchase appears in the Software account and that its saved card is visible under Software payment methods. Workspace cards and subscription billing should remain unaffected.
+6. Verify the buyer is charged the full THB catalog price, the purchase appears as paid in the Software account, and the card is available under Software payment methods. Workspace cards and subscription billing should remain unaffected.
 
 The installed Stripe server SDK and API version already support Checkout `ui_mode: "form"`; no dependency or API-version upgrade is needed for this implementation.
 
 ## Flow Overview
 
-The signed-in buyer selects a Software product and amount. The server validates the purchase, associates it with the Software-scoped Stripe Customer, creates a payment-mode Checkout Session, and returns its client secret. For subscriptions, the server resolves the approved recurring Price and creates a subscription-mode Session on the subscription-scoped Customer, preserving trial eligibility and preventing duplicate active enrollments. Stripe.js renders the embedded form for each flow. After confirmation, the app verifies the session and uses existing webhook/return fulfillment. Stripe Billing manages recurring subscription invoices and renewals.
+The signed-in buyer selects a Software product with a fixed THB catalog price. The server verifies the matching active Stripe Price and Product, associates the purchase with the Software-scoped Stripe Customer, creates a payment-mode embedded Checkout Session for the full Price, and returns its client secret. For subscriptions, the server resolves the approved recurring Price and creates a subscription-mode Session on the subscription-scoped Customer, preserving trial eligibility and preventing duplicate active enrollments. Stripe.js renders the embedded form for each flow. After confirmation, the app verifies the session and uses existing webhook/return fulfillment. Stripe Billing manages recurring subscription invoices and renewals.

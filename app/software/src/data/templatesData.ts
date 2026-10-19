@@ -5,8 +5,6 @@ export interface TemplateProduct {
   name: string;
   subtitle: string;
   price: number;
-  /** USD dollars (same as price; used by billing). */
-  priceUsd?: number;
   category: 'website' | 'dashboard' | 'commerce' | 'mobile' | 'saas';
   categoryLabel: string;
   format: string;
@@ -28,7 +26,7 @@ export const TEMPLATES: TemplateProduct[] = [
     id: 'luma',
     name: 'Luma Creative Studio',
     subtitle: 'Editorial agency & digital studio website',
-    price: 2490,
+    price: 3500,
     category: 'website',
     categoryLabel: 'Website',
     format: 'Single-File HTML / CSS / JS',
@@ -263,7 +261,7 @@ export const TEMPLATES: TemplateProduct[] = [
     id: 'nova',
     name: 'Nova Admin Dashboard',
     subtitle: 'Executive SaaS analytics & customer operations',
-    price: 3490,
+    price: 4000,
     category: 'dashboard',
     categoryLabel: 'Dashboard',
     format: 'Single-File HTML / CSS / JS',
@@ -475,7 +473,7 @@ export const TEMPLATES: TemplateProduct[] = [
     id: 'forma',
     name: 'Forma Goods Store',
     subtitle: 'Minimalist architectural home goods storefront',
-    price: 2990,
+    price: 4500,
     category: 'commerce',
     categoryLabel: 'E-Commerce',
     format: 'Single-File HTML / CSS / JS',
@@ -607,7 +605,7 @@ export const TEMPLATES: TemplateProduct[] = [
     id: 'flow',
     name: 'Flow Wellness App UI',
     subtitle: 'Mindful focus timer & daily ritual mobile kit',
-    price: 1790,
+    price: 5000,
     category: 'mobile',
     categoryLabel: 'Mobile UI',
     format: 'Single-File HTML / CSS / JS',
@@ -706,7 +704,7 @@ export const TEMPLATES: TemplateProduct[] = [
     id: 'arc',
     name: 'Arc Architecture Portfolio',
     subtitle: 'Spatial monograph & architectural practice site',
-    price: 2290,
+    price: 5500,
     category: 'website',
     categoryLabel: 'Portfolio',
     format: 'Single-File HTML / CSS / JS',
@@ -783,7 +781,7 @@ export const TEMPLATES: TemplateProduct[] = [
     id: 'spark',
     name: 'Spark Finance Dashboard',
     subtitle: 'Treasury, portfolio & wealth analytics UI',
-    price: 3190,
+    price: 6000,
     category: 'dashboard',
     categoryLabel: 'Finance UI',
     format: 'Single-File HTML / CSS / JS',
@@ -865,7 +863,7 @@ export const TEMPLATES: TemplateProduct[] = [
     id: 'kinetix',
     name: 'Kinetix AI SaaS Landing',
     subtitle: 'B2B workflow automation & interactive ROI page',
-    price: 2890,
+    price: 6500,
     category: 'saas',
     categoryLabel: 'SaaS Landing',
     format: 'Single-File HTML / CSS / JS',
@@ -955,7 +953,7 @@ export const TEMPLATES: TemplateProduct[] = [
     id: 'atelier',
     name: 'Atelier Culinary & Hospitality',
     subtitle: 'Tasting menu & table reservation flagship',
-    price: 2190,
+    price: 7000,
     category: 'commerce',
     categoryLabel: 'E-Commerce',
     format: 'Single-File HTML / CSS / JS',
@@ -1023,7 +1021,7 @@ export const TEMPLATES: TemplateProduct[] = [
     id: 'pulse',
     name: 'Pulse DevOps & Status Portal',
     subtitle: 'Real-time uptime monitor & incident changelog',
-    price: 2590,
+    price: 7500,
     category: 'saas',
     categoryLabel: 'SaaS Landing',
     format: 'Single-File HTML / CSS / JS',
@@ -1127,13 +1125,11 @@ const categoryColors: Record<TemplateProduct['category'], string> = {
   saas: '#0284c7',
 };
 
-/** Deterministic $499–$999 tiers for storefront HTML templates. */
-const TEMPLATE_PRICE_TIERS = [
-  499, 529, 549, 579, 599, 629, 649, 679, 699, 729, 749, 779, 799, 829, 849, 879, 899, 929, 949, 979, 999,
-] as const;
+/** Deterministic THB catalog tiers shared with the Stripe provisioner. */
+export const SOFTWARE_PRICE_TIERS_THB = [3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000] as const;
 
-function templatePriceUsd(_filename: string, index: number): number {
-  return TEMPLATE_PRICE_TIERS[index % TEMPLATE_PRICE_TIERS.length]!;
+function templatePriceThb(index: number): number {
+  return SOFTWARE_PRICE_TIERS_THB[index % SOFTWARE_PRICE_TIERS_THB.length]!;
 }
 
 export const HTML_STOREFRONT_TEMPLATES: TemplateProduct[] = HTML_TEMPLATE_FILES.map((filename, index) => {
@@ -1143,14 +1139,14 @@ export const HTML_STOREFRONT_TEMPLATES: TemplateProduct[] = HTML_TEMPLATE_FILES.
     id: filename,
     name,
     subtitle: `${categoryLabels[category]} template`,
-    price: templatePriceUsd(filename, index),
+    price: templatePriceThb(index),
     category,
     categoryLabel: categoryLabels[category],
     format: 'HTML template',
     pagesCount: 'Full-page preview',
     fileSize: 'HTML',
     updatedAt: 'Oct 2026',
-    description: `Preview the complete ${name} template and choose a payment amount to start your project inquiry.`,
+    description: `Preview the complete ${name} template and purchase it at the listed full price.`,
     features: [],
     techStack: ['HTML', 'CSS', 'JavaScript'],
     accentColor: categoryColors[category],

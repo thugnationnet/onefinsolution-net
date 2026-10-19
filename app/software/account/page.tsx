@@ -5,7 +5,6 @@ import { currentUser } from '@/lib/session';
 import { query } from '@/lib/db';
 import { readSoftwareBillingProfile } from '@/lib/software-billing-profile';
 import { SoftwareBillingManager } from './SoftwareBillingManager';
-import { SoftwareRemainingPay } from './SoftwareRemainingPay';
 import styles from './software-account.module.css';
 
 export const dynamic = 'force-dynamic';
@@ -15,8 +14,13 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-function usd(cents: number) {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100);
+function formatMoney(minor: number, currency: string) {
+  const normalizedCurrency = currency.toLowerCase() === 'thb' ? 'THB' : 'USD';
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: normalizedCurrency,
+    maximumFractionDigits: normalizedCurrency === 'THB' ? 0 : 2,
+  }).format(minor / 100);
 }
 
 export default async function SoftwareAccountPage() {
@@ -46,7 +50,7 @@ export default async function SoftwareAccountPage() {
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
-        <span className={styles.eyebrow}>SOFTWARE BILLING · USD</span>
+        <span className={styles.eyebrow}>SOFTWARE BILLING · THB</span>
         <h1>Your Software account</h1>
         <p>Signed in as {user.email}. This billing area has its own saved cards, addresses, and payment history, separate from your subscription and Workspace accounts.</p>
         <nav className={styles.nav} aria-label="Your billing areas">
@@ -61,22 +65,10 @@ export default async function SoftwareAccountPage() {
         publishableKey={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''}
       />
 
-      <SoftwareRemainingPay
-        publishableKey={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''}
-        purchases={purchases.map((purchase) => ({
-          id: purchase.id,
-          itemName: purchase.item_name,
-          amountPaidCents: Math.max(0, purchase.amount_paid_cents || 0),
-          totalPriceCents: purchase.total_price_cents,
-          remainingCents: Math.max(0, purchase.total_price_cents - Math.max(0, purchase.amount_paid_cents || 0)),
-          status: purchase.status,
-        }))}
-      />
-
       <section className={styles.section}>
         <h2>Software payment history</h2>
         <p>Stripe email receipts are sent on successful charges. Open a payment in Stripe or your email for the PDF receipt when available.</p>
-        <p>Agreed project price, payments applied, remaining balance, and project status (payment status stays separate).</p>
+        <p>Full-price Software purchases and project status. Contact support about balances from older purchases.</p>
         {purchases.length ? (
           <div className={styles.tableWrap}>
             <table className={styles.table}>
@@ -89,7 +81,7 @@ export default async function SoftwareAccountPage() {
                     purchase.status === 'paid'
                       ? 'Paid in full'
                       : purchase.status === 'partially_paid'
-                        ? 'Deposit / balance due (not paid in full)'
+                        ? 'Previously partially paid'
                         : purchase.status === 'failed'
                           ? 'Failed'
                           : 'Pending';
@@ -99,9 +91,9 @@ export default async function SoftwareAccountPage() {
                         <div>{purchase.item_name}</div>
                         <div className={styles.muted}>Ref {purchase.id.slice(0, 8)}</div>
                       </td>
-                      <td>{usd(paidAmount)}</td>
-                      <td>{usd(purchase.total_price_cents)}</td>
-                      <td>{usd(remaining)}</td>
+                      <td>{formatMoney(paidAmount, purchase.currency)}</td>
+                      <td>{formatMoney(purchase.total_price_cents, purchase.currency)}</td>
+                      <td>{formatMoney(remaining, purchase.currency)}</td>
                       <td>
                         <div>{paymentLabel}</div>
                         <div className={styles.muted}>Project: {purchase.inquiry_status || 'inquiry'}</div>

@@ -25,8 +25,8 @@ import { TemplatePreviewModal } from './components/TemplatePreviewModal';
 import { softwareCatalog, softwareServices, type SoftwareProduct } from './data/catalog';
 import { HTML_STOREFRONT_TEMPLATES as STOREFRONT_TEMPLATES, type TemplateProduct } from './data/templatesData';
 
-const formatUsd = (amount: number) =>
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(amount);
+const formatThb = (amount: number) =>
+  new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB', maximumFractionDigits: 0 }).format(amount);
 
 const templateInquiryHref = (template: TemplateProduct) =>
   `/software/checkout?kind=template&id=${encodeURIComponent(template.id)}`;
@@ -82,7 +82,7 @@ function ProductCard({
         <h3>{product.name}</h3>
         <p>{product.description}</p>
         <div className="product-card-footer">
-          <strong>{product.priceLabel}</strong>
+          <strong>Full price · {product.priceLabel}</strong>
           <button type="button" onClick={() => onPreview(product)} aria-label={`Preview ${product.name}`}>
             Preview template <ArrowRight size={15} aria-hidden="true" />
           </button>
@@ -180,7 +180,7 @@ export default function App() {
         <section className="design-library-section" id="design-library">
           <div className="section-heading">
             <div><span className="ofs-eyebrow">INTERACTIVE DESIGN COLLECTION</span><h2>Explore the template library</h2></div>
-            <p>Search and filter the collection, inspect a live responsive preview, and choose a payment amount to start your request.</p>
+            <p>Search and filter the collection, preview each item, and pay its fixed full price in Thai baht.</p>
           </div>
           <div className="design-library-controls">
             <div className="template-category-filters" role="group" aria-label="Filter templates by category">
@@ -241,7 +241,7 @@ export default function App() {
                   <div className="library-template-info">
                     <div className="library-template-title">
                       <div><h3>{template.name}</h3><p>{template.subtitle}</p></div>
-                      <strong>{formatUsd(template.price)} USD</strong>
+                      <strong>Full price · {formatThb(template.price)}</strong>
                     </div>
                     <p className="library-template-description">{template.description}</p>
                     <div className="library-template-meta">
@@ -252,7 +252,7 @@ export default function App() {
                         <Eye size={15} aria-hidden="true" /> Full preview
                       </button>
                       <Link className="template-enquiry-button" href={templateInquiryHref(template)}>
-                        Send inquiry
+                        Buy at full price
                       </Link>
                     </div>
                   </div>
@@ -260,13 +260,13 @@ export default function App() {
               ))}
             </div>
           )}
-          <p className="template-enquiry-note">Prices are shown in USD. Choose an amount from $5 up to the listed price to submit a paid inquiry.</p>
+          <p className="template-enquiry-note">All template prices are fixed in THB. Checkout charges the full listed price.</p>
         </section>
 
         <section className="content-section" id="templates">
           <div className="section-heading">
             <div><span className="ofs-eyebrow">SOFTWARE STARTING POINTS</span><h2>Explore the software catalog</h2></div>
-            <p>Preview available directions and choose an amount to start a paid inquiry for a selected product.</p>
+            <p>Preview available directions and purchase any selected product at its fixed full price in THB.</p>
           </div>
           <div className="product-grid">
             {softwareCatalog.map((product) => (
@@ -277,7 +277,7 @@ export default function App() {
               />
             ))}
           </div>
-          <p className="catalog-note">All catalog prices are shown in USD. Custom development is quoted separately in USD.</p>
+          <p className="catalog-note">All catalog prices are shown in THB. Custom development is quoted separately in THB.</p>
         </section>
 
         <section className="content-section services-section" id="services">
@@ -293,7 +293,7 @@ export default function App() {
                 <h3>{name}</h3>
                 <p>{description}</p>
                 <strong>{priceLabel}</strong>
-                <Link href={`/contact?category=general&subject=${encodeURIComponent(`${name} enquiry`)}`}>Request a USD quote <ArrowRight size={15} aria-hidden="true" /></Link>
+                <Link href={`/contact?category=general&subject=${encodeURIComponent(`${name} enquiry`)}`}>Request a THB quote <ArrowRight size={15} aria-hidden="true" /></Link>
               </article>
             ))}
           </div>
@@ -365,19 +365,19 @@ export default function App() {
                   <div><dt>Sections</dt><dd>{previewTemplate.pagesCount}</dd></div>
                   <div><dt>File size</dt><dd>{previewTemplate.fileSize}</dd></div>
                   <div><dt>Last updated</dt><dd>{previewTemplate.updatedAt}</dd></div>
-                  <div><dt>Fixed price (USD)</dt><dd>{formatUsd(previewTemplate.price)}</dd></div>
+                  <div><dt>Full price (THB)</dt><dd>{formatThb(previewTemplate.price)}</dd></div>
                 </dl>
                 <h3>Included features</h3>
                 <ul>{previewTemplate.features.map((feature) => <li key={feature}><Check size={15} aria-hidden="true" />{feature}</li>)}</ul>
                 <h3>Technology</h3>
                 <div className="template-tech-stack">{previewTemplate.techStack.map((technology) => <span key={technology}>{technology}</span>)}</div>
-                <p className="template-enquiry-note">Select a payment amount from $5 up to the listed USD price to submit a paid inquiry.</p>
+                <p className="template-enquiry-note">This is a fixed-price purchase. Checkout charges the full listed THB price.</p>
               </div>
             )}
             <footer className="template-library-preview-footer">
-              <span>{formatUsd(previewTemplate.price)} <small>fixed template price · USD</small></span>
+              <span>{formatThb(previewTemplate.price)} <small>full template price · THB</small></span>
               <div className="template-library-preview-actions">
-                <Link href={templateInquiryHref(previewTemplate)}>Send inquiry <ArrowUpRight size={15} aria-hidden="true" /></Link>
+                <Link href={templateInquiryHref(previewTemplate)}>Buy at full price <ArrowUpRight size={15} aria-hidden="true" /></Link>
                 <button type="button" onClick={() => setPreviewTemplate(null)}>Close preview</button>
               </div>
             </footer>

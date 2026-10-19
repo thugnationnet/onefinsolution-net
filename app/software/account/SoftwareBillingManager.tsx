@@ -119,7 +119,7 @@ export function SoftwareBillingManager({
 
       <section className={styles.cards}>
         <div className={styles.cardsHeading}>
-          <div><h2>Software payment methods</h2><p>Cards appear after a successful purchase or balance payment. No separate card-setup step.</p></div>
+          <div><h2>Software payment methods</h2><p>Cards appear after a successful full-price purchase. No separate card-setup step.</p></div>
         </div>
         {loading ? <p>Loading Software cardsâ€¦</p> : cards.length === 0 ? <p>No Software cards yet. Complete a purchase to save a card.</p> : (
           <ul>

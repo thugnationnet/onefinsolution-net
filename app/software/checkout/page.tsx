@@ -10,7 +10,7 @@ import styles from './checkout.module.css';
 
 export const metadata: Metadata = {
   title: 'Secure software checkout',
-  description: 'Choose a USD payment amount and securely submit your software inquiry.',
+  description: 'Purchase Software at its fixed full price in Thai baht using secure Stripe Checkout.',
 };
 
 export default async function SoftwareCheckoutPage({
@@ -31,20 +31,19 @@ export default async function SoftwareCheckoutPage({
     <div className={styles.page}>
       <div className={styles.card}>
         <Link className={styles.back} href="/software">← Back to software</Link>
-        <span className={styles.eyebrow}>SOFTWARE STORE · USD</span>
-        <h1>Start your inquiry</h1>
-        <p className={styles.intro}>Signed in as <strong>{user.email}</strong>. Choose a payment amount for <strong>{item.name}</strong>. Once payment is confirmed, our team will receive your inquiry.</p>
+        <span className={styles.eyebrow}>SOFTWARE STORE · THB</span>
+        <h1>Complete your purchase</h1>
+        <p className={styles.intro}>Signed in as <strong>{user.email}</strong>. Pay the full listed price for <strong>{item.name}</strong>. Once payment is confirmed, our team will receive your inquiry.</p>
         <div className={styles.summary}>
           <span>Selected {item.kind}</span>
           <strong>{item.name}</strong>
-          <div><span>Listed price</span><b>${(item.priceCents / 100).toFixed(2)} USD</b></div>
+          <div><span>Full price</span><b>{new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB', maximumFractionDigits: 0 }).format(item.priceMinor / 100)}</b></div>
           <div><span>Software billing name</span><b>{profile.billingName || profile.fullName || 'Not set'}</b></div>
           <div><span>Software billing address</span><b>{profile.billingLine1 || 'Not set'}</b></div>
         </div>
         <CheckoutForm
           kind={item.kind}
           id={item.id}
-          fullPrice={item.priceCents / 100}
           publishableKey={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''}
         />
         <p className={styles.note}>Your selected amount is a payment toward this item. Our team will confirm any remaining scope or balance after reviewing the inquiry.</p>

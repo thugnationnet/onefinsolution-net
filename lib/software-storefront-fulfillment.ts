@@ -31,6 +31,15 @@ function stripeId(value: string | { id: string } | null | undefined): string | n
   return typeof value === 'string' ? value : value.id || null;
 }
 
+function formatMoney(minor: number, currency: string): string {
+  const normalizedCurrency = currency.toLowerCase() === 'thb' ? 'THB' : 'USD';
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: normalizedCurrency,
+    maximumFractionDigits: normalizedCurrency === 'THB' ? 0 : 2,
+  }).format(minor / 100);
+}
+
 function paymentAttemptStatus(
   eventType: string,
   intentStatus: string,
@@ -111,6 +120,15 @@ export async function fulfillSoftwareStorefrontPayment(stripe: Stripe, event: St
     purchase.item_id !== item.id
   ) {
     throw new Error('Software storefront purchase record does not match Stripe.');
+  }
+  if (
+    metadata.checkout === 'embedded-form-fixed-price' &&
+    (intent.currency !== 'thb' ||
+      attemptAmount !== item.priceMinor ||
+      purchase.total_price_cents !== item.priceMinor ||
+      metadata.full_price_satang !== String(item.priceMinor))
+  ) {
+    throw new Error('Fixed-price Software payment does not match the THB catalog.');
   }
 
   // Agreed price is authoritative on the purchase row (not overwritten by installment amount).
@@ -230,8 +248,8 @@ export async function fulfillSoftwareStorefrontPayment(stripe: Stripe, event: St
       agreedPriceCents,
       amountPaidCents: agreedPriceCents - remaining,
     });
-    const amountPaidLabel = `$${(attemptAmount / 100).toFixed(2)}`;
-    const remainingLabel = `$${(remaining / 100).toFixed(2)}`;
+    const amountPaidLabel = formatMoney(attemptAmount, intent.currency);
+    const remainingLabel = formatMoney(remaining, intent.currency);
     const itemLabel = purchase.item_name || item?.name || 'Software item';
     await sendSoftwarePurchaseEmail(buyer.email, {
       itemName: itemLabel,
@@ -246,7 +264,7 @@ export async function fulfillSoftwareStorefrontPayment(stripe: Stripe, event: St
     }).catch(() => undefined);
   } else if (attemptStatus === 'failed' && buyer?.email && emailConfigured()) {
     const itemLabel = purchase.item_name || item?.name || 'Software item';
-    const amountLabel = `$${(attemptAmount / 100).toFixed(2)}`;
+    const amountLabel = formatMoney(attemptAmount, intent.currency);
     await sendSoftwarePaymentFailedEmail(buyer.email, {
       itemName: itemLabel,
       amountLabel,

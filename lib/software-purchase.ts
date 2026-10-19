@@ -12,8 +12,10 @@ export interface SoftwarePurchaseItem {
   kind: SoftwarePurchaseKind;
   id: string;
   name: string;
-  /** Default agreed project price (catalog). */
-  priceCents: number;
+  /** Fixed full price in THB satang. */
+  priceMinor: number;
+  priceLookupKey: string;
+  productLookupKey: string;
   /** Configurable estimate band (min–max). Defaults to catalog price when no band exists. */
   estimatedMinCents: number;
   estimatedMaxCents: number;
@@ -33,7 +35,7 @@ export interface SoftwarePurchaseTotals {
 type SoftwareStripeCatalogEntry = {
   productId?: string;
   priceId?: string;
-  priceUsd?: number;
+  priceThb?: number;
   kind?: string;
   lookup?: string;
 };
@@ -72,6 +74,15 @@ function stripeIdsFor(
   };
 }
 
+function lookupSlug(id: string): string {
+  return id
+    .replace(/\.html$/i, '')
+    .replace(/[^a-zA-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .toLowerCase()
+    .slice(0, 80);
+}
+
 export function getSoftwarePurchaseItem(
   kind: string | undefined,
   id: string | undefined,
@@ -81,35 +92,35 @@ export function getSoftwarePurchaseItem(
   if (kind === 'template') {
     const template = STOREFRONT_TEMPLATES.find((item) => item.id === id);
     if (!template) return null;
-    const priceCents = Math.round(Number(template.price) * 100);
-    if (!Number.isFinite(priceCents) || priceCents <= 0) return null;
+    const priceMinor = Math.round(Number(template.price) * 100);
+    if (!Number.isFinite(priceMinor) || priceMinor <= 0) return null;
+    const productLookupKey = `onefin_software_template_${lookupSlug(template.id)}`;
     return {
       kind,
       id: template.id,
       name: template.name,
-      priceCents,
-      estimatedMinCents: priceCents,
-      estimatedMaxCents: priceCents,
+      priceMinor,
+      productLookupKey,
+      priceLookupKey: `${productLookupKey}_thb`,
+      estimatedMinCents: priceMinor,
+      estimatedMaxCents: priceMinor,
       ...stripeIdsFor(kind, template.id),
     };
   }
 
   const product = softwareCatalog.find((item) => item.id === id);
   if (!product) return null;
-  // Software catalog uses priceUsd (USD). Avoid unsafe casts that fail under
-  // strict TS when SoftwareProduct has no `price` field.
-  const priceUsd =
-    typeof product.priceUsd === 'number' ? product.priceUsd : Number.NaN;
-  if (!Number.isFinite(priceUsd) || priceUsd <= 0) return null;
-
-  const priceCents = Math.round(priceUsd * 100);
+  const priceMinor = Math.round(product.priceThb * 100);
+  const productLookupKey = `onefin_software_catalog_${product.id}`;
   return {
     kind,
     id: product.id,
     name: product.name,
-    priceCents,
-    estimatedMinCents: priceCents,
-    estimatedMaxCents: priceCents,
+    priceMinor,
+    productLookupKey,
+    priceLookupKey: `${productLookupKey}_thb`,
+    estimatedMinCents: priceMinor,
+    estimatedMaxCents: priceMinor,
     ...stripeIdsFor(kind, product.id),
   };
 }

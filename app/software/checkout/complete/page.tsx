@@ -9,6 +9,15 @@ import { fulfillSoftwareStorefrontPayment } from '@/lib/software-storefront-fulf
 import { stripeObjectMatchesMode } from '@/lib/billing-environment';
 import styles from '../checkout.module.css';
 
+function formatMoney(minor: number, currency: string) {
+  const normalizedCurrency = currency.toLowerCase() === 'thb' ? 'THB' : 'USD';
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: normalizedCurrency,
+    maximumFractionDigits: normalizedCurrency === 'THB' ? 0 : 2,
+  }).format(minor / 100);
+}
+
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: 'Software payment status',
@@ -130,9 +139,9 @@ export default async function SoftwareCheckoutCompletePage({
         ? 'Your payment was not completed.'
         : 'We are confirming your payment.';
   const intro = fullyPaid
-    ? `Your payments totaling $${(paidAmount / 100).toFixed(2)} ${purchase.currency.toUpperCase()} cover the agreed project price for ${purchase.item_name}. Our team will follow up at ${user.email}.`
+    ? `Your payments totaling ${formatMoney(paidAmount, purchase.currency)} cover the agreed project price for ${purchase.item_name}. Our team will follow up at ${user.email}.`
     : partiallyPaid
-      ? `A successful payment of $${(paidAmount / 100).toFixed(2)} ${purchase.currency.toUpperCase()} was applied to ${purchase.item_name}. Remaining balance: $${(remainingBalance / 100).toFixed(2)}. This deposit is not full payment.`
+      ? `A successful payment of ${formatMoney(paidAmount, purchase.currency)} was applied to ${purchase.item_name}. Remaining balance: ${formatMoney(remainingBalance, purchase.currency)}.`
       : failed
         ? `The payment for ${purchase.item_name} did not complete. No successful payment was applied to the balance.`
         : confirmationIssue
@@ -148,9 +157,9 @@ export default async function SoftwareCheckoutCompletePage({
         <div className={styles.summary}>
           <span>Software purchase</span>
           <strong>{purchase.item_name}</strong>
-          <div><span>Agreed total</span><b>${(agreedTotal / 100).toFixed(2)} USD</b></div>
-          <div><span>Total paid</span><b>${(paidAmount / 100).toFixed(2)} USD</b></div>
-          <div><span>Remaining</span><b>${(remainingBalance / 100).toFixed(2)} USD</b></div>
+          <div><span>Full price</span><b>{formatMoney(agreedTotal, purchase.currency)}</b></div>
+          <div><span>Total paid</span><b>{formatMoney(paidAmount, purchase.currency)}</b></div>
+          <div><span>Remaining</span><b>{formatMoney(remainingBalance, purchase.currency)}</b></div>
           <div><span>Payment status</span><b>{purchase.status}</b></div>
           <div><span>Project status</span><b>{purchase.inquiry_status || 'inquiry'}</b></div>
         </div>

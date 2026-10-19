@@ -145,11 +145,11 @@ export function TemplatePreviewModal({
         <div className="template-preview-purchase-bar">
           <div>
             <span>Indicative price</span>
-            <strong>{product.priceLabel}</strong>
+            <strong>Full price · {product.priceLabel}</strong>
           </div>
-          <p>Choose a payment amount from $5 up to the listed USD price to start your inquiry.</p>
+          <p>This is a fixed-price purchase in THB. Checkout charges the full listed price.</p>
           <Link href={`/software/checkout?kind=software&id=${encodeURIComponent(product.id)}`}>
-            Send inquiry <ArrowRight size={15} aria-hidden="true" />
+            Buy at full price <ArrowRight size={15} aria-hidden="true" />
           </Link>
         </div>
       </section>

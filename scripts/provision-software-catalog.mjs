@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Provision Stripe Products + one-time Prices for the software storefront (test or --live).
+ * Provision Stripe Products + one-time THB Prices for the software storefront (test or --live).
  * Idempotent via price lookup_keys. Does not change PaymentIntent amount logic.
  *
  * Usage: npm run stripe:provision-software
@@ -43,35 +43,35 @@ const stripe = new Stripe(SECRET, { maxNetworkRetries: 2, timeout: 20000 });
 
 /** Keep prices in sync with app/software/src/data/catalog.ts */
 const CATALOG = [
-  { id: 'agency', name: 'Agency Website Kit', priceUsd: 899 },
-  { id: 'admin', name: 'SaaS Admin Dashboard', priceUsd: 799 },
-  { id: 'commerce', name: 'E-commerce Storefront', priceUsd: 849 },
-  { id: 'landing', name: 'SaaS Landing Page', priceUsd: 549 },
-  { id: 'mobile', name: 'Mobile App UI Starter', priceUsd: 699 },
-  { id: 'crm', name: 'CRM & Sales Dashboard', priceUsd: 949 },
-  { id: 'finance', name: 'Finance Overview Dashboard', priceUsd: 999 },
-  { id: 'restaurant', name: 'Restaurant & Cafe Website', priceUsd: 749 },
-  { id: 'real-estate', name: 'Real Estate Listings', priceUsd: 799 },
-  { id: 'portfolio', name: 'Creative Portfolio Studio', priceUsd: 599 },
-  { id: 'booking', name: 'Booking & Appointments', priceUsd: 699 },
-  { id: 'education', name: 'Online Course Platform', priceUsd: 649 },
+  { id: 'agency', name: 'Agency Website Kit', priceThb: 3500 },
+  { id: 'admin', name: 'SaaS Admin Dashboard', priceThb: 4000 },
+  { id: 'commerce', name: 'E-commerce Storefront', priceThb: 4500 },
+  { id: 'landing', name: 'SaaS Landing Page', priceThb: 5000 },
+  { id: 'mobile', name: 'Mobile App UI Starter', priceThb: 5500 },
+  { id: 'crm', name: 'CRM & Sales Dashboard', priceThb: 6000 },
+  { id: 'finance', name: 'Finance Overview Dashboard', priceThb: 6500 },
+  { id: 'restaurant', name: 'Restaurant & Cafe Website', priceThb: 7000 },
+  { id: 'real-estate', name: 'Real Estate Listings', priceThb: 7500 },
+  { id: 'portfolio', name: 'Creative Portfolio Studio', priceThb: 8000 },
+  { id: 'booking', name: 'Booking & Appointments', priceThb: 3500 },
+  { id: 'education', name: 'Online Course Platform', priceThb: 4000 },
 ];
 
 /** Curated featured templates (TEMPLATES in templatesData.ts) — stable lookup keys. */
 const CURATED_TEMPLATES = [
-  { id: 'luma', name: 'Luma Creative Studio', priceUsd: 2490 },
-  { id: 'nova', name: 'Nova Admin Dashboard', priceUsd: 3490 },
-  { id: 'forma', name: 'Forma Goods Store', priceUsd: 2990 },
-  { id: 'flow', name: 'Flow Wellness App UI', priceUsd: 1790 },
-  { id: 'arc', name: 'Arc Architecture Portfolio', priceUsd: 2290 },
-  { id: 'spark', name: 'Spark Finance Dashboard', priceUsd: 3190 },
-  { id: 'kinetix', name: 'Kinetix AI SaaS Landing', priceUsd: 2890 },
-  { id: 'atelier', name: 'Atelier Culinary & Hospitality', priceUsd: 2190 },
-  { id: 'pulse', name: 'Pulse DevOps & Status Portal', priceUsd: 2590 },
+  { id: 'luma', name: 'Luma Creative Studio', priceThb: 3500 },
+  { id: 'nova', name: 'Nova Admin Dashboard', priceThb: 4000 },
+  { id: 'forma', name: 'Forma Goods Store', priceThb: 4500 },
+  { id: 'flow', name: 'Flow Wellness App UI', priceThb: 5000 },
+  { id: 'arc', name: 'Arc Architecture Portfolio', priceThb: 5500 },
+  { id: 'spark', name: 'Spark Finance Dashboard', priceThb: 6000 },
+  { id: 'kinetix', name: 'Kinetix AI SaaS Landing', priceThb: 6500 },
+  { id: 'atelier', name: 'Atelier Culinary & Hospitality', priceThb: 7000 },
+  { id: 'pulse', name: 'Pulse DevOps & Status Portal', priceThb: 7500 },
 ];
 
 const TEMPLATE_PRICE_TIERS = [
-  499, 529, 549, 579, 599, 629, 649, 679, 699, 729, 749, 779, 799, 829, 849, 879, 899, 929, 949, 979, 999,
+  3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000, 7500, 8000,
 ];
 
 /** Keep in sync with app/software/src/data/htmlTemplateFiles.ts */
@@ -120,7 +120,7 @@ const HTML_TEMPLATE_FILES = [
   'velvet_bean_coffee_roastery.html',
 ];
 
-function templatePriceUsd(index) {
+function templatePriceThb(index) {
   return TEMPLATE_PRICE_TIERS[index % TEMPLATE_PRICE_TIERS.length];
 }
 
@@ -167,7 +167,7 @@ async function ensureProduct(productLookup, name, metadata) {
         hit.name !== name ||
         hit.metadata?.kind !== metadata.kind ||
         hit.metadata?.item_id !== metadata.item_id ||
-        hit.metadata?.price_usd !== metadata.price_usd;
+        hit.metadata?.price_thb !== metadata.price_thb;
       if (needsUpdate) {
         return stripe.products.update(hit.id, {
           name,
@@ -188,7 +188,7 @@ async function ensureProduct(productLookup, name, metadata) {
 }
 
 /**
- * Ensure one-time USD price with lookup_key.
+ * Ensure one-time THB price with lookup_key.
  * @param {string} productId
  * @param {string} priceLookupKey
  * @param {number} unitAmount
@@ -205,7 +205,7 @@ async function ensurePrice(productId, priceLookupKey, unitAmount, metadata) {
     const existing = byKey.data[0];
     if (
       existing.unit_amount === unitAmount &&
-      existing.currency === 'usd' &&
+      existing.currency === 'thb' &&
       !existing.recurring &&
       existing.product === productId
     ) {
@@ -221,7 +221,7 @@ async function ensurePrice(productId, priceLookupKey, unitAmount, metadata) {
     limit: 30,
   });
   const match = onProduct.data.find(
-    (p) => p.unit_amount === unitAmount && p.currency === 'usd' && !p.recurring,
+    (p) => p.unit_amount === unitAmount && p.currency === 'thb' && !p.recurring,
   );
   if (match) {
     if (match.lookup_key !== priceLookupKey) {
@@ -239,7 +239,7 @@ async function ensurePrice(productId, priceLookupKey, unitAmount, metadata) {
 
   return stripe.prices.create({
     product: productId,
-    currency: 'usd',
+    currency: 'thb',
     unit_amount: unitAmount,
     lookup_key: priceLookupKey,
     transfer_lookup_key: true,
@@ -247,23 +247,43 @@ async function ensurePrice(productId, priceLookupKey, unitAmount, metadata) {
   });
 }
 
-async function provisionOne({ kind, id, name, priceUsd, productLookup, priceLookup }) {
-  const unitAmount = priceUsd * 100;
+async function deactivateUsdPrice(productId, priceLookupKey) {
+  const usdLookupKey = priceLookupKey.replace(/_thb$/, '_usd');
+  const listed = await stripe.prices.list({
+    lookup_keys: [usdLookupKey],
+    active: true,
+    limit: 2,
+  });
+  for (const price of listed.data) {
+    if (
+      price.product === productId &&
+      price.currency === 'usd' &&
+      price.type === 'one_time'
+    ) {
+      await stripe.prices.update(price.id, { active: false });
+    }
+  }
+}
+
+async function provisionOne({ kind, id, name, priceThb, productLookup, priceLookup }) {
+  const unitAmount = priceThb * 100;
   const meta = {
     kind,
     item_id: id,
-    price_usd: String(priceUsd),
+    price_thb: String(priceThb),
   };
   const product = await ensureProduct(productLookup, name, meta);
   const price = await ensurePrice(product.id, priceLookup, unitAmount, {
     ...meta,
     onefin_product_lookup: productLookup,
   });
+  await stripe.products.update(product.id, { default_price: price.id });
+  await deactivateUsdPrice(product.id, priceLookup);
   return {
     kind,
     id,
     name,
-    priceUsd,
+    priceThb,
     productId: product.id,
     priceId: price.id,
     productLookup,
@@ -274,19 +294,19 @@ async function provisionOne({ kind, id, name, priceUsd, productLookup, priceLook
 async function main() {
   await assertAccount();
 
-  /** @type {Record<string, { productId: string, priceId: string, priceUsd: number, kind: string, lookup: string }>} */
+  /** @type {Record<string, { productId: string, priceId: string, priceThb: number, kind: string, lookup: string }>} */
   const catalogMap = {};
   const rows = [];
 
   console.log(`\nProvisioning ${CATALOG.length} catalog products…`);
   for (const item of CATALOG) {
     const productLookup = `onefin_software_catalog_${item.id}`;
-    const priceLookup = `onefin_software_catalog_${item.id}_usd`;
+    const priceLookup = `onefin_software_catalog_${item.id}_thb`;
     const row = await provisionOne({
       kind: 'software',
       id: item.id,
       name: `OneFin Software · ${item.name}`,
-      priceUsd: item.priceUsd,
+      priceThb: item.priceThb,
       productLookup,
       priceLookup,
     });
@@ -294,11 +314,11 @@ async function main() {
     catalogMap[`software:${item.id}`] = {
       productId: row.productId,
       priceId: row.priceId,
-      priceUsd: row.priceUsd,
+      priceThb: row.priceThb,
       kind: 'software',
       lookup: productLookup,
     };
-    console.log(`  ✓ catalog ${item.id}  $${item.priceUsd}`);
+    console.log(`  ✓ catalog ${item.id}  ฿${item.priceThb}`);
   }
 
   console.log(`\nProvisioning ${HTML_TEMPLATE_FILES.length} template products…`);
@@ -306,12 +326,12 @@ async function main() {
 Provisioning ${CURATED_TEMPLATES.length} curated templates…`);
   for (const item of CURATED_TEMPLATES) {
     const productLookup = `onefin_software_template_${item.id}`;
-    const priceLookup = `onefin_software_template_${item.id}_usd`;
+    const priceLookup = `onefin_software_template_${item.id}_thb`;
     const row = await provisionOne({
       kind: 'template',
       id: item.id,
       name: `OneFin Template · ${item.name}`,
-      priceUsd: item.priceUsd,
+      priceThb: item.priceThb,
       productLookup,
       priceLookup,
     });
@@ -319,24 +339,24 @@ Provisioning ${CURATED_TEMPLATES.length} curated templates…`);
     catalogMap[`template:${item.id}`] = {
       productId: row.productId,
       priceId: row.priceId,
-      priceUsd: row.priceUsd,
+      priceThb: row.priceThb,
       kind: 'template',
       lookup: productLookup,
     };
-    console.log(`  ✓ curated template ${item.id}  $${item.priceUsd}`);
+    console.log(`  ✓ curated template ${item.id}  ฿${item.priceThb}`);
   }
 
   for (let i = 0; i < HTML_TEMPLATE_FILES.length; i++) {
     const filename = HTML_TEMPLATE_FILES[i];
     const slug = sanitizeLookupSlug(filename);
-    const priceUsd = templatePriceUsd(i);
+    const priceThb = templatePriceThb(i);
     const productLookup = `onefin_software_template_${slug}`;
-    const priceLookup = `onefin_software_template_${slug}_usd`;
+    const priceLookup = `onefin_software_template_${slug}_thb`;
     const row = await provisionOne({
       kind: 'template',
       id: filename,
       name: `OneFin Template · ${templateName(filename)}`,
-      priceUsd,
+      priceThb,
       productLookup,
       priceLookup,
     });
@@ -344,11 +364,11 @@ Provisioning ${CURATED_TEMPLATES.length} curated templates…`);
     catalogMap[`template:${filename}`] = {
       productId: row.productId,
       priceId: row.priceId,
-      priceUsd: row.priceUsd,
+      priceThb: row.priceThb,
       kind: 'template',
       lookup: productLookup,
     };
-    console.log(`  ✓ template ${slug}  $${priceUsd}`);
+    console.log(`  ✓ template ${slug}  ฿${priceThb}`);
   }
 
   const outPath = resolve(process.cwd(), LIVE ? '.stripe-software-ids.live.json' : '.stripe-software-ids.json');
