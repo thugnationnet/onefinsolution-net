@@ -23,6 +23,7 @@ There are no product or key placeholders in the implementation:
 |-----------|-------|
 | `ui_mode` | `form` |
 | `mode` | `payment` |
+| `customer_update.name` | `auto` (required for Tax ID collection on an existing Customer) |
 | `billing_address_collection` | `auto` |
 | `phone_number_collection.enabled` | `false` |
 | `automatic_tax.enabled` | `false` |

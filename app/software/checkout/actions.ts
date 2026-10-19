@@ -344,6 +344,7 @@ export async function startSoftwareEmbeddedCheckout(input: {
             : { product_data: { name: item.name, metadata } }),
         },
       }],
+      customer_update: { name: 'auto' },
       billing_address_collection: 'auto',
       phone_number_collection: { enabled: false },
       automatic_tax: { enabled: false },
