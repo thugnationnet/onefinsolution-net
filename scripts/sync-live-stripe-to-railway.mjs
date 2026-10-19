@@ -73,7 +73,12 @@ function railwaySet(key, value) {
   };
 }
 
-const env = loadEnvFiles(['.env', '.env.local', '.env.stripe-generated']);
+const env = loadEnvFiles([
+  '.env',
+  '.env.local',
+  '.env.stripe-generated',
+  '.env.stripe-software-generated.live',
+]);
 
 const key = env.STRIPE_SECRET_KEY || '';
 const pk = env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '';

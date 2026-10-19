@@ -43,18 +43,18 @@ const stripe = new Stripe(SECRET, { maxNetworkRetries: 2, timeout: 20000 });
 
 /** Keep prices in sync with app/software/src/data/catalog.ts */
 const CATALOG = [
-  { id: 'agency', name: 'Agency OS', priceUsd: 899 },
-  { id: 'admin', name: 'Admin Console', priceUsd: 799 },
-  { id: 'commerce', name: 'Commerce Suite', priceUsd: 849 },
-  { id: 'landing', name: 'Landing Kit', priceUsd: 549 },
-  { id: 'mobile', name: 'Mobile Shell', priceUsd: 699 },
-  { id: 'crm', name: 'CRM Workspace', priceUsd: 949 },
-  { id: 'finance', name: 'Finance Desk', priceUsd: 999 },
-  { id: 'restaurant', name: 'Restaurant Ops', priceUsd: 749 },
-  { id: 'real-estate', name: 'Real Estate Hub', priceUsd: 799 },
-  { id: 'portfolio', name: 'Portfolio Site', priceUsd: 599 },
-  { id: 'booking', name: 'Booking System', priceUsd: 699 },
-  { id: 'education', name: 'Education Portal', priceUsd: 649 },
+  { id: 'agency', name: 'Agency Website Kit', priceUsd: 899 },
+  { id: 'admin', name: 'SaaS Admin Dashboard', priceUsd: 799 },
+  { id: 'commerce', name: 'E-commerce Storefront', priceUsd: 849 },
+  { id: 'landing', name: 'SaaS Landing Page', priceUsd: 549 },
+  { id: 'mobile', name: 'Mobile App UI Starter', priceUsd: 699 },
+  { id: 'crm', name: 'CRM & Sales Dashboard', priceUsd: 949 },
+  { id: 'finance', name: 'Finance Overview Dashboard', priceUsd: 999 },
+  { id: 'restaurant', name: 'Restaurant & Cafe Website', priceUsd: 749 },
+  { id: 'real-estate', name: 'Real Estate Listings', priceUsd: 799 },
+  { id: 'portfolio', name: 'Creative Portfolio Studio', priceUsd: 599 },
+  { id: 'booking', name: 'Booking & Appointments', priceUsd: 699 },
+  { id: 'education', name: 'Online Course Platform', priceUsd: 649 },
 ];
 
 /** Curated featured templates (TEMPLATES in templatesData.ts) — stable lookup keys. */

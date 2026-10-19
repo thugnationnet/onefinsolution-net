@@ -339,7 +339,9 @@ export async function startSoftwareEmbeddedCheckout(input: {
         price_data: {
           currency: charge.currency,
           unit_amount: charge.amount,
-          product_data: { name: item.name, metadata },
+          ...(item.stripeProductId
+            ? { product: item.stripeProductId }
+            : { product_data: { name: item.name, metadata } }),
         },
       }],
       billing_address_collection: 'auto',

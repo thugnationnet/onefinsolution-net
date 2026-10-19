@@ -75,9 +75,13 @@ export async function POST(request: Request) {
 
     await markStripeWebhookEventProcessed(event.id);
     return Response.json({ received: true });
-  } catch {
+  } catch (error) {
     // A non-2xx response lets Stripe retry; ledger + business grants stay idempotent.
-    console.error('Stripe webhook processing failed for event type:', event.type);
+    console.error('Stripe webhook processing failed:', {
+      eventId: event.id,
+      eventType: event.type,
+      error: error instanceof Error ? error.message : String(error),
+    });
     return Response.json({ error: 'Webhook processing failed. Retry required.' }, { status: 503 });
   }
 }
