@@ -71,10 +71,7 @@ export function SubscriptionForm({
           setBusy(true);
           setError('');
           try {
-            const result = await actionsResult.actions.confirm({
-              formConfirmEvent: event,
-              returnUrl: `${window.location.origin}/subscribe/return?session_id=${encodeURIComponent(checkoutSession.sessionId)}`,
-            });
+            const result = await actionsResult.actions.confirm({ formConfirmEvent: event });
             if (result.type === 'error') throw new Error(result.error.message);
             window.location.assign(`/subscribe/return?session_id=${encodeURIComponent(checkoutSession.sessionId)}`);
           } catch (failure) {
