@@ -29,6 +29,7 @@ export default async function SoftwareCheckoutCompletePage({
 
   const [record] = await query<{
     stripe_payment_intent_id: string | null;
+    stripe_checkout_session_id: string | null;
     item_name: string;
     amount_paid_cents: number;
     currency: string;
@@ -36,7 +37,7 @@ export default async function SoftwareCheckoutCompletePage({
     total_price_cents: number;
     inquiry_status: string;
   }>(
-    `select stripe_payment_intent_id,item_name,amount_paid_cents,total_price_cents,currency,status,inquiry_status
+    `select stripe_payment_intent_id,stripe_checkout_session_id,item_name,amount_paid_cents,total_price_cents,currency,status,inquiry_status
      from software_storefront_purchases where id=$1 and user_id=$2`,
     [purchaseId, user.id],
   );
@@ -44,14 +45,16 @@ export default async function SoftwareCheckoutCompletePage({
 
   let purchase = record;
   let confirmationIssue = false;
-  if (sessionId.startsWith('cs_') && record.status === 'pending') {
+  const checkoutSessionId = sessionId || record.stripe_checkout_session_id || '';
+  if (checkoutSessionId.startsWith('cs_') && record.status === 'pending') {
     try {
       const stripe = await verifiedStripe();
-      const session = await stripe.checkout.sessions.retrieve(sessionId, { expand: ['payment_intent'] });
+      const session = await stripe.checkout.sessions.retrieve(checkoutSessionId, { expand: ['payment_intent'] });
       const paymentIntentId = typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id;
       if (
         !paymentIntentId || session.metadata?.app !== 'onefin-software-store' ||
-        session.metadata?.billing_scope !== 'software' || session.metadata?.purchase_id !== purchaseId ||
+        session.metadata?.billing_scope !== 'software' || session.metadata?.flow !== 'software-storefront-checkout' ||
+        session.metadata?.purchase_id !== purchaseId ||
         session.metadata?.user_id !== user.id || session.client_reference_id !== user.id ||
         !stripeObjectMatchesMode(session.livemode)
       ) notFound();
@@ -64,8 +67,14 @@ export default async function SoftwareCheckoutCompletePage({
           livemode: intent.livemode, data: { object: intent },
         } as unknown as Stripe.Event);
       }
+      const [updated] = await query<typeof record>(
+        `select stripe_payment_intent_id,stripe_checkout_session_id,item_name,amount_paid_cents,total_price_cents,currency,status,inquiry_status
+         from software_storefront_purchases where id=$1 and user_id=$2`,
+        [purchaseId, user.id],
+      );
+      if (updated) purchase = updated;
     } catch (error) {
-      console.error('Unable to confirm hosted Software checkout:', error);
+      console.error('Unable to confirm embedded Software checkout:', error);
       confirmationIssue = true;
     }
   }
@@ -90,7 +99,7 @@ export default async function SoftwareCheckoutCompletePage({
         confirmationIssue = true;
       }
       const [updated] = await query<typeof record>(
-        `select stripe_payment_intent_id,item_name,amount_paid_cents,total_price_cents,currency,status,inquiry_status
+        `select stripe_payment_intent_id,stripe_checkout_session_id,item_name,amount_paid_cents,total_price_cents,currency,status,inquiry_status
          from software_storefront_purchases where id=$1 and user_id=$2`,
         [purchaseId, user.id],
       );

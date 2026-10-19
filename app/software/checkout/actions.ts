@@ -1,6 +1,5 @@
 'use server';
 
-import { randomUUID } from 'node:crypto';
 import { revalidatePath } from 'next/cache';
 import Stripe from 'stripe';
 import { resolvePresentmentCurrency, convertUsdCentsToCurrency } from '@/lib/billing-currency';
@@ -18,7 +17,6 @@ import { stripeObjectMatchesMode } from '@/lib/billing-environment';
 import {
   assertCustomerMatchesScope,
   requireOwnedPaymentMethod,
-  stripePaymentMethodId,
 } from '@/lib/billing-scope';
 import { updateSoftwareBillingProfile as persistSoftwareBillingProfile, type SoftwareBillingProfile } from '@/lib/software-billing-profile';
 import { syncSoftwareCustomerProfile } from '@/lib/software-stripe';
@@ -244,55 +242,139 @@ export async function createSoftwarePaymentIntent(input: {
   }
 }
 
-/**
- * Starts the initial Software inquiry payment in hosted Stripe Checkout. The
- * Checkout Session uses Stripe's configured custom payment domain (pay.*),
- * while the return URL remains on the signed-in application.
- */
-export async function startSoftwareHostedCheckout(input: {
+/** Creates an embedded Checkout Session for an initial Software purchase. */
+export async function startSoftwareEmbeddedCheckout(input: {
   kind: string; id: string; amount: string; purchaseId: string;
-}): Promise<{ url?: string; error?: string }> {
-  const prepared = await createSoftwarePaymentIntent({ ...input, savePaymentMethod: true });
-  if (!prepared.paymentIntentId || !prepared.clientSecret) {
-    return { error: prepared.error || 'Unable to start secure checkout.' };
+}): Promise<{ clientSecret?: string; purchaseId?: string; error?: string }> {
+  const user = await currentUser();
+  if (!user) return { error: 'Sign in to continue to the software checkout.' };
+  if (!input || typeof input !== 'object' ||
+      typeof input.kind !== 'string' || typeof input.id !== 'string' ||
+      typeof input.amount !== 'string' || typeof input.purchaseId !== 'string' ||
+      !uuid.test(input.purchaseId)) {
+    return { error: 'Invalid purchase request.' };
   }
+  const item = getSoftwarePurchaseItem(input.kind, input.id);
+  if (!item) return { error: 'That Software item is no longer available.' };
+  const amountCents = parseSoftwarePaymentAmount(input.amount, item.priceCents, 500);
+  if (amountCents === null) {
+    return { error: `Choose an amount from $5.00 up to $${(item.priceCents / 100).toFixed(2)}.` };
+  }
+
   try {
+    await throttle(`software-purchase:${user.id}`, 10);
+    const customer = await softwareCustomer(user.id, true);
+    if (!customer) throw new Error('Software billing account unavailable.');
     const stripe = await verifiedStripe();
-    const draft = await stripe.paymentIntents.retrieve(prepared.paymentIntentId);
-    if (
-      !stripeObjectMatchesMode(draft.livemode) ||
-      draft.metadata.app !== 'onefin-software-store' ||
-      draft.metadata.billing_scope !== 'software' ||
-      draft.metadata.purchase_id !== input.purchaseId ||
-      !draft.customer
-    ) throw new Error('Software payment verification failed.');
-    const metadata: Stripe.MetadataParam = { ...draft.metadata, checkout: 'hosted' };
+    const customerRecord = await stripe.customers.retrieve(customer);
+    if (customerRecord.deleted || !stripeObjectMatchesMode(customerRecord.livemode) ||
+        customerRecord.metadata.app !== 'onefin-software-store' ||
+        customerRecord.metadata.billing_scope !== 'software' ||
+        customerRecord.metadata.user_id !== user.id) {
+      throw new Error('Software billing customer verification failed.');
+    }
+
+    const [purchase] = await query<{
+      id: string;
+      status: string;
+      amount_paid_cents: number;
+      total_price_cents: number;
+    }>(
+      `insert into software_storefront_purchases(
+         id,user_id,item_kind,item_id,item_name,customer_email,
+         amount_paid_cents,total_price_cents,currency,status,inquiry_status
+       ) values($1,$2,$3,$4,$5,$6,0,$7,'usd','pending','inquiry')
+       on conflict(id) do update set customer_email=excluded.customer_email
+       where software_storefront_purchases.user_id=excluded.user_id
+         and software_storefront_purchases.item_id=excluded.item_id
+         and software_storefront_purchases.item_kind=excluded.item_kind
+         and software_storefront_purchases.status in ('pending','partially_paid','failed')
+         and software_storefront_purchases.amount_paid_cents=0
+         and software_storefront_purchases.total_price_cents=excluded.total_price_cents
+       returning id,status,amount_paid_cents,total_price_cents`,
+      [input.purchaseId, user.id, item.kind, item.id, item.name, user.email, item.priceCents],
+    );
+    if (!purchase || !['pending', 'partially_paid'].includes(purchase.status)) {
+      return { error: 'This purchase request is no longer available.' };
+    }
+    const remaining = remainingBalanceCents({
+      agreedPriceCents: purchase.total_price_cents,
+      amountPaidCents: purchase.amount_paid_cents,
+    });
+    if (amountCents > remaining) {
+      return {
+        error: remaining > 0
+          ? `Outstanding balance is $${(remaining / 100).toFixed(2)}. Enter up to that amount.`
+          : 'This project is already fully paid.',
+      };
+    }
+
+    const charge = await softwareChargeAmount(stripe, amountCents);
+    const metadata: Stripe.MetadataParam = {
+      app: 'onefin-software-store',
+      billing_scope: 'software',
+      flow: 'software-storefront-checkout',
+      checkout: 'embedded-form',
+      initiated_by: 'customer',
+      user_id: user.id,
+      purchase_id: purchase.id,
+      item_kind: item.kind,
+      item_id: item.id,
+      item_name: item.name,
+      catalog_price_usd: String(Math.round(item.priceCents / 100)),
+      full_price_cents: String(purchase.total_price_cents),
+      installment_amount_cents: String(amountCents),
+      amount_usd_cents: String(charge.usdCents),
+      presentment_amount_cents: String(charge.amount),
+      presentment_currency: charge.currency,
+    };
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      customer: typeof draft.customer === 'string' ? draft.customer : draft.customer.id,
-      client_reference_id: draft.metadata.user_id,
-      success_url: sitePath(`/software/checkout/complete?purchase_id=${encodeURIComponent(input.purchaseId)}&session_id={CHECKOUT_SESSION_ID}`),
-      cancel_url: sitePath(`/software/checkout?kind=${encodeURIComponent(input.kind)}&id=${encodeURIComponent(input.id)}`),
-      allowed_payment_method_types: ['card'],
+      ui_mode: 'form',
+      customer,
+      client_reference_id: user.id,
+      return_url: sitePath(`/software/checkout/complete?purchase_id=${encodeURIComponent(input.purchaseId)}&session_id={CHECKOUT_SESSION_ID}`),
       line_items: [{
         quantity: 1,
         price_data: {
-          currency: draft.currency,
-          unit_amount: draft.amount,
-          product_data: { name: draft.metadata.item_name || 'Software inquiry payment', metadata },
+          currency: charge.currency,
+          unit_amount: charge.amount,
+          product_data: { name: item.name, metadata },
         },
       }],
-      payment_intent_data: { setup_future_usage: 'off_session', metadata },
-      metadata,
       billing_address_collection: 'auto',
-      customer_update: { address: 'auto', name: 'auto' },
-      locale: 'auto',
-    }, { idempotencyKey: `software-hosted-checkout:${input.purchaseId}` });
-    if (!session.url) throw new Error('Hosted checkout is unavailable.');
-    return { url: session.url };
+      phone_number_collection: { enabled: false },
+      automatic_tax: { enabled: false },
+      name_collection: {
+        individual: { enabled: true, optional: true },
+        business: { enabled: true, optional: true },
+      },
+      submit_type: 'auto',
+      tax_id_collection: { enabled: true, required: 'if_supported' },
+      saved_payment_method_options: { payment_method_save: 'enabled' },
+      integration_identifier: 'custom_embedded_web_0001',
+      payment_intent_data: {
+        setup_future_usage: 'off_session',
+        receipt_email: user.email,
+        description: `Software storefront · ${item.name}`,
+        metadata,
+      },
+      metadata,
+      expand: ['payment_intent'],
+    }, { idempotencyKey: `software-embedded-checkout:${input.purchaseId}` });
+    if (!session.client_secret) throw new Error('Embedded Checkout is unavailable.');
+    const paymentIntentId = stripeId(session.payment_intent);
+    await query(
+      `update software_storefront_purchases
+       set stripe_checkout_session_id=$1,
+           stripe_payment_intent_id=coalesce($2,stripe_payment_intent_id)
+       where id=$3 and user_id=$4`,
+      [session.id, paymentIntentId, purchase.id, user.id],
+    );
+    return { clientSecret: session.client_secret, purchaseId: purchase.id };
   } catch (error) {
-    console.error('Unable to start hosted Software checkout:', error);
-    return { error: error instanceof Error ? error.message : 'Unable to start secure checkout.' };
+    console.error('Unable to start embedded Software checkout:', error);
+    return { error: 'Unable to start secure checkout. Please try again.' };
   }
 }
 
@@ -848,5 +930,3 @@ export async function confirmSoftwarePaymentWithSavedMethod(input: {
     };
   }
 }
-
-

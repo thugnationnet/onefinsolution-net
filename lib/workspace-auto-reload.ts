@@ -13,6 +13,8 @@ import {
 import { requireOwnedPaymentMethod } from '@/lib/billing-scope';
 import { stripeObjectMatchesMode } from '@/lib/billing-environment';
 import { fulfillStripeEvent } from '@/lib/stripe-fulfillment';
+import { queueBillingNotice } from '@/lib/billing-notices';
+import { sitePath } from '@/lib/site-url';
 
 const COOLDOWN_MS = 2 * 60 * 1000;
 const PENDING_STALE_MS = 15 * 60 * 1000;
@@ -268,11 +270,24 @@ export async function maybeAttemptWorkspaceAutoReload(userId: string): Promise<{
       return { attempted: true, charged: true };
     }
 
-    const message =
-      intent.status === 'requires_action'
-        ? 'Card requires authentication; complete a manual credit purchase or update the card.'
-        : `Automatic top-up ended with status ${intent.status}.`;
+    const requiresAction = intent.status === 'requires_action';
+    const message = requiresAction
+      ? 'Your saved Workspace card requires authentication. Complete a payment with this card or update it, then re-enable automatic top-ups.'
+      : `Automatic top-up ended with status ${intent.status}.`;
     await markAutoReloadFailure(userId, purchaseId, intent.id, message);
+    if (requiresAction) {
+      await query(
+        `update workspace_credit_settings set auto_reload_enabled=false
+         where user_id=$1`,
+        [userId],
+      );
+      await queueBillingNotice(
+        `workspace-auto-reload-action-required:${intent.id}`,
+        userId,
+        'Workspace payment needs authentication',
+        `We couldn't complete an automatic Workspace credit top-up because your saved card requires additional authentication. Automatic top-ups have been paused. Sign in at ${sitePath('/workspace')} to complete a payment with this card or update your saved Workspace payment method, then re-enable automatic top-ups.`,
+      );
+    }
     return { attempted: true, charged: false, error: message };
   } catch (error) {
     console.error('Workspace auto-reload failed:', error);
