@@ -27,7 +27,7 @@ There are no product or key placeholders in the implementation:
 | `automatic_tax.enabled` | `false` |
 | `submit_type` | `auto` |
 | `tax_id_collection.enabled` | `true` |
-| `tax_id_collection.required` | `if_supported` |
+| `tax_id_collection.required` | Stripe default (`never`); Tax ID collection enabled and optional |
 | `name_collection.individual` | Enabled, optional |
 | `name_collection.business` | Enabled, optional |
 | `saved_payment_method_options.payment_method_save` | `enabled` |
@@ -39,6 +39,8 @@ There are no product or key placeholders in the implementation:
 | Stripe.js | Loaded from `https://js.stripe.com/dahlia/stripe.js` |
 
 `payment_method_collection` is not explicitly set for this one-time payment Session. Stripe collects the payment method by default; the configured `always` value applies only to subscription Sessions.
+
+Tax ID collection is enabled but optional. Stripe rejects `tax_id_collection.required: 'if_supported'` when business-name collection is optional, so the Checkout Session leaves the `required` option unset.
 
 ### Chat subscriptions
 

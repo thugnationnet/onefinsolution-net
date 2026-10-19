@@ -350,7 +350,7 @@ export async function startSoftwareEmbeddedCheckout(input: {
         business: { enabled: true, optional: true },
       },
       submit_type: 'auto',
-      tax_id_collection: { enabled: true, required: 'if_supported' },
+      tax_id_collection: { enabled: true },
       saved_payment_method_options: { payment_method_save: 'enabled' },
       integration_identifier: 'custom_embedded_web_0001',
       payment_intent_data: {
