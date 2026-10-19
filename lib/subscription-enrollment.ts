@@ -41,7 +41,9 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
         if (!['canceled', 'incomplete_expired'].includes(sub.status)) throw new Error('Your checkout completed. Return to Plan & billing.');
       }
       if (session.status === 'open') {
-        if (previous.plan_key === key && previous.mode === mode && session.url) return { url: session.url };
+        if (previous.plan_key === key && previous.mode === mode && session.client_secret) {
+          return { clientSecret: session.client_secret, sessionId: session.id };
+        }
         await stripe.checkout.sessions.expire(session.id);
       }
     }
@@ -51,9 +53,17 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
       user_id: userId, app_user_id: userId, enrollment_id: requestId, plan_key: key, mode,
     };
     const session = await stripe.checkout.sessions.create({
-      mode: 'subscription', customer, client_reference_id: userId,
+      mode: 'subscription',
+      ui_mode: 'form',
+      customer,
+      client_reference_id: userId,
       line_items: [{ price: price.id, quantity: 1 }],
-      payment_method_collection: 'always', allowed_payment_method_types: ['card'],
+      billing_address_collection: 'auto',
+      payment_method_collection: 'always',
+      submit_type: 'auto',
+      integration_identifier: 'custom_embedded_web_0002',
+      saved_payment_method_options: { payment_method_save: 'enabled' },
+      return_url: sitePath(`/subscribe/return?session_id={CHECKOUT_SESSION_ID}`),
       subscription_data: {
         metadata,
         ...(mode === 'trial' ? {
@@ -62,10 +72,8 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
         } : {}),
       },
       metadata,
-      success_url: sitePath('/subscribe/return?session_id={CHECKOUT_SESSION_ID}'),
-      cancel_url: sitePath(`/subscribe?plan=${key}&mode=${mode}&cancelled=1`),
     }, { idempotencyKey: `subscription-checkout:${requestId}` });
-    if (!session.url || !stripeObjectMatchesMode(session.livemode)) throw new Error('Checkout is unavailable.');
+    if (!session.client_secret || !stripeObjectMatchesMode(session.livemode)) throw new Error('Checkout is unavailable.');
     await client.query(
       `insert into billing_enrollments(user_id,request_id,plan_key,mode,price_id,setup_id)
        values($1,$2,$3,$4,$5,$6) on conflict(user_id) do update set
@@ -73,7 +81,7 @@ export async function prepareEnrollment(userId: string, key: string, mode: 'tria
        trial_end=null,consent_at=null,created_at=now()`,
       [userId, requestId, key, mode, price.id, session.id],
     );
-    return { url: session.url };
+    return { clientSecret: session.client_secret, sessionId: session.id };
   });
 }
 

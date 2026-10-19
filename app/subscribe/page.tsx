@@ -27,11 +27,15 @@ export default async function SubscribePage({
       <h1>{mode === 'trial' ? `Start ${plan.name} free trial` : `Subscribe to ${plan.name}`}</h1>
       <p className="lede">
         {mode === 'trial'
-          ? `Try ${plan.name} free for ${plan.trialDays} days. Add your payment method securely on Stripe Checkout for renewal after the trial.`
-          : `Pay ${priceLabel(plan)} on Stripe Checkout to subscribe.`}
+          ? `Try ${plan.name} free for ${plan.trialDays} days. Add your payment method securely in Stripe Checkout for renewal after the trial.`
+          : `Pay ${priceLabel(plan)} in secure embedded Stripe Checkout to subscribe.`}
       </p>
       <p className="muted">Signed in as {user.email}</p>
-      <SubscriptionForm planKey={plan.key} initialMode={mode} />
+      <SubscriptionForm
+        planKey={plan.key}
+        initialMode={mode}
+        publishableKey={process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''}
+      />
       <p>
         <Link className="text-link" href="/pricing?billing=cancelled">
           Cancel and return to pricing
